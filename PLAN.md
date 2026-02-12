@@ -29,6 +29,7 @@ Build a web application to plan and visualize an engineering organization. The a
    - **Search:** Filter nodes by name, title, or team.
    - **Restructuring:** Update supervisor by dragging connections between nodes.
    - **Managing Positions:** Add new empty positions under any manager.
+   - **Collapse/Expand:** Toggle visibility of sub-hierarchies with counts of hidden reports.
 4. **Export:**
    - Export the modified organization back to CSV.
 

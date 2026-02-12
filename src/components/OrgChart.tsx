@@ -56,20 +56,20 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB') => {
 
   dagre.layout(dagreGraph);
 
-  nodes.forEach((node) => {
+  const layoutedNodes = nodes.map((node) => {
     const nodeWithPosition = dagreGraph.node(node.id);
-    node.targetPosition = isHorizontal ? 'left' : 'top';
-    node.sourcePosition = isHorizontal ? 'right' : 'bottom';
-
-    node.position = {
-      x: nodeWithPosition.x - nodeWidth / 2,
-      y: nodeWithPosition.y - nodeHeight / 2,
+    return {
+      ...node,
+      targetPosition: isHorizontal ? 'left' : 'top',
+      sourcePosition: isHorizontal ? 'right' : 'bottom',
+      position: {
+        x: nodeWithPosition.x - nodeWidth / 2,
+        y: nodeWithPosition.y - nodeHeight / 2,
+      },
     };
-
-    return node;
   });
 
-  return { nodes, edges };
+  return { nodes: layoutedNodes, edges };
 };
 
 interface OrgChartProps {
@@ -80,9 +80,22 @@ interface OrgChartProps {
 export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
+  const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set());
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
+  }, []);
+
+  const onToggleCollapse = useCallback((id: string) => {
+    setCollapsedNodes((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
   }, []);
 
   const onAddSubordinate = useCallback((parentId: string) => {
@@ -104,6 +117,7 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
           status: 'EMPTY',
           onAddSubordinate,
           onEditNode,
+          onToggleCollapse,
         },
         position,
       };
@@ -116,18 +130,86 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
 
       return nds.concat(newNode);
     });
-  }, [onEditNode]);
+  }, [onEditNode, onToggleCollapse]);
 
-  const { nodes: layoutedNodes, edges: layoutedEdges } = useMemo(() => {
+  const { nodes: initialLayoutedNodes, edges: initialLayoutedEdges } = useMemo(() => {
     const nodesWithAction = initialNodes.map(node => ({
       ...node,
-      data: { ...node.data, onAddSubordinate, onEditNode }
+      data: { ...node.data, onAddSubordinate, onEditNode, onToggleCollapse }
     }));
     return getLayoutedElements(nodesWithAction, initialEdges);
-  }, [initialNodes, initialEdges, onAddSubordinate, onEditNode]);
+  }, [initialNodes, initialEdges, onAddSubordinate, onEditNode, onToggleCollapse]);
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialLayoutedNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialLayoutedEdges);
+
+  const processedElements = useMemo(() => {
+    const descendantsMap: Record<string, string[]> = {};
+    const directChildrenMap: Record<string, string[]> = {};
+
+    edges.forEach(edge => {
+      if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
+      directChildrenMap[edge.source].push(edge.target);
+    });
+
+    const getDescendants = (nodeId: string): string[] => {
+      if (descendantsMap[nodeId]) return descendantsMap[nodeId];
+      const children = directChildrenMap[nodeId] || [];
+      let descendants = [...children];
+      for (const childId of children) {
+        descendants = [...descendants, ...getDescendants(childId)];
+      }
+      descendantsMap[nodeId] = descendants;
+      return descendants;
+    };
+
+    nodes.forEach(node => getDescendants(node.id));
+
+    const hiddenNodes = new Set<string>();
+    const checkHidden = (nodeId: string, isParentCollapsed: boolean) => {
+      const children = directChildrenMap[nodeId] || [];
+      const shouldHideChildren = isParentCollapsed || collapsedNodes.has(nodeId);
+      
+      children.forEach(childId => {
+        if (shouldHideChildren) {
+          hiddenNodes.add(childId);
+        }
+        checkHidden(childId, shouldHideChildren);
+      });
+    };
+
+    const childIds = new Set(edges.map(e => e.target));
+    const roots = nodes.filter(n => !childIds.has(n.id));
+    roots.forEach(root => checkHidden(root.id, false));
+
+    const updatedNodes = nodes.map(node => ({
+      ...node,
+      hidden: hiddenNodes.has(node.id),
+      data: {
+        ...node.data,
+        isCollapsed: collapsedNodes.has(node.id),
+        directReportsCount: (directChildrenMap[node.id] || []).length,
+        totalReportsCount: (descendantsMap[node.id] || []).length,
+        onToggleCollapse,
+      }
+    }));
+
+    const updatedEdges = edges.map(edge => ({
+      ...edge,
+      hidden: hiddenNodes.has(edge.target) || hiddenNodes.has(edge.source),
+    }));
+
+    const visibleNodes = updatedNodes.filter(n => !n.hidden);
+    const visibleEdges = updatedEdges.filter(e => !e.hidden);
+    const { nodes: layoutedNodes } = getLayoutedElements(visibleNodes, visibleEdges);
+    
+    const finalNodes = updatedNodes.map(node => {
+      const layouted = layoutedNodes.find(ln => ln.id === node.id);
+      return layouted ? { ...node, position: layouted.position } : node;
+    });
+
+    return { nodes: finalNodes, edges: updatedEdges };
+  }, [nodes, edges, collapsedNodes, onToggleCollapse]);
 
   const handleSaveNode = useCallback((updatedData: any) => {
     if (!editingNode) return;
@@ -204,8 +286,8 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
   return (
     <div className="w-full h-[800px] bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-inner relative">
       <ReactFlow
-        nodes={nodes}
-        edges={edges}
+        nodes={processedElements.nodes}
+        edges={processedElements.edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
