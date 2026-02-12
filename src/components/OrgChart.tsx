@@ -235,11 +235,18 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
       
       if (newNode) {
         const { x: vx, y: vy, zoom } = getViewport();
-        // Shift viewport by the same amount the node's world position shifted, scaled by zoom
-        const dx = (oldPos.x - newNode.position.x) * zoom;
-        const dy = (oldPos.y - newNode.position.y) * zoom;
         
-        setViewport({ x: vx + dx, y: vy + dy, zoom }, { duration: 400 });
+        // Calculate where the node WAS on the screen
+        const screenX = oldPos.x * zoom + vx;
+        const screenY = oldPos.y * zoom + vy;
+        
+        // Calculate where the node SHOULD be in the new viewport to stay at the same screen position
+        // screenPos = worldPos * zoom + viewportOffset
+        // viewportOffset = screenPos - worldPos * zoom
+        const nextVx = screenX - newNode.position.x * zoom;
+        const nextVy = screenY - newNode.position.y * zoom;
+
+        setViewport({ x: nextVx, y: nextVy, zoom }, { duration: 400 });
       }
       lastToggledRef.current = null;
     }
@@ -304,7 +311,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
         nodeTypes={nodeTypes}
         defaultEdgeOptions={defaultEdgeOptions}
         minZoom={0.1}
-        fitView
       >
         <Panel position="top-left" className="bg-white p-2 rounded-lg shadow-md border border-slate-200 w-64">
           <div className="relative">
