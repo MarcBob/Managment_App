@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, useEffect } from 'react';
+import { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import ReactFlow, {
   Background,
   Controls,
@@ -79,25 +79,34 @@ interface OrgChartProps {
 }
 
 const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) => {
-  const { fitView } = useReactFlow();
+  const { getViewport, setViewport } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
   const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set());
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  
+  // Track the last toggled node to maintain its screen position
+  const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
   }, []);
 
   const onToggleCollapse = useCallback((id: string) => {
+    // Capture the current world position of the node before we change the layout
+    const node = nodes.find(n => n.id === id);
+    if (node) {
+      lastToggledRef.current = { id, oldPos: { ...node.position } };
+    }
+
     setCollapsedNodes((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
       return next;
     });
-  }, []);
+  }, [nodes]);
 
   const onAddSubordinate = useCallback((parentId: string) => {
     const newId = `empty-${Date.now()}`;
@@ -218,10 +227,23 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
     return { nodes: finalNodes, edges: preparedEdges };
   }, [nodes, edges, collapsedNodes, searchQuery, onAddSubordinate, onEditNode, onToggleCollapse]);
 
-  // Animate viewport when layout changes due to collapse
+  // Adjust viewport to keep toggled node stable
   useEffect(() => {
-    fitView({ duration: 400, padding: 0.2 });
-  }, [collapsedNodes, fitView]);
+    if (lastToggledRef.current) {
+      const { id, oldPos } = lastToggledRef.current;
+      const newNode = processedElements.nodes.find(n => n.id === id);
+      
+      if (newNode) {
+        const { x: vx, y: vy, zoom } = getViewport();
+        // Shift viewport by the same amount the node's world position shifted, scaled by zoom
+        const dx = (oldPos.x - newNode.position.x) * zoom;
+        const dy = (oldPos.y - newNode.position.y) * zoom;
+        
+        setViewport({ x: vx + dx, y: vy + dy, zoom }, { duration: 400 });
+      }
+      lastToggledRef.current = null;
+    }
+  }, [processedElements.nodes, getViewport, setViewport]);
 
   const handleSaveNode = useCallback((updatedData: any) => {
     if (!editingNode) return;
