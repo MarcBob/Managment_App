@@ -13,7 +13,7 @@ import ReactFlow, {
   ReactFlowProvider,
 } from 'reactflow';
 import type { Connection, Edge } from 'reactflow';
-import { Search, Download } from 'lucide-react';
+import { Search, Download, Layers } from 'lucide-react';
 import dagre from 'dagre';
 import 'reactflow/dist/style.css';
 
@@ -79,10 +79,11 @@ interface OrgChartProps {
 }
 
 const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) => {
-  const { getViewport, setViewport, getNode } = useReactFlow();
+  const { getViewport, setViewport, getNode, fitView } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
   const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set());
+  const [maxDepth, setMaxDepth] = useState<number>(10);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   
@@ -169,19 +170,30 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
       return descendants;
     };
 
+    // 2. Calculate depths and identify hidden nodes
+    const nodeDepths: Record<string, number> = {};
     const hiddenNodes = new Set<string>();
-    const checkHidden = (nodeId: string, isParentCollapsed: boolean) => {
+    
+    const childIds = new Set(edges.map(e => e.target));
+    const roots = nodes.filter(n => !childIds.has(n.id));
+
+    const processHierarchy = (nodeId: string, depth: number, isParentCollapsed: boolean) => {
+      nodeDepths[nodeId] = depth;
       const children = directChildrenMap[nodeId] || [];
-      const shouldHideChildren = isParentCollapsed || collapsedNodes.has(nodeId);
+      
+      const shouldHideChildren = isParentCollapsed || collapsedNodes.has(nodeId) || depth >= maxDepth;
+      
       children.forEach(childId => {
-        if (shouldHideChildren) hiddenNodes.add(childId);
-        checkHidden(childId, shouldHideChildren);
+        if (shouldHideChildren) {
+          hiddenNodes.add(childId);
+        }
+        processHierarchy(childId, depth + 1, shouldHideChildren);
       });
     };
 
-    const childIds = new Set(edges.map(e => e.target));
-    nodes.filter(n => !childIds.has(n.id)).forEach(root => checkHidden(root.id, false));
+    roots.forEach(root => processHierarchy(root.id, 1, false));
 
+    // 3. Prepare nodes with data for layout and search
     const preparedNodes = nodes.map(node => {
       const matchesSearch = searchQuery === '' || 
         node.data.firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -200,6 +212,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
           isCollapsed: collapsedNodes.has(node.id),
           directReportsCount: (directChildrenMap[node.id] || []).length,
           totalReportsCount: getDescendants(node.id).length,
+          depth: nodeDepths[node.id],
         },
         style: {
           ...node.style,
@@ -225,7 +238,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
     });
 
     return { nodes: finalNodes, edges: preparedEdges };
-  }, [nodes, edges, collapsedNodes, searchQuery, onAddSubordinate, onEditNode, onToggleCollapse]);
+  }, [nodes, edges, collapsedNodes, searchQuery, maxDepth, onAddSubordinate, onEditNode, onToggleCollapse]);
 
   // Adjust viewport to keep toggled node stable
   useEffect(() => {
@@ -245,6 +258,11 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
       lastToggledRef.current = null;
     }
   }, [processedElements.nodes, getViewport, setViewport]);
+
+  // Handle fitView on layer depth changes
+  useEffect(() => {
+    fitView({ duration: 400, padding: 0.2 });
+  }, [maxDepth, fitView]);
 
   const handleSaveNode = useCallback((updatedData: any) => {
     if (!editingNode) return;
@@ -347,6 +365,39 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
           <p className="text-xs text-slate-500">
             Drag connections between nodes to restructure the hierarchy. Click the edit icon to modify details.
           </p>
+        </Panel>
+
+        <Panel position="bottom-right" className="bg-white/90 backdrop-blur p-2 rounded-lg shadow-lg border border-slate-200 flex flex-col gap-2 items-center mb-12">
+          <div className="flex flex-col items-center gap-1 border-b border-slate-100 pb-2 mb-1">
+            <Layers size={18} className="text-slate-400" />
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Layers</span>
+          </div>
+          <button
+            onClick={() => setMaxDepth(prev => Math.min(prev + 1, 20))}
+            className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors"
+            title="Show more layers"
+          >
+            <span className="text-lg font-bold">+</span>
+          </button>
+          <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-sm border border-blue-100">
+            {maxDepth}
+          </div>
+          <button
+            onClick={() => setMaxDepth(prev => Math.max(prev - 1, 1))}
+            className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors"
+            title="Show fewer layers"
+          >
+            <span className="text-lg font-bold">−</span>
+          </button>
+          <button
+            onClick={() => {
+              setMaxDepth(10);
+              setCollapsedNodes(new Set());
+            }}
+            className="mt-2 text-[10px] font-bold text-blue-600 hover:text-blue-700 uppercase"
+          >
+            Reset
+          </button>
         </Panel>
       </ReactFlow>
 
