@@ -343,15 +343,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
     [setEdges]
   );
 
-  const onLayout = useCallback(
-    (direction: string) => {
-      const { nodes: nextNodes, edges: nextEdges } = getLayoutedElements(nodes, edges, direction);
-      setNodes(nextNodes);
-      setEdges(nextEdges);
-    },
-    [nodes, edges, setNodes, setEdges]
-  );
-
   const handleExport = useCallback(() => {
     const csv = exportToCsv(nodes as any, edges as any);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -391,19 +382,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
         <Background color="#cbd5e1" gap={20} />
         <Controls />
         <Panel position="top-right" className="bg-white p-2 rounded-lg shadow-md border border-slate-200 flex gap-2">
-          <button
-            onClick={() => onLayout('TB')}
-            className="px-4 py-2 text-sm font-semibold bg-white border border-slate-200 hover:bg-slate-50 rounded-lg transition-all shadow-sm"
-          >
-            Vertical Layout
-          </button>
-          <button
-            onClick={() => onLayout('LR')}
-            className="px-4 py-2 text-sm font-semibold bg-white border border-slate-200 hover:bg-slate-50 rounded-lg transition-all shadow-sm"
-          >
-            Horizontal Layout
-          </button>
-          <div className="w-px bg-slate-200 mx-1" />
           <button
             onClick={handleExport}
             className="px-4 py-2 text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-all shadow-sm flex items-center gap-2"
