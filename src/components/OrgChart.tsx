@@ -211,6 +211,22 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
     return { nodes: finalNodes, edges: updatedEdges };
   }, [nodes, edges, collapsedNodes, onToggleCollapse]);
 
+  // Sync the layouted positions back to the main nodes state when collapsedNodes change
+  useEffect(() => {
+    setNodes((nds) => {
+      let changed = false;
+      const nextNodes = nds.map((node) => {
+        const processed = processedElements.nodes.find((n) => n.id === node.id);
+        if (processed && (processed.position.x !== node.position.x || processed.position.y !== node.position.y)) {
+          changed = true;
+          return { ...node, position: processed.position };
+        }
+        return node;
+      });
+      return changed ? nextNodes : nds;
+    });
+  }, [processedElements.nodes, setNodes]);
+
   const handleSaveNode = useCallback((updatedData: any) => {
     if (!editingNode) return;
     setNodes((nds) =>
