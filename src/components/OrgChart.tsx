@@ -50,7 +50,6 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
   g.setGraph({ rankdir: direction, nodesep: 70, ranksep: 100 });
   g.setDefaultEdgeLabel(() => ({}));
 
-  // Identify parents and their children
   const childrenMap: Record<string, string[]> = {};
   edges.forEach(edge => {
     if (!childrenMap[edge.source]) childrenMap[edge.source] = [];
@@ -64,10 +63,7 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
 
   const isLeaf = (nodeId: string) => !childrenMap[nodeId] || childrenMap[nodeId].length === 0;
 
-  // Group leaf nodes by parent if leafColumns > 1
   const leafGroups: Record<string, string[]> = {};
-  const processedNodes = new Set<string>();
-
   if (leafColumns > 1) {
     nodes.forEach(node => {
       const parentId = parentMap[node.id];
@@ -78,19 +74,15 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
     });
   }
 
-  // Add nodes to dagre
   nodes.forEach((node) => {
     const parentId = parentMap[node.id];
-    // If this node is part of a leaf group that will be stacked, we only add a "group placeholder" to dagre
     if (leafGroups[parentId]?.includes(node.id)) {
-      // Only add the placeholder once per parent
       const groupId = `group-${parentId}`;
       if (!g.hasNode(groupId)) {
         const groupLeafCount = leafGroups[parentId].length;
         const rows = Math.ceil(groupLeafCount / leafColumns);
         const gWidth = nodeWidth * leafColumns + horizontalSpacing * (leafColumns - 1);
         const gHeight = nodeHeight * rows + verticalSpacing * (rows - 1);
-        
         g.setNode(groupId, { width: gWidth, height: gHeight });
         g.setEdge(parentId, groupId);
       }
@@ -99,7 +91,6 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
     }
   });
 
-  // Add edges to dagre (excluding those to leaf group members)
   edges.forEach((edge) => {
     if (!leafGroups[edge.source]?.includes(edge.target) && !leafGroups[parentMap[edge.target]]?.includes(edge.target)) {
       g.setEdge(edge.source, edge.target);
@@ -109,7 +100,6 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
   dagre.layout(g);
 
   const finalNodes: any[] = [];
-
   nodes.forEach((node) => {
     const parentId = parentMap[node.id];
     if (leafGroups[parentId]?.includes(node.id)) {
@@ -117,21 +107,15 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
       const groupPos = g.node(groupId);
       const groupLeaves = leafGroups[parentId];
       const index = groupLeaves.indexOf(node.id);
-      
       const row = Math.floor(index / leafColumns);
       const col = index % leafColumns;
-      
       const totalRows = Math.ceil(groupLeaves.length / leafColumns);
       const groupWidth = nodeWidth * leafColumns + horizontalSpacing * (leafColumns - 1);
       const groupHeight = nodeHeight * totalRows + verticalSpacing * (totalRows - 1);
-
-      // Position relative to group center
       const startX = groupPos.x - groupWidth / 2;
       const startY = groupPos.y - groupHeight / 2;
-
       const x = startX + col * (nodeWidth + horizontalSpacing) + nodeWidth / 2;
       const y = startY + row * (nodeHeight + verticalSpacing) + nodeHeight / 2;
-
       finalNodes.push({
         ...node,
         targetPosition: isHorizontal ? 'left' : 'top',
@@ -160,20 +144,32 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
 interface OrgChartProps {
   initialNodes: OrgNode[];
   initialEdges: OrgEdge[];
+  initialCollapsedNodes?: string[];
+  initialExpandedNodes?: string[];
+  initialMaxDepth?: number;
+  initialLeafColumns?: number;
+  onDataChange?: (state: any) => void;
 }
 
-const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) => {
+const OrgChartInner: React.FC<OrgChartProps> = ({ 
+  initialNodes, 
+  initialEdges,
+  initialCollapsedNodes = [],
+  initialExpandedNodes = [],
+  initialMaxDepth,
+  initialLeafColumns = 1,
+  onDataChange
+}) => {
   const { getViewport, setViewport, getNode, fitView } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [leafColumns, setLeafColumns] = useState<number>(1);
+  const [leafColumns, setLeafColumns] = useState<number>(initialLeafColumns);
   
-  // Track manual overrides: explicitly expanded or explicitly collapsed
-  const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set());
-  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
+  const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set(initialCollapsedNodes));
+  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set(initialExpandedNodes));
   
-  const [maxDepth, setMaxDepth] = useState<number>(10);
+  const [maxDepth, setMaxDepth] = useState<number>(initialMaxDepth || 10);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   
@@ -192,7 +188,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
     const isCurrentlyCollapsed = (node?.data as any).isCollapsed;
 
     if (isCurrentlyCollapsed) {
-      // Expanding
       setCollapsedNodes(prev => {
         const next = new Set(prev);
         next.delete(id);
@@ -204,7 +199,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
         return next;
       });
     } else {
-      // Collapsing
       setCollapsedNodes(prev => {
         const next = new Set(prev);
         next.add(id);
@@ -220,7 +214,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
 
   const onAddSubordinate = useCallback((parentId: string) => {
     const newId = `empty-${Date.now()}`;
-    
     setNodes((nds) => {
       const parentNode = nds.find(n => n.id === parentId);
       const position = parentNode 
@@ -241,7 +234,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
       };
       return nds.concat(newNode);
     });
-
     setEdges((eds) => eds.concat({
       id: `e-${parentId}-${newId}`,
       source: parentId,
@@ -249,31 +241,45 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
     }));
   }, [setNodes, setEdges]);
 
-  // Sync with initial props and calculate initial max depth
+  // Sync with initial props
   useEffect(() => {
     setNodes(initialNodes);
     setEdges(initialEdges);
-    setCollapsedNodes(new Set());
-    setExpandedNodes(new Set());
-
-    // Calculate actual max depth of the initial graph
-    const directChildrenMap: Record<string, string[]> = {};
-    initialEdges.forEach(edge => {
-      if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
-      directChildrenMap[edge.source].push(edge.target);
-    });
-
-    let currentMax = 0;
-    const findMaxDepth = (nodeId: string, depth: number) => {
-      currentMax = Math.max(currentMax, depth);
-      (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
-    };
-
-    const childIds = new Set(initialEdges.map(e => e.target));
-    initialNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
+    setCollapsedNodes(new Set(initialCollapsedNodes));
+    setExpandedNodes(new Set(initialExpandedNodes));
     
-    setMaxDepth(currentMax || 1);
-  }, [initialNodes, initialEdges, setNodes, setEdges]);
+    if (initialMaxDepth !== undefined) {
+      setMaxDepth(initialMaxDepth);
+    } else {
+      const directChildrenMap: Record<string, string[]> = {};
+      initialEdges.forEach(edge => {
+        if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
+        directChildrenMap[edge.source].push(edge.target);
+      });
+      let currentMax = 0;
+      const findMaxDepth = (nodeId: string, depth: number) => {
+        currentMax = Math.max(currentMax, depth);
+        (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
+      };
+      const childIds = new Set(initialEdges.map(e => e.target));
+      initialNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
+      setMaxDepth(currentMax || 1);
+    }
+  }, [initialNodes, initialEdges]);
+
+  // Auto-save logic
+  useEffect(() => {
+    if (nodes.length > 0 && onDataChange) {
+      onDataChange({
+        nodes,
+        edges,
+        collapsedNodes: Array.from(collapsedNodes),
+        expandedNodes: Array.from(expandedNodes),
+        maxDepth,
+        leafColumns
+      });
+    }
+  }, [nodes, edges, collapsedNodes, expandedNodes, maxDepth, leafColumns, onDataChange]);
 
   // Derived view state
   const processedElements = useMemo(() => {
@@ -281,7 +287,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
 
     const directChildrenMap: Record<string, string[]> = {};
     const descendantsMap: Record<string, string[]> = {};
-    
     edges.forEach(edge => {
       if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
       directChildrenMap[edge.source].push(edge.target);
@@ -300,22 +305,17 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
 
     const nodeDepths: Record<string, number> = {};
     const hiddenNodes = new Set<string>();
-    
     const childIds = new Set(edges.map(e => e.target));
     const roots = nodes.filter(n => !childIds.has(n.id));
 
     const processHierarchy = (nodeId: string, depth: number, isParentHidden: boolean) => {
       nodeDepths[nodeId] = depth;
       const children = directChildrenMap[nodeId] || [];
-      
       const areChildrenHidden = isParentHidden || 
                                collapsedNodes.has(nodeId) || 
                                (depth >= maxDepth && !expandedNodes.has(nodeId));
-      
       children.forEach(childId => {
-        if (areChildrenHidden) {
-          hiddenNodes.add(childId);
-        }
+        if (areChildrenHidden) hiddenNodes.add(childId);
         processHierarchy(childId, depth + 1, areChildrenHidden);
       });
     };
@@ -360,7 +360,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
 
     const visibleNodes = preparedNodes.filter(n => !n.hidden);
     const visibleEdges = preparedEdges.filter(e => !e.hidden);
-    
     const { nodes: layoutedNodes } = getLayoutedElements(visibleNodes, visibleEdges, 'TB', leafColumns);
 
     const finalNodes = preparedNodes.map(node => {
@@ -371,12 +370,10 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
     return { nodes: finalNodes, edges: preparedEdges };
   }, [nodes, edges, collapsedNodes, expandedNodes, searchQuery, maxDepth, leafColumns, onAddSubordinate, onEditNode, onToggleCollapse]);
 
-  // Adjust viewport to keep toggled node stable
   useEffect(() => {
     if (lastToggledRef.current) {
       const { id, oldPos } = lastToggledRef.current;
       const newNode = processedElements.nodes.find(n => n.id === id);
-      
       if (newNode) {
         const { x: vx, y: vy, zoom } = getViewport();
         const nextVx = vx + (oldPos.x - newNode.position.x) * zoom;
@@ -413,16 +410,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
     setEditingNode(null);
   }, [editingNode, setNodes]);
 
-  const onConnect = useCallback(
-    (params: Connection) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges]
-  );
-
-  const onEdgeUpdate = useCallback(
-    (oldEdge: Edge, newConnection: Connection) =>
-      setEdges((els) => updateEdge(oldEdge, newConnection, els)),
-    [setEdges]
-  );
+  const onConnect = useCallback((params: Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+  const onEdgeUpdate = useCallback((oldEdge: Edge, newConnection: Connection) => setEdges((els) => updateEdge(oldEdge, newConnection, els)), [setEdges]);
 
   const handleExport = useCallback(() => {
     const csv = exportToCsv(nodes as any, edges as any);
@@ -485,32 +474,16 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
             Drag connections between nodes to restructure the hierarchy. Click the edit icon to modify details.
           </p>
         </Panel>
-
         <Panel position="bottom-right" className="bg-white/90 backdrop-blur p-2 rounded-lg shadow-lg border border-slate-200 flex flex-col gap-2 items-center mb-12">
           <div className="flex flex-col items-center gap-1 border-b border-slate-100 pb-2 mb-1">
             <Layers size={18} className="text-slate-400" />
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Layers</span>
           </div>
-          <button
-            onClick={() => setMaxDepth(prev => Math.min(prev + 1, 20))}
-            className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors"
-            title="Show more layers"
-          >
-            <span className="text-lg font-bold">+</span>
-          </button>
-          <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-sm border border-blue-100">
-            {maxDepth}
-          </div>
-          <button
-            onClick={() => setMaxDepth(prev => Math.max(prev - 1, 1))}
-            className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors"
-            title="Show fewer layers"
-          >
-            <span className="text-lg font-bold">−</span>
-          </button>
+          <button onClick={() => setMaxDepth(prev => Math.min(prev + 1, 20))} className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors" title="Show more layers"><span className="text-lg font-bold">+</span></button>
+          <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-sm border border-blue-100">{maxDepth}</div>
+          <button onClick={() => setMaxDepth(prev => Math.max(prev - 1, 1))} className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors" title="Show fewer layers"><span className="text-lg font-bold">−</span></button>
           <button
             onClick={() => {
-              // Recalculate max depth for reset
               const childIds = new Set(edges.map(e => e.target));
               const directChildrenMap: Record<string, string[]> = {};
               edges.forEach(edge => {
@@ -534,24 +507,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
           </button>
         </Panel>
       </ReactFlow>
-
-      {editingNode && (
-        <EditNodeModal
-          isOpen={!!editingNode}
-          nodeData={editingNode.data}
-          nodeId={editingNode.id}
-          onClose={() => setEditingNode(null)}
-          onSave={handleSaveNode}
-          onDelete={handleDeleteNode}
-        />
-      )}
-
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        leafColumns={leafColumns}
-        setLeafColumns={setLeafColumns}
-      />
+      {editingNode && <EditNodeModal isOpen={!!editingNode} nodeData={editingNode.data} nodeId={editingNode.id} onClose={() => setEditingNode(null)} onSave={handleSaveNode} onDelete={handleDeleteNode} />}
+      <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} leafColumns={leafColumns} setLeafColumns={setLeafColumns} />
     </div>
   );
 };

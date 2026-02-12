@@ -1,15 +1,64 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FileUpload } from './components/FileUpload';
 import { OrgChart } from './components/OrgChart';
 import type { OrgNode, OrgEdge } from './utils/csvParser';
 import './App.css';
 
+const API_URL = 'http://localhost:3001/api';
+
 function App() {
-  const [data, setData] = useState<{ nodes: OrgNode[]; edges: OrgEdge[] } | null>(null);
+  const [data, setData] = useState<{ 
+    nodes: OrgNode[]; 
+    edges: OrgEdge[];
+    collapsedNodes?: string[];
+    expandedNodes?: string[];
+    maxDepth?: number;
+    leafColumns?: number;
+  } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Load saved state on startup
+  useEffect(() => {
+    const loadState = async () => {
+      try {
+        const response = await fetch(`${API_URL}/load`);
+        if (response.ok) {
+          const savedState = await response.json();
+          setData(savedState);
+        }
+      } catch (error) {
+        console.error('Failed to load saved state:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadState();
+  }, []);
 
   const handleDataLoaded = (nodes: OrgNode[], edges: OrgEdge[]) => {
     setData({ nodes, edges });
   };
+
+  const handleDataChange = useCallback(async (newState: any) => {
+    try {
+      await fetch(`${API_URL}/save`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newState),
+      });
+    } catch (error) {
+      console.error('Failed to auto-save state:', error);
+    }
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="text-slate-500 font-medium animate-pulse">Loading saved state...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans">
@@ -18,10 +67,14 @@ function App() {
           <h1 className="text-xl font-bold text-slate-800">Org Planner</h1>
           {data && (
             <button 
-              onClick={() => setData(null)}
+              onClick={() => {
+                if (confirm('Are you sure you want to reset? This will NOT clear the saved file unless you also clear it explicitly.')) {
+                  setData(null);
+                }
+              }}
               className="text-sm font-medium text-slate-500 hover:text-slate-800"
             >
-              Reset
+              Reset View
             </button>
           )}
         </div>
@@ -47,7 +100,15 @@ function App() {
             </div>
             
             <div className="flex-1 min-h-[500px]">
-              <OrgChart initialNodes={data.nodes} initialEdges={data.edges} />
+              <OrgChart 
+                initialNodes={data.nodes} 
+                initialEdges={data.edges}
+                initialCollapsedNodes={data.collapsedNodes}
+                initialExpandedNodes={data.expandedNodes}
+                initialMaxDepth={data.maxDepth}
+                initialLeafColumns={data.leafColumns}
+                onDataChange={handleDataChange}
+              />
             </div>
           </div>
         )}
