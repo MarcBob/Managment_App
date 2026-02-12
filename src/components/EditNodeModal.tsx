@@ -8,9 +8,10 @@ interface EditNodeModalProps {
   onDelete: (id: string) => void;
   nodeId: string;
   nodeData: any;
+  existingTeams: string[];
 }
 
-export const EditNodeModal = ({ isOpen, onClose, onSave, onDelete, nodeId, nodeData }: EditNodeModalProps) => {
+export const EditNodeModal = ({ isOpen, onClose, onSave, onDelete, nodeId, nodeData, existingTeams }: EditNodeModalProps) => {
   const [formData, setFormData] = useState(nodeData);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
@@ -99,10 +100,16 @@ export const EditNodeModal = ({ isOpen, onClose, onSave, onDelete, nodeId, nodeD
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Team</label>
               <input
                 type="text"
+                list="existing-teams"
                 className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 value={formData.team || ''}
                 onChange={(e) => setFormData({ ...formData, team: e.target.value })}
               />
+              <datalist id="existing-teams">
+                {existingTeams.map(team => (
+                  <option key={team} value={team} />
+                ))}
+              </datalist>
             </div>
 
             <div className="space-y-1">

@@ -370,6 +370,14 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     return { nodes: finalNodes, edges: preparedEdges };
   }, [nodes, edges, collapsedNodes, expandedNodes, searchQuery, maxDepth, leafColumns, onAddSubordinate, onEditNode, onToggleCollapse]);
 
+  const existingTeams = useMemo(() => {
+    const teams = new Set<string>();
+    nodes.forEach(node => {
+      if (node.data.team) teams.add(node.data.team);
+    });
+    return Array.from(teams).sort();
+  }, [nodes]);
+
   useEffect(() => {
     if (lastToggledRef.current) {
       const { id, oldPos } = lastToggledRef.current;
@@ -507,7 +515,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           </button>
         </Panel>
       </ReactFlow>
-      {editingNode && <EditNodeModal isOpen={!!editingNode} nodeData={editingNode.data} nodeId={editingNode.id} onClose={() => setEditingNode(null)} onSave={handleSaveNode} onDelete={handleDeleteNode} />}
+      {editingNode && <EditNodeModal isOpen={!!editingNode} nodeData={editingNode.data} nodeId={editingNode.id} existingTeams={existingTeams} onClose={() => setEditingNode(null)} onSave={handleSaveNode} onDelete={handleDeleteNode} />}
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} leafColumns={leafColumns} setLeafColumns={setLeafColumns} />
     </div>
   );
