@@ -310,6 +310,12 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
     fitView({ duration: 400, padding: 0.2 });
   }, [maxDepth, fitView]);
 
+  const handleDeleteNode = useCallback((id: string) => {
+    setNodes((nds) => nds.filter((node) => node.id !== id));
+    setEdges((eds) => eds.filter((edge) => edge.source !== id && edge.target !== id));
+    setEditingNode(null);
+  }, [setNodes, setEdges]);
+
   const handleSaveNode = useCallback((updatedData: any) => {
     if (!editingNode) return;
     setNodes((nds) =>
@@ -465,8 +471,10 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
         <EditNodeModal
           isOpen={!!editingNode}
           nodeData={editingNode.data}
+          nodeId={editingNode.id}
           onClose={() => setEditingNode(null)}
           onSave={handleSaveNode}
+          onDelete={handleDeleteNode}
         />
       )}
     </div>
