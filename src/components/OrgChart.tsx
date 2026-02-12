@@ -36,28 +36,24 @@ const defaultEdgeOptions = {
   },
 };
 
-const dagreGraph = new dagre.graphlib.Graph();
-dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-const nodeWidth = 240;
-const nodeHeight = 150;
-
 const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB') => {
   const isHorizontal = direction === 'LR';
-  dagreGraph.setGraph({ rankdir: direction });
+  const g = new dagre.graphlib.Graph();
+  g.setGraph({ rankdir: direction });
+  g.setDefaultEdgeLabel(() => ({}));
 
   nodes.forEach((node) => {
-    dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
+    g.setNode(node.id, { width: nodeWidth, height: nodeHeight });
   });
 
   edges.forEach((edge) => {
-    dagreGraph.setEdge(edge.source, edge.target);
+    g.setEdge(edge.source, edge.target);
   });
 
-  dagre.layout(dagreGraph);
+  dagre.layout(g);
 
   const layoutedNodes = nodes.map((node) => {
-    const nodeWithPosition = dagreGraph.node(node.id);
+    const nodeWithPosition = g.node(node.id);
     return {
       ...node,
       targetPosition: isHorizontal ? 'left' : 'top',
@@ -177,14 +173,21 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
 
     const { nodes: layoutedNodes } = getLayoutedElements(visibleNodes, visibleEdges);
 
-    setNodes((nds) => nds.map(node => {
-      const layouted = layoutedNodes.find(ln => ln.id === node.id);
-      return {
-        ...node,
-        hidden: hiddenNodes.has(node.id),
-        position: layouted ? layouted.position : node.position
-      };
-    }));
+    setNodes((nds) => {
+      return nds.map(node => {
+        const layouted = layoutedNodes.find(ln => ln.id === node.id);
+        const isHidden = hiddenNodes.has(node.id);
+        
+        if (layouted) {
+          return {
+            ...node,
+            hidden: isHidden,
+            position: layouted.position
+          };
+        }
+        return { ...node, hidden: isHidden };
+      });
+    });
 
     setEdges((eds) => eds.map(edge => ({
       ...edge,
