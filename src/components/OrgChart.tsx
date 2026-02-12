@@ -81,6 +81,8 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
   const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set());
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
@@ -132,18 +134,65 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
     });
   }, [onEditNode, onToggleCollapse]);
 
-  const { nodes: initialLayoutedNodes, edges: initialLayoutedEdges } = useMemo(() => {
+  // Handle Initial Load and Layout changes
+  useEffect(() => {
     const nodesWithAction = initialNodes.map(node => ({
       ...node,
       data: { ...node.data, onAddSubordinate, onEditNode, onToggleCollapse }
     }));
-    return getLayoutedElements(nodesWithAction, initialEdges);
+    const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(nodesWithAction, initialEdges);
+    setNodes(layoutedNodes);
+    setEdges(layoutedEdges);
   }, [initialNodes, initialEdges, onAddSubordinate, onEditNode, onToggleCollapse]);
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialLayoutedNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialLayoutedEdges);
+  // Re-layout when collapsedNodes change
+  useEffect(() => {
+    if (nodes.length === 0) return;
 
-  const processedElements = useMemo(() => {
+    const directChildrenMap: Record<string, string[]> = {};
+    edges.forEach(edge => {
+      if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
+      directChildrenMap[edge.source].push(edge.target);
+    });
+
+    const hiddenNodes = new Set<string>();
+    const checkHidden = (nodeId: string, isParentCollapsed: boolean) => {
+      const children = directChildrenMap[nodeId] || [];
+      const shouldHideChildren = isParentCollapsed || collapsedNodes.has(nodeId);
+      
+      children.forEach(childId => {
+        if (shouldHideChildren) {
+          hiddenNodes.add(childId);
+        }
+        checkHidden(childId, shouldHideChildren);
+      });
+    };
+
+    const childIds = new Set(edges.map(e => e.target));
+    const roots = nodes.filter(n => !childIds.has(n.id));
+    roots.forEach(root => checkHidden(root.id, false));
+
+    const visibleNodes = nodes.filter(n => !hiddenNodes.has(n.id));
+    const visibleEdges = edges.filter(e => !hiddenNodes.has(e.source) && !hiddenNodes.has(e.target));
+
+    const { nodes: layoutedNodes } = getLayoutedElements(visibleNodes, visibleEdges);
+
+    setNodes((nds) => nds.map(node => {
+      const layouted = layoutedNodes.find(ln => ln.id === node.id);
+      return {
+        ...node,
+        hidden: hiddenNodes.has(node.id),
+        position: layouted ? layouted.position : node.position
+      };
+    }));
+
+    setEdges((eds) => eds.map(edge => ({
+      ...edge,
+      hidden: hiddenNodes.has(edge.source) || hiddenNodes.has(edge.target)
+    })));
+  }, [collapsedNodes]);
+
+  const processedNodes = useMemo(() => {
     const descendantsMap: Record<string, string[]> = {};
     const directChildrenMap: Record<string, string[]> = {};
 
@@ -165,26 +214,8 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
 
     nodes.forEach(node => getDescendants(node.id));
 
-    const hiddenNodes = new Set<string>();
-    const checkHidden = (nodeId: string, isParentCollapsed: boolean) => {
-      const children = directChildrenMap[nodeId] || [];
-      const shouldHideChildren = isParentCollapsed || collapsedNodes.has(nodeId);
-      
-      children.forEach(childId => {
-        if (shouldHideChildren) {
-          hiddenNodes.add(childId);
-        }
-        checkHidden(childId, shouldHideChildren);
-      });
-    };
-
-    const childIds = new Set(edges.map(e => e.target));
-    const roots = nodes.filter(n => !childIds.has(n.id));
-    roots.forEach(root => checkHidden(root.id, false));
-
-    const updatedNodes = nodes.map(node => ({
+    return nodes.map(node => ({
       ...node,
-      hidden: hiddenNodes.has(node.id),
       data: {
         ...node.data,
         isCollapsed: collapsedNodes.has(node.id),
@@ -193,39 +224,7 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
         onToggleCollapse,
       }
     }));
-
-    const updatedEdges = edges.map(edge => ({
-      ...edge,
-      hidden: hiddenNodes.has(edge.target) || hiddenNodes.has(edge.source),
-    }));
-
-    const visibleNodes = updatedNodes.filter(n => !n.hidden);
-    const visibleEdges = updatedEdges.filter(e => !e.hidden);
-    const { nodes: layoutedNodes } = getLayoutedElements(visibleNodes, visibleEdges);
-    
-    const finalNodes = updatedNodes.map(node => {
-      const layouted = layoutedNodes.find(ln => ln.id === node.id);
-      return layouted ? { ...node, position: layouted.position } : node;
-    });
-
-    return { nodes: finalNodes, edges: updatedEdges };
   }, [nodes, edges, collapsedNodes, onToggleCollapse]);
-
-  // Sync the layouted positions back to the main nodes state when collapsedNodes change
-  useEffect(() => {
-    setNodes((nds) => {
-      let changed = false;
-      const nextNodes = nds.map((node) => {
-        const processed = processedElements.nodes.find((n) => n.id === node.id);
-        if (processed && (processed.position.x !== node.position.x || processed.position.y !== node.position.y)) {
-          changed = true;
-          return { ...node, position: processed.position };
-        }
-        return node;
-      });
-      return changed ? nextNodes : nds;
-    });
-  }, [processedElements.nodes, setNodes]);
 
   const handleSaveNode = useCallback((updatedData: any) => {
     if (!editingNode) return;
@@ -302,8 +301,8 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
   return (
     <div className="w-full h-[800px] bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-inner relative">
       <ReactFlow
-        nodes={processedElements.nodes}
-        edges={processedElements.edges}
+        nodes={processedNodes}
+        edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
