@@ -1,0 +1,139 @@
+First Name,Last Name,Job Title,Team,Work Email,Supervisor name,Status
+Eric,Rosenthal,Senior Software Developer (Backend),Card-API,eric.rosenthal@dkbcodefactory.com,"Arumugasami, Sakthi",FILLED
+Levent,Ünver,Senior Software Developer (Backend),Card-API,levent.uenver@dkbcodefactory.com,"Arumugasami, Sakthi",FILLED
+Maximilian,Liemant,Senior Software Developer (Backend),Card-API,maximilian.Liemant@dkbcodefactory.com,"Arumugasami, Sakthi",FILLED
+Anna,Eckhardt,Senior Software Developer (Backend),Card-API,Anna.Eckhardt@dkbcodefactory.com,"Arumugasami, Sakthi",FILLED
+Mohammad,Rahimi Shoushtari,Software Developer (Backend),Accounts & Transactions,Mohammad.Rahimi@dkbcodefactory.com,"Baydon, Karim",FILLED
+Paul,Defois,Senior Software Developer (Backend),Accounts & Transactions,Paul.Defois@dkbcodefactory.com,"Baydon, Karim",FILLED
+Ali,Adel Ismail Aboelela,Senior Software Developer (Backend),Accounts & Transactions,Ali.Adel@dkbcodefactory.com,"Baydon, Karim",FILLED
+Eugen,Puzynin,Software Developer (Backend),Accounts & Transactions,Eugen.Puzynin@dkbcodefactory.com,"Baydon, Karim",FILLED
+Asghar,Mirzaei,Senior Software Developer (Backend),Accounts & Transactions,Asghar.Mirzaei@dkbcodefactory.com,"Baydon, Karim",FILLED
+Jesus Manuel,Sanchez Delgado,Chapter Lead Engineering (Frontend),,manuel.sanchez@dkbcodefactory.com,"Bobzien, Marc",FILLED
+Stephan,Seigewasser,Chapter Lead Engineering (Backend),,stephan.seigewasser@dkbcodefactory.com,"Bobzien, Marc",FILLED
+Benedict,Roeser,Engineering Manager (Backend),Beschluss,Benedict.Roeser@dkbcodefactory.com,"Bobzien, Marc",FILLED
+Raphaela,Wrede,Chapter Lead (Pega),,raphaela.wrede@dkbcodefactory.com,"Bobzien, Marc",FILLED
+Christoph-Philipp,Henzelmann,Chapter Lead Engineering (Mobile),,Christoph.Henzelmann@dkbcodefactory.com,"Bobzien, Marc",FILLED
+Oleksii,Vasyliev,Mobile Developer (iOS),Banking App - Nova Services,Oleksii.Vasyliev@dkbcodefactory.com,"Borsa, Iván",FILLED
+Reza,Lotfi,Senior Mobile Developer (Android),Banking App - Nova Services,Reza.Lotfi@dkbcodefactory.com,"Borsa, Iván",FILLED
+Seyed,Vaziri,Senior Software Developer (Frontend),Web Banking,Mohsen.Vaziri@dkbcodefactory.com,"Borsa, Iván",FILLED
+Hanieh,Haddad,Junior Software Developer (Frontend),Bank Account,Hanieh.Haddad@dkbcodefactory.com,"Borsa, Iván",FILLED
+Felix,Grünewald,Senior Software Developer (Backend),Communication & Documents,felix.gruenewald@dkbcodefactory.com,"de la Pena Fayos, Javier",FILLED
+Izuchukwu,Oleka,Senior Software Developer (Backend),Communication & Documents,Izuchukwu.Oleka@dkbcodefactory.com,"de la Pena Fayos, Javier",FILLED
+Ibrahim,Emre,Senior Software Developer (Backend),Communication & Documents,Umurcan.Emre@dkbcodefactory.com,"de la Pena Fayos, Javier",FILLED
+Daniel,Schellenberg,Junior Software Developer (Backend),Communication & Documents,Daniel.Schellenberg@dkbcodefactory.com,"de la Pena Fayos, Javier",FILLED
+Georgios,Karanikas,Senior Software Developer (Backend),Accounts & Transactions,Georgios.Karanikas@dkbcodefactory.com,"Elo, Pablo",FILLED
+Shanmugam,Muthuraj,Senior Software Developer (Backend),Loans,Shanmugam.Muthuraj@dkbcodefactory.com,"Elo, Pablo",FILLED
+Mel,Grosser,Senior Software Developer (Frontend),Loans,mel.grosser@dkbcodefactory.com,"Elo, Pablo",FILLED
+Chae,Lee,Senior Software Developer (Frontend),Loans,Chae-Hyuk.Lee@dkbcodefactory.com,"Elo, Pablo",FILLED
+Priscila,Duarte Uchoa Lopes Flores,Software Developer (Frontend),Loans,Priscila.Flores@dkbcodefactory.com,"Elo, Pablo",FILLED
+Darian,Reck,Junior Software Developer (Backend),Loans,Darian.Reck@dkbcodefactory.com,"Elo, Pablo",FILLED
+Hannes,Waldschmidt,Werkstudent,Card MGMT & Stammdaten,hannes.Waldschmidt@dkbcodefactory.com,"Fürstenau, Martin",FILLED
+Dennis,Hiller,Software Developer (Backend),Card MGMT & Stammdaten,Dennis.Hiller@dkbcodefactory.com,"Fürstenau, Martin",FILLED
+Ledion,Spaho,Senior Software Developer (Backend),Card MGMT & Stammdaten,Ledion.Spaho@dkbcodefactory.com,"Fürstenau, Martin",FILLED
+Fabian,Georgi,Software Developer (Backend),Card MGMT & Stammdaten,Fabian.Georgi@dkbcodefactory.com,"Fürstenau, Martin",FILLED
+Daniel,Stopka,Pega Developer,Bank Account,Daniel.Stopka@dkbcodefactory.com,"Gutierrez Reyes, Maria",FILLED
+Franz,Hefele,Pega Developer,Customer Onboarding,Franz.Hefele@dkbcodefactory.com,"Gutierrez Reyes, Maria",FILLED
+Stefan,Junge,Pega Developer,Customer Onboarding,stefan.junge@dkbcodefactory.com,"Gutierrez Reyes, Maria",FILLED
+Marie,Jager,Pega Developer,Sicherheiten,Marie.Jager@dkbcodefactory.com,"Gutierrez Reyes, Maria",FILLED
+Mounika,Sunkara,Senior Pega Developer,Customer Onboarding,Mounika.Sunkara@dkbcodefactory.com,"Gutierrez Reyes, Maria",FILLED
+Iván,Borsa,Engineering Manager (iOS),Banking App - Nova Services,ivan.borsa@dkbcodefactory.com,"Henzelmann, Christoph-Philipp",FILLED
+Michael,Steudter,Engineering Manager (iOS),Banking App - Nova Payments,michael.steudter@dkbcodefactory.com,"Henzelmann, Christoph-Philipp",FILLED
+Vladimir,Ignjatijevic,Engineering Manager (Android),Banking App - Nova Core,vladimir.ignjatijevic@dkbcodefactory.com,"Henzelmann, Christoph-Philipp",FILLED
+Pablo,Perez Gonzalez,Engineering Manager (Android),Banking App - Nova Products,Pablo.Perez-Gonzalez@dkbcodefactory.com,"Henzelmann, Christoph-Philipp",FILLED
+Andrej,Bielevicius,Senior Mobile Developer (Android),Banking App - Nova Core,andrej.bielevicius@dkbcodefactory.com,"Ignjatijevic, Vladimir",FILLED
+Cassiano,Guareschi Montanari,Senior Software Developer (Frontend),Web Banking,Cassiano.Montanari@dkbcodefactory.com,"Ignjatijevic, Vladimir",FILLED
+Adam,Kerenyi,Senior Mobile Developer (iOS),Banking App - Nova Core,adam.kerenyi@dkbcodefactory.com,"Ignjatijevic, Vladimir",FILLED
+Claudinei,Bido,Senior Software Developer (Frontend),Web Banking,claudinei.bido@dkbcodefactory.com,"Ignjatijevic, Vladimir",FILLED
+Sarangan,Gnanasegaram,Senior Mobile Developer (Android),Banking App - Nova Core,Sarangan.Gnanasegaram@dkbcodefactory.com,"Ignjatijevic, Vladimir",FILLED
+Koki,Isshiki,Mobile Developer (iOS),Banking App - Nova Core,Koki.Isshiki@dkbcodefactory.com,"Ignjatijevic, Vladimir",FILLED
+Dennis,Steiner,Senior Software Developer (Backend),Payment & Fraud,dennis.steiner@dkbcodefactory.com,"Kefale, Biniam",FILLED
+Faizan,Hussain,Senior Software Developer (Backend),Payment & Fraud,Faizan.Hussain@dkbcodefactory.com,"Kefale, Biniam",FILLED
+Denys,Stoianov,Software Developer (Backend),Payment & Fraud,Denys.Stoianov@dkbcodefactory.com,"Kefale, Biniam",FILLED
+Byeonggil,Park,Software Developer (Backend),Accounts & Transactions,Byeonggil.Park@dkbcodefactory.com,"Kefale, Biniam",FILLED
+Mehrdad,Hosseinnejad Yami,Senior Software Developer (Backend),Payment & Fraud,Mehrdad.Yami@dkbcodefactory.com,"Kefale, Biniam",FILLED
+Hari,Tummala,Senior Software Developer (Backend),Payment & Fraud,Hari.Tummala@dkbcodefactory.com,"Kefale, Biniam",FILLED
+Marc,Bobzien,Head of Engineering,,Marc.Bobzien@dkbcodefactory.com,"Lehsten, Alexander",FILLED
+Alexandr,Melnic,Senior Software Developer (Backend),Signup,alexandr.melnic@dkbcodefactory.com,"Maghear, Adrian-Florin",FILLED
+Sura,Watthanalamlert,Software Developer (Backend),Signup,Sura.Watthanalamlert@dkbcodefactory.com,"Maghear, Adrian-Florin",FILLED
+Eveline,Kooijman,Senior Software Developer (Frontend),Signup,Eveline.Kooijman@dkbcodefactory.com,"Maghear, Adrian-Florin",FILLED
+Miriam,Bah,Senior Software Developer (Frontend),Signup,miriam.Bah@dkbcodefactory.com,"Maghear, Adrian-Florin",FILLED
+Delia,Metzler,Software Developer (Frontend),Signup,Delia.Metzler@dkbcodefactory.com,"Maghear, Adrian-Florin",FILLED
+Serhat,Sungur,Software Developer (Backend),Signup,Serhat.Sungur@dkbcodefactory.com,"Maghear, Adrian-Florin",FILLED
+Thomas,Juhnke,Software Developer (Backend),Onboarding,Thomas.Juhnke@dkbcodefactory.com,"Maghear, Adrian-Florin",FILLED
+Thore,Ottenheym,Software Developer (Backend),Onboarding,Thore.Ottenheym@dkbcodefactory.com,"Maghear, Adrian-Florin",FILLED
+Samuel,Stein,Senior Software Developer (Backend),Sicherheiten,samuel.stein@dkbcodefactory.com,"Mazur, Maria",FILLED
+Roman,Drischel,Software Developer (Backend),Kreditwelt & Ablage,Roman.Uglovskij@dkbcodefactory.com,"Mazur, Maria",FILLED
+Jennifer,Wjertzoch,Senior Software Developer (Frontend),Kreditwelt & Ablage,Jennifer.Wjertzoch@dkbcodefactory.com,"Mazur, Maria",FILLED
+Renata,Lazarov,Junior Software Developer (Frontend),Verwalterplatform,Renata.Lazarov@dkbcodefactory.com,"Mazur, Maria",FILLED
+Lucas,Lee,Software Developer (Backend),Broker,lucas.lee@dkbcodefactory.com,"Mösch, Christopher",FILLED
+Leon,Kranich,Software Developer (Backend),Broker,Leon.Kranich@dkbcodefactory.com,"Mösch, Christopher",FILLED
+Naimah,Fowler,Junior Software Developer (Backend),Broker,Naimah.Fowler@dkbcodefactory.com,"Mösch, Christopher",FILLED
+Antonio,Martinelli,Senior Software Developer (Backend),Broker,Antonio.Martinelli@dkbcodefactory.com,"Mösch, Christopher",FILLED
+Janine,Brennförder,Senior Software Developer (Backend),Broker,Janine.Brennfoerder@dkbcodefactory.com,"Mösch, Christopher",FILLED
+Bodo,Wissemann,Senior Software Developer (Backend),Broker,Bodo.Wissemann@dkbcodefactory.com,"Mösch, Christopher",FILLED
+Alessandro,Memoli,Junior Software Developer (Backend),Broker,Alessandro.Memoli@dkbcodefactory.com,"Mösch, Christopher",FILLED
+Franziska,Comploi,Senior Software Developer (Frontend),Homepage,Franziska.Comploi@dkbcodefactory.com,"Okumus, Yasin",FILLED
+Cynthia,Akinade,Software Developer (Frontend),Homepage,Cynthia.Akinade@dkbcodefactory.com,"Okumus, Yasin",FILLED
+Nataliia,Tbilieli,Software Developer (Frontend),Homepage,Nataliia.Tbilieli@dkbcodefactory.com,"Okumus, Yasin",FILLED
+Philipp,Johannes,Pega Developer,Produktlöschung,Philipp.Johannes@dkbcodefactory.com,"Olukoye, Hannah",FILLED
+Lena,Strokov,Pega Developer,Produktlöschung,Lena.Strokov@dkbcodefactory.com,"Olukoye, Hannah",FILLED
+Marco,Rossow,Pega Developer,Produktlöschung,Marco.Rossow@dkbcodefactory.com,"Olukoye, Hannah",FILLED
+Arlik,Florin,Pega Developer,Digitale Postverteilung,Arlik.Florin@dkbcodefactory.com,"Olukoye, Hannah",FILLED
+Michael,Kutzner,Junior Pega Developer,Produktlöschung,Michael.Kutzner@dkbcodefactory.com,"Olukoye, Hannah",FILLED
+Thomas,Segkoulis,Senior Mobile Developer (iOS),Banking App - Nova Products,thomas.Segkoulis@dkbcodefactory.com,"Perez Gonzalez, Pablo",FILLED
+Richard,Scharf,Mobile Developer (iOS),Banking App - Nova Products,Leonard.Scharf@dkbcodefactory.com,"Perez Gonzalez, Pablo",FILLED
+Philipp,Geißler,Senior Mobile Developer (Android),Banking App - Nova Products,Philipp.Geissler@dkbcodefactory.com,"Perez Gonzalez, Pablo",FILLED
+Thomas,Wilson,Software Developer (Frontend),Web Banking,Thomas.Wilson@dkbcodefactory.com,"Perez Gonzalez, Pablo",FILLED
+Rafal,Sztajer,Senior Software Developer (Frontend),Broker,rafal.Sztajer@dkbcodefactory.com,"Perez Gonzalez, Pablo",FILLED
+Benjamin,Kunz,Mobile Developer (Android),Banking App - Nova Products,Benjamin.Kunz@dkbcodefactory.com,"Perez Gonzalez, Pablo",FILLED
+Pavlo,Tereshchuk,Mobile Developer (iOS),Banking App - Nova Products,Pavlo.Tereshchuk@dkbcodefactory.com,"Perez Gonzalez, Pablo",FILLED
+Leoni,Sperling,Software Developer (Frontend),Banking App - Nova Products,Leoni.Sperling@dkbcodefactory.com,"Perez Gonzalez, Pablo",FILLED
+Veit,Schumacher,Software Developer (Frontend),Bank Account,veit.schumacher@dkbcodefactory.com,"Piotrowski, Lukasz",FILLED
+Justina,Valda-Rajić,Software Developer (Frontend),,Justina.Valda-Rajic@dkbcodefactory.com,"Piotrowski, Lukasz",FILLED
+Nabil,Mediouni,Software Developer (Frontend),,Nabil.Mediouni@dkbcodefactory.com,"Piotrowski, Lukasz",FILLED
+Markus,May,Senior Software Developer (Backend),Beschluss,markus.may@dkbcodefactory.com,"Roeser, Benedict",FILLED
+Stefan,Kudwien,Senior Software Developer (Frontend),Sicherheiten,stefan.kudwien@dkbcodefactory.com,"Roeser, Benedict",FILLED
+Michael,Scharni,Senior Software Developer (Backend),Auflagen & Bonität,michael.Scharni@dkbcodefactory.com,"Roeser, Benedict",FILLED
+Manuel,Pache,Senior Software Developer (Backend),Produkte & Wirtschaftlichkeit,Manuel.Pache@dkbcodefactory.com,"Roeser, Benedict",FILLED
+Miroslav,Dzunic,Senior Software Developer (Frontend),Beschluss,Miroslav.Dzunic@dkbcodefactory.com,"Roeser, Benedict",FILLED
+Rowena,Schmidt,Junior Software Developer (Frontend),Beschluss,Rowena.Schmidt@dkbcodefactory.com,"Roeser, Benedict",FILLED
+Anton,Katzer,Principal Engineer (Frontend),Kreditwelt & Ablage,anton.katzer@dkbcodefactory.com,"Sanchez Delgado, Jesus Manuel",FILLED
+Lukasz,Piotrowski,Engineering Manager (Frontend),Banking App - Nova Payments,lukasz.Piotrowski@dkbcodefactory.com,"Sanchez Delgado, Jesus Manuel",FILLED
+Judith,Hartmann,Principal Engineer (Frontend),,judith.hartmann@dkbcodefactory.com,"Sanchez Delgado, Jesus Manuel",FILLED
+Daniel,Neuschäfer-Rube,Engineering Manager (Frontend),Produkte & Wirtschaftlichkeit,Daniel.Neuschaefer-Rube@dkbcodefactory.com,"Sanchez Delgado, Jesus Manuel",FILLED
+Yasin,Okumus,Engineering Manager (Frontend),Homepage,Mesut.Okumus@dkbcodefactory.com,"Sanchez Delgado, Jesus Manuel",FILLED
+Maria,Mazur,Engineering Manager (Frontend),Kreditwelt & Ablage,Maria.Mazur@dkbcodefactory.com,"Sanchez Delgado, Jesus Manuel",FILLED
+Stiliyana,Yordanova,Engineering Manager (Frontend),Web Banking,Stiliyana.Yordanova@dkbcodefactory.com,"Sanchez Delgado, Jesus Manuel",FILLED
+Tobias,Pohl,Pega Developer,Stammdaten / Produktänderung,Tobias.Pohl@dkbcodefactory.com,"Schaefer, Elif",FILLED
+Patrick,Pister,Pega Developer,Sicherheiten Bearbeitung,Patrick.Pister@dkbcodefactory.com,"Schaefer, Elif",FILLED
+Sven,Wetzurek,Pega Developer (noch kein Level),Stammdaten / Produktänderung,Sven.Wetzurek@dkbcodefactory.com,"Schaefer, Elif",FILLED
+Heiko,Ruhm,Pega Developer,Stammdaten / Produktänderung,Heiko.Ruhm@dkbcodefactory.com,"Schaefer, Elif",FILLED
+Kristjana,Gjonaj,Pega Developer,Kredit Consult,Kristjana.Gjonaj@dkbcodefactory.com,"Schaefer, Elif",FILLED
+Miloslaw,Frey,Senior Pega Developer,Stammdaten-/Produktänderung,Miloslaw.Frey@dkbcodefactory.com,"Schaefer, Elif",FILLED
+Akanksha,Rai,Senior Pega Developer,Stammdaten-/Produktänderung,AkankshaBhardwaj.Rai@dkbcodefactory.com,"Schaefer, Elif",FILLED
+Martin,Fürstenau,Engineering Manager (Backend),Card MGMT & Stammdaten,martin.fuerstenau@dkbcodefactory.com,"Seigewasser, Stephan",FILLED
+Sakthi,Arumugasami,Engineering Manager (Backend),Card-API,Sakthi.Arumugasami@dkbcodefactory.com,"Seigewasser, Stephan",FILLED
+Pablo,Elo,Engineering Manager (Backend),Loans,pablo.elo@dkbcodefactory.com,"Seigewasser, Stephan",FILLED
+Driptaroop,Das,Principal Engineering (Backend),,Driptaroop.Das@dkbcodefactory.com,"Seigewasser, Stephan",FILLED
+Christopher,Mösch,Engineering Manager (Backend),Broker,Christopher.Moesch@dkbcodefactory.com,"Seigewasser, Stephan",FILLED
+Javier,de la Pena Fayos,Engineering Manager (Backend),Communication & Documents,Javier.delapena@dkbcodefactory.com,"Seigewasser, Stephan",FILLED
+Adrian-Florin,Maghear,Engineering Manager (Backend),Signup,Adrian.Maghear@dkbcodefactory.com,"Seigewasser, Stephan",FILLED
+Georgios,Stavrakakis,Engineering Manager (Backend),Card MGMT & Stammdaten,Georgios.Stavrakakis@dkbcodefactory.com,"Seigewasser, Stephan",FILLED
+Biniam,Kefale,Engineering Manager (Backend),Payment & Fraud,Biniam.Kefale@dkbcodefactory.com,"Seigewasser, Stephan",FILLED
+Karim,Baydon,Engineering Manager (Backend),Card MGMT & Stammdaten,Karim.Baydon@dkbcodefactory.com,"Seigewasser, Stephan",FILLED
+Hyung-Jun,Yoo,Senior Mobile Developer (Android),Banking App - Nova Services,Hyung-Jun.Yoo@dkbcodefactory.com,"Steudter, Michael",FILLED
+Fabian,Schaffner,Senior Mobile Developer (iOS),Banking App - Nova Payments,fabian.Schaffner@dkbcodefactory.com,"Steudter, Michael",FILLED
+Anna,Cieślak,Mobile Developer (Android),Banking App - Nova Payments,anna.Cieslak@dkbcodefactory.com,"Steudter, Michael",FILLED
+Stephan,Georgi,Senior Mobile Developer (iOS),Banking App - Nova Payments,stephan.georgi@dkbcodefactory.com,"Steudter, Michael",FILLED
+Mohamed,Abdelhamid,Senior Mobile Developer (Android),Banking App - Nova Payments,Mohamed.Abdelhamid@dkbcodefactory.com,"Steudter, Michael",FILLED
+Ekin,Alçar,Senior Software Developer (Frontend),Web Banking,ekin.alcar@dkbcodefactory.com,"Steudter, Michael",FILLED
+Brent,Curriden,Junior Software Developer (Frontend),Web Banking,Brent.Curriden@dkbcodefactory.com,"Steudter, Michael",FILLED
+Beatriz,Loures Macuco,Mobile Developer (iOS),Banking App - Nova Payments,Beatriz.Macuco@dkbcodefactory.com,"Steudter, Michael",FILLED
+Maria,Gutierrez Reyes,Engineering Manager (Pega),,margarita.gutierrez@dkbcodefactory.com,"Wrede, Raphaela",FILLED
+Elif,Schaefer,Engineering Manager (Pega),,Elif.Schaefer@dkbcodefactory.com,"Wrede, Raphaela",FILLED
+Hannah,Olukoye,Engineering Manager (Pega),,HannahAkinyi.Olukoye@dkbcodefactory.com,"Wrede, Raphaela",FILLED
+Maria,Cruz Molina,Senior Mobile Developer (iOS),Banking App - Nova Core,Luisa.CruzMolina@dkbcodefactory.com,"Yordanova, Stiliyana",FILLED
+Aija,Avota,Software Developer (Frontend),Web Banking,Aija.Avota@dkbcodefactory.com,"Yordanova, Stiliyana",FILLED
+Ben,Forchert,Mobile Developer (Android),Banking App - Nova Payments,luno.forchert@dkbcodefactory.com,"Yordanova, Stiliyana",FILLED
+João,Raimundo Belchior,Senior Software Developer (Frontend),Web Banking,Joao.Belchior@dkbcodefactory.com,"Yordanova, Stiliyana",FILLED
+Christophe,Hoste,Senior Mobile Developer (iOS),Banking App - Nova Services,Christophe.Hoste@dkbcodefactory.com,"Yordanova, Stiliyana",FILLED
