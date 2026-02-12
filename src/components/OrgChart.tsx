@@ -79,7 +79,7 @@ interface OrgChartProps {
 }
 
 const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) => {
-  const { getViewport, setViewport } = useReactFlow();
+  const { getViewport, setViewport, getNode } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
   const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set());
@@ -94,8 +94,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
   }, []);
 
   const onToggleCollapse = useCallback((id: string) => {
-    // Capture the current world position of the node before we change the layout
-    const node = nodes.find(n => n.id === id);
+    // Capture the CURRENT position using getNode which reflects the rendered state
+    const node = getNode(id);
     if (node) {
       lastToggledRef.current = { id, oldPos: { ...node.position } };
     }
@@ -106,7 +106,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
       else next.add(id);
       return next;
     });
-  }, [nodes]);
+  }, [getNode]);
 
   const onAddSubordinate = useCallback((parentId: string) => {
     const newId = `empty-${Date.now()}`;
@@ -236,15 +236,9 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
       if (newNode) {
         const { x: vx, y: vy, zoom } = getViewport();
         
-        // Calculate where the node WAS on the screen
-        const screenX = oldPos.x * zoom + vx;
-        const screenY = oldPos.y * zoom + vy;
-        
-        // Calculate where the node SHOULD be in the new viewport to stay at the same screen position
-        // screenPos = worldPos * zoom + viewportOffset
-        // viewportOffset = screenPos - worldPos * zoom
-        const nextVx = screenX - newNode.position.x * zoom;
-        const nextVy = screenY - newNode.position.y * zoom;
+        // Calculate new viewport to keep the node at the same screen position
+        const nextVx = vx + (oldPos.x - newNode.position.x) * zoom;
+        const nextVy = vy + (oldPos.y - newNode.position.y) * zoom;
 
         setViewport({ x: nextVx, y: nextVy, zoom }, { duration: 400 });
       }
