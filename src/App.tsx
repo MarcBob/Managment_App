@@ -27,14 +27,14 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-12">
+      <main className={data ? "px-4 py-6" : "max-w-7xl mx-auto px-4 py-12"}>
         {!data ? (
           <div className="max-w-xl mx-auto">
             <FileUpload onDataLoaded={handleDataLoaded} />
           </div>
         ) : (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-6 h-[calc(100vh-120px)]">
+            <div className="flex items-center justify-between shrink-0">
               <h2 className="text-2xl font-bold text-slate-900">Organization Chart</h2>
               <div className="flex gap-4">
                 <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-sm font-medium">
@@ -46,7 +46,9 @@ function App() {
               </div>
             </div>
             
-            <OrgChart initialNodes={data.nodes} initialEdges={data.edges} />
+            <div className="flex-1 min-h-[500px]">
+              <OrgChart initialNodes={data.nodes} initialEdges={data.edges} />
+            </div>
           </div>
         )}
       </main>

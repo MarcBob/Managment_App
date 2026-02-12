@@ -358,7 +358,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
   }, [nodes, edges]);
 
   return (
-    <div className="w-full h-[800px] bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-inner relative">
+    <div className="w-full h-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-inner relative min-h-[500px]">
       <ReactFlow
         nodes={processedElements.nodes}
         edges={processedElements.edges}
