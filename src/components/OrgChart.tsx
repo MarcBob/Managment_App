@@ -9,6 +9,8 @@ import ReactFlow, {
   addEdge,
   updateEdge,
   MarkerType,
+  useReactFlow,
+  ReactFlowProvider,
 } from 'reactflow';
 import type { Connection, Edge } from 'reactflow';
 import { Search, Download } from 'lucide-react';
@@ -76,7 +78,8 @@ interface OrgChartProps {
   initialEdges: OrgEdge[];
 }
 
-export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) => {
+const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) => {
+  const { fitView } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
   const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set());
@@ -134,11 +137,10 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
     setCollapsedNodes(new Set());
   }, [initialNodes, initialEdges, setNodes, setEdges]);
 
-  // Derived view state (computed every render)
+  // Derived view state
   const processedElements = useMemo(() => {
     if (nodes.length === 0) return { nodes: [], edges: [] };
 
-    // 1. Build maps
     const directChildrenMap: Record<string, string[]> = {};
     const descendantsMap: Record<string, string[]> = {};
     
@@ -158,7 +160,6 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
       return descendants;
     };
 
-    // 2. Identify hidden nodes
     const hiddenNodes = new Set<string>();
     const checkHidden = (nodeId: string, isParentCollapsed: boolean) => {
       const children = directChildrenMap[nodeId] || [];
@@ -172,7 +173,6 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
     const childIds = new Set(edges.map(e => e.target));
     nodes.filter(n => !childIds.has(n.id)).forEach(root => checkHidden(root.id, false));
 
-    // 3. Prepare nodes with data for layout and search
     const preparedNodes = nodes.map(node => {
       const matchesSearch = searchQuery === '' || 
         node.data.firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -205,13 +205,11 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
       hidden: hiddenNodes.has(edge.source) || hiddenNodes.has(edge.target),
     }));
 
-    // 4. Perform Layout on visible elements
     const visibleNodes = preparedNodes.filter(n => !n.hidden);
     const visibleEdges = preparedEdges.filter(e => !e.hidden);
     
     const { nodes: layoutedNodes } = getLayoutedElements(visibleNodes, visibleEdges);
 
-    // 5. Merge layouted positions back
     const finalNodes = preparedNodes.map(node => {
       const layouted = layoutedNodes.find(ln => ln.id === node.id);
       return layouted ? { ...node, position: layouted.position } : node;
@@ -219,6 +217,11 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
 
     return { nodes: finalNodes, edges: preparedEdges };
   }, [nodes, edges, collapsedNodes, searchQuery, onAddSubordinate, onEditNode, onToggleCollapse]);
+
+  // Animate viewport when layout changes due to collapse
+  useEffect(() => {
+    fitView({ duration: 400, padding: 0.2 });
+  }, [collapsedNodes, fitView]);
 
   const handleSaveNode = useCallback((updatedData: any) => {
     if (!editingNode) return;
@@ -336,3 +339,9 @@ export const OrgChart: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }
     </div>
   );
 };
+
+export const OrgChart: React.FC<OrgChartProps> = (props) => (
+  <ReactFlowProvider>
+    <OrgChartInner {...props} />
+  </ReactFlowProvider>
+);
