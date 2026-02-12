@@ -9,16 +9,28 @@ interface EditNodeModalProps {
   nodeId: string;
   nodeData: any;
   existingTeams: string[];
+  possibleManagers: { id: string, name: string }[];
+  currentManagerId: string;
 }
 
-export const EditNodeModal = ({ isOpen, onClose, onSave, onDelete, nodeId, nodeData, existingTeams }: EditNodeModalProps) => {
-  const [formData, setFormData] = useState(nodeData);
+export const EditNodeModal = ({ 
+  isOpen, 
+  onClose, 
+  onSave, 
+  onDelete, 
+  nodeId, 
+  nodeData, 
+  existingTeams,
+  possibleManagers,
+  currentManagerId
+}: EditNodeModalProps) => {
+  const [formData, setFormData] = useState({ ...nodeData, managerId: currentManagerId });
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   useEffect(() => {
-    setFormData(nodeData);
+    setFormData({ ...nodeData, managerId: currentManagerId });
     setShowConfirmDelete(false);
-  }, [nodeData]);
+  }, [nodeData, currentManagerId]);
 
   if (!isOpen) return null;
 
@@ -94,6 +106,26 @@ export const EditNodeModal = ({ isOpen, onClose, onSave, onDelete, nodeId, nodeD
                 value={formData.jobTitle || ''}
                 onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
               />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Direct Manager</label>
+              <input
+                type="text"
+                list="possible-managers"
+                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                value={possibleManagers.find(m => m.id === formData.managerId)?.name || formData.managerId || ''}
+                onChange={(e) => {
+                  const selectedManager = possibleManagers.find(m => m.name === e.target.value);
+                  setFormData({ ...formData, managerId: selectedManager ? selectedManager.id : e.target.value });
+                }}
+                placeholder="Select or type manager ID..."
+              />
+              <datalist id="possible-managers">
+                {possibleManagers.map(m => (
+                  <option key={m.id} value={m.name} />
+                ))}
+              </datalist>
             </div>
 
             <div className="space-y-1">

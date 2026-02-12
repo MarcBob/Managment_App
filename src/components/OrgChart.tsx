@@ -378,6 +378,17 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     return Array.from(teams).sort();
   }, [nodes]);
 
+  const possibleManagers = useMemo(() => {
+    return nodes
+      .map(n => ({
+        id: n.id,
+        name: n.data.status === 'FILLED' 
+          ? `${n.data.firstName} ${n.data.lastName}` 
+          : `EMPTY: ${n.data.jobTitle} (${n.id})`
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [nodes]);
+
   useEffect(() => {
     if (lastToggledRef.current) {
       const { id, oldPos } = lastToggledRef.current;
@@ -404,19 +415,40 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
 
   const handleSaveNode = useCallback((updatedData: any) => {
     if (!editingNode) return;
+    const { managerId: newManagerId, ...restData } = updatedData;
+
     setNodes((nds) =>
       nds.map((node) => {
         if (node.id === editingNode.id) {
           return {
             ...node,
-            data: { ...node.data, ...updatedData },
+            data: { ...node.data, ...restData },
           };
         }
         return node;
       })
     );
+
+    setEdges((eds) => {
+      const currentEdge = eds.find(e => e.target === editingNode.id);
+      if (currentEdge) {
+        if (newManagerId) {
+          return eds.map(e => e.id === currentEdge.id ? { ...e, source: newManagerId } : e);
+        } else {
+          return eds.filter(e => e.id !== currentEdge.id);
+        }
+      } else if (newManagerId) {
+        return eds.concat({
+          id: `e-${newManagerId}-${editingNode.id}`,
+          source: newManagerId,
+          target: editingNode.id
+        });
+      }
+      return eds;
+    });
+
     setEditingNode(null);
-  }, [editingNode, setNodes]);
+  }, [editingNode, setNodes, setEdges]);
 
   const onConnect = useCallback((params: Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
   const onEdgeUpdate = useCallback((oldEdge: Edge, newConnection: Connection) => setEdges((els) => updateEdge(oldEdge, newConnection, els)), [setEdges]);
@@ -515,7 +547,19 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           </button>
         </Panel>
       </ReactFlow>
-      {editingNode && <EditNodeModal isOpen={!!editingNode} nodeData={editingNode.data} nodeId={editingNode.id} existingTeams={existingTeams} onClose={() => setEditingNode(null)} onSave={handleSaveNode} onDelete={handleDeleteNode} />}
+      {editingNode && (
+        <EditNodeModal 
+          isOpen={!!editingNode} 
+          nodeData={editingNode.data} 
+          nodeId={editingNode.id} 
+          existingTeams={existingTeams}
+          possibleManagers={possibleManagers}
+          currentManagerId={edges.find(e => e.target === editingNode.id)?.source || ''}
+          onClose={() => setEditingNode(null)} 
+          onSave={handleSaveNode} 
+          onDelete={handleDeleteNode} 
+        />
+      )}
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} leafColumns={leafColumns} setLeafColumns={setLeafColumns} />
     </div>
   );
