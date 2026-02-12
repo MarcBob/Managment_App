@@ -82,12 +82,15 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
   const { getViewport, setViewport, getNode, fitView } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
+  
+  // Track manual overrides: explicitly expanded or explicitly collapsed
   const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set());
+  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
+  
   const [maxDepth, setMaxDepth] = useState<number>(10);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   
-  // Track the last toggled node to maintain its screen position
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
 
   const onEditNode = useCallback((id: string, data: any) => {
@@ -95,18 +98,38 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
   }, []);
 
   const onToggleCollapse = useCallback((id: string) => {
-    // Capture the CURRENT position using getNode which reflects the rendered state
     const node = getNode(id);
     if (node) {
       lastToggledRef.current = { id, oldPos: { ...node.position } };
     }
 
-    setCollapsedNodes((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
+    const isCurrentlyCollapsed = (node?.data as any).isCollapsed;
+
+    if (isCurrentlyCollapsed) {
+      // Expanding
+      setCollapsedNodes(prev => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+      setExpandedNodes(prev => {
+        const next = new Set(prev);
+        next.add(id);
+        return next;
+      });
+    } else {
+      // Collapsing
+      setCollapsedNodes(prev => {
+        const next = new Set(prev);
+        next.add(id);
+        return next;
+      });
+      setExpandedNodes(prev => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+    }
   }, [getNode]);
 
   const onAddSubordinate = useCallback((parentId: string) => {
@@ -140,11 +163,30 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
     }));
   }, [setNodes, setEdges]);
 
-  // Sync with initial props
+  // Sync with initial props and calculate initial max depth
   useEffect(() => {
     setNodes(initialNodes);
     setEdges(initialEdges);
     setCollapsedNodes(new Set());
+    setExpandedNodes(new Set());
+
+    // Calculate actual max depth of the initial graph
+    const directChildrenMap: Record<string, string[]> = {};
+    initialEdges.forEach(edge => {
+      if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
+      directChildrenMap[edge.source].push(edge.target);
+    });
+
+    let currentMax = 0;
+    const findMaxDepth = (nodeId: string, depth: number) => {
+      currentMax = Math.max(currentMax, depth);
+      (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
+    };
+
+    const childIds = new Set(initialEdges.map(e => e.target));
+    initialNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
+    
+    setMaxDepth(currentMax || 1);
   }, [initialNodes, initialEdges, setNodes, setEdges]);
 
   // Derived view state
@@ -170,36 +212,44 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
       return descendants;
     };
 
-    // 2. Calculate depths and identify hidden nodes
     const nodeDepths: Record<string, number> = {};
     const hiddenNodes = new Set<string>();
     
     const childIds = new Set(edges.map(e => e.target));
     const roots = nodes.filter(n => !childIds.has(n.id));
 
-    const processHierarchy = (nodeId: string, depth: number, isParentCollapsed: boolean) => {
+    const processHierarchy = (nodeId: string, depth: number, isParentHidden: boolean) => {
       nodeDepths[nodeId] = depth;
       const children = directChildrenMap[nodeId] || [];
       
-      const shouldHideChildren = isParentCollapsed || collapsedNodes.has(nodeId) || depth >= maxDepth;
+      // Node visibility calculation:
+      // A node's children are hidden if:
+      // 1. The parent itself is hidden (propagated)
+      // 2. The parent is explicitly collapsed
+      // 3. The parent is at/beyond maxDepth AND is not explicitly expanded
+      const areChildrenHidden = isParentHidden || 
+                               collapsedNodes.has(nodeId) || 
+                               (depth >= maxDepth && !expandedNodes.has(nodeId));
       
       children.forEach(childId => {
-        if (shouldHideChildren) {
+        if (areChildrenHidden) {
           hiddenNodes.add(childId);
         }
-        processHierarchy(childId, depth + 1, shouldHideChildren);
+        processHierarchy(childId, depth + 1, areChildrenHidden);
       });
     };
 
     roots.forEach(root => processHierarchy(root.id, 1, false));
 
-    // 3. Prepare nodes with data for layout and search
     const preparedNodes = nodes.map(node => {
       const matchesSearch = searchQuery === '' || 
         node.data.firstName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         node.data.lastName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         node.data.jobTitle?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         node.data.team?.toLowerCase().includes(searchQuery.toLowerCase());
+
+      const depth = nodeDepths[node.id] || 1;
+      const isCollapsed = collapsedNodes.has(node.id) || (depth >= maxDepth && !expandedNodes.has(node.id));
 
       return {
         ...node,
@@ -209,10 +259,10 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
           onAddSubordinate,
           onEditNode,
           onToggleCollapse,
-          isCollapsed: collapsedNodes.has(node.id),
+          isCollapsed,
           directReportsCount: (directChildrenMap[node.id] || []).length,
           totalReportsCount: getDescendants(node.id).length,
-          depth: nodeDepths[node.id],
+          depth,
         },
         style: {
           ...node.style,
@@ -238,7 +288,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
     });
 
     return { nodes: finalNodes, edges: preparedEdges };
-  }, [nodes, edges, collapsedNodes, searchQuery, maxDepth, onAddSubordinate, onEditNode, onToggleCollapse]);
+  }, [nodes, edges, collapsedNodes, expandedNodes, searchQuery, maxDepth, onAddSubordinate, onEditNode, onToggleCollapse]);
 
   // Adjust viewport to keep toggled node stable
   useEffect(() => {
@@ -248,18 +298,14 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
       
       if (newNode) {
         const { x: vx, y: vy, zoom } = getViewport();
-        
-        // Calculate new viewport to keep the node at the same screen position
         const nextVx = vx + (oldPos.x - newNode.position.x) * zoom;
         const nextVy = vy + (oldPos.y - newNode.position.y) * zoom;
-
         setViewport({ x: nextVx, y: nextVy, zoom }, { duration: 400 });
       }
       lastToggledRef.current = null;
     }
   }, [processedElements.nodes, getViewport, setViewport]);
 
-  // Handle fitView on layer depth changes
   useEffect(() => {
     fitView({ duration: 400, padding: 0.2 });
   }, [maxDepth, fitView]);
@@ -391,8 +437,22 @@ const OrgChartInner: React.FC<OrgChartProps> = ({ initialNodes, initialEdges }) 
           </button>
           <button
             onClick={() => {
-              setMaxDepth(10);
+              // Recalculate max depth for reset
+              const childIds = new Set(edges.map(e => e.target));
+              const directChildrenMap: Record<string, string[]> = {};
+              edges.forEach(edge => {
+                if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
+                directChildrenMap[edge.source].push(edge.target);
+              });
+              let currentMax = 0;
+              const findMaxDepth = (nodeId: string, depth: number) => {
+                currentMax = Math.max(currentMax, depth);
+                (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
+              };
+              nodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
+              setMaxDepth(currentMax || 1);
               setCollapsedNodes(new Set());
+              setExpandedNodes(new Set());
             }}
             className="mt-2 text-[10px] font-bold text-blue-600 hover:text-blue-700 uppercase"
           >
