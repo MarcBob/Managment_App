@@ -16,18 +16,24 @@ function App() {
     leafColumns?: number;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasLoadedFromServer, setHasLoadedFromServer] = useState(false);
 
   // Load saved state on startup
   useEffect(() => {
     const loadState = async () => {
       try {
+        console.log('Attempting to load state from server...');
         const response = await fetch(`${API_URL}/load`);
         if (response.ok) {
           const savedState = await response.json();
+          console.log('Successfully loaded state from server');
           setData(savedState);
+          setHasLoadedFromServer(true);
+        } else {
+          console.log('No saved state found on server (404)');
         }
       } catch (error) {
-        console.error('Failed to load saved state:', error);
+        console.warn('Could not connect to persistence server. Auto-save will be disabled.', error);
       } finally {
         setIsLoading(false);
       }
@@ -38,24 +44,34 @@ function App() {
 
   const handleDataLoaded = (nodes: OrgNode[], edges: OrgEdge[]) => {
     setData({ nodes, edges });
+    // We didn't load this from server, but we want to start saving now
+    setHasLoadedFromServer(true);
   };
 
   const handleDataChange = useCallback(async (newState: any) => {
+    if (!hasLoadedFromServer) return; 
+
+    // Update local state to stay in sync and avoid prop-reversion
+    setData(newState);
+
     try {
-      await fetch(`${API_URL}/save`, {
+      const response = await fetch(`${API_URL}/save`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newState),
       });
+      if (!response.ok) {
+        console.error('[FRONTEND] Server failed to save state');
+      }
     } catch (error) {
-      console.error('Failed to auto-save state:', error);
+      console.error('[FRONTEND] Failed to auto-save state (server unreachable):', error);
     }
-  }, []);
+  }, [hasLoadedFromServer]);
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="text-slate-500 font-medium animate-pulse">Loading saved state...</div>
+        <div className="text-slate-500 font-medium animate-pulse">Checking for saved state...</div>
       </div>
     );
   }
@@ -68,8 +84,12 @@ function App() {
           {data && (
             <button 
               onClick={() => {
-                if (confirm('Are you sure you want to reset? This will NOT clear the saved file unless you also clear it explicitly.')) {
+                if (confirm('Are you sure you want to reset the view? This will NOT delete the saved file on the server.')) {
                   setData(null);
+                  setHasLoadedFromServer(false);
+                  // Give the user a chance to reload or import new
+                  setIsLoading(true);
+                  setTimeout(() => setIsLoading(false), 100);
                 }
               }}
               className="text-sm font-medium text-slate-500 hover:text-slate-800"

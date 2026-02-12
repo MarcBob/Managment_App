@@ -174,6 +174,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
+  const isInitializingRef = useRef(true);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
@@ -241,35 +242,42 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     }));
   }, [setNodes, setEdges]);
 
-  // Sync with initial props
+  // Initial initialization from props
   useEffect(() => {
-    setNodes(initialNodes);
-    setEdges(initialEdges);
-    setCollapsedNodes(new Set(initialCollapsedNodes));
-    setExpandedNodes(new Set(initialExpandedNodes));
-    
-    if (initialMaxDepth !== undefined) {
-      setMaxDepth(initialMaxDepth);
-    } else {
-      const directChildrenMap: Record<string, string[]> = {};
-      initialEdges.forEach(edge => {
-        if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
-        directChildrenMap[edge.source].push(edge.target);
-      });
-      let currentMax = 0;
-      const findMaxDepth = (nodeId: string, depth: number) => {
-        currentMax = Math.max(currentMax, depth);
-        (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
-      };
-      const childIds = new Set(initialEdges.map(e => e.target));
-      initialNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
-      setMaxDepth(currentMax || 1);
+    if (isInitializingRef.current) {
+      setNodes(initialNodes);
+      setEdges(initialEdges);
+      setCollapsedNodes(new Set(initialCollapsedNodes));
+      setExpandedNodes(new Set(initialExpandedNodes));
+      setLeafColumns(initialLeafColumns);
+      
+      if (initialMaxDepth !== undefined) {
+        setMaxDepth(initialMaxDepth);
+      } else {
+        const directChildrenMap: Record<string, string[]> = {};
+        initialEdges.forEach(edge => {
+          if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
+          directChildrenMap[edge.source].push(edge.target);
+        });
+        let currentMax = 0;
+        const findMaxDepth = (nodeId: string, depth: number) => {
+          currentMax = Math.max(currentMax, depth);
+          (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
+        };
+        const childIds = new Set(initialEdges.map(e => e.target));
+        initialNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
+        setMaxDepth(currentMax || 1);
+      }
+      isInitializingRef.current = false;
     }
   }, [initialNodes, initialEdges]);
 
-  // Auto-save logic
+  // Auto-save logic with debounce
   useEffect(() => {
-    if (nodes.length > 0 && onDataChange) {
+    if (isInitializingRef.current || nodes.length === 0 || !onDataChange) return;
+
+    const timer = setTimeout(() => {
+      console.log(`[FRONTEND] Auto-saving state. Nodes: ${nodes.length}, Edges: ${edges.length}`);
       onDataChange({
         nodes,
         edges,
@@ -278,7 +286,9 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         maxDepth,
         leafColumns
       });
-    }
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, [nodes, edges, collapsedNodes, expandedNodes, maxDepth, leafColumns, onDataChange]);
 
   // Derived view state
