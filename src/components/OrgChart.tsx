@@ -164,17 +164,37 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [leafColumns, setLeafColumns] = useState<number>(initialLeafColumns);
   
+  // Local state initialized once from props
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set(initialCollapsedNodes));
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set(initialExpandedNodes));
-  
+  const [leafColumns, setLeafColumns] = useState<number>(initialLeafColumns);
   const [maxDepth, setMaxDepth] = useState<number>(initialMaxDepth || 10);
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
-  const isInitializingRef = useRef(true);
+  const isFirstMount = useRef(true);
+  const lastSavedStateRef = useRef<string>('');
+
+  // Handle dynamic max depth calculation if not provided
+  useEffect(() => {
+    if (initialMaxDepth === undefined && initialEdges.length > 0) {
+      const directChildrenMap: Record<string, string[]> = {};
+      initialEdges.forEach(edge => {
+        if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
+        directChildrenMap[edge.source].push(edge.target);
+      });
+      let currentMax = 0;
+      const findMaxDepth = (nodeId: string, depth: number) => {
+        currentMax = Math.max(currentMax, depth);
+        (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
+      };
+      const childIds = new Set(initialEdges.map(e => e.target));
+      initialNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
+      setMaxDepth(currentMax || 1);
+    }
+  }, [initialNodes, initialEdges, initialMaxDepth]);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
@@ -215,77 +235,52 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
 
   const onAddSubordinate = useCallback((parentId: string) => {
     const newId = `empty-${Date.now()}`;
-    setNodes((nds) => {
-      const parentNode = nds.find(n => n.id === parentId);
-      const position = parentNode 
+    const parentNode = nodes.find(n => n.id === parentId);
+    
+    const newNode: any = {
+      id: newId,
+      type: 'person',
+      data: {
+        firstName: '',
+        lastName: '',
+        jobTitle: 'New Position',
+        team: parentNode?.data.team || '',
+        status: 'EMPTY',
+      },
+      position: parentNode 
         ? { x: parentNode.position.x, y: parentNode.position.y + 200 }
-        : { x: 0, y: 0 };
+        : { x: 0, y: 0 },
+    };
 
-      const newNode: any = {
-        id: newId,
-        type: 'person',
-        data: {
-          firstName: '',
-          lastName: '',
-          jobTitle: 'New Position',
-          team: parentNode?.data.team || '',
-          status: 'EMPTY',
-        },
-        position,
-      };
-      return nds.concat(newNode);
-    });
+    // Use functional updates to ensure atomicity
+    setNodes((nds) => nds.concat(newNode));
     setEdges((eds) => eds.concat({
       id: `e-${parentId}-${newId}`,
       source: parentId,
       target: newId,
     }));
-  }, [setNodes, setEdges]);
+  }, [nodes, setNodes, setEdges]);
 
-  // Initial initialization from props
+  // Auto-save logic with debounce and deep compare check
   useEffect(() => {
-    if (isInitializingRef.current) {
-      setNodes(initialNodes);
-      setEdges(initialEdges);
-      setCollapsedNodes(new Set(initialCollapsedNodes));
-      setExpandedNodes(new Set(initialExpandedNodes));
-      setLeafColumns(initialLeafColumns);
-      
-      if (initialMaxDepth !== undefined) {
-        setMaxDepth(initialMaxDepth);
-      } else {
-        const directChildrenMap: Record<string, string[]> = {};
-        initialEdges.forEach(edge => {
-          if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
-          directChildrenMap[edge.source].push(edge.target);
-        });
-        let currentMax = 0;
-        const findMaxDepth = (nodeId: string, depth: number) => {
-          currentMax = Math.max(currentMax, depth);
-          (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
-        };
-        const childIds = new Set(initialEdges.map(e => e.target));
-        initialNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
-        setMaxDepth(currentMax || 1);
-      }
-      isInitializingRef.current = false;
-    }
-  }, [initialNodes, initialEdges]);
-
-  // Auto-save logic with debounce
-  useEffect(() => {
-    if (isInitializingRef.current || nodes.length === 0 || !onDataChange) return;
+    if (nodes.length === 0 || !onDataChange) return;
 
     const timer = setTimeout(() => {
-      console.log(`[FRONTEND] Auto-saving state. Nodes: ${nodes.length}, Edges: ${edges.length}`);
-      onDataChange({
+      const currentState = {
         nodes,
         edges,
         collapsedNodes: Array.from(collapsedNodes),
         expandedNodes: Array.from(expandedNodes),
         maxDepth,
         leafColumns
-      });
+      };
+      
+      const stateString = JSON.stringify(currentState);
+      if (stateString !== lastSavedStateRef.current) {
+        console.log(`[FRONTEND] State changed. Nodes: ${nodes.length}, Edges: ${edges.length}. Sending to auto-save...`);
+        onDataChange(currentState);
+        lastSavedStateRef.current = stateString;
+      }
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -380,25 +375,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     return { nodes: finalNodes, edges: preparedEdges };
   }, [nodes, edges, collapsedNodes, expandedNodes, searchQuery, maxDepth, leafColumns, onAddSubordinate, onEditNode, onToggleCollapse]);
 
-  const existingTeams = useMemo(() => {
-    const teams = new Set<string>();
-    nodes.forEach(node => {
-      if (node.data.team) teams.add(node.data.team);
-    });
-    return Array.from(teams).sort();
-  }, [nodes]);
-
-  const possibleManagers = useMemo(() => {
-    return nodes
-      .map(n => ({
-        id: n.id,
-        name: n.data.status === 'FILLED' 
-          ? `${n.data.firstName} ${n.data.lastName}` 
-          : `EMPTY: ${n.data.jobTitle} (${n.id})`
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name));
-  }, [nodes]);
-
   useEffect(() => {
     if (lastToggledRef.current) {
       const { id, oldPos } = lastToggledRef.current;
@@ -414,7 +390,12 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   }, [processedElements.nodes, getViewport, setViewport]);
 
   useEffect(() => {
-    fitView({ duration: 400, padding: 0.2 });
+    if (isFirstMount.current && nodes.length > 0) {
+      fitView({ duration: 0, padding: 0.2 });
+      isFirstMount.current = false;
+    } else if (nodes.length > 0) {
+      fitView({ duration: 400, padding: 0.2 });
+    }
   }, [maxDepth, leafColumns, fitView]);
 
   const handleDeleteNode = useCallback((id: string) => {
@@ -473,6 +454,25 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     link.click();
     document.body.removeChild(link);
   }, [nodes, edges]);
+
+  const existingTeams = useMemo(() => {
+    const teams = new Set<string>();
+    nodes.forEach(node => {
+      if (node.data.team) teams.add(node.data.team);
+    });
+    return Array.from(teams).sort();
+  }, [nodes]);
+
+  const possibleManagers = useMemo(() => {
+    return nodes
+      .map(n => ({
+        id: n.id,
+        name: n.data.status === 'FILLED' 
+          ? `${n.data.firstName} ${n.data.lastName}` 
+          : `EMPTY: ${n.data.jobTitle} (${n.id})`
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [nodes]);
 
   return (
     <div className="w-full h-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-inner relative min-h-[500px]">
