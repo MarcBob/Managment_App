@@ -153,6 +153,7 @@ function App() {
     localStorage.setItem(CURRENT_PLAN_KEY, newName);
     localStorage.setItem(`${LOCAL_STORAGE_KEY}_${newName}`, JSON.stringify(newData));
     if (serverReachable) syncToServer(newData);
+    fetchPlans(); // Refresh plan list after first save
   };
 
   const handleDataChange = useCallback(async (newState: Partial<PlanData>) => {
@@ -194,13 +195,11 @@ function App() {
   }, [data, serverReachable, syncToServer]);
 
   const handleRename = async (newName: string) => {
-    if (!data) return;
-    
-    const oldName = data.name;
+    const oldName = data?.name || currentPlanName;
     if (oldName === newName) return;
 
-    // 1. If server is reachable, rename on server first
-    if (serverReachable) {
+    // 1. If we have data and server is reachable, rename on server
+    if (data && serverReachable) {
       setSaveStatus('saving');
       try {
         const response = await fetch(`${API_URL}/rename`, {
@@ -211,9 +210,12 @@ function App() {
         
         if (!response.ok) {
           const err = await response.json();
-          alert(`Failed to rename: ${err.error || 'Unknown error'}`);
-          setSaveStatus('error');
-          return;
+          // If the error is 404 (file doesn't exist yet), we'll just handle it as a new save
+          if (response.status !== 404) {
+            alert(`Failed to rename: ${err.error || 'Unknown error'}`);
+            setSaveStatus('error');
+            return;
+          }
         }
       } catch (error) {
         console.error('[FRONTEND] Rename failed', error);
@@ -225,15 +227,22 @@ function App() {
     // 2. Update Local Storage
     localStorage.removeItem(`${LOCAL_STORAGE_KEY}_${oldName}`);
     
-    const newData = { ...data, name: newName };
-    setData(newData);
-    setCurrentPlanName(newName);
-    localStorage.setItem(CURRENT_PLAN_KEY, newName);
-    localStorage.setItem(`${LOCAL_STORAGE_KEY}_${newName}`, JSON.stringify(newData));
-    
-    if (serverReachable) {
-      setSaveStatus('saved');
-      fetchPlans();
+    if (data) {
+      const newData = { ...data, name: newName };
+      setData(newData);
+      setCurrentPlanName(newName);
+      localStorage.setItem(CURRENT_PLAN_KEY, newName);
+      localStorage.setItem(`${LOCAL_STORAGE_KEY}_${newName}`, JSON.stringify(newData));
+      
+      if (serverReachable) {
+        await syncToServer(newData);
+        setSaveStatus('saved');
+        fetchPlans();
+      }
+    } else {
+      // Just updating the name for an empty plan
+      setCurrentPlanName(newName);
+      localStorage.setItem(CURRENT_PLAN_KEY, newName);
     }
   };
 
