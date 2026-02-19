@@ -534,6 +534,14 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     return Array.from(teams).sort();
   }, [nodes]);
 
+  const existingJobTitles = useMemo(() => {
+    const titles = new Set<string>();
+    nodes.forEach(node => {
+      if (node.data.jobTitle) titles.add(node.data.jobTitle);
+    });
+    return Array.from(titles).sort();
+  }, [nodes]);
+
   const possibleManagers = useMemo(() => {
     return nodes
       .map(n => ({
@@ -634,6 +642,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           nodeData={editingNode.data} 
           nodeId={editingNode.id} 
           existingTeams={existingTeams}
+          existingJobTitles={existingJobTitles}
           possibleManagers={possibleManagers}
           currentManagerId={edges.find(e => e.target === editingNode.id)?.source || ''}
           onClose={() => setEditingNode(null)} 

@@ -9,6 +9,7 @@ interface EditNodeModalProps {
   nodeId: string;
   nodeData: any;
   existingTeams: string[];
+  existingJobTitles: string[];
   possibleManagers: { id: string, name: string }[];
   currentManagerId: string;
 }
@@ -21,6 +22,7 @@ export const EditNodeModal = ({
   nodeId, 
   nodeData, 
   existingTeams,
+  existingJobTitles,
   possibleManagers,
   currentManagerId
 }: EditNodeModalProps) => {
@@ -102,10 +104,16 @@ export const EditNodeModal = ({
               <input
                 type="text"
                 required
+                list="existing-job-titles"
                 className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 value={formData.jobTitle || ''}
                 onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
               />
+              <datalist id="existing-job-titles">
+                {existingJobTitles.map(title => (
+                  <option key={title} value={title} />
+                ))}
+              </datalist>
             </div>
 
             <div className="space-y-1">
