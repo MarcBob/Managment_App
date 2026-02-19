@@ -597,12 +597,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
             Export CSV
           </button>
         </Panel>
-        <Panel position="bottom-left" className="bg-white/90 backdrop-blur p-3 rounded-lg shadow-lg border border-slate-200 max-w-xs">
-          <h4 className="font-bold text-slate-800 text-sm mb-1">Planning Mode</h4>
-          <p className="text-xs text-slate-500">
-            Drag connections between nodes to restructure the hierarchy. Click the edit icon to modify details.
-          </p>
-        </Panel>
         <Panel position="bottom-right" className="bg-white/90 backdrop-blur p-2 rounded-lg shadow-lg border border-slate-200 flex flex-col gap-2 items-center mb-12">
           <div className="flex flex-col items-center gap-1 border-b border-slate-100 pb-2 mb-1">
             <Layers size={18} className="text-slate-400" />
