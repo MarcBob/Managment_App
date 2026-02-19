@@ -101,6 +101,34 @@ app.post('/api/save/:name', (req, res) => {
   }
 });
 
+// Rename a plan
+app.post('/api/rename', (req, res) => {
+  const { oldName, newName } = req.body;
+  if (!oldName || !newName) {
+    return res.status(400).json({ error: 'Missing oldName or newName' });
+  }
+
+  const oldPath = path.join(PLANS_DIR, `${oldName}.json`);
+  const newPath = path.join(PLANS_DIR, `${newName}.json`);
+
+  if (!fs.existsSync(oldPath)) {
+    return res.status(404).json({ error: 'Source plan not found' });
+  }
+
+  if (fs.existsSync(newPath)) {
+    return res.status(400).json({ error: 'Destination plan already exists' });
+  }
+
+  try {
+    fs.renameSync(oldPath, newPath);
+    console.log(`[BACKEND] RENAME - [${oldName}] to [${newName}]`);
+    res.json({ success: true });
+  } catch (error) {
+    console.error('[BACKEND] Error renaming plan:', error);
+    res.status(500).json({ error: 'Failed to rename plan' });
+  }
+});
+
 // Legacy support for /api/load and /api/save (points to 'default')
 app.get('/api/load', noCache, (req, res) => {
   res.redirect('/api/load/default');

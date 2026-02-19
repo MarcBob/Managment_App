@@ -193,10 +193,36 @@ function App() {
     }
   }, [data, serverReachable, syncToServer]);
 
-  const handleRename = (newName: string) => {
+  const handleRename = async (newName: string) => {
     if (!data) return;
     
     const oldName = data.name;
+    if (oldName === newName) return;
+
+    // 1. If server is reachable, rename on server first
+    if (serverReachable) {
+      setSaveStatus('saving');
+      try {
+        const response = await fetch(`${API_URL}/rename`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ oldName, newName }),
+        });
+        
+        if (!response.ok) {
+          const err = await response.json();
+          alert(`Failed to rename: ${err.error || 'Unknown error'}`);
+          setSaveStatus('error');
+          return;
+        }
+      } catch (error) {
+        console.error('[FRONTEND] Rename failed', error);
+        setSaveStatus('offline');
+        setServerReachable(false);
+      }
+    }
+    
+    // 2. Update Local Storage
     localStorage.removeItem(`${LOCAL_STORAGE_KEY}_${oldName}`);
     
     const newData = { ...data, name: newName };
@@ -206,7 +232,7 @@ function App() {
     localStorage.setItem(`${LOCAL_STORAGE_KEY}_${newName}`, JSON.stringify(newData));
     
     if (serverReachable) {
-      syncToServer(newData);
+      setSaveStatus('saved');
       fetchPlans();
     }
   };
