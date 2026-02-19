@@ -208,7 +208,7 @@
       },
       "width": 240,
       "height": 111,
-      "selected": false,
+      "selected": true,
       "dragging": false,
       "positionAbsolute": {
         "x": -148.7656249909957,
@@ -2677,7 +2677,7 @@
       },
       "width": 240,
       "height": 111,
-      "selected": true,
+      "selected": false,
       "dragging": false,
       "positionAbsolute": {
         "x": 0,
@@ -3410,5 +3410,5 @@
       "ivan.borsa@dkbcodefactory.com"
     ]
   },
-  "lastUpdated": "2026-02-19T16:21:14.675Z"
+  "lastUpdated": "2026-02-19T16:21:07.591Z"
 }

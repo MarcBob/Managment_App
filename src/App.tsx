@@ -1,42 +1,94 @@
 import { useState, useEffect, useCallback } from 'react';
 import { FileUpload } from './components/FileUpload';
 import { OrgChart } from './components/OrgChart';
+import { EditableTitle } from './components/EditableTitle';
 import type { OrgNode, OrgEdge } from './utils/csvParser';
-import { Cloud, CloudOff, RefreshCw, CheckCircle2, Briefcase } from 'lucide-react';
+import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus } from 'lucide-react';
 import './App.css';
 
 const API_URL = 'http://localhost:3001/api';
 const LOCAL_STORAGE_KEY = 'org-planner-state';
+const CURRENT_PLAN_KEY = 'org-planner-current-plan';
 
 type SaveStatus = 'saved' | 'saving' | 'offline' | 'error';
 
+interface ViewState {
+  maxDepth?: number;
+  leafColumns?: number;
+  collapsedNodes?: string[];
+  expandedNodes?: string[];
+}
+
+interface PlanData {
+  name: string;
+  nodes: OrgNode[];
+  edges: OrgEdge[];
+  lastUpdated?: string;
+  viewState?: ViewState;
+}
+
+// Interface for old schema during migration
+interface LegacyPlanData extends PlanData {
+  maxDepth?: number;
+  leafColumns?: number;
+  collapsedNodes?: string[];
+  expandedNodes?: string[];
+}
+
 function App() {
-  const [data, setData] = useState<{ 
-    nodes: OrgNode[]; 
-    edges: OrgEdge[];
-    lastUpdated?: string;
-    viewState?: {
-      maxDepth?: number;
-      leafColumns?: number;
-      collapsedNodes?: string[];
-      expandedNodes?: string[];
-    }
-  } | null>(null);
+  const [data, setData] = useState<PlanData | null>(null);
+  const [currentPlanName, setCurrentPlanName] = useState<string>(() => {
+    return localStorage.getItem(CURRENT_PLAN_KEY) || 'default';
+  });
+  const [availablePlans, setAvailablePlans] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('saved');
   const [serverReachable, setServerReachable] = useState(true);
   const [isRecruiterMode, setIsRecruiterMode] = useState(false);
+  const [isPlanMenuOpen, setIsPlanMenuOpen] = useState(false);
 
-  // Load saved state on startup
+  const syncToServer = useCallback(async (state: PlanData) => {
+    try {
+      const response = await fetch(`${API_URL}/save/${state.name}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(state),
+      });
+      if (response.ok) {
+        setSaveStatus('saved');
+      } else {
+        setSaveStatus('error');
+      }
+    } catch (e) {
+      console.warn('[FRONTEND] Sync to server failed', e);
+      setSaveStatus('offline');
+    }
+  }, []);
+
+  // Load available plans
+  const fetchPlans = useCallback(async () => {
+    try {
+      const response = await fetch(`${API_URL}/plans`);
+      if (response.ok) {
+        const plans = await response.json();
+        setAvailablePlans(plans);
+      }
+    } catch (error) {
+      console.warn('[FRONTEND] Failed to fetch plans', error);
+    }
+  }, []);
+
+  // Load saved state on startup or when plan changes
   useEffect(() => {
     const loadState = async () => {
-      let finalData = null;
-      let serverData = null;
+      setIsLoading(true);
+      let finalData: PlanData | null = null;
+      let serverData: LegacyPlanData | null = null;
 
       // 1. Try loading from server
       try {
-        console.log('[FRONTEND] Loading state from server...');
-        const response = await fetch(`${API_URL}/load`);
+        console.log(`[FRONTEND] Loading plan [${currentPlanName}] from server...`);
+        const response = await fetch(`${API_URL}/load/${currentPlanName}`);
         if (response.ok) {
           serverData = await response.json();
           // Migration for old flat schema
@@ -47,6 +99,9 @@ function App() {
               collapsedNodes: serverData.collapsedNodes,
               expandedNodes: serverData.expandedNodes
             };
+          }
+          if (serverData) {
+            serverData.name = serverData.name || currentPlanName;
           }
           finalData = serverData;
           setServerReachable(true);
@@ -59,27 +114,18 @@ function App() {
 
       // 2. Check LocalStorage for a newer version
       try {
-        const localRaw = localStorage.getItem(LOCAL_STORAGE_KEY);
+        const localRaw = localStorage.getItem(`${LOCAL_STORAGE_KEY}_${currentPlanName}`);
         if (localRaw) {
-          const localData = JSON.parse(localRaw);
+          const localData: PlanData = JSON.parse(localRaw);
           const serverTime = serverData?.lastUpdated ? new Date(serverData.lastUpdated).getTime() : 0;
           const localTime = localData?.lastUpdated ? new Date(localData.lastUpdated).getTime() : 0;
-
-          console.log('[FRONTEND] Version comparison:', {
-            server: serverData?.lastUpdated || 'none',
-            local: localData?.lastUpdated || 'none'
-          });
 
           if (localTime > serverTime) {
             console.log('[FRONTEND] LocalStorage version is newer, using it.');
             finalData = localData;
-            // If server is reachable, sync the newer local version back to server
-            if (serverData && localData.nodes) { // serverData exists means server is reachable
-              console.log('[FRONTEND] Syncing newer local version to server...');
+            if (serverReachable && localData.nodes) {
               syncToServer(localData);
             }
-          } else {
-            console.log('[FRONTEND] Server version is newer or equal.');
           }
         }
       } catch (e) {
@@ -88,41 +134,40 @@ function App() {
 
       setData(finalData);
       setIsLoading(false);
+      fetchPlans();
     };
 
     loadState();
-  }, [serverReachable]);
-
-  const syncToServer = async (state: any) => {
-    try {
-      await fetch(`${API_URL}/save`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(state),
-      });
-    } catch (e) {
-      console.warn('[FRONTEND] Initial sync to server failed');
-    }
-  };
+  }, [currentPlanName, serverReachable, fetchPlans, syncToServer]);
 
   const handleDataLoaded = (nodes: OrgNode[], edges: OrgEdge[]) => {
-    const newData = { nodes, edges, lastUpdated: new Date().toISOString() };
+    const newName = currentPlanName === 'default' && data === null ? 'Untitled Plan' : currentPlanName;
+    const newData: PlanData = { 
+      name: newName, 
+      nodes, 
+      edges, 
+      lastUpdated: new Date().toISOString() 
+    };
     setData(newData);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newData));
+    setCurrentPlanName(newName);
+    localStorage.setItem(CURRENT_PLAN_KEY, newName);
+    localStorage.setItem(`${LOCAL_STORAGE_KEY}_${newName}`, JSON.stringify(newData));
+    if (serverReachable) syncToServer(newData);
   };
 
-  const handleDataChange = useCallback(async (newState: any) => {
-    const timestampedState = {
+  const handleDataChange = useCallback(async (newState: Partial<PlanData>) => {
+    if (!data) return;
+
+    const timestampedState: PlanData = {
+      ...data,
       ...newState,
       lastUpdated: new Date().toISOString()
     };
 
-    // Update local state immediately
     setData(timestampedState);
     
-    // Save to LocalStorage immediately (fast, reliable on refresh)
     try {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(timestampedState));
+      localStorage.setItem(`${LOCAL_STORAGE_KEY}_${timestampedState.name}`, JSON.stringify(timestampedState));
     } catch (e) {
       console.warn('[FRONTEND] LocalStorage save failed', e);
     }
@@ -131,12 +176,10 @@ function App() {
 
     setSaveStatus('saving');
     try {
-      const response = await fetch(`${API_URL}/save`, {
+      const response = await fetch(`${API_URL}/save/${timestampedState.name}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(timestampedState),
-        // keepalive removed here because payload > 64KB causes rejection in some browsers
-        // LocalStorage fallback covers the "refresh during save" case
       });
       if (response.ok) {
         setSaveStatus('saved');
@@ -144,17 +187,50 @@ function App() {
         setSaveStatus('error');
       }
     } catch (error) {
+      console.warn('[FRONTEND] Save to server failed', error);
       setSaveStatus('offline');
       setServerReachable(false);
     }
-  }, [serverReachable]);
+  }, [data, serverReachable, syncToServer]);
+
+  const handleRename = (newName: string) => {
+    if (!data) return;
+    
+    const oldName = data.name;
+    localStorage.removeItem(`${LOCAL_STORAGE_KEY}_${oldName}`);
+    
+    const newData = { ...data, name: newName };
+    setData(newData);
+    setCurrentPlanName(newName);
+    localStorage.setItem(CURRENT_PLAN_KEY, newName);
+    localStorage.setItem(`${LOCAL_STORAGE_KEY}_${newName}`, JSON.stringify(newData));
+    
+    if (serverReachable) {
+      syncToServer(newData);
+      fetchPlans();
+    }
+  };
+
+  const handleSwitchPlan = (name: string) => {
+    setCurrentPlanName(name);
+    localStorage.setItem(CURRENT_PLAN_KEY, name);
+    setIsPlanMenuOpen(false);
+  };
+
+  const handleCreateNew = () => {
+    const name = `New Plan ${availablePlans.length + 1}`;
+    setCurrentPlanName(name);
+    localStorage.setItem(CURRENT_PLAN_KEY, name);
+    setData(null);
+    setIsPlanMenuOpen(false);
+  };
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-slate-500 font-medium animate-pulse flex items-center gap-2">
           <RefreshCw className="animate-spin h-5 w-5" />
-          Synchronizing with server...
+          Loading plan [ {currentPlanName} ] ...
         </div>
       </div>
     );
@@ -162,28 +238,78 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans">
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-10">
+      <header className="border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold text-slate-800">Org Planner</h1>
-            {data && (
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">
-                {saveStatus === 'saving' && <RefreshCw className="h-3.5 w-3.5 animate-spin text-blue-500" />}
-                {saveStatus === 'saved' && <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />}
-                {saveStatus === 'offline' && <CloudOff className="h-3.5 w-3.5 text-slate-400" />}
-                {saveStatus === 'error' && <CloudOff className="h-3.5 w-3.5 text-red-500" />}
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
-                  {saveStatus === 'saving' ? 'Syncing...' : saveStatus === 'saved' ? 'Saved' : 'Offline'}
-                </span>
-              </div>
-            )}
+          <div className="flex items-center gap-6">
+            <div className="relative">
+              <button 
+                onClick={() => setIsPlanMenuOpen(!isPlanMenuOpen)}
+                className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-600"
+                title="Manage Plans"
+              >
+                <FolderOpen className="h-6 w-6" />
+              </button>
+              
+              {isPlanMenuOpen && (
+                <>
+                  <div 
+                    className="fixed inset-0 z-30" 
+                    onClick={() => setIsPlanMenuOpen(false)} 
+                  />
+                  <div className="absolute left-0 mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow-xl z-40 py-2">
+                    <div className="px-4 py-2 border-b border-slate-100 mb-2">
+                      <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Your Plans</span>
+                    </div>
+                    {availablePlans.map(plan => (
+                      <button
+                        key={plan}
+                        onClick={() => handleSwitchPlan(plan)}
+                        className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-50 flex items-center justify-between ${
+                          currentPlanName === plan ? "text-blue-600 font-bold bg-blue-50/50" : "text-slate-600"
+                        }`}
+                      >
+                        <span className="truncate">{plan}</span>
+                        {currentPlanName === plan && <CheckCircle2 className="h-4 w-4" />}
+                      </button>
+                    ))}
+                    <div className="border-t border-slate-100 mt-2 pt-2">
+                      <button
+                        onClick={handleCreateNew}
+                        className="w-full text-left px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 flex items-center gap-2 font-medium"
+                      >
+                        <Plus className="h-4 w-4" />
+                        Create New Plan
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="flex items-center gap-4">
+              <EditableTitle 
+                value={data?.name || currentPlanName} 
+                onChange={handleRename}
+              />
+              {data && (
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">
+                  {saveStatus === 'saving' && <RefreshCw className="h-3.5 w-3.5 animate-spin text-blue-500" />}
+                  {saveStatus === 'saved' && <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />}
+                  {saveStatus === 'offline' && <CloudOff className="h-3.5 w-3.5 text-slate-400" />}
+                  {saveStatus === 'error' && <CloudOff className="h-3.5 w-3.5 text-red-500" />}
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                    {saveStatus === 'saving' ? 'Syncing...' : saveStatus === 'saved' ? 'Saved' : 'Offline'}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
 
           {data && (
             <button 
               onClick={() => {
                 if (confirm('Are you sure you want to reset the view? This will NOT delete the saved file on the server.')) {
-                  localStorage.removeItem(LOCAL_STORAGE_KEY);
+                  localStorage.removeItem(`${LOCAL_STORAGE_KEY}_${currentPlanName}`);
                   setData(null);
                 }
               }}
@@ -234,7 +360,7 @@ function App() {
             
             <div className="flex-1 min-h-[500px]">
               <OrgChart 
-                key={data.nodes.length > 0 ? 'loaded' : 'empty'}
+                key={`${data.name}-${data.nodes.length}`}
                 initialNodes={data.nodes} 
                 initialEdges={data.edges}
                 initialViewState={data.viewState}

@@ -8,7 +8,7 @@ Anton,Katzer,Principal Engineer (Frontend),Kreditwelt & Ablage,anton.katzer@dkbc
 
 describe('csvParser', () => {
   it('should parse CSV and return nodes and edges including dates', () => {
-    const { nodes, edges } = parseOrgCsv(mockCsv);
+    const { nodes } = parseOrgCsv(mockCsv);
 
     expect(nodes).toHaveLength(3);
     
