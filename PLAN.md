@@ -36,6 +36,7 @@ Build a web application to plan and visualize an engineering organization. The a
       - Support for `Start Date` and `Exit Date` fields.
       - Future hires are labeled with a green start date on the org chart.
       - Departing employees are labeled with a red exit date.
+      - **Recruiter Mode:** Refined to automatically hide all nodes that are not vacancies and do not lead to any vacancies, providing a focused view of the hiring pipeline.
       - Integrated into both `EditNodeModal` and `csvParser`.
    ## Next Steps (Future Enhancements)
 - Persistence using `localStorage`.

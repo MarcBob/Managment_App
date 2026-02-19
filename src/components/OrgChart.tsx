@@ -308,6 +308,12 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
 
     const directChildrenMap: Record<string, string[]> = {};
     const descendantsMap: Record<string, string[]> = {};
+    const nodeMap: Record<string, any> = {};
+    
+    nodes.forEach(n => {
+      nodeMap[n.id] = n;
+    });
+
     edges.forEach(edge => {
       if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
       directChildrenMap[edge.source].push(edge.target);
@@ -326,23 +332,20 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
 
     // Pre-calculate which nodes lead to an empty position for Recruiter Mode
     const hasEmptyDescendantMap: Record<string, boolean> = {};
+    const checkEmpty = (nodeId: string): boolean => {
+      if (hasEmptyDescendantMap[nodeId] !== undefined) return hasEmptyDescendantMap[nodeId];
+      
+      const children = directChildrenMap[nodeId] || [];
+      const hasEmptyChild = children.some(cid => {
+        const child = nodeMap[cid];
+        return child?.data.status === 'EMPTY' || checkEmpty(cid);
+      });
+      
+      hasEmptyDescendantMap[nodeId] = hasEmptyChild;
+      return hasEmptyChild;
+    };
+    
     if (isRecruiterMode) {
-      const nodeMap: Record<string, any> = {};
-      nodes.forEach(n => nodeMap[n.id] = n);
-      
-      const checkEmpty = (nodeId: string): boolean => {
-        if (hasEmptyDescendantMap[nodeId] !== undefined) return hasEmptyDescendantMap[nodeId];
-        
-        const children = directChildrenMap[nodeId] || [];
-        const hasEmptyChild = children.some(cid => {
-          const child = nodeMap[cid];
-          return child?.data.status === 'EMPTY' || checkEmpty(cid);
-        });
-        
-        hasEmptyDescendantMap[nodeId] = hasEmptyChild;
-        return hasEmptyChild;
-      };
-      
       nodes.forEach(n => checkEmpty(n.id));
     }
 
@@ -354,23 +357,34 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     const processHierarchy = (nodeId: string, depth: number, isParentHidden: boolean) => {
       nodeDepths[nodeId] = depth;
       const children = directChildrenMap[nodeId] || [];
+      const node = nodeMap[nodeId];
+      const isVacancy = node?.data.status === 'EMPTY';
+      const leadsToVacancy = hasEmptyDescendantMap[nodeId];
+
+      let isThisNodeHidden = isParentHidden;
+      if (isRecruiterMode && !isParentHidden) {
+        // In Recruiter Mode, hide nodes that aren't vacancies and don't lead to one
+        if (!isVacancy && !leadsToVacancy) {
+          isThisNodeHidden = true;
+        }
+      }
+
+      if (isThisNodeHidden) hiddenNodes.add(nodeId);
       
-      let areChildrenHidden = isParentHidden || collapsedNodes.has(nodeId) || (depth >= maxDepth && !expandedNodes.has(nodeId));
+      let areChildrenHidden = isThisNodeHidden || collapsedNodes.has(nodeId) || (depth >= maxDepth && !expandedNodes.has(nodeId));
       
       // Force expansion/collapse in Recruiter Mode
-      if (isRecruiterMode && !isParentHidden) {
-        const hasVacancy = hasEmptyDescendantMap[nodeId];
-        if (!hasVacancy) {
-          // If this node doesn't lead to a vacancy, collapse it unless it's a leaf
-          if (children.length > 0) areChildrenHidden = true;
-        } else {
-          // If it DOES lead to a vacancy, ensure it stays expanded
+      if (isRecruiterMode && !isThisNodeHidden) {
+        if (leadsToVacancy) {
+          // If it DOES lead to a vacancy, ensure it stays expanded to show the path
           areChildrenHidden = false;
+        } else {
+          // Otherwise collapse children (they are likely hidden anyway, but for consistency)
+          if (children.length > 0) areChildrenHidden = true;
         }
       }
 
       children.forEach(childId => {
-        if (areChildrenHidden) hiddenNodes.add(childId);
         processHierarchy(childId, depth + 1, areChildrenHidden);
       });
     };
@@ -390,8 +404,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       let isCollapsed = collapsedNodes.has(node.id) || (depth >= maxDepth && !expandedNodes.has(node.id));
 
       if (isRecruiterMode) {
-        const hasVacancy = hasEmptyDescendantMap[node.id];
-        isCollapsed = (directChildrenMap[node.id]?.length > 0) && !hasVacancy;
+        const leadsToVacancy = hasEmptyDescendantMap[node.id];
+        isCollapsed = !leadsToVacancy && (directChildrenMap[node.id]?.length > 0);
       }
 
       return {
