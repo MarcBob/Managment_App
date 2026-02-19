@@ -1,7 +1,7 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Handle, Position } from 'reactflow';
 import type { NodeProps } from 'reactflow';
-import { User, UserMinus, Plus, Edit2, ChevronDown, ChevronRight } from 'lucide-react';
+import { User, UserMinus, Plus, Edit2, ChevronDown, ChevronRight, Calendar } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -39,17 +39,45 @@ export const PersonNode = memo(({ data, id }: NodeProps) => {
     onToggleCollapse,
     isCollapsed,
     directReportsCount,
-    totalReportsCount
+    totalReportsCount,
+    startDate,
+    exitDate,
   } = data;
   const isFilled = status === 'FILLED';
   const teamColor = getTeamColor(team);
   const hasReports = directReportsCount > 0;
 
+  const isFutureHire = useMemo(() => {
+    if (!startDate) return false;
+    const start = new Date(startDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return start >= today;
+  }, [startDate]);
+
+  const hasExitDate = !!exitDate;
+
   return (
     <div className={cn(
-      "px-4 py-3 shadow-lg rounded-lg border-2 w-[240px] bg-white transition-all group",
+      "px-4 py-3 shadow-lg rounded-lg border-2 w-[240px] bg-white transition-all group relative",
       isFilled ? teamColor : "border-slate-200 border-dashed opacity-80"
     )}>
+      {/* Date Labels */}
+      <div className="absolute -top-3 left-2 flex gap-1">
+        {isFutureHire && (
+          <div className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-emerald-600">
+            <Calendar size={10} />
+            Starts: {startDate}
+          </div>
+        )}
+        {hasExitDate && (
+          <div className="bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-rose-600">
+            <Calendar size={10} />
+            Exits: {exitDate}
+          </div>
+        )}
+      </div>
+
       <Handle type="target" position={Position.Top} className="w-2 h-2 !bg-slate-300" />
       
       <div className="flex items-center gap-3">

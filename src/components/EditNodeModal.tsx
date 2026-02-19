@@ -156,6 +156,27 @@ export const EditNodeModal = ({
               </select>
             </div>
 
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Start Date</label>
+                <input
+                  type="date"
+                  className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  value={formData.startDate || ''}
+                  onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Exit Date</label>
+                <input
+                  type="date"
+                  className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  value={formData.exitDate || ''}
+                  onChange={(e) => setFormData({ ...formData, exitDate: e.target.value })}
+                />
+              </div>
+            </div>
+
             <div className="pt-4 flex flex-col gap-3">
               <div className="flex gap-3">
                 <button

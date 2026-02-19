@@ -925,11 +925,17 @@
         "status": "FILLED"
       },
       "position": {
-        "x": 0,
-        "y": 0
+        "x": 4845,
+        "y": 730
       },
       "width": 240,
-      "height": 111
+      "height": 111,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 4845,
+        "y": 730
+      },
+      "dragging": false
     },
     {
       "id": "Denys.Stoianov@dkbcodefactory.com",
@@ -1024,7 +1030,9 @@
         "y": 0
       },
       "width": 240,
-      "height": 111
+      "height": 111,
+      "selected": false,
+      "dragging": false
     },
     {
       "id": "alexandr.melnic@dkbcodefactory.com",
@@ -1150,14 +1158,21 @@
         "team": "Onboarding",
         "workEmail": "Thomas.Juhnke@dkbcodefactory.com",
         "supervisorName": "Maghear, Adrian-Florin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "isCollapsed": true,
+        "directReportsCount": 0,
+        "totalReportsCount": 0,
+        "depth": 4,
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
       },
       "width": 240,
-      "height": 111
+      "height": 111,
+      "selected": false,
+      "dragging": false
     },
     {
       "id": "Thore.Ottenheym@dkbcodefactory.com",
@@ -1846,7 +1861,7 @@
       },
       "width": 240,
       "height": 111,
-      "selected": true,
+      "selected": false,
       "dragging": false
     },
     {
@@ -2246,7 +2261,9 @@
         "y": 0
       },
       "width": 240,
-      "height": 111
+      "height": 111,
+      "selected": false,
+      "dragging": false
     },
     {
       "id": "Adrian.Maghear@dkbcodefactory.com",
@@ -2265,7 +2282,9 @@
         "y": 0
       },
       "width": 240,
-      "height": 111
+      "height": 111,
+      "selected": false,
+      "dragging": false
     },
     {
       "id": "Georgios.Stavrakakis@dkbcodefactory.com",
@@ -2624,6 +2643,25 @@
       "position": {
         "x": 0,
         "y": 0
+      },
+      "width": 240,
+      "height": 111
+    },
+    {
+      "id": "empty-1771505245025",
+      "type": "person",
+      "data": {
+        "firstName": "",
+        "lastName": "",
+        "jobTitle": "New Position",
+        "team": "Communication & Documents",
+        "status": "EMPTY",
+        "startDate": "",
+        "exitDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 200
       },
       "width": 240,
       "height": 111
@@ -3314,10 +3352,20 @@
       "id": "e-Stiliyana.Yordanova@dkbcodefactory.com-Christophe.Hoste@dkbcodefactory.com",
       "source": "Stiliyana.Yordanova@dkbcodefactory.com",
       "target": "Christophe.Hoste@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Javier.delapena@dkbcodefactory.com-empty-1771505245025",
+      "source": "Javier.delapena@dkbcodefactory.com",
+      "target": "empty-1771505245025"
     }
   ],
-  "collapsedNodes": [],
-  "expandedNodes": [],
-  "maxDepth": 4,
-  "leafColumns": 2
+  "viewState": {
+    "maxDepth": 4,
+    "leafColumns": 2,
+    "collapsedNodes": [],
+    "expandedNodes": [
+      "Adrian.Maghear@dkbcodefactory.com"
+    ]
+  },
+  "lastUpdated": "2026-02-19T12:56:50.450Z"
 }

@@ -31,9 +31,13 @@ Build a web application to plan and visualize an engineering organization. The a
    - **Managing Positions:** Add new empty positions under any manager.
    - **Collapse/Expand:** Toggle visibility of sub-hierarchies with counts of hidden reports.
 4. **Export:**
-   - Export the modified organization back to CSV.
-
-## Next Steps (Future Enhancements)
+       - Export the modified organization back to CSV.
+   5. **Hiring & Exit Visibility:**
+      - Support for `Start Date` and `Exit Date` fields.
+      - Future hires are labeled with a green start date on the org chart.
+      - Departing employees are labeled with a red exit date.
+      - Integrated into both `EditNodeModal` and `csvParser`.
+   ## Next Steps (Future Enhancements)
 - Persistence using `localStorage`.
 - Real-time team clustering frames (Sub-flows).
 - Detailed person info in a side panel.

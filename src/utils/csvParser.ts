@@ -8,6 +8,8 @@ export interface OrgNodeData {
   workEmail: string;
   supervisorName: string;
   status: 'FILLED' | 'EMPTY';
+  startDate?: string;
+  exitDate?: string;
 }
 
 export interface OrgNode {
@@ -57,6 +59,8 @@ export const parseOrgCsv = (csvString: string) => {
         workEmail: email,
         supervisorName: row['Supervisor name'],
         status: row['Status'] as 'FILLED' | 'EMPTY',
+        startDate: row['Start Date'] || '',
+        exitDate: row['Exit Date'] || '',
       },
       position: { x: 0, y: 0 },
     });
@@ -103,6 +107,8 @@ export const exportToCsv = (nodes: OrgNode[], edges: OrgEdge[]) => {
       'Work Email': node.data.workEmail,
       'Supervisor name': supervisorName,
       'Status': node.data.status,
+      'Start Date': node.data.startDate || '',
+      'Exit Date': node.data.exitDate || '',
     };
   });
 

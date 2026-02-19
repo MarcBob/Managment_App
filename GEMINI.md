@@ -8,6 +8,7 @@
 ## Data Schema
 - CSV based on BambooHR export.
 - Supervisor link uses `LastName, FirstName` matching.
+- Includes `Start Date` and `Exit Date` for hiring and exit planning.
 
 ## Tools
 - React Flow for graph visualization.
