@@ -36,6 +36,27 @@ export const EditNodeModal = ({
 
   if (!isOpen) return null;
 
+  const generateEmail = (firstName: string, lastName: string) => {
+    if (!firstName && !lastName) return '';
+    const cleanFirst = firstName.trim().replace(/\s+/g, '.').toLowerCase();
+    const cleanLast = lastName.trim().replace(/\s+/g, '.').toLowerCase();
+    
+    if (cleanFirst && cleanLast) return `${cleanFirst}.${cleanLast}@dkb.de`;
+    if (cleanFirst) return `${cleanFirst}@dkb.de`;
+    if (cleanLast) return `${cleanLast}@dkb.de`;
+    return '';
+  };
+
+  const handleNameChange = (updates: Partial<typeof formData>) => {
+    const nextData = { ...formData, ...updates };
+    // Only auto-generate if email is currently empty or was previously auto-generated
+    const currentAutoEmail = generateEmail(formData.firstName || '', formData.lastName || '');
+    if (!formData.workEmail || formData.workEmail === currentAutoEmail) {
+      nextData.workEmail = generateEmail(nextData.firstName || '', nextData.lastName || '');
+    }
+    setFormData(nextData);
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden">
@@ -85,7 +106,7 @@ export const EditNodeModal = ({
                   type="text"
                   className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   value={formData.firstName || ''}
-                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                  onChange={(e) => handleNameChange({ firstName: e.target.value })}
                 />
               </div>
               <div className="space-y-1">
@@ -94,9 +115,21 @@ export const EditNodeModal = ({
                   type="text"
                   className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   value={formData.lastName || ''}
-                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                  onChange={(e) => handleNameChange({ lastName: e.target.value })}
                 />
               </div>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Work Email</label>
+              <input
+                type="email"
+                required
+                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                value={formData.workEmail || ''}
+                onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
+                placeholder="first.last@dkb.de"
+              />
             </div>
 
             <div className="space-y-1">

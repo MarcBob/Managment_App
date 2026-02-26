@@ -563,6 +563,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         lastName: '',
         jobTitle: 'New Position',
         team: parentNode?.data.team || '',
+        workEmail: '',
         status: 'EMPTY',
         startDate: '',
         exitDate: '',

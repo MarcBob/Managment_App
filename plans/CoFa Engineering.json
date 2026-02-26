@@ -3512,8 +3512,9 @@
         "defaultFallbackColor": "#ffffff"
       }
     ],
-    "defaultFallbackColor": "#ffffff"
+    "defaultFallbackColor": "#ffffff",
+    "searchShortcut": "meta+f"
   },
-  "lastUpdated": "2026-02-26T19:42:30.191Z",
+  "lastUpdated": "2026-02-26T20:31:05.395Z",
   "name": "CoFa Engineering"
 }
