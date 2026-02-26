@@ -44,6 +44,7 @@ export const EditNodeModal = ({
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [showActionMenu, setShowActionMenu] = useState(false);
   const actionMenuRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setFormData({ ...nodeData, managerId: currentManagerId });
@@ -56,10 +57,14 @@ export const EditNodeModal = ({
       if (actionMenuRef.current && !actionMenuRef.current.contains(event.target as Node)) {
         setShowActionMenu(false);
       }
+      
+      if (isOpen && modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose();
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -145,7 +150,7 @@ export const EditNodeModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden">
+      <div ref={modalRef} className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
           <h3 className="font-bold text-slate-800">
             {showConfirmDelete ? 'Confirm Deletion' : 'Edit Position'}
