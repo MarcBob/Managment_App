@@ -503,7 +503,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     });
 
     // 3. Team Groups
-    const teamGroups = getTeamGroups(visibleNodes, visibleEdges);
+    const teamGroups = getTeamGroups(rawNodes, rawEdges);
     const teamGroupPositions = calculateTeamGroupPositions(teamGroups, finalNodes, nodeWidth, nodeHeight, 20);
     
     const teamGroupNodes = teamGroupPositions.map(pos => ({

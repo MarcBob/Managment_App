@@ -31,11 +31,19 @@ export function getTeamGroups(nodes: any[], edges: any[]): TeamGroup[] {
     });
 
     Object.entries(teamsInGroup).forEach(([team, memberIds]) => {
-      if (memberIds.length > 1) {
+      const parentNode = nodeMap[parentId];
+      const finalMemberIds = [...memberIds];
+      
+      // If parent belongs to the same team, include them in the frame
+      if (parentNode && parentNode.data && parentNode.data.team === team) {
+        finalMemberIds.push(parentId);
+      }
+
+      if (finalMemberIds.length > 1) {
         groups.push({
           id: `team-group-${parentId}-${team}`,
           team,
-          memberIds
+          memberIds: finalMemberIds
         });
       }
     });
@@ -65,7 +73,7 @@ export function calculateTeamGroupPositions(
       .map(id => layoutedNodes.find(n => n.id === id))
       .filter((n): n is any => !!n && !n.hidden);
     
-    if (groupMembers.length < 2) return null;
+    if (groupMembers.length < 1) return null;
 
     const minX = Math.min(...groupMembers.map(n => n.position.x));
     const minY = Math.min(...groupMembers.map(n => n.position.y));

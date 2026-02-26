@@ -65,13 +65,24 @@ describe('calculateTeamGroupPositions', () => {
     expect(pos.height).toBe(80 + 2 * padding);
   });
 
-  it('should return empty if less than 2 members are found', () => {
+  it('should return a group if 1 member is found', () => {
     const groups = [
       { id: 'group1', team: 'Engineering', memberIds: ['1', '2'] }
     ];
     const nodes = [
       { id: '1', position: { x: 100, y: 100 } },
       // node 2 is missing
+    ];
+    const positions = calculateTeamGroupPositions(groups, nodes, 50, 30, 10);
+    expect(positions).toHaveLength(1);
+  });
+
+  it('should return empty if 0 members are found', () => {
+    const groups = [
+      { id: 'group1', team: 'Engineering', memberIds: ['1', '2'] }
+    ];
+    const nodes = [
+      // all nodes missing
     ];
     const positions = calculateTeamGroupPositions(groups, nodes, 50, 30, 10);
     expect(positions).toHaveLength(0);

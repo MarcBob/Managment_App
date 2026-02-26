@@ -40,7 +40,7 @@ Build a web application to plan and visualize an engineering organization. The a
       - Support for `Start Date` and `Exit Date` fields.
       - Future hires are labeled with a green start date on the org chart.
       - Departing employees are labeled with a red exit date.
-      - **Recruiter Mode:** Refined to automatically hide all nodes that are not vacancies and do not lead to any vacancies, providing a focused view of the hiring pipeline.
+      - **Recruiter Mode:** Refined to automatically hide all nodes that are not vacancies and do not lead to any vacancies, providing a focused view of the hiring pipeline. Now shows team indicators (dashed frames) for all vacancies that are part of a larger team, even if only one vacancy is visible in the current view.
       - Integrated into both `EditNodeModal` and `csvParser`.
    6. **UI Refinements:**
       - **Multi-line Job Titles:** Job titles now reserve three lines on the node card, allowing longer titles to wrap without being truncated immediately.
@@ -59,7 +59,7 @@ Build a web application to plan and visualize an engineering organization. The a
       - **Click-to-Close Modal:** Enhanced the `EditNodeModal` to close when clicking outside the modal content, improving user experience and consistency.
    ## Next Steps (Future Enhancements)
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height.
-- [x] Visual Team Clustering: Draw frames around direct reports in the same team.
+- [x] Visual Team Clustering: Draw frames around direct reports in the same team. The frame also includes the team lead if they share the same team property.
 - [x] Custom Node Filters: Define color filters for nodes based on job title keywords, with priority-based ordering.
 - [x] Filter Groups: Save sets of filters as higher-level groups that can be toggled on/off collectively.
 - Detailed person info in a side panel.

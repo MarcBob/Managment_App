@@ -3393,10 +3393,11 @@
   "viewState": {
     "maxDepth": 4,
     "leafColumns": 2,
-    "collapsedNodes": [],
-    "expandedNodes": [
-      "Mesut.Okumus@dkbcodefactory.com"
+    "collapsedNodes": [
+      "Mesut.Okumus@dkbcodefactory.com",
+      "Benedict.Roeser@dkbcodefactory.com"
     ],
+    "expandedNodes": [],
     "leadershipLayers": [
       {
         "id": "1772127286089",
@@ -3518,6 +3519,6 @@
     "companyDomain": "dkb.de",
     "outlookBaseUrl": "https://outlook.office.com/mail/deeplink/compose"
   },
-  "lastUpdated": "2026-02-26T21:43:16.527Z",
+  "lastUpdated": "2026-02-26T22:38:55.225Z",
   "name": "CoFa Engineering"
 }
