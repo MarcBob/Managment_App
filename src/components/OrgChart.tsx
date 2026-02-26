@@ -209,7 +209,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   onDataChange,
   isRecruiterMode = false
 }) => {
-  const { getViewport, setViewport, getNode, fitView } = useReactFlow();
+  const { getViewport, setViewport, getNode, fitView, fitBounds } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -617,6 +617,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
 
   const handleSearchKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && searchQuery.trim() !== '') {
+      console.log('Search triggered for:', searchQuery);
       const query = searchQuery.toLowerCase();
       // Find all person nodes that match the search
       const matchingNodes = nodes.filter(node => 
@@ -629,12 +630,16 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         )
       );
 
+      console.log('Found matching nodes:', matchingNodes.length);
+
       if (matchingNodes.length > 0) {
         // Calculate the bounding box of all matching nodes
         const minX = Math.min(...matchingNodes.map(n => n.position.x));
         const minY = Math.min(...matchingNodes.map(n => n.position.y));
         const maxX = Math.max(...matchingNodes.map(n => n.position.x + (n.width || nodeWidth)));
         const maxY = Math.max(...matchingNodes.map(n => n.position.y + (n.height || nodeHeight)));
+
+        console.log('Bounds:', { minX, minY, maxX, maxY });
 
         const padding = 50;
         fitBounds(
