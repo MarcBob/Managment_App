@@ -198,6 +198,8 @@ interface OrgChartProps {
     filterGroups?: FilterGroup[];
     defaultFallbackColor?: string;
     searchShortcut?: string;
+    companyDomain?: string;
+    outlookBaseUrl?: string;
   };
   onDataChange?: (state: any) => void;
   isRecruiterMode?: boolean;
@@ -232,6 +234,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [filterGroups, setFilterGroups] = useState<FilterGroup[]>(initialViewState.filterGroups || []);
   const [defaultFallbackColor, setDefaultFallbackColor] = useState<string>(initialViewState.defaultFallbackColor || '#ffffff');
   const [searchShortcut, setSearchShortcut] = useState<string>(initialViewState.searchShortcut || 'meta+e');
+  const [companyDomain, setCompanyDomain] = useState<string>(initialViewState.companyDomain || 'dkb.de');
+  const [outlookBaseUrl, setOutlookBaseUrl] = useState<string>(initialViewState.outlookBaseUrl || 'https://outlook.office.com/mail/deeplink/compose');
   
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
   const isFirstMount = useRef(true);
@@ -255,7 +259,9 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     if (initialViewState.filterGroups !== undefined) setFilterGroups(initialViewState.filterGroups);
     if (initialViewState.defaultFallbackColor !== undefined) setDefaultFallbackColor(initialViewState.defaultFallbackColor);
     if (initialViewState.searchShortcut !== undefined) setSearchShortcut(initialViewState.searchShortcut);
-  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups, initialViewState.defaultFallbackColor, initialViewState.searchShortcut]);
+    if (initialViewState.companyDomain !== undefined) setCompanyDomain(initialViewState.companyDomain);
+    if (initialViewState.outlookBaseUrl !== undefined) setOutlookBaseUrl(initialViewState.outlookBaseUrl);
+  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups, initialViewState.defaultFallbackColor, initialViewState.searchShortcut, initialViewState.companyDomain, initialViewState.outlookBaseUrl]);
 
   // Keyboard shortcut listener
   useEffect(() => {
@@ -506,6 +512,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         filterGroups,
         defaultFallbackColor,
         searchShortcut,
+        companyDomain,
+        outlookBaseUrl,
       }
     };
 
@@ -523,7 +531,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor, searchShortcut]);
+  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor, searchShortcut, companyDomain, outlookBaseUrl]);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
@@ -821,6 +829,10 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           existingJobTitles={existingJobTitles}
           possibleManagers={possibleManagers}
           currentManagerId={rawEdges.find(e => e.target === editingNode.id)?.source || ''}
+          companyDomain={companyDomain}
+          outlookBaseUrl={outlookBaseUrl}
+          allNodes={rawNodes}
+          allEdges={rawEdges}
           onClose={() => setEditingNode(null)} 
           onSave={handleSaveNode} 
           onDelete={handleDeleteNode} 
@@ -841,6 +853,10 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         setDefaultFallbackColor={setDefaultFallbackColor}
         searchShortcut={searchShortcut}
         setSearchShortcut={setSearchShortcut}
+        companyDomain={companyDomain}
+        setCompanyDomain={setCompanyDomain}
+        outlookBaseUrl={outlookBaseUrl}
+        setOutlookBaseUrl={setOutlookBaseUrl}
       />
     </div>
   );

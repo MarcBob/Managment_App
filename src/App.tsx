@@ -23,6 +23,8 @@ interface ViewState {
   nodeFilters?: NodeFilter[];
   filterGroups?: FilterGroup[];
   searchShortcut?: string;
+  companyDomain?: string;
+  outlookBaseUrl?: string;
 }
 
 interface PlanData {
@@ -43,6 +45,8 @@ interface LegacyPlanData extends PlanData {
   nodeFilters?: NodeFilter[];
   filterGroups?: FilterGroup[];
   searchShortcut?: string;
+  companyDomain?: string;
+  outlookBaseUrl?: string;
 }
 
 function App() {
@@ -102,7 +106,7 @@ function App() {
         if (response.ok) {
           serverData = await response.json();
           // Migration for old flat schema
-          if (serverData && !serverData.viewState && (serverData.maxDepth || serverData.leafColumns || serverData.leadershipLayers || serverData.nodeFilters || serverData.filterGroups || serverData.searchShortcut)) {
+          if (serverData && !serverData.viewState && (serverData.maxDepth || serverData.leafColumns || serverData.leadershipLayers || serverData.nodeFilters || serverData.filterGroups || serverData.searchShortcut || serverData.companyDomain || serverData.outlookBaseUrl)) {
             serverData.viewState = {
               maxDepth: serverData.maxDepth,
               leafColumns: serverData.leafColumns,
@@ -111,7 +115,9 @@ function App() {
               leadershipLayers: serverData.leadershipLayers,
               nodeFilters: serverData.nodeFilters,
               filterGroups: serverData.filterGroups,
-              searchShortcut: serverData.searchShortcut
+              searchShortcut: serverData.searchShortcut,
+              companyDomain: serverData.companyDomain,
+              outlookBaseUrl: serverData.outlookBaseUrl
             };
           }
           if (serverData) {

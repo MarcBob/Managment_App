@@ -1,5 +1,11 @@
-import { useState, useEffect } from 'react';
-import { X, Trash2, AlertCircle } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { X, Trash2, AlertCircle, Mail, ExternalLink, ChevronDown, Users } from 'lucide-react';
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 interface EditNodeModalProps {
   isOpen: boolean;
@@ -12,6 +18,10 @@ interface EditNodeModalProps {
   existingJobTitles: string[];
   possibleManagers: { id: string, name: string }[];
   currentManagerId: string;
+  companyDomain: string;
+  outlookBaseUrl: string;
+  allNodes: any[];
+  allEdges: any[];
 }
 
 export const EditNodeModal = ({ 
@@ -24,15 +34,32 @@ export const EditNodeModal = ({
   existingTeams,
   existingJobTitles,
   possibleManagers,
-  currentManagerId
+  currentManagerId,
+  companyDomain,
+  outlookBaseUrl,
+  allNodes,
+  allEdges
 }: EditNodeModalProps) => {
   const [formData, setFormData] = useState({ ...nodeData, managerId: currentManagerId });
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [showEmailMenu, setShowEmailMenu] = useState(false);
+  const emailMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setFormData({ ...nodeData, managerId: currentManagerId });
     setShowConfirmDelete(false);
+    setShowEmailMenu(false);
   }, [nodeData, currentManagerId]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (emailMenuRef.current && !emailMenuRef.current.contains(event.target as Node)) {
+        setShowEmailMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   if (!isOpen) return null;
 
@@ -40,10 +67,11 @@ export const EditNodeModal = ({
     if (!firstName && !lastName) return '';
     const cleanFirst = firstName.trim().replace(/\s+/g, '.').toLowerCase();
     const cleanLast = lastName.trim().replace(/\s+/g, '.').toLowerCase();
+    const domain = companyDomain || 'dkb.de';
     
-    if (cleanFirst && cleanLast) return `${cleanFirst}.${cleanLast}@dkb.de`;
-    if (cleanFirst) return `${cleanFirst}@dkb.de`;
-    if (cleanLast) return `${cleanLast}@dkb.de`;
+    if (cleanFirst && cleanLast) return `${cleanFirst}.${cleanLast}@${domain}`;
+    if (cleanFirst) return `${cleanFirst}@${domain}`;
+    if (cleanLast) return `${cleanLast}@${domain}`;
     return '';
   };
 
@@ -56,6 +84,49 @@ export const EditNodeModal = ({
     }
     setFormData(nextData);
   };
+
+  const getDirectReportsEmails = () => {
+    const childrenIds = allEdges.filter(e => e.source === nodeId).map(e => e.target);
+    return allNodes
+      .filter(n => childrenIds.includes(n.id) && n.data.workEmail)
+      .map(n => n.data.workEmail);
+  };
+
+  const getFullOrgEmails = () => {
+    const emails = new Set<string>();
+    const stack = [nodeId];
+    const visited = new Set<string>();
+
+    while (stack.length > 0) {
+      const current = stack.pop()!;
+      if (visited.has(current)) continue;
+      visited.add(current);
+
+      const node = allNodes.find(n => n.id === current);
+      if (node?.data.workEmail) emails.add(node.data.workEmail);
+
+      const children = allEdges.filter(e => e.source === current).map(e => e.target);
+      stack.push(...children);
+    }
+    return Array.from(emails);
+  };
+
+  const handleSendEmail = (type: 'person' | 'direct' | 'full') => {
+    let recipients: string[] = [];
+    if (type === 'person') recipients = [formData.workEmail];
+    else if (type === 'direct') recipients = [formData.workEmail, ...getDirectReportsEmails()];
+    else if (type === 'full') recipients = getFullOrgEmails();
+
+    const validRecipients = recipients.filter(Boolean);
+    if (validRecipients.length === 0) return;
+
+    const outlookUrl = outlookBaseUrl || 'https://outlook.office.com/mail/deeplink/compose';
+    window.open(`${outlookUrl}?to=${validRecipients.join(';')}`, '_blank', 'noopener,noreferrer');
+    setShowEmailMenu(false);
+  };
+
+  const directReportsEmails = getDirectReportsEmails();
+  const fullOrgEmails = getFullOrgEmails();
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
@@ -122,14 +193,88 @@ export const EditNodeModal = ({
 
             <div className="space-y-1">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Work Email</label>
-              <input
-                type="email"
-                required
-                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                value={formData.workEmail || ''}
-                onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
-                placeholder="first.last@dkb.de"
-              />
+              <div className="flex gap-2">
+                <input
+                  type="email"
+                  required
+                  className="flex-1 px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  value={formData.workEmail || ''}
+                  onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
+                  placeholder={`first.last@${companyDomain || 'dkb.de'}`}
+                />
+                
+                <div className="flex shrink-0 gap-1">
+                  <button
+                    type="button"
+                    onClick={() => handleSendEmail('person')}
+                    disabled={!formData.workEmail}
+                    className="px-3 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-all flex items-center justify-center border border-blue-100 shadow-sm"
+                    title="Open in Outlook Web"
+                  >
+                    <Mail size={18} />
+                  </button>
+
+                  <div className="relative" ref={emailMenuRef}>
+                    <button
+                      type="button"
+                      onClick={() => setShowEmailMenu(!showEmailMenu)}
+                      className="px-2 py-2 bg-slate-50 text-slate-600 hover:bg-slate-100 rounded-lg transition-all flex items-center justify-center border border-slate-100 shadow-sm"
+                      title="More Email Options"
+                    >
+                      <ChevronDown size={18} className={cn(showEmailMenu && "rotate-180 transition-transform")} />
+                    </button>
+
+                    {showEmailMenu && (
+                      <div className="absolute right-0 mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow-xl z-[60] py-2 overflow-hidden">
+                        <div className="px-4 py-2 border-b border-slate-100 mb-1">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email Options</span>
+                        </div>
+                        
+                        <button
+                          type="button"
+                          onClick={() => handleSendEmail('person')}
+                          className="w-full text-left px-4 py-2 text-sm hover:bg-slate-50 flex flex-col"
+                        >
+                          <span className="font-semibold text-slate-700">Just {formData.firstName || 'Employee'}</span>
+                          <span className="text-[10px] text-slate-400 truncate">{formData.workEmail}</span>
+                        </button>
+
+                        {directReportsEmails.length > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => handleSendEmail('direct')}
+                            className="w-full text-left px-4 py-2 text-sm hover:bg-slate-50 flex flex-col border-t border-slate-50"
+                          >
+                            <span className="font-semibold text-slate-700 flex items-center gap-2">
+                              <Users size={14} />
+                              Person + Direct Reports
+                            </span>
+                            <span className="text-[10px] text-slate-400">
+                              {directReportsEmails.length + 1} recipients
+                            </span>
+                          </button>
+                        )}
+
+                        {fullOrgEmails.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => handleSendEmail('full')}
+                            className="w-full text-left px-4 py-2 text-sm hover:bg-slate-50 flex flex-col border-t border-slate-50"
+                          >
+                            <span className="font-semibold text-slate-700 flex items-center gap-2">
+                              <Users size={14} />
+                              Full Sub-Organization
+                            </span>
+                            <span className="text-[10px] text-slate-400">
+                              {fullOrgEmails.length} total recipients
+                            </span>
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="space-y-1">

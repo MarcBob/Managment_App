@@ -24,6 +24,10 @@ interface SettingsModalProps {
   setDefaultFallbackColor: (color: string) => void;
   searchShortcut: string;
   setSearchShortcut: (shortcut: string) => void;
+  companyDomain: string;
+  setCompanyDomain: (domain: string) => void;
+  outlookBaseUrl: string;
+  setOutlookBaseUrl: (url: string) => void;
 }
 
 export const SettingsModal = ({ 
@@ -40,7 +44,11 @@ export const SettingsModal = ({
   defaultFallbackColor = '#ffffff',
   setDefaultFallbackColor,
   searchShortcut,
-  setSearchShortcut
+  setSearchShortcut,
+  companyDomain,
+  setCompanyDomain,
+  outlookBaseUrl,
+  setOutlookBaseUrl
 }: SettingsModalProps) => {
   if (!isOpen) return null;
 
@@ -225,6 +233,42 @@ export const SettingsModal = ({
                 placeholder="e.g. meta+e"
                 className="w-32 px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white font-mono"
               />
+            </div>
+          </div>
+
+          {/* Company & Outlook Settings */}
+          <div className="space-y-4">
+            <div className="flex flex-col">
+              <label className="text-sm font-bold text-slate-700">Company & Outlook Settings</label>
+              <p className="text-xs text-slate-500 mt-1">
+                Configure the company domain and Outlook Web access.
+              </p>
+            </div>
+
+            <div className="space-y-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Company Email Domain</label>
+                <input
+                  type="text"
+                  value={companyDomain}
+                  onChange={(e) => setCompanyDomain(e.target.value)}
+                  placeholder="e.g. dkb.de"
+                  className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Outlook Compose URL</label>
+                <input
+                  type="text"
+                  value={outlookBaseUrl}
+                  onChange={(e) => setOutlookBaseUrl(e.target.value)}
+                  placeholder="https://outlook.office.com/mail/deeplink/compose"
+                  className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                />
+                <p className="text-[10px] text-slate-400">
+                  Used for "Send Email" deep links.
+                </p>
+              </div>
             </div>
           </div>
 
