@@ -17,7 +17,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "levent.uenver@dkbcodefactory.com",
@@ -36,9 +36,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      "height": 111
     },
     {
       "id": "maximilian.Liemant@dkbcodefactory.com",
@@ -57,7 +55,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Anna.Eckhardt@dkbcodefactory.com",
@@ -76,7 +74,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Mohammad.Rahimi@dkbcodefactory.com",
@@ -95,7 +93,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Paul.Defois@dkbcodefactory.com",
@@ -114,9 +112,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      "height": 111
     },
     {
       "id": "Ali.Adel@dkbcodefactory.com",
@@ -135,7 +131,26 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
+    },
+    {
+      "id": "Eugen.Puzynin@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Eugen",
+        "lastName": "Puzynin",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Accounts & Transactions",
+        "workEmail": "Eugen.Puzynin@dkbcodefactory.com",
+        "supervisorName": "Baydon, Karim",
+        "status": "FILLED"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "width": 240,
+      "height": 111
     },
     {
       "id": "Asghar.Mirzaei@dkbcodefactory.com",
@@ -154,7 +169,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "manuel.sanchez@dkbcodefactory.com",
@@ -173,7 +188,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "stephan.seigewasser@dkbcodefactory.com",
@@ -192,7 +207,7 @@
         "y": 295.40014204406293
       },
       "width": 240,
-      "height": 139,
+      "height": 111,
       "selected": false,
       "dragging": false,
       "positionAbsolute": {
@@ -217,7 +232,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "raphaela.wrede@dkbcodefactory.com",
@@ -232,17 +247,11 @@
         "status": "FILLED"
       },
       "position": {
-        "x": 20615,
-        "y": 239.10677134978164
+        "x": 0,
+        "y": 0
       },
       "width": 240,
-      "height": 139,
-      "selected": false,
-      "positionAbsolute": {
-        "x": 20615,
-        "y": 239.10677134978164
-      },
-      "dragging": false
+      "height": 111
     },
     {
       "id": "Christoph.Henzelmann@dkbcodefactory.com",
@@ -261,7 +270,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Oleksii.Vasyliev@dkbcodefactory.com",
@@ -280,7 +289,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Reza.Lotfi@dkbcodefactory.com",
@@ -299,7 +308,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Mohsen.Vaziri@dkbcodefactory.com",
@@ -318,7 +327,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Hanieh.Haddad@dkbcodefactory.com",
@@ -337,7 +346,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "felix.gruenewald@dkbcodefactory.com",
@@ -356,7 +365,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Izuchukwu.Oleka@dkbcodefactory.com",
@@ -375,7 +384,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Umurcan.Emre@dkbcodefactory.com",
@@ -394,7 +403,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Daniel.Schellenberg@dkbcodefactory.com",
@@ -413,7 +422,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Georgios.Karanikas@dkbcodefactory.com",
@@ -428,17 +437,11 @@
         "status": "FILLED"
       },
       "position": {
-        "x": 1385.077522925754,
-        "y": 1008.9467587529302
+        "x": 0,
+        "y": 0
       },
       "width": 240,
-      "height": 139,
-      "selected": false,
-      "positionAbsolute": {
-        "x": 1385.077522925754,
-        "y": 1008.9467587529302
-      },
-      "dragging": false
+      "height": 111
     },
     {
       "id": "Shanmugam.Muthuraj@dkbcodefactory.com",
@@ -457,7 +460,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "mel.grosser@dkbcodefactory.com",
@@ -476,7 +479,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Chae-Hyuk.Lee@dkbcodefactory.com",
@@ -495,7 +498,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Priscila.Flores@dkbcodefactory.com",
@@ -514,7 +517,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Darian.Reck@dkbcodefactory.com",
@@ -533,7 +536,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "hannes.Waldschmidt@dkbcodefactory.com",
@@ -552,7 +555,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Dennis.Hiller@dkbcodefactory.com",
@@ -571,7 +574,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Ledion.Spaho@dkbcodefactory.com",
@@ -586,17 +589,11 @@
         "status": "FILLED"
       },
       "position": {
-        "x": 2935.454684613955,
-        "y": 1618.8635946158136
+        "x": 0,
+        "y": 0
       },
       "width": 240,
-      "height": 139,
-      "selected": false,
-      "positionAbsolute": {
-        "x": 2935.454684613955,
-        "y": 1618.8635946158136
-      },
-      "dragging": false
+      "height": 111
     },
     {
       "id": "Fabian.Georgi@dkbcodefactory.com",
@@ -615,7 +612,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Daniel.Stopka@dkbcodefactory.com",
@@ -634,7 +631,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Franz.Hefele@dkbcodefactory.com",
@@ -653,7 +650,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "stefan.junge@dkbcodefactory.com",
@@ -672,7 +669,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Marie.Jager@dkbcodefactory.com",
@@ -691,7 +688,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Mounika.Sunkara@dkbcodefactory.com",
@@ -710,7 +707,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "ivan.borsa@dkbcodefactory.com",
@@ -729,7 +726,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139,
+      "height": 111,
       "selected": false,
       "dragging": false
     },
@@ -750,7 +747,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "vladimir.ignjatijevic@dkbcodefactory.com",
@@ -769,7 +766,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
@@ -788,7 +785,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "andrej.bielevicius@dkbcodefactory.com",
@@ -807,7 +804,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Cassiano.Montanari@dkbcodefactory.com",
@@ -826,7 +823,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "adam.kerenyi@dkbcodefactory.com",
@@ -845,7 +842,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "claudinei.bido@dkbcodefactory.com",
@@ -864,7 +861,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Sarangan.Gnanasegaram@dkbcodefactory.com",
@@ -883,7 +880,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Koki.Isshiki@dkbcodefactory.com",
@@ -902,7 +899,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "dennis.steiner@dkbcodefactory.com",
@@ -921,7 +918,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Faizan.Hussain@dkbcodefactory.com",
@@ -940,7 +937,7 @@
         "y": 730
       },
       "width": 240,
-      "height": 139,
+      "height": 111,
       "selected": false,
       "positionAbsolute": {
         "x": 4845,
@@ -965,7 +962,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Byeonggil.Park@dkbcodefactory.com",
@@ -984,7 +981,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Mehrdad.Yami@dkbcodefactory.com",
@@ -1003,7 +1000,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Hari.Tummala@dkbcodefactory.com",
@@ -1022,7 +1019,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Marc.Bobzien@dkbcodefactory.com",
@@ -1041,7 +1038,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139,
+      "height": 111,
       "selected": false,
       "dragging": false
     },
@@ -1062,7 +1059,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Sura.Watthanalamlert@dkbcodefactory.com",
@@ -1081,7 +1078,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Eveline.Kooijman@dkbcodefactory.com",
@@ -1100,7 +1097,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "miriam.Bah@dkbcodefactory.com",
@@ -1119,7 +1116,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Delia.Metzler@dkbcodefactory.com",
@@ -1138,7 +1135,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Serhat.Sungur@dkbcodefactory.com",
@@ -1157,7 +1154,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Thomas.Juhnke@dkbcodefactory.com",
@@ -1181,7 +1178,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139,
+      "height": 111,
       "selected": false,
       "dragging": false
     },
@@ -1202,7 +1199,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "samuel.stein@dkbcodefactory.com",
@@ -1221,7 +1218,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Roman.Uglovskij@dkbcodefactory.com",
@@ -1240,7 +1237,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Jennifer.Wjertzoch@dkbcodefactory.com",
@@ -1259,7 +1256,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Renata.Lazarov@dkbcodefactory.com",
@@ -1278,7 +1275,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "lucas.lee@dkbcodefactory.com",
@@ -1297,7 +1294,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Leon.Kranich@dkbcodefactory.com",
@@ -1316,7 +1313,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Naimah.Fowler@dkbcodefactory.com",
@@ -1335,7 +1332,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Antonio.Martinelli@dkbcodefactory.com",
@@ -1354,7 +1351,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Janine.Brennfoerder@dkbcodefactory.com",
@@ -1373,7 +1370,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Bodo.Wissemann@dkbcodefactory.com",
@@ -1392,9 +1389,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      "height": 111
     },
     {
       "id": "Alessandro.Memoli@dkbcodefactory.com",
@@ -1413,7 +1408,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Franziska.Comploi@dkbcodefactory.com",
@@ -1432,7 +1427,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Cynthia.Akinade@dkbcodefactory.com",
@@ -1451,7 +1446,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Nataliia.Tbilieli@dkbcodefactory.com",
@@ -1470,7 +1465,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Philipp.Johannes@dkbcodefactory.com",
@@ -1489,7 +1484,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Lena.Strokov@dkbcodefactory.com",
@@ -1508,7 +1503,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Marco.Rossow@dkbcodefactory.com",
@@ -1527,7 +1522,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Arlik.Florin@dkbcodefactory.com",
@@ -1546,7 +1541,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Michael.Kutzner@dkbcodefactory.com",
@@ -1565,7 +1560,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "thomas.Segkoulis@dkbcodefactory.com",
@@ -1584,7 +1579,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Leonard.Scharf@dkbcodefactory.com",
@@ -1603,7 +1598,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Philipp.Geissler@dkbcodefactory.com",
@@ -1622,7 +1617,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Thomas.Wilson@dkbcodefactory.com",
@@ -1641,7 +1636,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "rafal.Sztajer@dkbcodefactory.com",
@@ -1660,7 +1655,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Benjamin.Kunz@dkbcodefactory.com",
@@ -1679,7 +1674,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Pavlo.Tereshchuk@dkbcodefactory.com",
@@ -1698,7 +1693,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Leoni.Sperling@dkbcodefactory.com",
@@ -1717,7 +1712,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "veit.schumacher@dkbcodefactory.com",
@@ -1736,7 +1731,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Justina.Valda-Rajic@dkbcodefactory.com",
@@ -1755,7 +1750,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Nabil.Mediouni@dkbcodefactory.com",
@@ -1774,7 +1769,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "markus.may@dkbcodefactory.com",
@@ -1793,7 +1788,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "stefan.kudwien@dkbcodefactory.com",
@@ -1812,7 +1807,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "michael.Scharni@dkbcodefactory.com",
@@ -1831,7 +1826,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Manuel.Pache@dkbcodefactory.com",
@@ -1850,7 +1845,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Miroslav.Dzunic@dkbcodefactory.com",
@@ -1873,7 +1868,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139,
+      "height": 111,
       "selected": false,
       "dragging": false
     },
@@ -1894,7 +1889,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "anton.katzer@dkbcodefactory.com",
@@ -1913,7 +1908,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "lukasz.Piotrowski@dkbcodefactory.com",
@@ -1932,7 +1927,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "judith.hartmann@dkbcodefactory.com",
@@ -1951,7 +1946,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Daniel.Neuschaefer-Rube@dkbcodefactory.com",
@@ -1970,7 +1965,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Mesut.Okumus@dkbcodefactory.com",
@@ -1989,9 +1984,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      "height": 111
     },
     {
       "id": "Maria.Mazur@dkbcodefactory.com",
@@ -2010,7 +2003,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Stiliyana.Yordanova@dkbcodefactory.com",
@@ -2029,7 +2022,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Tobias.Pohl@dkbcodefactory.com",
@@ -2048,7 +2041,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Patrick.Pister@dkbcodefactory.com",
@@ -2067,7 +2060,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Sven.Wetzurek@dkbcodefactory.com",
@@ -2086,7 +2079,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Heiko.Ruhm@dkbcodefactory.com",
@@ -2105,7 +2098,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Kristjana.Gjonaj@dkbcodefactory.com",
@@ -2124,7 +2117,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Miloslaw.Frey@dkbcodefactory.com",
@@ -2143,7 +2136,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "AkankshaBhardwaj.Rai@dkbcodefactory.com",
@@ -2162,7 +2155,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "martin.fuerstenau@dkbcodefactory.com",
@@ -2181,7 +2174,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Sakthi.Arumugasami@dkbcodefactory.com",
@@ -2200,7 +2193,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "pablo.elo@dkbcodefactory.com",
@@ -2219,7 +2212,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Driptaroop.Das@dkbcodefactory.com",
@@ -2238,7 +2231,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Christopher.Moesch@dkbcodefactory.com",
@@ -2257,7 +2250,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Javier.delapena@dkbcodefactory.com",
@@ -2276,7 +2269,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139,
+      "height": 111,
       "selected": false,
       "dragging": false
     },
@@ -2297,7 +2290,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139,
+      "height": 111,
       "selected": false,
       "dragging": false
     },
@@ -2318,7 +2311,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Biniam.Kefale@dkbcodefactory.com",
@@ -2337,7 +2330,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Karim.Baydon@dkbcodefactory.com",
@@ -2356,7 +2349,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Hyung-Jun.Yoo@dkbcodefactory.com",
@@ -2375,7 +2368,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "fabian.Schaffner@dkbcodefactory.com",
@@ -2394,7 +2387,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "anna.Cieslak@dkbcodefactory.com",
@@ -2413,7 +2406,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "stephan.georgi@dkbcodefactory.com",
@@ -2432,7 +2425,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Mohamed.Abdelhamid@dkbcodefactory.com",
@@ -2451,7 +2444,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "ekin.alcar@dkbcodefactory.com",
@@ -2470,7 +2463,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Brent.Curriden@dkbcodefactory.com",
@@ -2489,7 +2482,26 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
+    },
+    {
+      "id": "Beatriz.Macuco@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Beatriz",
+        "lastName": "Loures Macuco",
+        "jobTitle": "Mobile Developer (iOS)",
+        "team": "Banking App - Nova Payments",
+        "workEmail": "Beatriz.Macuco@dkbcodefactory.com",
+        "supervisorName": "Steudter, Michael",
+        "status": "FILLED"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "width": 240,
+      "height": 111
     },
     {
       "id": "margarita.gutierrez@dkbcodefactory.com",
@@ -2508,7 +2520,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Elif.Schaefer@dkbcodefactory.com",
@@ -2523,17 +2535,11 @@
         "status": "FILLED"
       },
       "position": {
-        "x": 9182.606230762052,
-        "y": 716.4962842802081
+        "x": 0,
+        "y": 0
       },
       "width": 240,
-      "height": 139,
-      "selected": false,
-      "positionAbsolute": {
-        "x": 9182.606230762052,
-        "y": 716.4962842802081
-      },
-      "dragging": false
+      "height": 111
     },
     {
       "id": "HannahAkinyi.Olukoye@dkbcodefactory.com",
@@ -2552,7 +2558,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Luisa.CruzMolina@dkbcodefactory.com",
@@ -2571,7 +2577,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Aija.Avota@dkbcodefactory.com",
@@ -2590,7 +2596,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "luno.forchert@dkbcodefactory.com",
@@ -2609,7 +2615,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Joao.Belchior@dkbcodefactory.com",
@@ -2628,7 +2634,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "Christophe.Hoste@dkbcodefactory.com",
@@ -2647,7 +2653,7 @@
         "y": 0
       },
       "width": 240,
-      "height": 139
+      "height": 111
     },
     {
       "id": "empty-1771505245025",
@@ -2670,8 +2676,8 @@
         "y": 748.4872620790629
       },
       "width": 240,
-      "height": 139,
-      "selected": false,
+      "height": 111,
+      "selected": true,
       "dragging": false,
       "positionAbsolute": {
         "x": 0,
@@ -2695,7 +2701,7 @@
         "y": 200
       },
       "width": 240,
-      "height": 139
+      "height": 111
     }
   ],
   "edges": [
@@ -2733,6 +2739,11 @@
       "id": "e-Karim.Baydon@dkbcodefactory.com-Ali.Adel@dkbcodefactory.com",
       "source": "Karim.Baydon@dkbcodefactory.com",
       "target": "Ali.Adel@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Karim.Baydon@dkbcodefactory.com-Eugen.Puzynin@dkbcodefactory.com",
+      "source": "Karim.Baydon@dkbcodefactory.com",
+      "target": "Eugen.Puzynin@dkbcodefactory.com"
     },
     {
       "id": "e-Karim.Baydon@dkbcodefactory.com-Asghar.Mirzaei@dkbcodefactory.com",
@@ -3335,6 +3346,11 @@
       "target": "Brent.Curriden@dkbcodefactory.com"
     },
     {
+      "id": "e-michael.steudter@dkbcodefactory.com-Beatriz.Macuco@dkbcodefactory.com",
+      "source": "michael.steudter@dkbcodefactory.com",
+      "target": "Beatriz.Macuco@dkbcodefactory.com"
+    },
+    {
       "id": "e-raphaela.wrede@dkbcodefactory.com-margarita.gutierrez@dkbcodefactory.com",
       "source": "raphaela.wrede@dkbcodefactory.com",
       "target": "margarita.gutierrez@dkbcodefactory.com"
@@ -3390,35 +3406,9 @@
     "leafColumns": 2,
     "collapsedNodes": [],
     "expandedNodes": [
-      "Mesut.Okumus@dkbcodefactory.com"
-    ],
-    "leadershipLayers": [
-      {
-        "id": "1772127286089",
-        "name": "Layer 1",
-        "identifier": "Chapter Lead"
-      },
-      {
-        "id": "1772127292230",
-        "name": "Layer 2",
-        "identifier": "\"Engineering Manager, Principal\""
-      }
-    ],
-    "nodeFilters": [
-      {
-        "id": "1772129079947",
-        "name": "Filter 1",
-        "pattern": "Senior",
-        "color": "#d1f0ff"
-      },
-      {
-        "id": "1772129177466",
-        "name": "Filter 2",
-        "pattern": "Junior",
-        "color": "#e5ffeb"
-      }
+      "Adrian.Maghear@dkbcodefactory.com",
+      "ivan.borsa@dkbcodefactory.com"
     ]
   },
-  "lastUpdated": "2026-02-26T18:07:45.530Z",
-  "name": "CoFa Engineering"
+  "lastUpdated": "2026-02-19T16:21:14.675Z"
 }

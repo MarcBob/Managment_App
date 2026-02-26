@@ -24,7 +24,9 @@ import { SettingsModal } from './SettingsModal';
 import { exportToCsv } from '../utils/csvParser';
 import { getTeamGroups, calculateTeamGroupPositions } from '../utils/teamGrouping';
 import { getLeadershipRank } from '../utils/leadershipLayers';
+import { getNodeColor } from '../utils/nodeFilters';
 import type { LeadershipLayer } from '../utils/leadershipLayers';
+import type { NodeFilter } from '../utils/nodeFilters';
 import type { OrgNode, OrgEdge } from '../utils/csvParser';
 
 const nodeTypes = {
@@ -192,6 +194,7 @@ interface OrgChartProps {
     collapsedNodes?: string[];
     expandedNodes?: string[];
     leadershipLayers?: LeadershipLayer[];
+    nodeFilters?: NodeFilter[];
   };
   onDataChange?: (state: any) => void;
   isRecruiterMode?: boolean;
@@ -222,6 +225,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [leafColumns, setLeafColumns] = useState<number>(initialViewState.leafColumns || 1);
   const [maxDepth, setMaxDepth] = useState<number>(initialViewState.maxDepth || 10);
   const [leadershipLayers, setLeadershipLayers] = useState<LeadershipLayer[]>(initialViewState.leadershipLayers || []);
+  const [nodeFilters, setNodeFilters] = useState<NodeFilter[]>(initialViewState.nodeFilters || []);
   
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
   const isFirstMount = useRef(true);
@@ -240,7 +244,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     if (initialViewState.collapsedNodes !== undefined) setCollapsedNodes(new Set(initialViewState.collapsedNodes));
     if (initialViewState.expandedNodes !== undefined) setExpandedNodes(new Set(initialViewState.expandedNodes));
     if (initialViewState.leadershipLayers !== undefined) setLeadershipLayers(initialViewState.leadershipLayers);
-  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers]);
+    if (initialViewState.nodeFilters !== undefined) setNodeFilters(initialViewState.nodeFilters);
+  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters]);
 
   // Handle structural or filter changes with side-effect layout
   useEffect(() => {
@@ -342,6 +347,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           directReportsCount: (directChildrenMap[node.id] || []).length,
           totalReportsCount: getDescendants(node.id).length,
           depth,
+          customColor: getNodeColor(node.data.jobTitle || '', nodeFilters, ''),
         },
         style: {
           ...node.style,
@@ -409,7 +415,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       }
       lastToggledRef.current = null;
     }
-  }, [rawNodes, rawEdges, searchQuery, collapsedNodes, expandedNodes, maxDepth, isRecruiterMode, leafColumns, getViewport, setViewport, leadershipLayers]);
+  }, [rawNodes, rawEdges, searchQuery, collapsedNodes, expandedNodes, maxDepth, isRecruiterMode, leafColumns, getViewport, setViewport, leadershipLayers, nodeFilters]);
 
   useEffect(() => {
     if (layoutVersion > 0) {
@@ -437,6 +443,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         collapsedNodes: Array.from(collapsedNodes),
         expandedNodes: Array.from(expandedNodes),
         leadershipLayers,
+        nodeFilters,
       }
     };
 
@@ -454,7 +461,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers]);
+  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters]);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
@@ -694,6 +701,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         setLeafColumns={setLeafColumns} 
         leadershipLayers={leadershipLayers}
         setLeadershipLayers={setLeadershipLayers}
+        nodeFilters={nodeFilters}
+        setNodeFilters={setNodeFilters}
       />
     </div>
   );

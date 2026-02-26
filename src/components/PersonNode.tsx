@@ -26,6 +26,7 @@ export const PersonNode = memo(({ data, id }: NodeProps) => {
     totalReportsCount,
     startDate,
     exitDate,
+    customColor,
   } = data;
   const isFilled = status === 'FILLED';
   const teamColorClass = getTeamColor(team).tailwind;
@@ -44,9 +45,11 @@ export const PersonNode = memo(({ data, id }: NodeProps) => {
   return (
     <div 
       className={cn(
-        "px-4 py-3 shadow-lg rounded-lg border-2 w-[240px] bg-white transition-all group relative cursor-pointer hover:border-blue-300 active:scale-95",
-        isFilled ? teamColorClass : "border-slate-200 border-dashed opacity-80"
+        "px-4 py-3 shadow-lg rounded-lg border-2 w-[240px] transition-all group relative cursor-pointer hover:border-blue-300 active:scale-95",
+        isFilled ? teamColorClass : "border-slate-200 border-dashed opacity-80",
+        !customColor && "bg-white"
       )}
+      style={customColor ? { backgroundColor: customColor } : undefined}
       onClick={() => onEditNode(id, data)}
     >
       {/* Date Labels */}

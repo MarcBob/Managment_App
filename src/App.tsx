@@ -4,6 +4,7 @@ import { OrgChart } from './components/OrgChart';
 import { EditableTitle } from './components/EditableTitle';
 import type { OrgNode, OrgEdge } from './utils/csvParser';
 import type { LeadershipLayer } from './utils/leadershipLayers';
+import type { NodeFilter } from './utils/nodeFilters';
 import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus } from 'lucide-react';
 import './App.css';
 
@@ -19,6 +20,7 @@ interface ViewState {
   collapsedNodes?: string[];
   expandedNodes?: string[];
   leadershipLayers?: LeadershipLayer[];
+  nodeFilters?: NodeFilter[];
 }
 
 interface PlanData {
@@ -36,6 +38,7 @@ interface LegacyPlanData extends PlanData {
   collapsedNodes?: string[];
   expandedNodes?: string[];
   leadershipLayers?: LeadershipLayer[];
+  nodeFilters?: NodeFilter[];
 }
 
 function App() {
@@ -95,12 +98,14 @@ function App() {
         if (response.ok) {
           serverData = await response.json();
           // Migration for old flat schema
-          if (serverData && !serverData.viewState && (serverData.maxDepth || serverData.leafColumns)) {
+          if (serverData && !serverData.viewState && (serverData.maxDepth || serverData.leafColumns || serverData.leadershipLayers || serverData.nodeFilters)) {
             serverData.viewState = {
               maxDepth: serverData.maxDepth,
               leafColumns: serverData.leafColumns,
               collapsedNodes: serverData.collapsedNodes,
-              expandedNodes: serverData.expandedNodes
+              expandedNodes: serverData.expandedNodes,
+              leadershipLayers: serverData.leadershipLayers,
+              nodeFilters: serverData.nodeFilters
             };
           }
           if (serverData) {

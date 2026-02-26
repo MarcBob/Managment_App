@@ -49,4 +49,5 @@ Build a web application to plan and visualize an engineering organization. The a
    ## Next Steps (Future Enhancements)
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height.
 - [x] Visual Team Clustering: Draw frames around direct reports in the same team.
+- [x] Custom Node Filters: Define color filters for nodes based on job title keywords, with priority-based ordering.
 - Detailed person info in a side panel.
