@@ -13,7 +13,7 @@ import ReactFlow, {
   ReactFlowProvider,
 } from 'reactflow';
 import type { Connection, Edge, Node } from 'reactflow';
-import { Search, Download, Layers, Settings as SettingsIcon } from 'lucide-react';
+import { Search, Download, Layers, Settings as SettingsIcon, X } from 'lucide-react';
 import dagre from 'dagre';
 import 'reactflow/dist/style.css';
 
