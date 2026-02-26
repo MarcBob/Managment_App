@@ -651,15 +651,24 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         console.log('Bounds:', { minX, minY, maxX, maxY });
 
         const padding = 50;
-        fitBounds(
-          { 
-            x: minX - padding, 
-            y: minY - padding, 
-            width: (maxX - minX) + padding * 2, 
-            height: (maxY - minY) + padding * 2 
-          }, 
-          { duration: 800 }
-        );
+        const bounds = { 
+          x: minX - padding, 
+          y: minY - padding, 
+          width: (maxX - minX) + padding * 2, 
+          height: (maxY - minY) + padding * 2 
+        };
+
+        // If only one match, we don't want to zoom in TOO much
+        if (matchingNodes.length === 1) {
+          fitView({
+            nodes: matchingNodes,
+            duration: 800,
+            padding: 2, // Larger padding to avoid max zoom
+            maxZoom: 0.8
+          });
+        } else {
+          fitBounds(bounds, { duration: 800 });
+        }
       }
     }
   };
@@ -678,16 +687,25 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         minZoom={0.1}
       >
         <Panel position="top-left" className="bg-white p-2 rounded-lg shadow-md border border-slate-200 w-64">
-          <div className="relative">
+          <div className="relative group/search">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
             <input
               type="text"
               placeholder="Search by name, title, team..."
-              className="w-full pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-9 pr-8 py-2 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleSearchKeyDown}
             />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-2 top-2 p-0.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-all"
+                title="Clear search"
+              >
+                <X size={14} />
+              </button>
+            )}
           </div>
         </Panel>
         <Background color="#cbd5e1" gap={20} />
