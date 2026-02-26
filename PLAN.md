@@ -51,6 +51,10 @@ Build a web application to plan and visualize an engineering organization. The a
       - Added configurable keyboard shortcuts for common actions.
       - Default search focus shortcut: `meta+e` (Command+E on Mac).
       - Configurable via the Chart Settings modal.
+   8. **Collaboration Integration:**
+      - **MS Teams Chat:** Replaced the primary email button with a message button that opens a MS Teams chat deep link.
+      - **Multi-Recipient Support:** Added options to start group chats with direct reports or the full sub-organization.
+      - **Unified Action Menu:** Consolidated both MS Teams and Outlook email options into a single, accessible dropdown menu in the position edit modal.
    ## Next Steps (Future Enhancements)
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height.
 - [x] Visual Team Clustering: Draw frames around direct reports in the same team.

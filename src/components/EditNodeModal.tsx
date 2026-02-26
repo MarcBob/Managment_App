@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, Trash2, AlertCircle, Mail, ExternalLink, ChevronDown, Users } from 'lucide-react';
+import { X, Trash2, AlertCircle, Mail, MessageSquare, ExternalLink, ChevronDown, Users } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -42,19 +42,19 @@ export const EditNodeModal = ({
 }: EditNodeModalProps) => {
   const [formData, setFormData] = useState({ ...nodeData, managerId: currentManagerId });
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [showEmailMenu, setShowEmailMenu] = useState(false);
-  const emailMenuRef = useRef<HTMLDivElement>(null);
+  const [showActionMenu, setShowActionMenu] = useState(false);
+  const actionMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setFormData({ ...nodeData, managerId: currentManagerId });
     setShowConfirmDelete(false);
-    setShowEmailMenu(false);
+    setShowActionMenu(false);
   }, [nodeData, currentManagerId]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (emailMenuRef.current && !emailMenuRef.current.contains(event.target as Node)) {
-        setShowEmailMenu(false);
+      if (actionMenuRef.current && !actionMenuRef.current.contains(event.target as Node)) {
+        setShowActionMenu(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -122,7 +122,22 @@ export const EditNodeModal = ({
 
     const outlookUrl = outlookBaseUrl || 'https://outlook.office.com/mail/deeplink/compose';
     window.open(`${outlookUrl}?to=${validRecipients.join(';')}`, '_blank', 'noopener,noreferrer');
-    setShowEmailMenu(false);
+    setShowActionMenu(false);
+  };
+
+  const handleSendMessage = (type: 'person' | 'direct' | 'full') => {
+    let recipients: string[] = [];
+    if (type === 'person') recipients = [formData.workEmail];
+    else if (type === 'direct') recipients = [formData.workEmail, ...getDirectReportsEmails()];
+    else if (type === 'full') recipients = getFullOrgEmails();
+
+    const validRecipients = recipients.filter(Boolean);
+    if (validRecipients.length === 0) return;
+
+    // MS Teams deep link: https://teams.microsoft.com/l/chat/0/0?users=recipient1,recipient2,...
+    const teamsUrl = `https://teams.microsoft.com/l/chat/0/0?users=${validRecipients.join(',')}`;
+    window.open(teamsUrl, '_blank', 'noopener,noreferrer');
+    setShowActionMenu(false);
   };
 
   const directReportsEmails = getDirectReportsEmails();
@@ -206,36 +221,83 @@ export const EditNodeModal = ({
                 <div className="flex shrink-0 gap-1">
                   <button
                     type="button"
-                    onClick={() => handleSendEmail('person')}
+                    onClick={() => handleSendMessage('person')}
                     disabled={!formData.workEmail}
-                    className="px-3 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-all flex items-center justify-center border border-blue-100 shadow-sm"
-                    title="Open in Outlook Web"
+                    className="px-3 py-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-all flex items-center justify-center border border-indigo-100 shadow-sm"
+                    title="Open MS Teams Chat"
                   >
-                    <Mail size={18} />
+                    <MessageSquare size={18} />
                   </button>
 
-                  <div className="relative" ref={emailMenuRef}>
+                  <div className="relative" ref={actionMenuRef}>
                     <button
                       type="button"
-                      onClick={() => setShowEmailMenu(!showEmailMenu)}
+                      onClick={() => setShowActionMenu(!showActionMenu)}
                       className="px-2 py-2 bg-slate-50 text-slate-600 hover:bg-slate-100 rounded-lg transition-all flex items-center justify-center border border-slate-100 shadow-sm"
-                      title="More Email Options"
+                      title="More Options"
                     >
-                      <ChevronDown size={18} className={cn(showEmailMenu && "rotate-180 transition-transform")} />
+                      <ChevronDown size={18} className={cn(showActionMenu && "rotate-180 transition-transform")} />
                     </button>
 
-                    {showEmailMenu && (
+                    {showActionMenu && (
                       <div className="absolute right-0 mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow-xl z-[60] py-2 overflow-hidden">
-                        <div className="px-4 py-2 border-b border-slate-100 mb-1">
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email Options</span>
+                        {/* Teams Section */}
+                        <div className="px-4 py-2 border-b border-slate-100 mb-1 bg-slate-50/50">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Teams Options</span>
                         </div>
                         
                         <button
                           type="button"
-                          onClick={() => handleSendEmail('person')}
-                          className="w-full text-left px-4 py-2 text-sm hover:bg-slate-50 flex flex-col"
+                          onClick={() => handleSendMessage('person')}
+                          className="w-full text-left px-4 py-2 text-sm hover:bg-indigo-50 flex flex-col"
                         >
-                          <span className="font-semibold text-slate-700">Just {formData.firstName || 'Employee'}</span>
+                          <span className="font-semibold text-slate-700">Chat with {formData.firstName || 'Employee'}</span>
+                          <span className="text-[10px] text-slate-400 truncate">{formData.workEmail}</span>
+                        </button>
+
+                        {directReportsEmails.length > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => handleSendMessage('direct')}
+                            className="w-full text-left px-4 py-2 text-sm hover:bg-indigo-50 flex flex-col border-t border-slate-50"
+                          >
+                            <span className="font-semibold text-slate-700 flex items-center gap-2">
+                              <Users size={14} />
+                              Person + Direct Reports
+                            </span>
+                            <span className="text-[10px] text-slate-400">
+                              {directReportsEmails.length + 1} participants
+                            </span>
+                          </button>
+                        )}
+
+                        {fullOrgEmails.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => handleSendMessage('full')}
+                            className="w-full text-left px-4 py-2 text-sm hover:bg-indigo-50 flex flex-col border-t border-slate-50"
+                          >
+                            <span className="font-semibold text-slate-700 flex items-center gap-2">
+                              <Users size={14} />
+                              Full Sub-Organization
+                            </span>
+                            <span className="text-[10px] text-slate-400">
+                              {fullOrgEmails.length} total participants
+                            </span>
+                          </button>
+                        )}
+
+                        {/* Email Section */}
+                        <div className="px-4 py-2 border-y border-slate-100 my-1 bg-slate-50/50">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email Options</span>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => handleSendEmail('person')}
+                          className="w-full text-left px-4 py-2 text-sm hover:bg-blue-50 flex flex-col"
+                        >
+                          <span className="font-semibold text-slate-700">Email {formData.firstName || 'Employee'}</span>
                           <span className="text-[10px] text-slate-400 truncate">{formData.workEmail}</span>
                         </button>
 
@@ -243,7 +305,7 @@ export const EditNodeModal = ({
                           <button
                             type="button"
                             onClick={() => handleSendEmail('direct')}
-                            className="w-full text-left px-4 py-2 text-sm hover:bg-slate-50 flex flex-col border-t border-slate-50"
+                            className="w-full text-left px-4 py-2 text-sm hover:bg-blue-50 flex flex-col border-t border-slate-50"
                           >
                             <span className="font-semibold text-slate-700 flex items-center gap-2">
                               <Users size={14} />
@@ -259,7 +321,7 @@ export const EditNodeModal = ({
                           <button
                             type="button"
                             onClick={() => handleSendEmail('full')}
-                            className="w-full text-left px-4 py-2 text-sm hover:bg-slate-50 flex flex-col border-t border-slate-50"
+                            className="w-full text-left px-4 py-2 text-sm hover:bg-blue-50 flex flex-col border-t border-slate-50"
                           >
                             <span className="font-semibold text-slate-700 flex items-center gap-2">
                               <Users size={14} />
