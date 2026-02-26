@@ -325,18 +325,23 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     roots.forEach(root => processHierarchy(root.id, 1, false));
 
     // 2. Prepare nodes for layout
-    const query = searchQuery.toLowerCase();
+    const query = searchQuery.toLowerCase().trim();
+    const queryParts = query.split(/\s+/).filter(p => p !== '');
+    
     const preparedNodes = rawNodes.map(node => {
       const firstName = node.data.firstName?.toLowerCase() || '';
       const lastName = node.data.lastName?.toLowerCase() || '';
-      const fullName = `${firstName} ${lastName}`;
-      const matchesSearch = searchQuery === '' || 
-        fullName.includes(query) ||
-        firstName.includes(query) ||
-        lastName.includes(query) ||
-        node.data.jobTitle?.toLowerCase().includes(query) ||
-        node.data.team?.toLowerCase().includes(query) ||
-        (node.data.status === 'EMPTY' && 'empty'.includes(query));
+      const jobTitle = node.data.jobTitle?.toLowerCase() || '';
+      const team = node.data.team?.toLowerCase() || '';
+      const statusText = node.data.status === 'EMPTY' ? 'empty' : '';
+
+      const matchesSearch = searchQuery === '' || queryParts.every(part => 
+        firstName.includes(part) || 
+        lastName.includes(part) || 
+        jobTitle.includes(part) || 
+        team.includes(part) || 
+        statusText.includes(part)
+      );
 
       const depth = nodeDepths[node.id] || 1;
       let isCollapsed = collapsedNodes.has(node.id) || (depth >= maxDepth && !expandedNodes.has(node.id));
@@ -622,20 +627,25 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const handleSearchKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && searchQuery.trim() !== '') {
       console.log('Search triggered for:', searchQuery);
-      const query = searchQuery.toLowerCase();
+      const query = searchQuery.toLowerCase().trim();
+      const queryParts = query.split(/\s+/).filter(p => p !== '');
+      
       // Find all person nodes that match the search
       const matchingNodes = nodes.filter(node => {
         if (node.type !== 'person') return false;
+        
         const firstName = node.data.firstName?.toLowerCase() || '';
         const lastName = node.data.lastName?.toLowerCase() || '';
-        const fullName = `${firstName} ${lastName}`;
-        return (
-          fullName.includes(query) ||
-          firstName.includes(query) ||
-          lastName.includes(query) ||
-          node.data.jobTitle?.toLowerCase().includes(query) ||
-          node.data.team?.toLowerCase().includes(query) ||
-          (node.data.status === 'EMPTY' && 'empty'.includes(query))
+        const jobTitle = node.data.jobTitle?.toLowerCase() || '';
+        const team = node.data.team?.toLowerCase() || '';
+        const statusText = node.data.status === 'EMPTY' ? 'empty' : '';
+
+        return queryParts.every(part => 
+          firstName.includes(part) || 
+          lastName.includes(part) || 
+          jobTitle.includes(part) || 
+          team.includes(part) || 
+          statusText.includes(part)
         );
       });
 
