@@ -24,6 +24,8 @@ interface SettingsModalProps {
   setDefaultFallbackColor: (color: string) => void;
   searchShortcut: string;
   setSearchShortcut: (shortcut: string) => void;
+  teamsShortcut: string;
+  setTeamsShortcut: (shortcut: string) => void;
   companyDomain: string;
   setCompanyDomain: (domain: string) => void;
   outlookBaseUrl: string;
@@ -45,6 +47,8 @@ export const SettingsModal = ({
   setDefaultFallbackColor,
   searchShortcut,
   setSearchShortcut,
+  teamsShortcut,
+  setTeamsShortcut,
   companyDomain,
   setCompanyDomain,
   outlookBaseUrl,
@@ -231,6 +235,17 @@ export const SettingsModal = ({
                 value={searchShortcut}
                 onChange={(e) => setSearchShortcut(e.target.value.toLowerCase())}
                 placeholder="e.g. meta+e"
+                className="w-32 px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white font-mono"
+              />
+            </div>
+
+            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <span className="text-sm text-slate-600 flex-1">Open Teams Chat</span>
+              <input
+                type="text"
+                value={teamsShortcut}
+                onChange={(e) => setTeamsShortcut(e.target.value.toLowerCase())}
+                placeholder="e.g. meta+m"
                 className="w-32 px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white font-mono"
               />
             </div>

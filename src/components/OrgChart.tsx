@@ -198,6 +198,7 @@ interface OrgChartProps {
     filterGroups?: FilterGroup[];
     defaultFallbackColor?: string;
     searchShortcut?: string;
+    teamsShortcut?: string;
     companyDomain?: string;
     outlookBaseUrl?: string;
   };
@@ -234,6 +235,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [filterGroups, setFilterGroups] = useState<FilterGroup[]>(initialViewState.filterGroups || []);
   const [defaultFallbackColor, setDefaultFallbackColor] = useState<string>(initialViewState.defaultFallbackColor || '#ffffff');
   const [searchShortcut, setSearchShortcut] = useState<string>(initialViewState.searchShortcut || 'meta+e');
+  const [teamsShortcut, setTeamsShortcut] = useState<string>(initialViewState.teamsShortcut || 'meta+m');
   const [companyDomain, setCompanyDomain] = useState<string>(initialViewState.companyDomain || 'dkb.de');
   const [outlookBaseUrl, setOutlookBaseUrl] = useState<string>(initialViewState.outlookBaseUrl || 'https://outlook.office.com/mail/deeplink/compose');
   
@@ -259,46 +261,109 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     if (initialViewState.filterGroups !== undefined) setFilterGroups(initialViewState.filterGroups);
     if (initialViewState.defaultFallbackColor !== undefined) setDefaultFallbackColor(initialViewState.defaultFallbackColor);
     if (initialViewState.searchShortcut !== undefined) setSearchShortcut(initialViewState.searchShortcut);
+    if (initialViewState.teamsShortcut !== undefined) setTeamsShortcut(initialViewState.teamsShortcut);
     if (initialViewState.companyDomain !== undefined) setCompanyDomain(initialViewState.companyDomain);
     if (initialViewState.outlookBaseUrl !== undefined) setOutlookBaseUrl(initialViewState.outlookBaseUrl);
-  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups, initialViewState.defaultFallbackColor, initialViewState.searchShortcut, initialViewState.companyDomain, initialViewState.outlookBaseUrl]);
+  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups, initialViewState.defaultFallbackColor, initialViewState.searchShortcut, initialViewState.teamsShortcut, initialViewState.companyDomain, initialViewState.outlookBaseUrl]);
+
+  const openTeamsChat = useCallback((email: string) => {
+    if (!email) return;
+    const teamsUrl = `https://teams.microsoft.com/l/chat/0/0?users=${email}`;
+    window.open(teamsUrl, '_blank', 'noopener,noreferrer');
+  }, []);
+
+  const getSearchMatches = useCallback(() => {
+    const query = searchQuery.toLowerCase().trim();
+    if (query === '') return [];
+    
+    const queryParts = query.split(/\s+/).filter(p => p !== '');
+    return nodes.filter(node => {
+      if (node.type !== 'person') return false;
+      
+      const firstName = node.data.firstName?.toLowerCase() || '';
+      const lastName = node.data.lastName?.toLowerCase() || '';
+      const jobTitle = node.data.jobTitle?.toLowerCase() || '';
+      const team = node.data.team?.toLowerCase() || '';
+      const statusText = node.data.status === 'EMPTY' ? 'empty' : '';
+
+      return queryParts.every(part => 
+        firstName.includes(part) || 
+        lastName.includes(part) || 
+        jobTitle.includes(part) || 
+        team.includes(part) || 
+        statusText.includes(part)
+      );
+    });
+  }, [nodes, searchQuery]);
 
   // Keyboard shortcut listener
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
-      // Don't trigger if user is typing in an input (unless it's the search input itself, but that's fine)
-      if (
-        document.activeElement?.tagName === 'INPUT' || 
-        document.activeElement?.tagName === 'TEXTAREA' ||
-        (document.activeElement as HTMLElement)?.isContentEditable
-      ) {
-        if (document.activeElement !== searchInputRef.current) {
-          return;
+      const matchShortcut = (shortcut: string) => {
+        const parts = shortcut.toLowerCase().split('+');
+        const key = parts[parts.length - 1];
+        const hasMeta = parts.includes('meta') || parts.includes('command') || parts.includes('cmd');
+        const hasCtrl = parts.includes('ctrl');
+        const hasAlt = parts.includes('alt');
+        const hasShift = parts.includes('shift');
+
+        const metaMatch = hasMeta ? (e.metaKey || (navigator.platform.toUpperCase().indexOf('MAC') === -1 && e.ctrlKey)) : !e.metaKey;
+        const ctrlMatch = hasCtrl ? e.ctrlKey : !e.ctrlKey;
+        const altMatch = hasAlt ? e.altKey : !e.altKey;
+        const shiftMatch = hasShift ? e.shiftKey : !e.shiftKey;
+
+        return metaMatch && ctrlMatch && altMatch && shiftMatch && e.key.toLowerCase() === key;
+      };
+
+      const isSearchMatch = matchShortcut(searchShortcut);
+      const isTeamsMatch = matchShortcut(teamsShortcut);
+
+      if (!isSearchMatch && !isTeamsMatch) return;
+
+      // Don't trigger search shortcut if user is typing in an input (except search input)
+      if (isSearchMatch) {
+        if (
+          document.activeElement?.tagName === 'INPUT' || 
+          document.activeElement?.tagName === 'TEXTAREA' ||
+          (document.activeElement as HTMLElement)?.isContentEditable
+        ) {
+          if (document.activeElement !== searchInputRef.current) {
+            return;
+          }
         }
-      }
-
-      const parts = searchShortcut.toLowerCase().split('+');
-      const key = parts[parts.length - 1];
-      const hasMeta = parts.includes('meta') || parts.includes('command') || parts.includes('cmd');
-      const hasCtrl = parts.includes('ctrl');
-      const hasAlt = parts.includes('alt');
-      const hasShift = parts.includes('shift');
-
-      const metaMatch = hasMeta ? (e.metaKey || (navigator.platform.toUpperCase().indexOf('MAC') === -1 && e.ctrlKey)) : !e.metaKey;
-      const ctrlMatch = hasCtrl ? e.ctrlKey : !e.ctrlKey;
-      const altMatch = hasAlt ? e.altKey : !e.altKey;
-      const shiftMatch = hasShift ? e.shiftKey : !e.shiftKey;
-
-      if (metaMatch && ctrlMatch && altMatch && shiftMatch && e.key.toLowerCase() === key) {
         e.preventDefault();
         searchInputRef.current?.focus();
         searchInputRef.current?.select();
+        return;
+      }
+
+      if (isTeamsMatch) {
+        e.preventDefault();
+        
+        // 1. If modal is open, use that person
+        if (editingNode && editingNode.data.workEmail) {
+          openTeamsChat(editingNode.data.workEmail);
+          return;
+        }
+
+        // 2. Check if exactly one node is selected
+        const selectedNode = nodes.find(n => n.selected && n.type === 'person');
+        if (selectedNode && selectedNode.data.workEmail) {
+          openTeamsChat(selectedNode.data.workEmail);
+          return;
+        }
+
+        // 3. Fallback: If searching and exactly one match, use that
+        const matchingNodes = getSearchMatches();
+        if (matchingNodes.length === 1 && matchingNodes[0].data.workEmail) {
+          openTeamsChat(matchingNodes[0].data.workEmail);
+        }
       }
     };
 
-    window.addEventListener('keydown', handleGlobalKeyDown);
-    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [searchShortcut]);
+    window.addEventListener('keydown', handleGlobalKeyDown, true); // Use capture to intercept before other handlers
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown, true);
+  }, [searchShortcut, teamsShortcut, editingNode, nodes, openTeamsChat, getSearchMatches]);
   // Handle structural or filter changes with side-effect layout
   useEffect(() => {
     if (rawNodes.length === 0) return;
@@ -512,6 +577,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         filterGroups,
         defaultFallbackColor,
         searchShortcut,
+        teamsShortcut,
         companyDomain,
         outlookBaseUrl,
       }
@@ -531,7 +597,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor, searchShortcut, companyDomain, outlookBaseUrl]);
+  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor, searchShortcut, teamsShortcut, companyDomain, outlookBaseUrl]);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
@@ -676,27 +742,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const handleSearchKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && searchQuery.trim() !== '') {
       console.log('Search triggered for:', searchQuery);
-      const query = searchQuery.toLowerCase().trim();
-      const queryParts = query.split(/\s+/).filter(p => p !== '');
-      
-      // Find all person nodes that match the search
-      const matchingNodes = nodes.filter(node => {
-        if (node.type !== 'person') return false;
-        
-        const firstName = node.data.firstName?.toLowerCase() || '';
-        const lastName = node.data.lastName?.toLowerCase() || '';
-        const jobTitle = node.data.jobTitle?.toLowerCase() || '';
-        const team = node.data.team?.toLowerCase() || '';
-        const statusText = node.data.status === 'EMPTY' ? 'empty' : '';
-
-        return queryParts.every(part => 
-          firstName.includes(part) || 
-          lastName.includes(part) || 
-          jobTitle.includes(part) || 
-          team.includes(part) || 
-          statusText.includes(part)
-        );
-      });
+      const matchingNodes = getSearchMatches();
 
       console.log('Found matching nodes:', matchingNodes.length);
 
@@ -853,6 +899,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         setDefaultFallbackColor={setDefaultFallbackColor}
         searchShortcut={searchShortcut}
         setSearchShortcut={setSearchShortcut}
+        teamsShortcut={teamsShortcut}
+        setTeamsShortcut={setTeamsShortcut}
         companyDomain={companyDomain}
         setCompanyDomain={setCompanyDomain}
         outlookBaseUrl={outlookBaseUrl}

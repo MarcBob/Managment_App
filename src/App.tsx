@@ -23,6 +23,7 @@ interface ViewState {
   nodeFilters?: NodeFilter[];
   filterGroups?: FilterGroup[];
   searchShortcut?: string;
+  teamsShortcut?: string;
   companyDomain?: string;
   outlookBaseUrl?: string;
 }
@@ -45,6 +46,7 @@ interface LegacyPlanData extends PlanData {
   nodeFilters?: NodeFilter[];
   filterGroups?: FilterGroup[];
   searchShortcut?: string;
+  teamsShortcut?: string;
   companyDomain?: string;
   outlookBaseUrl?: string;
 }
@@ -106,7 +108,7 @@ function App() {
         if (response.ok) {
           serverData = await response.json();
           // Migration for old flat schema
-          if (serverData && !serverData.viewState && (serverData.maxDepth || serverData.leafColumns || serverData.leadershipLayers || serverData.nodeFilters || serverData.filterGroups || serverData.searchShortcut || serverData.companyDomain || serverData.outlookBaseUrl)) {
+          if (serverData && !serverData.viewState && (serverData.maxDepth || serverData.leafColumns || serverData.leadershipLayers || serverData.nodeFilters || serverData.filterGroups || serverData.searchShortcut || serverData.teamsShortcut || serverData.companyDomain || serverData.outlookBaseUrl)) {
             serverData.viewState = {
               maxDepth: serverData.maxDepth,
               leafColumns: serverData.leafColumns,
@@ -116,6 +118,7 @@ function App() {
               nodeFilters: serverData.nodeFilters,
               filterGroups: serverData.filterGroups,
               searchShortcut: serverData.searchShortcut,
+              teamsShortcut: serverData.teamsShortcut,
               companyDomain: serverData.companyDomain,
               outlookBaseUrl: serverData.outlookBaseUrl
             };

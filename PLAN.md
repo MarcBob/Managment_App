@@ -50,6 +50,7 @@ Build a web application to plan and visualize an engineering organization. The a
    7. **Keyboard Shortcuts:**
       - Added configurable keyboard shortcuts for common actions.
       - Default search focus shortcut: `meta+e` (Command+E on Mac).
+      - **Teams Shortcut:** Added a configurable shortcut (`meta+m` default) to open MS Teams chat for a selected node, a node being edited, or a unique search result.
       - Configurable via the Chart Settings modal.
    8. **Collaboration Integration:**
       - **MS Teams Chat:** Replaced the primary email button with a message button that opens a MS Teams chat deep link.

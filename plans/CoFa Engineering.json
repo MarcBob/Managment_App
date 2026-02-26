@@ -3513,8 +3513,11 @@
       }
     ],
     "defaultFallbackColor": "#ffffff",
-    "searchShortcut": "meta+f"
+    "searchShortcut": "meta+f",
+    "teamsShortcut": "meta+m",
+    "companyDomain": "dkb.de",
+    "outlookBaseUrl": "https://outlook.office.com/mail/deeplink/compose"
   },
-  "lastUpdated": "2026-02-26T20:31:05.395Z",
+  "lastUpdated": "2026-02-26T21:43:16.527Z",
   "name": "CoFa Engineering"
 }
