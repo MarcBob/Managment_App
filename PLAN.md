@@ -47,6 +47,10 @@ Build a web application to plan and visualize an engineering organization. The a
       - **Interactive Cards:** Removed the explicit edit button; clicking anywhere on a node card now opens the edit modal, with hover and active states for better feedback.
       - **Team Label Layering:** Ensured team group labels and borders are rendered above connection arrows (edges) for better readability by adjusting the z-index and node rendering order.
       - **Dynamic Contrast Color:** Automatically switches text and icon colors to white on dark custom background colors to ensure optimal accessibility and readability.
+   7. **Keyboard Shortcuts:**
+      - Added configurable keyboard shortcuts for common actions.
+      - Default search focus shortcut: `meta+e` (Command+E on Mac).
+      - Configurable via the Chart Settings modal.
    ## Next Steps (Future Enhancements)
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height.
 - [x] Visual Team Clustering: Draw frames around direct reports in the same team.

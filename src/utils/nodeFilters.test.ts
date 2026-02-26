@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { getNodeColor, getActiveFilters, NodeFilter, FilterGroup } from './nodeFilters';
+import { getNodeColor, getActiveFilters } from './nodeFilters';
+import type { NodeFilter, FilterGroup } from './nodeFilters';
 
 describe('nodeFilters', () => {
   const filters: NodeFilter[] = [

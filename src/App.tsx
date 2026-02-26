@@ -22,6 +22,7 @@ interface ViewState {
   leadershipLayers?: LeadershipLayer[];
   nodeFilters?: NodeFilter[];
   filterGroups?: FilterGroup[];
+  searchShortcut?: string;
 }
 
 interface PlanData {
@@ -41,6 +42,7 @@ interface LegacyPlanData extends PlanData {
   leadershipLayers?: LeadershipLayer[];
   nodeFilters?: NodeFilter[];
   filterGroups?: FilterGroup[];
+  searchShortcut?: string;
 }
 
 function App() {
@@ -100,7 +102,7 @@ function App() {
         if (response.ok) {
           serverData = await response.json();
           // Migration for old flat schema
-          if (serverData && !serverData.viewState && (serverData.maxDepth || serverData.leafColumns || serverData.leadershipLayers || serverData.nodeFilters || serverData.filterGroups)) {
+          if (serverData && !serverData.viewState && (serverData.maxDepth || serverData.leafColumns || serverData.leadershipLayers || serverData.nodeFilters || serverData.filterGroups || serverData.searchShortcut)) {
             serverData.viewState = {
               maxDepth: serverData.maxDepth,
               leafColumns: serverData.leafColumns,
@@ -108,7 +110,8 @@ function App() {
               expandedNodes: serverData.expandedNodes,
               leadershipLayers: serverData.leadershipLayers,
               nodeFilters: serverData.nodeFilters,
-              filterGroups: serverData.filterGroups
+              filterGroups: serverData.filterGroups,
+              searchShortcut: serverData.searchShortcut
             };
           }
           if (serverData) {

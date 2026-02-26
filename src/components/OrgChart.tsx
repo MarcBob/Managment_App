@@ -197,6 +197,7 @@ interface OrgChartProps {
     nodeFilters?: NodeFilter[];
     filterGroups?: FilterGroup[];
     defaultFallbackColor?: string;
+    searchShortcut?: string;
   };
   onDataChange?: (state: any) => void;
   isRecruiterMode?: boolean;
@@ -230,10 +231,12 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [nodeFilters, setNodeFilters] = useState<NodeFilter[]>(initialViewState.nodeFilters || []);
   const [filterGroups, setFilterGroups] = useState<FilterGroup[]>(initialViewState.filterGroups || []);
   const [defaultFallbackColor, setDefaultFallbackColor] = useState<string>(initialViewState.defaultFallbackColor || '#ffffff');
+  const [searchShortcut, setSearchShortcut] = useState<string>(initialViewState.searchShortcut || 'meta+e');
   
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
   const isFirstMount = useRef(true);
   const lastSavedRef = useRef<string>('');
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Sync initial data
   useEffect(() => {
@@ -251,8 +254,45 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     if (initialViewState.nodeFilters !== undefined) setNodeFilters(initialViewState.nodeFilters);
     if (initialViewState.filterGroups !== undefined) setFilterGroups(initialViewState.filterGroups);
     if (initialViewState.defaultFallbackColor !== undefined) setDefaultFallbackColor(initialViewState.defaultFallbackColor);
-  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups, initialViewState.defaultFallbackColor]);
+    if (initialViewState.searchShortcut !== undefined) setSearchShortcut(initialViewState.searchShortcut);
+  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups, initialViewState.defaultFallbackColor, initialViewState.searchShortcut]);
 
+  // Keyboard shortcut listener
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger if user is typing in an input (unless it's the search input itself, but that's fine)
+      if (
+        document.activeElement?.tagName === 'INPUT' || 
+        document.activeElement?.tagName === 'TEXTAREA' ||
+        (document.activeElement as HTMLElement)?.isContentEditable
+      ) {
+        if (document.activeElement !== searchInputRef.current) {
+          return;
+        }
+      }
+
+      const parts = searchShortcut.toLowerCase().split('+');
+      const key = parts[parts.length - 1];
+      const hasMeta = parts.includes('meta') || parts.includes('command') || parts.includes('cmd');
+      const hasCtrl = parts.includes('ctrl');
+      const hasAlt = parts.includes('alt');
+      const hasShift = parts.includes('shift');
+
+      const metaMatch = hasMeta ? (e.metaKey || (navigator.platform.toUpperCase().indexOf('MAC') === -1 && e.ctrlKey)) : !e.metaKey;
+      const ctrlMatch = hasCtrl ? e.ctrlKey : !e.ctrlKey;
+      const altMatch = hasAlt ? e.altKey : !e.altKey;
+      const shiftMatch = hasShift ? e.shiftKey : !e.shiftKey;
+
+      if (metaMatch && ctrlMatch && altMatch && shiftMatch && e.key.toLowerCase() === key) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        searchInputRef.current?.select();
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [searchShortcut]);
   // Handle structural or filter changes with side-effect layout
   useEffect(() => {
     if (rawNodes.length === 0) return;
@@ -465,6 +505,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         nodeFilters,
         filterGroups,
         defaultFallbackColor,
+        searchShortcut,
       }
     };
 
@@ -482,12 +523,11 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor]);
+  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor, searchShortcut]);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
   }, []);
-
   const onToggleCollapse = useCallback((id: string) => {
     const node = getNode(id);
     if (node) {
@@ -700,6 +740,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           <div className="relative group/search">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
             <input
+              ref={searchInputRef}
               type="text"
               placeholder="Search by name, title, team..."
               className="w-full pl-9 pr-8 py-2 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -797,11 +838,12 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         setFilterGroups={setFilterGroups}
         defaultFallbackColor={defaultFallbackColor}
         setDefaultFallbackColor={setDefaultFallbackColor}
+        searchShortcut={searchShortcut}
+        setSearchShortcut={setSearchShortcut}
       />
     </div>
   );
 };
-
 export const OrgChart: React.FC<OrgChartProps> = (props) => (
   <ReactFlowProvider>
     <OrgChartInner {...props} />

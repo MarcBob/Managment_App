@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Settings as SettingsIcon, Plus, Trash2, ArrowUp, ArrowDown, Palette, GripVertical, Layers, Save, Edit2 } from 'lucide-react';
+import { X, Settings as SettingsIcon, Plus, Trash2, Palette, GripVertical, Layers, Save, Edit2 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import type { LeadershipLayer } from '../utils/leadershipLayers';
@@ -22,6 +22,8 @@ interface SettingsModalProps {
   setFilterGroups: (groups: FilterGroup[]) => void;
   defaultFallbackColor?: string;
   setDefaultFallbackColor: (color: string) => void;
+  searchShortcut: string;
+  setSearchShortcut: (shortcut: string) => void;
 }
 
 export const SettingsModal = ({ 
@@ -36,7 +38,9 @@ export const SettingsModal = ({
   filterGroups,
   setFilterGroups,
   defaultFallbackColor = '#ffffff',
-  setDefaultFallbackColor
+  setDefaultFallbackColor,
+  searchShortcut,
+  setSearchShortcut
 }: SettingsModalProps) => {
   if (!isOpen) return null;
 
@@ -73,15 +77,6 @@ export const SettingsModal = ({
 
   const updateFilter = (id: string, updates: Partial<NodeFilter>) => {
     setNodeFilters(nodeFilters.map(f => f.id === id ? { ...f, ...updates } : f));
-  };
-
-  const moveFilter = (index: number, direction: 'up' | 'down') => {
-    const newFilters = [...nodeFilters];
-    const targetIndex = direction === 'up' ? index - 1 : index + 1;
-    if (targetIndex >= 0 && targetIndex < newFilters.length) {
-      [newFilters[index], newFilters[targetIndex]] = [newFilters[targetIndex], newFilters[index]];
-      setNodeFilters(newFilters);
-    }
   };
 
   const saveAsGroup = () => {
@@ -209,6 +204,27 @@ export const SettingsModal = ({
                   {cols} {cols === 1 ? 'Col' : 'Cols'}
                 </button>
               ))}
+            </div>
+          </div>
+
+          {/* Keyboard Shortcuts */}
+          <div className="space-y-3">
+            <div className="flex flex-col">
+              <label className="text-sm font-bold text-slate-700">Keyboard Shortcuts</label>
+              <p className="text-xs text-slate-500 mt-1">
+                Configure shortcuts for quick actions. Use 'meta' for Command (Mac) or Windows key.
+              </p>
+            </div>
+            
+            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <span className="text-sm text-slate-600 flex-1">Focus Search</span>
+              <input
+                type="text"
+                value={searchShortcut}
+                onChange={(e) => setSearchShortcut(e.target.value.toLowerCase())}
+                placeholder="e.g. meta+e"
+                className="w-32 px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white font-mono"
+              />
             </div>
           </div>
 
@@ -345,7 +361,7 @@ export const SettingsModal = ({
                     />
 
                     <div className="flex -space-x-1.5 overflow-hidden">
-                      {group.filters.slice(0, 3).map((f, i) => (
+                      {group.filters.slice(0, 3).map((f) => (
                         <div 
                           key={f.id} 
                           className="w-4 h-4 rounded-full border border-white"
