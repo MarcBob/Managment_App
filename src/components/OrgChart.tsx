@@ -327,9 +327,13 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     // 2. Prepare nodes for layout
     const query = searchQuery.toLowerCase();
     const preparedNodes = rawNodes.map(node => {
+      const firstName = node.data.firstName?.toLowerCase() || '';
+      const lastName = node.data.lastName?.toLowerCase() || '';
+      const fullName = `${firstName} ${lastName}`;
       const matchesSearch = searchQuery === '' || 
-        node.data.firstName?.toLowerCase().includes(query) ||
-        node.data.lastName?.toLowerCase().includes(query) ||
+        fullName.includes(query) ||
+        firstName.includes(query) ||
+        lastName.includes(query) ||
         node.data.jobTitle?.toLowerCase().includes(query) ||
         node.data.team?.toLowerCase().includes(query) ||
         (node.data.status === 'EMPTY' && 'empty'.includes(query));
@@ -620,15 +624,20 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       console.log('Search triggered for:', searchQuery);
       const query = searchQuery.toLowerCase();
       // Find all person nodes that match the search
-      const matchingNodes = nodes.filter(node => 
-        node.type === 'person' && (
-          node.data.firstName?.toLowerCase().includes(query) ||
-          node.data.lastName?.toLowerCase().includes(query) ||
+      const matchingNodes = nodes.filter(node => {
+        if (node.type !== 'person') return false;
+        const firstName = node.data.firstName?.toLowerCase() || '';
+        const lastName = node.data.lastName?.toLowerCase() || '';
+        const fullName = `${firstName} ${lastName}`;
+        return (
+          fullName.includes(query) ||
+          firstName.includes(query) ||
+          lastName.includes(query) ||
           node.data.jobTitle?.toLowerCase().includes(query) ||
           node.data.team?.toLowerCase().includes(query) ||
           (node.data.status === 'EMPTY' && 'empty'.includes(query))
-        )
-      );
+        );
+      });
 
       console.log('Found matching nodes:', matchingNodes.length);
 
