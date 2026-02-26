@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { PersonNode } from './PersonNode';
 import { ReactFlowProvider } from 'reactflow';
@@ -61,7 +61,7 @@ describe('PersonNode', () => {
     // but for now let's just use the job title container's parent
     const jobTitleElement = screen.getByText('Software Engineer with a very long title that should wrap');
     const card = jobTitleElement.closest('.group');
-    card?.click();
+    if (card) fireEvent.click(card);
     
     expect(onEditNode).toHaveBeenCalledWith(defaultProps.id, expect.any(Object));
   });

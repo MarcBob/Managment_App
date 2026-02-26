@@ -12,19 +12,22 @@ import ReactFlow, {
   useReactFlow,
   ReactFlowProvider,
 } from 'reactflow';
-import type { Connection, Edge } from 'reactflow';
+import type { Connection, Edge, Node } from 'reactflow';
 import { Search, Download, Layers, Settings as SettingsIcon } from 'lucide-react';
 import dagre from 'dagre';
 import 'reactflow/dist/style.css';
 
 import { PersonNode } from './PersonNode';
+import { TeamGroupNode } from './TeamGroupNode';
 import { EditNodeModal } from './EditNodeModal';
 import { SettingsModal } from './SettingsModal';
 import { exportToCsv } from '../utils/csvParser';
+import { getTeamGroups, calculateTeamGroupPositions } from '../utils/teamGrouping';
 import type { OrgNode, OrgEdge } from '../utils/csvParser';
 
 const nodeTypes = {
   person: PersonNode,
+  teamGroup: TeamGroupNode,
 };
 
 const defaultEdgeOptions = {
@@ -166,8 +169,14 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  // Use separate state for raw data and displayed elements
+  const [rawNodes, setRawNodes] = useState<Node[]>(initialNodes);
+  const [rawEdges, setRawEdges] = useState<Edge[]>(initialEdges);
+  
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [layoutVersion, setLayoutVersion] = useState(0);
+  
   const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set(initialViewState.collapsedNodes || []));
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set(initialViewState.expandedNodes || []));
   const [leafColumns, setLeafColumns] = useState<number>(initialViewState.leafColumns || 1);
@@ -177,7 +186,13 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const isFirstMount = useRef(true);
   const lastSavedRef = useRef<string>('');
 
-  // Sync settings from props if they change externally
+  // Sync initial data
+  useEffect(() => {
+    setRawNodes(initialNodes);
+    setRawEdges(initialEdges);
+  }, [initialNodes, initialEdges]);
+
+  // Sync settings from props
   useEffect(() => {
     if (initialViewState.leafColumns !== undefined) setLeafColumns(initialViewState.leafColumns);
     if (initialViewState.maxDepth !== undefined) setMaxDepth(initialViewState.maxDepth);
@@ -185,136 +200,20 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     if (initialViewState.expandedNodes !== undefined) setExpandedNodes(new Set(initialViewState.expandedNodes));
   }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes]);
 
-  // Handle dynamic max depth calculation if not provided
+  // Handle structural or filter changes with side-effect layout
   useEffect(() => {
-    if (initialViewState.maxDepth === undefined && initialEdges.length > 0) {
-      const directChildrenMap: Record<string, string[]> = {};
-      initialEdges.forEach(edge => {
-        if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
-        directChildrenMap[edge.source].push(edge.target);
-      });
-      let currentMax = 0;
-      const findMaxDepth = (nodeId: string, depth: number) => {
-        currentMax = Math.max(currentMax, depth);
-        (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
-      };
-      const childIds = new Set(initialEdges.map(e => e.target));
-      initialNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
-      setMaxDepth(currentMax || 1);
-    }
-  }, [initialNodes, initialEdges, initialViewState.maxDepth]);
+    if (rawNodes.length === 0) return;
 
-  // Sync / Auto-save logic
-  useEffect(() => {
-    if (!onDataChange || nodes.length === 0) return;
-
-    const currentState = {
-      nodes,
-      edges,
-      viewState: {
-        maxDepth,
-        leafColumns,
-        collapsedNodes: Array.from(collapsedNodes),
-        expandedNodes: Array.from(expandedNodes),
-      }
-    };
-
-    const stateString = JSON.stringify(currentState);
-    
-    // Initialize ref on first run
-    if (lastSavedRef.current === '') {
-      lastSavedRef.current = stateString;
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      if (stateString !== lastSavedRef.current) {
-        lastSavedRef.current = stateString;
-        onDataChange(currentState);
-      }
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [nodes, edges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange]);
-
-  const onEditNode = useCallback((id: string, data: any) => {
-    setEditingNode({ id, data });
-  }, []);
-
-  const onToggleCollapse = useCallback((id: string) => {
-    const node = getNode(id);
-    if (node) {
-      lastToggledRef.current = { id, oldPos: { ...node.position } };
-    }
-
-    const isCurrentlyCollapsed = (node?.data as any).isCollapsed;
-
-    if (isCurrentlyCollapsed) {
-      setCollapsedNodes(prev => {
-        const next = new Set(prev);
-        next.delete(id);
-        return next;
-      });
-      setExpandedNodes(prev => {
-        const next = new Set(prev);
-        next.add(id);
-        return next;
-      });
-    } else {
-      setCollapsedNodes(prev => {
-        const next = new Set(prev);
-        next.add(id);
-        return next;
-      });
-      setExpandedNodes(prev => {
-        const next = new Set(prev);
-        next.delete(id);
-        return next;
-      });
-    }
-  }, [getNode]);
-
-  const onAddSubordinate = useCallback((parentId: string) => {
-    const newId = `empty-${Date.now()}`;
-    const parentNode = nodes.find(n => n.id === parentId);
-    
-    const newNode: any = {
-      id: newId,
-      type: 'person',
-      data: {
-        firstName: '',
-        lastName: '',
-        jobTitle: 'New Position',
-        team: parentNode?.data.team || '',
-        status: 'EMPTY',
-        startDate: '',
-        exitDate: '',
-      },
-      position: parentNode 
-        ? { x: parentNode.position.x, y: parentNode.position.y + 200 }
-        : { x: 0, y: 0 },
-    };
-
-    setNodes((nds) => nds.concat(newNode));
-    setEdges((eds) => eds.concat({
-      id: `e-${parentId}-${newId}`,
-      source: parentId,
-      target: newId,
-    }));
-  }, [nodes, setNodes, setEdges]);
-
-  const processedElements = useMemo(() => {
-    if (nodes.length === 0) return { nodes: [], edges: [] };
-
+    // 1. Build hierarchy information
     const directChildrenMap: Record<string, string[]> = {};
     const descendantsMap: Record<string, string[]> = {};
     const nodeMap: Record<string, any> = {};
     
-    nodes.forEach(n => {
+    rawNodes.forEach(n => {
       nodeMap[n.id] = n;
     });
 
-    edges.forEach(edge => {
+    rawEdges.forEach(edge => {
       if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
       directChildrenMap[edge.source].push(edge.target);
     });
@@ -330,29 +229,24 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       return descendants;
     };
 
-    // Pre-calculate which nodes lead to an empty position for Recruiter Mode
     const hasEmptyDescendantMap: Record<string, boolean> = {};
     const checkEmpty = (nodeId: string): boolean => {
       if (hasEmptyDescendantMap[nodeId] !== undefined) return hasEmptyDescendantMap[nodeId];
-      
       const children = directChildrenMap[nodeId] || [];
       const hasEmptyChild = children.some(cid => {
         const child = nodeMap[cid];
         return child?.data.status === 'EMPTY' || checkEmpty(cid);
       });
-      
       hasEmptyDescendantMap[nodeId] = hasEmptyChild;
       return hasEmptyChild;
     };
     
-    if (isRecruiterMode) {
-      nodes.forEach(n => checkEmpty(n.id));
-    }
+    if (isRecruiterMode) rawNodes.forEach(n => checkEmpty(n.id));
 
     const nodeDepths: Record<string, number> = {};
     const hiddenNodes = new Set<string>();
-    const childIds = new Set(edges.map(e => e.target));
-    const roots = nodes.filter(n => !childIds.has(n.id));
+    const childIds = new Set(rawEdges.map(e => e.target));
+    const roots = rawNodes.filter(n => !childIds.has(n.id));
 
     const processHierarchy = (nodeId: string, depth: number, isParentHidden: boolean) => {
       nodeDepths[nodeId] = depth;
@@ -363,36 +257,23 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
 
       let isThisNodeHidden = isParentHidden;
       if (isRecruiterMode && !isParentHidden) {
-        // In Recruiter Mode, hide nodes that aren't vacancies and don't lead to one
-        if (!isVacancy && !leadsToVacancy) {
-          isThisNodeHidden = true;
-        }
+        if (!isVacancy && !leadsToVacancy) isThisNodeHidden = true;
       }
-
       if (isThisNodeHidden) hiddenNodes.add(nodeId);
       
       let areChildrenHidden = isThisNodeHidden || collapsedNodes.has(nodeId) || (depth >= maxDepth && !expandedNodes.has(nodeId));
-      
-      // Force expansion/collapse in Recruiter Mode
       if (isRecruiterMode && !isThisNodeHidden) {
-        if (leadsToVacancy) {
-          // If it DOES lead to a vacancy, ensure it stays expanded to show the path
-          areChildrenHidden = false;
-        } else {
-          // Otherwise collapse children (they are likely hidden anyway, but for consistency)
-          if (children.length > 0) areChildrenHidden = true;
-        }
+        if (leadsToVacancy) areChildrenHidden = false;
+        else if (children.length > 0) areChildrenHidden = true;
       }
-
-      children.forEach(childId => {
-        processHierarchy(childId, depth + 1, areChildrenHidden);
-      });
+      children.forEach(childId => processHierarchy(childId, depth + 1, areChildrenHidden));
     };
 
     roots.forEach(root => processHierarchy(root.id, 1, false));
 
-    const preparedNodes = nodes.map(node => {
-      const query = searchQuery.toLowerCase();
+    // 2. Prepare nodes for layout
+    const query = searchQuery.toLowerCase();
+    const preparedNodes = rawNodes.map(node => {
       const matchesSearch = searchQuery === '' || 
         node.data.firstName?.toLowerCase().includes(query) ||
         node.data.lastName?.toLowerCase().includes(query) ||
@@ -402,7 +283,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
 
       const depth = nodeDepths[node.id] || 1;
       let isCollapsed = collapsedNodes.has(node.id) || (depth >= maxDepth && !expandedNodes.has(node.id));
-
       if (isRecruiterMode) {
         const leadsToVacancy = hasEmptyDescendantMap[node.id];
         isCollapsed = !leadsToVacancy && (directChildrenMap[node.id]?.length > 0);
@@ -429,27 +309,57 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       };
     });
 
-    const preparedEdges = edges.map(edge => ({
-      ...edge,
-      hidden: hiddenNodes.has(edge.source) || hiddenNodes.has(edge.target),
-    }));
-
     const visibleNodes = preparedNodes.filter(n => !n.hidden);
-    const visibleEdges = preparedEdges.filter(e => !e.hidden);
+    const visibleEdges = rawEdges.filter(e => !hiddenNodes.has(e.source) && !hiddenNodes.has(e.target));
+    
     const { nodes: layoutedNodes } = getLayoutedElements(visibleNodes, visibleEdges, 'TB', leafColumns);
 
     const finalNodes = preparedNodes.map(node => {
       const layouted = layoutedNodes.find(ln => ln.id === node.id);
-      return layouted ? { ...node, position: layouted.position } : node;
+      return layouted ? { 
+        ...node, 
+        position: layouted.position,
+        width: nodeWidth,
+        height: nodeHeight
+      } : node;
     });
 
-    return { nodes: finalNodes, edges: preparedEdges };
-  }, [nodes, edges, collapsedNodes, expandedNodes, searchQuery, maxDepth, leafColumns, onAddSubordinate, onEditNode, onToggleCollapse, isRecruiterMode]);
+    // 3. Team Groups
+    const teamGroups = getTeamGroups(visibleNodes, visibleEdges);
+    const teamGroupPositions = calculateTeamGroupPositions(teamGroups, finalNodes, nodeWidth, nodeHeight, 20);
+    
+    const teamGroupNodes = teamGroupPositions.map(pos => ({
+      id: pos.id,
+      type: 'teamGroup',
+      position: { x: pos.x, y: pos.y },
+      width: pos.width,
+      height: pos.height,
+      data: { team: pos.team },
+      style: { 
+        width: pos.width, 
+        height: pos.height,
+        pointerEvents: 'none' as any,
+        zIndex: -1,
+      },
+      draggable: false,
+      selectable: false,
+    }));
 
-  useEffect(() => {
+    const nextNodes = [...teamGroupNodes, ...finalNodes];
+    const nextEdges = rawEdges.map(edge => ({
+      ...edge,
+      hidden: hiddenNodes.has(edge.source) || hiddenNodes.has(edge.target),
+    }));
+
+    // Batch update nodes and edges state
+    setNodes(nextNodes);
+    setEdges(nextEdges);
+    setLayoutVersion(v => v + 1);
+
+    // Viewport handling after manual toggle (pan to node)
     if (lastToggledRef.current) {
       const { id, oldPos } = lastToggledRef.current;
-      const newNode = processedElements.nodes.find(n => n.id === id);
+      const newNode = nextNodes.find(n => n.id === id);
       if (newNode) {
         const { x: vx, y: vy, zoom } = getViewport();
         const nextVx = vx + (oldPos.x - newNode.position.x) * zoom;
@@ -458,28 +368,119 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       }
       lastToggledRef.current = null;
     }
-  }, [processedElements.nodes, getViewport, setViewport]);
+  }, [rawNodes, rawEdges, searchQuery, collapsedNodes, expandedNodes, maxDepth, isRecruiterMode, leafColumns, getViewport, setViewport]);
 
   useEffect(() => {
-    if (isFirstMount.current && nodes.length > 0) {
-      fitView({ duration: 0, padding: 0.2 });
-      isFirstMount.current = false;
-    } else if (nodes.length > 0) {
-      fitView({ duration: 400, padding: 0.2 });
+    if (layoutVersion > 0) {
+      const duration = isFirstMount.current ? 0 : 400;
+      const timer = setTimeout(() => {
+        fitView({ duration, padding: 0.2 });
+        isFirstMount.current = false;
+      }, 50);
+      return () => clearTimeout(timer);
     }
-  }, [maxDepth, leafColumns, fitView, nodes.length, isRecruiterMode]);
+  }, [layoutVersion, fitView]);
+
+  // Remove the old fitView effect
+
+  // Sync / Auto-save logic
+  useEffect(() => {
+    if (!onDataChange || rawNodes.length === 0) return;
+
+    const currentState = {
+      nodes: rawNodes,
+      edges: rawEdges,
+      viewState: {
+        maxDepth,
+        leafColumns,
+        collapsedNodes: Array.from(collapsedNodes),
+        expandedNodes: Array.from(expandedNodes),
+      }
+    };
+
+    const stateString = JSON.stringify(currentState);
+    if (lastSavedRef.current === '') {
+      lastSavedRef.current = stateString;
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      if (stateString !== lastSavedRef.current) {
+        lastSavedRef.current = stateString;
+        onDataChange(currentState);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange]);
+
+  const onEditNode = useCallback((id: string, data: any) => {
+    setEditingNode({ id, data });
+  }, []);
+
+  const onToggleCollapse = useCallback((id: string) => {
+    const node = getNode(id);
+    if (node) {
+      lastToggledRef.current = { id, oldPos: { ...node.position } };
+    }
+
+    setCollapsedNodes(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+        setExpandedNodes(e => new Set(e).add(id));
+      } else {
+        next.add(id);
+        setExpandedNodes(e => {
+          const nextE = new Set(e);
+          nextE.delete(id);
+          return nextE;
+        });
+      }
+      return next;
+    });
+  }, [getNode]);
+
+  const onAddSubordinate = useCallback((parentId: string) => {
+    const newId = `empty-${Date.now()}`;
+    const parentNode = rawNodes.find(n => n.id === parentId);
+    
+    const newNode: any = {
+      id: newId,
+      type: 'person',
+      data: {
+        firstName: '',
+        lastName: '',
+        jobTitle: 'New Position',
+        team: parentNode?.data.team || '',
+        status: 'EMPTY',
+        startDate: '',
+        exitDate: '',
+      },
+      position: parentNode 
+        ? { x: parentNode.position.x, y: parentNode.position.y + 200 }
+        : { x: 0, y: 0 },
+    };
+
+    setRawNodes((nds) => nds.concat(newNode));
+    setRawEdges((eds) => eds.concat({
+      id: `e-${parentId}-${newId}`,
+      source: parentId,
+      target: newId,
+    }));
+  }, [rawNodes]);
 
   const handleDeleteNode = useCallback((id: string) => {
-    setNodes((nds) => nds.filter((node) => node.id !== id));
-    setEdges((eds) => eds.filter((edge) => edge.source !== id && edge.target !== id));
+    setRawNodes((nds) => nds.filter((node) => node.id !== id));
+    setRawEdges((eds) => eds.filter((edge) => edge.source !== id && edge.target !== id));
     setEditingNode(null);
-  }, [setNodes, setEdges]);
+  }, []);
 
   const handleSaveNode = useCallback((updatedData: any) => {
     if (!editingNode) return;
     const { managerId: newManagerId, ...restData } = updatedData;
 
-    setNodes((nds) =>
+    setRawNodes((nds) =>
       nds.map((node) => {
         if (node.id === editingNode.id) {
           return {
@@ -491,7 +492,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       })
     );
 
-    setEdges((eds) => {
+    setRawEdges((eds) => {
       const currentEdge = eds.find(e => e.target === editingNode.id);
       if (currentEdge) {
         if (newManagerId) {
@@ -510,13 +511,13 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     });
 
     setEditingNode(null);
-  }, [editingNode, setNodes, setEdges]);
+  }, [editingNode]);
 
-  const onConnect = useCallback((params: Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-  const onEdgeUpdate = useCallback((oldEdge: Edge, newConnection: Connection) => setEdges((els) => updateEdge(oldEdge, newConnection, els)), [setEdges]);
+  const onConnect = useCallback((params: Connection) => setRawEdges((eds) => addEdge(params, eds)), []);
+  const onEdgeUpdate = useCallback((oldEdge: Edge, newConnection: Connection) => setRawEdges((els) => updateEdge(oldEdge, newConnection, els)), []);
 
   const handleExport = useCallback(() => {
-    const csv = exportToCsv(nodes as any, edges as any);
+    const csv = exportToCsv(rawNodes as any, rawEdges as any);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -524,26 +525,26 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }, [nodes, edges]);
+  }, [rawNodes, rawEdges]);
 
   const existingTeams = useMemo(() => {
     const teams = new Set<string>();
-    nodes.forEach(node => {
+    rawNodes.forEach(node => {
       if (node.data.team) teams.add(node.data.team);
     });
     return Array.from(teams).sort();
-  }, [nodes]);
+  }, [rawNodes]);
 
   const existingJobTitles = useMemo(() => {
     const titles = new Set<string>();
-    nodes.forEach(node => {
+    rawNodes.forEach(node => {
       if (node.data.jobTitle) titles.add(node.data.jobTitle);
     });
     return Array.from(titles).sort();
-  }, [nodes]);
+  }, [rawNodes]);
 
   const possibleManagers = useMemo(() => {
-    return nodes
+    return rawNodes
       .map(n => ({
         id: n.id,
         name: n.data.status === 'FILLED' 
@@ -551,13 +552,13 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           : `EMPTY: ${n.data.jobTitle} (${n.id})`
       }))
       .sort((a, b) => a.name.localeCompare(b.name));
-  }, [nodes]);
+  }, [rawNodes]);
 
   return (
     <div className="w-full h-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-inner relative min-h-[500px]">
       <ReactFlow
-        nodes={processedElements.nodes}
-        edges={processedElements.edges}
+        nodes={nodes}
+        edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
@@ -607,9 +608,9 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           <button onClick={() => setMaxDepth(prev => Math.max(prev - 1, 1))} className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors" title="Show fewer layers"><span className="text-lg font-bold">−</span></button>
           <button
             onClick={() => {
-              const childIds = new Set(edges.map(e => e.target));
+              const childIds = new Set(rawEdges.map(e => e.target));
               const directChildrenMap: Record<string, string[]> = {};
-              edges.forEach(edge => {
+              rawEdges.forEach(edge => {
                 if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
                 directChildrenMap[edge.source].push(edge.target);
               });
@@ -618,7 +619,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
                 currentMax = Math.max(currentMax, depth);
                 (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
               };
-              nodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
+              rawNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
               setMaxDepth(currentMax || 1);
               setCollapsedNodes(new Set());
               setExpandedNodes(new Set());
@@ -638,7 +639,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           existingTeams={existingTeams}
           existingJobTitles={existingJobTitles}
           possibleManagers={possibleManagers}
-          currentManagerId={edges.find(e => e.target === editingNode.id)?.source || ''}
+          currentManagerId={rawEdges.find(e => e.target === editingNode.id)?.source || ''}
           onClose={() => setEditingNode(null)} 
           onSave={handleSaveNode} 
           onDelete={handleDeleteNode} 

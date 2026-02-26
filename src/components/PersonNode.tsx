@@ -5,27 +5,11 @@ import { User, UserMinus, Plus, ChevronDown, ChevronRight, Calendar } from 'luci
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+import { getTeamColor } from '../utils/colors';
+
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-const getTeamColor = (team: string) => {
-  if (!team) return 'border-slate-200';
-  const colors = [
-    'border-blue-400',
-    'border-emerald-400',
-    'border-violet-400',
-    'border-amber-400',
-    'border-rose-400',
-    'border-cyan-400',
-    'border-indigo-400',
-  ];
-  let hash = 0;
-  for (let i = 0; i < team.length; i++) {
-    hash = team.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return colors[Math.abs(hash) % colors.length];
-};
 
 export const PersonNode = memo(({ data, id }: NodeProps) => {
   const { 
@@ -44,7 +28,7 @@ export const PersonNode = memo(({ data, id }: NodeProps) => {
     exitDate,
   } = data;
   const isFilled = status === 'FILLED';
-  const teamColor = getTeamColor(team);
+  const teamColorClass = getTeamColor(team).tailwind;
   const hasReports = directReportsCount > 0;
 
   const isFutureHire = useMemo(() => {
@@ -61,7 +45,7 @@ export const PersonNode = memo(({ data, id }: NodeProps) => {
     <div 
       className={cn(
         "px-4 py-3 shadow-lg rounded-lg border-2 w-[240px] bg-white transition-all group relative cursor-pointer hover:border-blue-300 active:scale-95",
-        isFilled ? teamColor : "border-slate-200 border-dashed opacity-80"
+        isFilled ? teamColorClass : "border-slate-200 border-dashed opacity-80"
       )}
       onClick={() => onEditNode(id, data)}
     >

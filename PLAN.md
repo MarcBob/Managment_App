@@ -46,5 +46,5 @@ Build a web application to plan and visualize an engineering organization. The a
       - **Multi-line Job Titles:** Job titles now reserve three lines on the node card, allowing longer titles to wrap without being truncated immediately.
       - **Interactive Cards:** Removed the explicit edit button; clicking anywhere on a node card now opens the edit modal, with hover and active states for better feedback.
    ## Next Steps (Future Enhancements)
-- Real-time team clustering frames (Sub-flows).
+- [x] Visual Team Clustering: Draw frames around direct reports in the same team.
 - Detailed person info in a side panel.
