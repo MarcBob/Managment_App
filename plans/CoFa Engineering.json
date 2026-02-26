@@ -3406,19 +3406,34 @@
     ],
     "nodeFilters": [
       {
-        "id": "1772129079947",
+        "id": "1772130891123",
         "name": "Filter 1",
-        "pattern": "Senior",
-        "color": "#d1f0ff"
-      },
+        "pattern": "Engineering Manager",
+        "color": "#4d61ff"
+      }
+    ],
+    "filterGroups": [
       {
-        "id": "1772129177466",
-        "name": "Filter 2",
-        "pattern": "Junior",
-        "color": "#e5ffeb"
+        "id": "1772130949336",
+        "name": "Seniority",
+        "enabled": true,
+        "filters": [
+          {
+            "id": "1772129079947",
+            "name": "Filter 1",
+            "pattern": "Senior",
+            "color": "#d1f0ff"
+          },
+          {
+            "id": "1772129177466",
+            "name": "Filter 2",
+            "pattern": "Junior",
+            "color": "#e5ffeb"
+          }
+        ]
       }
     ]
   },
-  "lastUpdated": "2026-02-26T18:07:45.530Z",
+  "lastUpdated": "2026-02-26T18:36:13.857Z",
   "name": "CoFa Engineering"
 }

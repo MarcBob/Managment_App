@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getNodeColor, NodeFilter } from './nodeFilters';
+import { getNodeColor, getActiveFilters, NodeFilter, FilterGroup } from './nodeFilters';
 
 describe('nodeFilters', () => {
   const filters: NodeFilter[] = [
@@ -38,5 +38,30 @@ describe('nodeFilters', () => {
 
   it('should handle comma-separated patterns', () => {
     expect(getNodeColor('Staff Engineer', filters)).toBe('#0000ff');
+  });
+
+  describe('getActiveFilters', () => {
+    it('should combine scratchpad filters and enabled group filters', () => {
+      const scratchpad: NodeFilter[] = [{ id: 's1', name: 'S1', pattern: 'p1', color: 'c1' }];
+      const groups: FilterGroup[] = [
+        {
+          id: 'g1',
+          name: 'Group 1',
+          enabled: true,
+          filters: [{ id: 'f1', name: 'F1', pattern: 'pf1', color: 'cf1' }]
+        },
+        {
+          id: 'g2',
+          name: 'Group 2',
+          enabled: false,
+          filters: [{ id: 'f2', name: 'F2', pattern: 'pf2', color: 'cf2' }]
+        }
+      ];
+
+      const active = getActiveFilters(scratchpad, groups);
+      expect(active).toHaveLength(2);
+      expect(active[0].id).toBe('s1');
+      expect(active[1].id).toBe('f1');
+    });
   });
 });

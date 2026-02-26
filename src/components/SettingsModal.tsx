@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { X, Settings as SettingsIcon, Plus, Trash2, ArrowUp, ArrowDown, Palette, GripVertical } from 'lucide-react';
+import { X, Settings as SettingsIcon, Plus, Trash2, ArrowUp, ArrowDown, Palette, GripVertical, Layers, Save, Edit2 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import type { LeadershipLayer } from '../utils/leadershipLayers';
-import type { NodeFilter } from '../utils/nodeFilters';
+import type { NodeFilter, FilterGroup } from '../utils/nodeFilters';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -18,6 +18,8 @@ interface SettingsModalProps {
   setLeadershipLayers: (layers: LeadershipLayer[]) => void;
   nodeFilters: NodeFilter[];
   setNodeFilters: (filters: NodeFilter[]) => void;
+  filterGroups: FilterGroup[];
+  setFilterGroups: (groups: FilterGroup[]) => void;
 }
 
 export const SettingsModal = ({ 
@@ -28,7 +30,9 @@ export const SettingsModal = ({
   leadershipLayers,
   setLeadershipLayers,
   nodeFilters,
-  setNodeFilters
+  setNodeFilters,
+  filterGroups,
+  setFilterGroups
 }: SettingsModalProps) => {
   if (!isOpen) return null;
 
@@ -74,6 +78,60 @@ export const SettingsModal = ({
       [newFilters[index], newFilters[targetIndex]] = [newFilters[targetIndex], newFilters[index]];
       setNodeFilters(newFilters);
     }
+  };
+
+  const saveAsGroup = () => {
+    if (nodeFilters.length === 0) return;
+    
+    const groupName = prompt('Enter a name for this filter group:', `Group ${filterGroups.length + 1}`);
+    if (!groupName) return;
+
+    const newGroup: FilterGroup = {
+      id: Date.now().toString(),
+      name: groupName,
+      enabled: true,
+      filters: [...nodeFilters]
+    };
+
+    setFilterGroups([...filterGroups, newGroup]);
+    setNodeFilters([]); // Clear scratchpad after saving
+  };
+
+  const removeFilterGroup = (id: string) => {
+    setFilterGroups(filterGroups.filter(g => g.id !== id));
+  };
+
+  const toggleFilterGroup = (id: string) => {
+    setFilterGroups(filterGroups.map(g => 
+      g.id === id ? { ...g, enabled: !g.enabled } : g
+    ));
+  };
+
+  const updateFilterGroupName = (id: string, name: string) => {
+    setFilterGroups(filterGroups.map(g => 
+      g.id === id ? { ...g, name } : g
+    ));
+  };
+
+  const editFilterGroup = (groupId: string) => {
+    const groupToEdit = filterGroups.find(g => g.id === groupId);
+    if (!groupToEdit) return;
+
+    let nextGroups = filterGroups.filter(g => g.id !== groupId);
+
+    // If there are current scratchpad filters, save them to "Temp Save"
+    if (nodeFilters.length > 0) {
+      const tempGroup: FilterGroup = {
+        id: `temp-${Date.now()}`,
+        name: 'Temp Save',
+        enabled: true,
+        filters: [...nodeFilters]
+      };
+      nextGroups = [...nextGroups, tempGroup];
+    }
+
+    setFilterGroups(nextGroups);
+    setNodeFilters(groupToEdit.filters);
   };
 
   const [draggedFilterIndex, setDraggedFilterIndex] = useState<number | null>(null);
@@ -195,15 +253,103 @@ export const SettingsModal = ({
                 </div>
               ))}
               
-              <button
-                onClick={addFilter}
-                className="w-full py-2 flex items-center justify-center gap-2 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-all border border-blue-100 border-dashed"
-              >
-                <Plus size={16} />
-                Add Color Filter
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={addFilter}
+                  className="flex-1 py-2 flex items-center justify-center gap-2 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-all border border-blue-100 border-dashed"
+                >
+                  <Plus size={16} />
+                  Add Color Filter
+                </button>
+                {nodeFilters.length > 0 && (
+                  <button
+                    onClick={saveAsGroup}
+                    className="px-4 py-2 flex items-center justify-center gap-2 text-sm font-semibold text-emerald-600 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-all border border-emerald-100 border-dashed"
+                    title="Save current filters as a group"
+                  >
+                    <Save size={16} />
+                    Save as Group
+                  </button>
+                )}
+              </div>
             </div>
           </div>
+
+          {/* Filter Groups */}
+          {filterGroups.length > 0 && (
+            <div className="space-y-4">
+              <div className="flex flex-col">
+                <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
+                  <Layers size={16} />
+                  Saved Filter Groups
+                </label>
+                <p className="text-xs text-slate-500 mt-1">
+                  Toggle entire sets of filters on or off.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                {filterGroups.map((group) => (
+                  <div 
+                    key={group.id} 
+                    className={cn(
+                      "flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100 transition-all",
+                      !group.enabled && "opacity-60 bg-slate-100"
+                    )}
+                  >
+                    <button 
+                      onClick={() => toggleFilterGroup(group.id)}
+                      className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                        group.enabled ? "bg-blue-600" : "bg-slate-300"
+                      }`}
+                    >
+                      <span className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                        group.enabled ? "translate-x-4" : "translate-x-0"
+                      }`} />
+                    </button>
+
+                    <input
+                      type="text"
+                      value={group.name}
+                      onChange={(e) => updateFilterGroupName(group.id, e.target.value)}
+                      className="flex-1 px-2 py-1 text-sm font-medium border-transparent hover:border-slate-200 focus:border-blue-500 focus:bg-white bg-transparent rounded-md focus:outline-none transition-all"
+                    />
+
+                    <div className="flex -space-x-1.5 overflow-hidden">
+                      {group.filters.slice(0, 3).map((f, i) => (
+                        <div 
+                          key={f.id} 
+                          className="w-4 h-4 rounded-full border border-white"
+                          style={{ backgroundColor: f.color }}
+                        />
+                      ))}
+                      {group.filters.length > 3 && (
+                        <div className="text-[10px] font-bold text-slate-400 pl-1">
+                          +{group.filters.length - 3}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => editFilterGroup(group.id)}
+                        className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all"
+                        title="Edit group filters"
+                      >
+                        <Edit2 size={16} />
+                      </button>
+                      <button
+                        onClick={() => removeFilterGroup(group.id)}
+                        className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Leadership Layers */}
           <div className="space-y-4">

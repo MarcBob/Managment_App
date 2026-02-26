@@ -5,6 +5,13 @@ export interface NodeFilter {
   color: string;
 }
 
+export interface FilterGroup {
+  id: string;
+  name: string;
+  enabled: boolean;
+  filters: NodeFilter[];
+}
+
 export const getNodeColor = (
   jobTitle: string,
   filters: NodeFilter[],
@@ -26,4 +33,14 @@ export const getNodeColor = (
   }
 
   return defaultColor;
+};
+
+export const getActiveFilters = (
+  scratchpadFilters: NodeFilter[],
+  groups: FilterGroup[]
+): NodeFilter[] => {
+  return [
+    ...scratchpadFilters,
+    ...groups.filter(g => g.enabled).flatMap(g => g.filters)
+  ];
 };

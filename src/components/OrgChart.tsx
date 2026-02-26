@@ -24,9 +24,9 @@ import { SettingsModal } from './SettingsModal';
 import { exportToCsv } from '../utils/csvParser';
 import { getTeamGroups, calculateTeamGroupPositions } from '../utils/teamGrouping';
 import { getLeadershipRank } from '../utils/leadershipLayers';
-import { getNodeColor } from '../utils/nodeFilters';
+import { getNodeColor, getActiveFilters } from '../utils/nodeFilters';
 import type { LeadershipLayer } from '../utils/leadershipLayers';
-import type { NodeFilter } from '../utils/nodeFilters';
+import type { NodeFilter, FilterGroup } from '../utils/nodeFilters';
 import type { OrgNode, OrgEdge } from '../utils/csvParser';
 
 const nodeTypes = {
@@ -195,6 +195,7 @@ interface OrgChartProps {
     expandedNodes?: string[];
     leadershipLayers?: LeadershipLayer[];
     nodeFilters?: NodeFilter[];
+    filterGroups?: FilterGroup[];
   };
   onDataChange?: (state: any) => void;
   isRecruiterMode?: boolean;
@@ -226,6 +227,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [maxDepth, setMaxDepth] = useState<number>(initialViewState.maxDepth || 10);
   const [leadershipLayers, setLeadershipLayers] = useState<LeadershipLayer[]>(initialViewState.leadershipLayers || []);
   const [nodeFilters, setNodeFilters] = useState<NodeFilter[]>(initialViewState.nodeFilters || []);
+  const [filterGroups, setFilterGroups] = useState<FilterGroup[]>(initialViewState.filterGroups || []);
   
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
   const isFirstMount = useRef(true);
@@ -245,7 +247,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     if (initialViewState.expandedNodes !== undefined) setExpandedNodes(new Set(initialViewState.expandedNodes));
     if (initialViewState.leadershipLayers !== undefined) setLeadershipLayers(initialViewState.leadershipLayers);
     if (initialViewState.nodeFilters !== undefined) setNodeFilters(initialViewState.nodeFilters);
-  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters]);
+    if (initialViewState.filterGroups !== undefined) setFilterGroups(initialViewState.filterGroups);
+  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups]);
 
   // Handle structural or filter changes with side-effect layout
   useEffect(() => {
@@ -335,6 +338,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         isCollapsed = !leadsToVacancy && (directChildrenMap[node.id]?.length > 0);
       }
 
+      const allActiveFilters = getActiveFilters(nodeFilters, filterGroups);
+
       return {
         ...node,
         hidden: hiddenNodes.has(node.id),
@@ -347,7 +352,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           directReportsCount: (directChildrenMap[node.id] || []).length,
           totalReportsCount: getDescendants(node.id).length,
           depth,
-          customColor: getNodeColor(node.data.jobTitle || '', nodeFilters, ''),
+          customColor: getNodeColor(node.data.jobTitle || '', allActiveFilters, ''),
         },
         style: {
           ...node.style,
@@ -415,7 +420,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       }
       lastToggledRef.current = null;
     }
-  }, [rawNodes, rawEdges, searchQuery, collapsedNodes, expandedNodes, maxDepth, isRecruiterMode, leafColumns, getViewport, setViewport, leadershipLayers, nodeFilters]);
+  }, [rawNodes, rawEdges, searchQuery, collapsedNodes, expandedNodes, maxDepth, isRecruiterMode, leafColumns, getViewport, setViewport, leadershipLayers, nodeFilters, filterGroups]);
 
   useEffect(() => {
     if (layoutVersion > 0) {
@@ -444,6 +449,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         expandedNodes: Array.from(expandedNodes),
         leadershipLayers,
         nodeFilters,
+        filterGroups,
       }
     };
 
@@ -461,7 +467,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters]);
+  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups]);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
@@ -703,6 +709,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         setLeadershipLayers={setLeadershipLayers}
         nodeFilters={nodeFilters}
         setNodeFilters={setNodeFilters}
+        filterGroups={filterGroups}
+        setFilterGroups={setFilterGroups}
       />
     </div>
   );
