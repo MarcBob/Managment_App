@@ -615,6 +615,41 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [rawNodes]);
 
+  const handleSearchKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && searchQuery.trim() !== '') {
+      const query = searchQuery.toLowerCase();
+      // Find all person nodes that match the search
+      const matchingNodes = nodes.filter(node => 
+        node.type === 'person' && (
+          node.data.firstName?.toLowerCase().includes(query) ||
+          node.data.lastName?.toLowerCase().includes(query) ||
+          node.data.jobTitle?.toLowerCase().includes(query) ||
+          node.data.team?.toLowerCase().includes(query) ||
+          (node.data.status === 'EMPTY' && 'empty'.includes(query))
+        )
+      );
+
+      if (matchingNodes.length > 0) {
+        // Calculate the bounding box of all matching nodes
+        const minX = Math.min(...matchingNodes.map(n => n.position.x));
+        const minY = Math.min(...matchingNodes.map(n => n.position.y));
+        const maxX = Math.max(...matchingNodes.map(n => n.position.x + (n.width || nodeWidth)));
+        const maxY = Math.max(...matchingNodes.map(n => n.position.y + (n.height || nodeHeight)));
+
+        const padding = 50;
+        fitBounds(
+          { 
+            x: minX - padding, 
+            y: minY - padding, 
+            width: (maxX - minX) + padding * 2, 
+            height: (maxY - minY) + padding * 2 
+          }, 
+          { duration: 800 }
+        );
+      }
+    }
+  };
+
   return (
     <div className="w-full h-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-inner relative min-h-[500px]">
       <ReactFlow
@@ -637,6 +672,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
               className="w-full pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
             />
           </div>
         </Panel>
