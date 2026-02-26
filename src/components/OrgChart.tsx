@@ -23,6 +23,8 @@ import { EditNodeModal } from './EditNodeModal';
 import { SettingsModal } from './SettingsModal';
 import { exportToCsv } from '../utils/csvParser';
 import { getTeamGroups, calculateTeamGroupPositions } from '../utils/teamGrouping';
+import { getLeadershipRank } from '../utils/leadershipLayers';
+import type { LeadershipLayer } from '../utils/leadershipLayers';
 import type { OrgNode, OrgEdge } from '../utils/csvParser';
 
 const nodeTypes = {
@@ -47,10 +49,16 @@ const nodeHeight = 150;
 const horizontalSpacing = 50;
 const verticalSpacing = 50;
 
-const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafColumns = 1) => {
+const getLayoutedElements = (
+  nodes: any[], 
+  edges: any[], 
+  direction = 'TB', 
+  leafColumns = 1,
+  leadershipLayers: LeadershipLayer[] = []
+) => {
   const isHorizontal = direction === 'LR';
   const g = new dagre.graphlib.Graph();
-  g.setGraph({ rankdir: direction, nodesep: 70, ranksep: 100 });
+  g.setGraph({ rankdir: direction, nodesep: 100, ranksep: 100 });
   g.setDefaultEdgeLabel(() => ({}));
 
   const childrenMap: Record<string, string[]> = {};
@@ -65,6 +73,17 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
   });
 
   const isLeaf = (nodeId: string) => !childrenMap[nodeId] || childrenMap[nodeId].length === 0;
+  const isRoot = (nodeId: string) => !parentMap[nodeId];
+
+  // 1. Calculate target ranks for all nodes
+  const nodeRanks: Record<string, number> = {};
+  nodes.forEach(node => {
+    nodeRanks[node.id] = getLeadershipRank(
+      node.data.jobTitle || '', 
+      leadershipLayers, 
+      isRoot(node.id)
+    );
+  });
 
   const leafGroups: Record<string, string[]> = {};
   if (leafColumns > 1) {
@@ -77,6 +96,7 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
     });
   }
 
+  // 2. Set nodes in dagre
   nodes.forEach((node) => {
     const parentId = parentMap[node.id];
     if (leafGroups[parentId]?.includes(node.id)) {
@@ -87,24 +107,43 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
         const gWidth = nodeWidth * leafColumns + horizontalSpacing * (leafColumns - 1);
         const gHeight = nodeHeight * rows + verticalSpacing * (rows - 1);
         g.setNode(groupId, { width: gWidth, height: gHeight });
-        g.setEdge(parentId, groupId);
+        
+        // Edge to group node
+        const sourceRank = nodeRanks[parentId] ?? 0;
+        // Leaf group nodes are usually in the "last layer"
+        const targetRank = leadershipLayers.length + 1;
+        const minLen = Math.max(1, targetRank - sourceRank);
+        g.setEdge(parentId, groupId, { minlen: minLen });
       }
     } else {
       g.setNode(node.id, { width: nodeWidth, height: nodeHeight });
     }
   });
 
+  // 3. Set edges with minlen constraints
   edges.forEach((edge) => {
-    if (!leafGroups[edge.source]?.includes(edge.target) && !leafGroups[parentMap[edge.target]]?.includes(edge.target)) {
-      g.setEdge(edge.source, edge.target);
+    // Only process edges that are NOT going into a leaf group (those are handled above)
+    const isTargetInLeafGroup = leafGroups[parentMap[edge.target]]?.includes(edge.target);
+    
+    if (!isTargetInLeafGroup) {
+      const sourceRank = nodeRanks[edge.source] ?? 0;
+      const targetRank = nodeRanks[edge.target] ?? (sourceRank + 1);
+      
+      // Force minlen to be the difference in ranks
+      // This forces Dagre to push the node down to the correct leadership layer
+      const minLen = Math.max(1, targetRank - sourceRank);
+      g.setEdge(edge.source, edge.target, { minlen: minLen });
     }
   });
 
   dagre.layout(g);
 
+  // 4. Extract positions
   const finalNodes: any[] = [];
   nodes.forEach((node) => {
     const parentId = parentMap[node.id];
+    let position: { x: number, y: number };
+
     if (leafGroups[parentId]?.includes(node.id)) {
       const groupId = `group-${parentId}`;
       const groupPos = g.node(groupId);
@@ -117,28 +156,28 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB', leafC
       const groupHeight = nodeHeight * totalRows + verticalSpacing * (totalRows - 1);
       const startX = groupPos.x - groupWidth / 2;
       const startY = groupPos.y - groupHeight / 2;
-      const x = startX + col * (nodeWidth + horizontalSpacing) + nodeWidth / 2;
-      const y = startY + row * (nodeHeight + verticalSpacing) + nodeHeight / 2;
-      finalNodes.push({
-        ...node,
-        targetPosition: isHorizontal ? 'left' : 'top',
-        sourcePosition: isHorizontal ? 'right' : 'bottom',
-        position: { x: x - nodeWidth / 2, y: y - nodeHeight / 2 },
-      });
+      position = {
+        x: startX + col * (nodeWidth + horizontalSpacing) + nodeWidth / 2,
+        y: startY + row * (nodeHeight + verticalSpacing) + nodeHeight / 2,
+      };
     } else {
       const nodeWithPosition = g.node(node.id);
       if (nodeWithPosition) {
-        finalNodes.push({
-          ...node,
-          targetPosition: isHorizontal ? 'left' : 'top',
-          sourcePosition: isHorizontal ? 'right' : 'bottom',
-          position: {
-            x: nodeWithPosition.x - nodeWidth / 2,
-            y: nodeWithPosition.y - nodeHeight / 2,
-          },
-        });
+        position = { x: nodeWithPosition.x, y: nodeWithPosition.y };
+      } else {
+        position = { x: 0, y: 0 };
       }
     }
+
+    finalNodes.push({
+      ...node,
+      targetPosition: isHorizontal ? 'left' : 'top',
+      sourcePosition: isHorizontal ? 'right' : 'bottom',
+      position: {
+        x: position.x - nodeWidth / 2,
+        y: position.y - nodeHeight / 2,
+      },
+    });
   });
 
   return { nodes: finalNodes, edges };
@@ -152,6 +191,7 @@ interface OrgChartProps {
     leafColumns?: number;
     collapsedNodes?: string[];
     expandedNodes?: string[];
+    leadershipLayers?: LeadershipLayer[];
   };
   onDataChange?: (state: any) => void;
   isRecruiterMode?: boolean;
@@ -181,6 +221,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set(initialViewState.expandedNodes || []));
   const [leafColumns, setLeafColumns] = useState<number>(initialViewState.leafColumns || 1);
   const [maxDepth, setMaxDepth] = useState<number>(initialViewState.maxDepth || 10);
+  const [leadershipLayers, setLeadershipLayers] = useState<LeadershipLayer[]>(initialViewState.leadershipLayers || []);
   
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
   const isFirstMount = useRef(true);
@@ -198,7 +239,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     if (initialViewState.maxDepth !== undefined) setMaxDepth(initialViewState.maxDepth);
     if (initialViewState.collapsedNodes !== undefined) setCollapsedNodes(new Set(initialViewState.collapsedNodes));
     if (initialViewState.expandedNodes !== undefined) setExpandedNodes(new Set(initialViewState.expandedNodes));
-  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes]);
+    if (initialViewState.leadershipLayers !== undefined) setLeadershipLayers(initialViewState.leadershipLayers);
+  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers]);
 
   // Handle structural or filter changes with side-effect layout
   useEffect(() => {
@@ -312,7 +354,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     const visibleNodes = preparedNodes.filter(n => !n.hidden);
     const visibleEdges = rawEdges.filter(e => !hiddenNodes.has(e.source) && !hiddenNodes.has(e.target));
     
-    const { nodes: layoutedNodes } = getLayoutedElements(visibleNodes, visibleEdges, 'TB', leafColumns);
+    const { nodes: layoutedNodes } = getLayoutedElements(visibleNodes, visibleEdges, 'TB', leafColumns, leadershipLayers);
 
     const finalNodes = preparedNodes.map(node => {
       const layouted = layoutedNodes.find(ln => ln.id === node.id);
@@ -339,7 +381,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         width: pos.width, 
         height: pos.height,
         pointerEvents: 'none' as any,
-        zIndex: -1,
       },
       draggable: false,
       selectable: false,
@@ -368,7 +409,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       }
       lastToggledRef.current = null;
     }
-  }, [rawNodes, rawEdges, searchQuery, collapsedNodes, expandedNodes, maxDepth, isRecruiterMode, leafColumns, getViewport, setViewport]);
+  }, [rawNodes, rawEdges, searchQuery, collapsedNodes, expandedNodes, maxDepth, isRecruiterMode, leafColumns, getViewport, setViewport, leadershipLayers]);
 
   useEffect(() => {
     if (layoutVersion > 0) {
@@ -395,6 +436,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         leafColumns,
         collapsedNodes: Array.from(collapsedNodes),
         expandedNodes: Array.from(expandedNodes),
+        leadershipLayers,
       }
     };
 
@@ -412,7 +454,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange]);
+  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers]);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
@@ -645,7 +687,14 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           onDelete={handleDeleteNode} 
         />
       )}
-      <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} leafColumns={leafColumns} setLeafColumns={setLeafColumns} />
+      <SettingsModal 
+        isOpen={isSettingsOpen} 
+        onClose={() => setIsSettingsOpen(false)} 
+        leafColumns={leafColumns} 
+        setLeafColumns={setLeafColumns} 
+        leadershipLayers={leadershipLayers}
+        setLeadershipLayers={setLeadershipLayers}
+      />
     </div>
   );
 };

@@ -45,6 +45,8 @@ Build a web application to plan and visualize an engineering organization. The a
    6. **UI Refinements:**
       - **Multi-line Job Titles:** Job titles now reserve three lines on the node card, allowing longer titles to wrap without being truncated immediately.
       - **Interactive Cards:** Removed the explicit edit button; clicking anywhere on a node card now opens the edit modal, with hover and active states for better feedback.
+      - **Team Label Layering:** Ensured team group labels and borders are rendered above connection arrows (edges) for better readability by adjusting the z-index and node rendering order.
    ## Next Steps (Future Enhancements)
+- [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height.
 - [x] Visual Team Clustering: Draw frames around direct reports in the same team.
 - Detailed person info in a side panel.

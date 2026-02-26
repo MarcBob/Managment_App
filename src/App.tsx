@@ -3,6 +3,7 @@ import { FileUpload } from './components/FileUpload';
 import { OrgChart } from './components/OrgChart';
 import { EditableTitle } from './components/EditableTitle';
 import type { OrgNode, OrgEdge } from './utils/csvParser';
+import type { LeadershipLayer } from './utils/leadershipLayers';
 import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus } from 'lucide-react';
 import './App.css';
 
@@ -17,6 +18,7 @@ interface ViewState {
   leafColumns?: number;
   collapsedNodes?: string[];
   expandedNodes?: string[];
+  leadershipLayers?: LeadershipLayer[];
 }
 
 interface PlanData {
@@ -33,6 +35,7 @@ interface LegacyPlanData extends PlanData {
   leafColumns?: number;
   collapsedNodes?: string[];
   expandedNodes?: string[];
+  leadershipLayers?: LeadershipLayer[];
 }
 
 function App() {

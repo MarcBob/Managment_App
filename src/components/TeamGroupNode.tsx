@@ -12,7 +12,6 @@ export const TeamGroupNode = memo(({ data }: NodeProps) => {
       style={{
         borderColor: color,
         backgroundColor: `${color}10`, // 10 is hex for ~6% opacity
-        zIndex: -1,
         pointerEvents: 'none',
       }}
     >

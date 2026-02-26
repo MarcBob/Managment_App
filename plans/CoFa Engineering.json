@@ -3391,8 +3391,20 @@
     "collapsedNodes": [],
     "expandedNodes": [
       "Mesut.Okumus@dkbcodefactory.com"
+    ],
+    "leadershipLayers": [
+      {
+        "id": "1772127286089",
+        "name": "Layer 1",
+        "identifier": "Chapter Lead"
+      },
+      {
+        "id": "1772127292230",
+        "name": "Layer 2",
+        "identifier": "\"Engineering Manager, Principal\""
+      }
     ]
   },
-  "lastUpdated": "2026-02-26T14:55:25.831Z",
+  "lastUpdated": "2026-02-26T17:50:36.980Z",
   "name": "CoFa Engineering"
 }
