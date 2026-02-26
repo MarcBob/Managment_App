@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, Trash2, AlertCircle, Mail, MessageSquare, ExternalLink, ChevronDown, Users } from 'lucide-react';
+import { X, Trash2, AlertCircle, MessageSquare, ChevronDown, Users } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 

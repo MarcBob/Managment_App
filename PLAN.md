@@ -57,6 +57,10 @@ Build a web application to plan and visualize an engineering organization. The a
       - **Multi-Recipient Support:** Added options to start group chats with direct reports or the full sub-organization.
       - **Unified Action Menu:** Consolidated both MS Teams and Outlook email options into a single, accessible dropdown menu in the position edit modal.
       - **Click-to-Close Modal:** Enhanced the `EditNodeModal` to close when clicking outside the modal content, improving user experience and consistency.
+   9. **Proximity Zoom (Magnifying Glass):**
+      - Added a "magnifying glass" effect that enlarges nodes near the mouse cursor when the Space bar is held down.
+      - Uses a React Context to efficiently track mouse position and space bar state across all nodes.
+      - Dynamically calculates scale and z-index for person nodes based on distance to the cursor.
    ## Next Steps (Future Enhancements)
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height.
 - [x] Visual Team Clustering: Draw frames around direct reports in the same team. The frame also includes the team lead if they share the same team property.

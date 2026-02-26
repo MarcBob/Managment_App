@@ -28,6 +28,12 @@ import { getNodeColor, getActiveFilters } from '../utils/nodeFilters';
 import type { LeadershipLayer } from '../utils/leadershipLayers';
 import type { NodeFilter, FilterGroup } from '../utils/nodeFilters';
 import type { OrgNode, OrgEdge } from '../utils/csvParser';
+import React from 'react';
+
+export const MouseContext = React.createContext({ 
+  mousePos: { x: 0, y: 0 }, 
+  isSpacePressed: false 
+});
 
 const nodeTypes = {
   person: PersonNode,
@@ -213,10 +219,12 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   onDataChange,
   isRecruiterMode = false
 }) => {
-  const { getViewport, setViewport, getNode, fitView, fitBounds } = useReactFlow();
+  const { getViewport, setViewport, getNode, fitView, fitBounds, screenToFlowPosition } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingNode, setEditingNode] = useState<{ id: string, data: any } | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isSpacePressed, setIsSpacePressed] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   
   // Use separate state for raw data and displayed elements
   const [rawNodes, setRawNodes] = useState<Node[]>(initialNodes);
@@ -299,6 +307,19 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   // Keyboard shortcut listener
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.code === 'Space' && !isSpacePressed) {
+        // Only trigger if not in an input
+        if (
+          document.activeElement?.tagName !== 'INPUT' && 
+          document.activeElement?.tagName !== 'TEXTAREA' &&
+          !(document.activeElement as HTMLElement)?.isContentEditable
+        ) {
+          setIsSpacePressed(true);
+          // Prevent scrolling with space
+          e.preventDefault();
+        }
+      }
+
       const matchShortcut = (shortcut: string) => {
         const parts = shortcut.toLowerCase().split('+');
         const key = parts[parts.length - 1];
@@ -361,9 +382,19 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       }
     };
 
+    const handleGlobalKeyUp = (e: KeyboardEvent) => {
+      if (e.code === 'Space') {
+        setIsSpacePressed(false);
+      }
+    };
+
     window.addEventListener('keydown', handleGlobalKeyDown, true); // Use capture to intercept before other handlers
-    return () => window.removeEventListener('keydown', handleGlobalKeyDown, true);
-  }, [searchShortcut, teamsShortcut, editingNode, nodes, openTeamsChat, getSearchMatches]);
+    window.addEventListener('keyup', handleGlobalKeyUp, true);
+    return () => {
+      window.removeEventListener('keydown', handleGlobalKeyDown, true);
+      window.removeEventListener('keyup', handleGlobalKeyUp, true);
+    };
+  }, [searchShortcut, teamsShortcut, editingNode, nodes, openTeamsChat, getSearchMatches, isSpacePressed]);
   // Handle structural or filter changes with side-effect layout
   useEffect(() => {
     if (rawNodes.length === 0) return;
@@ -599,6 +630,14 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     return () => clearTimeout(timer);
   }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor, searchShortcut, teamsShortcut, companyDomain, outlookBaseUrl]);
 
+  const onMouseMove = useCallback((event: React.MouseEvent) => {
+    const pos = screenToFlowPosition({
+      x: event.clientX,
+      y: event.clientY,
+    });
+    setMousePos(pos);
+  }, [screenToFlowPosition]);
+
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
   }, []);
@@ -780,92 +819,95 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
 
   return (
     <div className="w-full h-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-inner relative min-h-[500px]">
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        onEdgeUpdate={onEdgeUpdate}
-        nodeTypes={nodeTypes}
-        defaultEdgeOptions={defaultEdgeOptions}
-        minZoom={0.1}
-      >
-        <Panel position="top-left" className="bg-white p-2 rounded-lg shadow-md border border-slate-200 w-64">
-          <div className="relative group/search">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
-            <input
-              ref={searchInputRef}
-              type="text"
-              placeholder="Search by name, title, team..."
-              className="w-full pl-9 pr-8 py-2 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={handleSearchKeyDown}
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-2 top-2 p-0.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-all"
-                title="Clear search"
-              >
-                <X size={14} />
-              </button>
-            )}
-          </div>
-        </Panel>
-        <Background color="#cbd5e1" gap={20} />
-        <Controls />
-        <Panel position="top-right" className="bg-white p-2 rounded-lg shadow-md border border-slate-200 flex gap-2">
-          <button
-            onClick={() => setIsSettingsOpen(true)}
-            className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-all"
-            title="Chart Settings"
-          >
-            <SettingsIcon size={20} />
-          </button>
-          <div className="w-px bg-slate-200 mx-1" />
-          <button
-            onClick={handleExport}
-            className="px-4 py-2 text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-all shadow-sm flex items-center gap-2"
-          >
-            <Download size={16} />
-            Export CSV
-          </button>
-        </Panel>
-        <Panel position="bottom-right" className="bg-white/90 backdrop-blur p-2 rounded-lg shadow-lg border border-slate-200 flex flex-col gap-2 items-center mb-12">
-          <div className="flex flex-col items-center gap-1 border-b border-slate-100 pb-2 mb-1">
-            <Layers size={18} className="text-slate-400" />
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Layers</span>
-          </div>
-          <button onClick={() => setMaxDepth(prev => Math.min(prev + 1, 20))} className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors" title="Show more layers"><span className="text-lg font-bold">+</span></button>
-          <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-sm border border-blue-100">{maxDepth}</div>
-          <button onClick={() => setMaxDepth(prev => Math.max(prev - 1, 1))} className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors" title="Show fewer layers"><span className="text-lg font-bold">−</span></button>
-          <button
-            onClick={() => {
-              const childIds = new Set(rawEdges.map(e => e.target));
-              const directChildrenMap: Record<string, string[]> = {};
-              rawEdges.forEach(edge => {
-                if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
-                directChildrenMap[edge.source].push(edge.target);
-              });
-              let currentMax = 0;
-              const findMaxDepth = (nodeId: string, depth: number) => {
-                currentMax = Math.max(currentMax, depth);
-                (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
-              };
-              rawNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
-              setMaxDepth(currentMax || 1);
-              setCollapsedNodes(new Set());
-              setExpandedNodes(new Set());
-              setLeafColumns(1);
-            }}
-            className="mt-2 text-[10px] font-bold text-blue-600 hover:text-blue-700 uppercase"
-          >
-            Reset
-          </button>
-        </Panel>
-      </ReactFlow>
+      <MouseContext.Provider value={{ mousePos, isSpacePressed }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          onEdgeUpdate={onEdgeUpdate}
+          nodeTypes={nodeTypes}
+          defaultEdgeOptions={defaultEdgeOptions}
+          minZoom={0.1}
+          onMouseMove={onMouseMove}
+        >
+          <Panel position="top-left" className="bg-white p-2 rounded-lg shadow-md border border-slate-200 w-64">
+            <div className="relative group/search">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Search by name, title, team..."
+                className="w-full pl-9 pr-8 py-2 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearchKeyDown}
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2 top-2 p-0.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-all"
+                  title="Clear search"
+                >
+                  <X size={14} />
+                </button>
+              )}
+            </div>
+          </Panel>
+          <Background color="#cbd5e1" gap={20} />
+          <Controls />
+          <Panel position="top-right" className="bg-white p-2 rounded-lg shadow-md border border-slate-200 flex gap-2">
+            <button
+              onClick={() => setIsSettingsOpen(true)}
+              className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-all"
+              title="Chart Settings"
+            >
+              <SettingsIcon size={20} />
+            </button>
+            <div className="w-px bg-slate-200 mx-1" />
+            <button
+              onClick={handleExport}
+              className="px-4 py-2 text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-all shadow-sm flex items-center gap-2"
+            >
+              <Download size={16} />
+              Export CSV
+            </button>
+          </Panel>
+          <Panel position="bottom-right" className="bg-white/90 backdrop-blur p-2 rounded-lg shadow-lg border border-slate-200 flex flex-col gap-2 items-center mb-12">
+            <div className="flex flex-col items-center gap-1 border-b border-slate-100 pb-2 mb-1">
+              <Layers size={18} className="text-slate-400" />
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Layers</span>
+            </div>
+            <button onClick={() => setMaxDepth(prev => Math.min(prev + 1, 20))} className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors" title="Show more layers"><span className="text-lg font-bold">+</span></button>
+            <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-sm border border-blue-100">{maxDepth}</div>
+            <button onClick={() => setMaxDepth(prev => Math.max(prev - 1, 1))} className="p-2 rounded-md hover:bg-slate-100 text-slate-600 transition-colors" title="Show fewer layers"><span className="text-lg font-bold">−</span></button>
+            <button
+              onClick={() => {
+                const childIds = new Set(rawEdges.map(e => e.target));
+                const directChildrenMap: Record<string, string[]> = {};
+                rawEdges.forEach(edge => {
+                  if (!directChildrenMap[edge.source]) directChildrenMap[edge.source] = [];
+                  directChildrenMap[edge.source].push(edge.target);
+                });
+                let currentMax = 0;
+                const findMaxDepth = (nodeId: string, depth: number) => {
+                  currentMax = Math.max(currentMax, depth);
+                  (directChildrenMap[nodeId] || []).forEach(childId => findMaxDepth(childId, depth + 1));
+                };
+                rawNodes.filter(n => !childIds.has(n.id)).forEach(root => findMaxDepth(root.id, 1));
+                setMaxDepth(currentMax || 1);
+                setCollapsedNodes(new Set());
+                setExpandedNodes(new Set());
+                setLeafColumns(1);
+              }}
+              className="mt-2 text-[10px] font-bold text-blue-600 hover:text-blue-700 uppercase"
+            >
+              Reset
+            </button>
+          </Panel>
+        </ReactFlow>
+      </MouseContext.Provider>
       {editingNode && (
         <EditNodeModal 
           isOpen={!!editingNode} 

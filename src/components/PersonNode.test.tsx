@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { PersonNode } from './PersonNode';
 import { ReactFlowProvider } from 'reactflow';
+import { MouseContext } from './OrgChart';
 
 // Mock ResizeObserver which is used by ReactFlow
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
@@ -46,6 +47,38 @@ describe('PersonNode', () => {
     expect(jobTitleElement).toHaveClass('line-clamp-3');
     expect(jobTitleElement).toHaveClass('h-12');
     expect(jobTitleElement).not.toHaveClass('truncate');
+  });
+
+  it('applies scaling when space is pressed and mouse is close', () => {
+    const mousePos = { x: 120, y: 75 }; // Exactly at node center (0,0) + (120, 75)
+    
+    render(
+      <ReactFlowProvider>
+        <MouseContext.Provider value={{ mousePos, isSpacePressed: true }}>
+          <PersonNode {...defaultProps} xPos={0} yPos={0} />
+        </MouseContext.Provider>
+      </ReactFlowProvider>
+    );
+
+    const jobTitleElement = screen.getByText('Software Engineer with a very long title that should wrap');
+    const card = jobTitleElement.closest('.group');
+    expect(card).toHaveStyle('transform: scale(12)');
+  });
+
+  it('does not apply scaling when space is not pressed', () => {
+    const mousePos = { x: 120, y: 75 };
+    
+    render(
+      <ReactFlowProvider>
+        <MouseContext.Provider value={{ mousePos, isSpacePressed: false }}>
+          <PersonNode {...defaultProps} xPos={0} yPos={0} />
+        </MouseContext.Provider>
+      </ReactFlowProvider>
+    );
+
+    const jobTitleElement = screen.getByText('Software Engineer with a very long title that should wrap');
+    const card = jobTitleElement.closest('.group');
+    expect(card).toHaveStyle('transform: scale(1)');
   });
 
   it('calls onEditNode when the card is clicked', () => {

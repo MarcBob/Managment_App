@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useContext, useEffect } from 'react';
 import { Handle, Position } from 'reactflow';
 import type { NodeProps } from 'reactflow';
 import { User, UserMinus, Plus, ChevronDown, ChevronRight, Calendar } from 'lucide-react';
@@ -6,12 +6,13 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 import { getTeamColor, getContrastColor } from '../utils/colors';
+import { MouseContext } from './OrgChart';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const PersonNode = memo(({ data, id }: NodeProps) => {
+export const PersonNode = memo(({ data, id, xPos, yPos }: NodeProps) => {
   const { 
     firstName, 
     lastName, 
@@ -28,6 +29,43 @@ export const PersonNode = memo(({ data, id }: NodeProps) => {
     exitDate,
     customColor,
   } = data;
+
+  const { mousePos, isSpacePressed } = useContext(MouseContext);
+
+  const scale = useMemo(() => {
+    if (!isSpacePressed) return 1;
+    
+    // Node center
+    const centerX = xPos + 120; // nodeWidth / 2
+    const centerY = yPos + 75;  // nodeHeight / 2
+    
+    const dx = mousePos.x - centerX;
+    const dy = mousePos.y - centerY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+    const maxDistance = 400;
+    const maxScale = 12.0;
+    
+    if (distance > maxDistance) return 1;
+    
+    // Linear interpolation: 1 at maxDistance, maxScale at 0 distance
+    const factor = 1 - (distance / maxDistance);
+    return 1 + (maxScale - 1) * factor;
+  }, [isSpacePressed, mousePos, xPos, yPos]);
+
+  // Force stacking order by manipulating the React Flow node wrapper's z-index
+  useEffect(() => {
+    const nodeElement = document.querySelector(`.react-flow__node[data-id="${id}"]`);
+    if (nodeElement instanceof HTMLElement) {
+      if (isSpacePressed && scale > 1) {
+        // Use a high base and add scale-based priority
+        nodeElement.style.zIndex = Math.round(scale * 1000).toString();
+      } else {
+        nodeElement.style.zIndex = '';
+      }
+    }
+  }, [id, scale, isSpacePressed]);
+
   const isFilled = status === 'FILLED';
   const teamColorClass = getTeamColor(team).tailwind;
   const hasReports = directReportsCount > 0;
@@ -48,11 +86,14 @@ export const PersonNode = memo(({ data, id }: NodeProps) => {
   return (
     <div 
       className={cn(
-        "px-4 py-3 shadow-lg rounded-lg border-2 w-[240px] transition-all group relative cursor-pointer hover:border-blue-300 active:scale-95",
+        "px-4 py-3 shadow-lg rounded-lg border-2 w-[240px] transition-all duration-75 group relative cursor-pointer hover:border-blue-300 active:scale-95",
         isFilled ? (customColor ? "border-transparent" : teamColorClass) : "border-slate-200 border-dashed opacity-80",
         !customColor && "bg-white"
       )}
-      style={customColor ? { backgroundColor: customColor } : undefined}
+      style={{
+        ...(customColor ? { backgroundColor: customColor } : {}),
+        transform: `scale(${scale})`,
+      }}
       onClick={() => onEditNode(id, data)}
     >
       {/* Date Labels */}

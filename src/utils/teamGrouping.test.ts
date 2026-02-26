@@ -69,7 +69,7 @@ describe('calculateTeamGroupPositions', () => {
     const groups = [
       { id: 'group1', team: 'Engineering', memberIds: ['1', '2'] }
     ];
-    const nodes = [
+    const nodes: any[] = [
       { id: '1', position: { x: 100, y: 100 } },
       // node 2 is missing
     ];
@@ -81,7 +81,7 @@ describe('calculateTeamGroupPositions', () => {
     const groups = [
       { id: 'group1', team: 'Engineering', memberIds: ['1', '2'] }
     ];
-    const nodes = [
+    const nodes: any[] = [
       // all nodes missing
     ];
     const positions = calculateTeamGroupPositions(groups, nodes, 50, 30, 10);
