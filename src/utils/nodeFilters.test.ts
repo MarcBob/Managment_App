@@ -32,6 +32,10 @@ describe('nodeFilters', () => {
     expect(getNodeColor('Junior Engineer', filters, '#eeeeee')).toBe('#eeeeee');
   });
 
+  it('should return groupFallbackColor if no match and provided', () => {
+    expect(getNodeColor('Junior Engineer', filters, '#ffffff', '#00ff00')).toBe('#00ff00');
+  });
+
   it('should handle case-insensitivity', () => {
     expect(getNodeColor('senior engineer', filters)).toBe('#ff0000');
   });

@@ -2684,11 +2684,16 @@
       "data": {
         "firstName": "",
         "lastName": "",
-        "jobTitle": "New Position",
+        "jobTitle": "Senior Mobile Developer (iOS)",
         "team": "Banking App - Nova Services",
         "status": "EMPTY",
         "startDate": "",
-        "exitDate": ""
+        "exitDate": "",
+        "isCollapsed": true,
+        "directReportsCount": 0,
+        "totalReportsCount": 0,
+        "depth": 4,
+        "customColor": "#ffffff"
       },
       "position": {
         "x": 0,
@@ -3404,36 +3409,111 @@
         "identifier": "\"Engineering Manager, Principal\""
       }
     ],
-    "nodeFilters": [
-      {
-        "id": "1772130891123",
-        "name": "Filter 1",
-        "pattern": "Engineering Manager",
-        "color": "#4d61ff"
-      }
-    ],
+    "nodeFilters": [],
     "filterGroups": [
       {
-        "id": "1772130949336",
+        "id": "1772134156451",
         "name": "Seniority",
-        "enabled": true,
+        "enabled": false,
         "filters": [
           {
             "id": "1772129079947",
             "name": "Filter 1",
             "pattern": "Senior",
-            "color": "#d1f0ff"
+            "color": "#2acb2c"
           },
           {
             "id": "1772129177466",
             "name": "Filter 2",
             "pattern": "Junior",
             "color": "#e5ffeb"
+          },
+          {
+            "id": "1772131399610",
+            "name": "Filter 3",
+            "pattern": "Principal",
+            "color": "#00ad1d"
+          },
+          {
+            "id": "1772131426102",
+            "name": "Filter 4",
+            "pattern": "Engineering Manager",
+            "color": "#8fabff"
+          },
+          {
+            "id": "1772131584562",
+            "name": "Filter 5",
+            "pattern": "Chapter Lead",
+            "color": "#526eff"
+          },
+          {
+            "id": "1772132183161",
+            "name": "Filter 6",
+            "pattern": "Head",
+            "color": "#0061e0"
           }
-        ]
+        ],
+        "defaultFallbackColor": "#91ee92"
+      },
+      {
+        "id": "1772134835504",
+        "name": "Plattform",
+        "enabled": false,
+        "filters": [
+          {
+            "id": "1772134162553",
+            "name": "Filter 1",
+            "pattern": "Frontend",
+            "color": "#58d336"
+          },
+          {
+            "id": "1772134191276",
+            "name": "Filter 2",
+            "pattern": "Backend",
+            "color": "#3a24e5"
+          },
+          {
+            "id": "1772134220388",
+            "name": "Filter 3",
+            "pattern": "Pega",
+            "color": "#2f86f9"
+          },
+          {
+            "id": "1772134241521",
+            "name": "Filter 4",
+            "pattern": "Android",
+            "color": "#5bd7c2"
+          },
+          {
+            "id": "1772134272113",
+            "name": "Filter 5",
+            "pattern": "iOS",
+            "color": "#ffe32e"
+          },
+          {
+            "id": "1772134409015",
+            "name": "Filter 6",
+            "pattern": "Mobile",
+            "color": "#fff942"
+          },
+          {
+            "id": "1772134566660",
+            "name": "Filter 7",
+            "pattern": "Werkstudent",
+            "color": "#ffccf8"
+          },
+          {
+            "id": "1772134788204",
+            "name": "Filter 8",
+            "pattern": "Head of Engineering",
+            "color": "#4f8f00"
+          }
+        ],
+        "defaultFallbackColor": "#ffffff"
       }
-    ]
+    ],
+    "defaultFallbackColor": "#ffffff"
   },
-  "lastUpdated": "2026-02-26T18:36:13.857Z",
+  "lastUpdated": "2026-02-26T19:42:30.191Z",
   "name": "CoFa Engineering"
 }

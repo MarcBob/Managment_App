@@ -10,12 +10,14 @@ export interface FilterGroup {
   name: string;
   enabled: boolean;
   filters: NodeFilter[];
+  defaultFallbackColor?: string;
 }
 
 export const getNodeColor = (
   jobTitle: string,
   filters: NodeFilter[],
-  defaultColor: string = '#ffffff'
+  defaultColor: string = '#ffffff',
+  groupFallbackColor?: string
 ): string => {
   const normalizedTitle = jobTitle.toLowerCase();
 
@@ -32,7 +34,7 @@ export const getNodeColor = (
     }
   }
 
-  return defaultColor;
+  return groupFallbackColor || defaultColor;
 };
 
 export const getActiveFilters = (

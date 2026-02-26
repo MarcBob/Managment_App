@@ -196,6 +196,7 @@ interface OrgChartProps {
     leadershipLayers?: LeadershipLayer[];
     nodeFilters?: NodeFilter[];
     filterGroups?: FilterGroup[];
+    defaultFallbackColor?: string;
   };
   onDataChange?: (state: any) => void;
   isRecruiterMode?: boolean;
@@ -228,6 +229,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [leadershipLayers, setLeadershipLayers] = useState<LeadershipLayer[]>(initialViewState.leadershipLayers || []);
   const [nodeFilters, setNodeFilters] = useState<NodeFilter[]>(initialViewState.nodeFilters || []);
   const [filterGroups, setFilterGroups] = useState<FilterGroup[]>(initialViewState.filterGroups || []);
+  const [defaultFallbackColor, setDefaultFallbackColor] = useState<string>(initialViewState.defaultFallbackColor || '#ffffff');
   
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
   const isFirstMount = useRef(true);
@@ -248,7 +250,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     if (initialViewState.leadershipLayers !== undefined) setLeadershipLayers(initialViewState.leadershipLayers);
     if (initialViewState.nodeFilters !== undefined) setNodeFilters(initialViewState.nodeFilters);
     if (initialViewState.filterGroups !== undefined) setFilterGroups(initialViewState.filterGroups);
-  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups]);
+    if (initialViewState.defaultFallbackColor !== undefined) setDefaultFallbackColor(initialViewState.defaultFallbackColor);
+  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups, initialViewState.defaultFallbackColor]);
 
   // Handle structural or filter changes with side-effect layout
   useEffect(() => {
@@ -339,6 +342,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       }
 
       const allActiveFilters = getActiveFilters(nodeFilters, filterGroups);
+      const activeGroups = filterGroups.filter(g => g.enabled);
+      const groupFallbackColor = activeGroups.length > 0 ? activeGroups[0].defaultFallbackColor : defaultFallbackColor;
 
       return {
         ...node,
@@ -352,7 +357,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           directReportsCount: (directChildrenMap[node.id] || []).length,
           totalReportsCount: getDescendants(node.id).length,
           depth,
-          customColor: getNodeColor(node.data.jobTitle || '', allActiveFilters, ''),
+          customColor: getNodeColor(node.data.jobTitle || '', allActiveFilters, '', groupFallbackColor),
         },
         style: {
           ...node.style,
@@ -420,7 +425,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       }
       lastToggledRef.current = null;
     }
-  }, [rawNodes, rawEdges, searchQuery, collapsedNodes, expandedNodes, maxDepth, isRecruiterMode, leafColumns, getViewport, setViewport, leadershipLayers, nodeFilters, filterGroups]);
+  }, [rawNodes, rawEdges, searchQuery, collapsedNodes, expandedNodes, maxDepth, isRecruiterMode, leafColumns, getViewport, setViewport, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor]);
 
   useEffect(() => {
     if (layoutVersion > 0) {
@@ -450,6 +455,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         leadershipLayers,
         nodeFilters,
         filterGroups,
+        defaultFallbackColor,
       }
     };
 
@@ -467,7 +473,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups]);
+  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor]);
 
   const onEditNode = useCallback((id: string, data: any) => {
     setEditingNode({ id, data });
@@ -711,6 +717,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         setNodeFilters={setNodeFilters}
         filterGroups={filterGroups}
         setFilterGroups={setFilterGroups}
+        defaultFallbackColor={defaultFallbackColor}
+        setDefaultFallbackColor={setDefaultFallbackColor}
       />
     </div>
   );

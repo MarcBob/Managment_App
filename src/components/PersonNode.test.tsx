@@ -65,4 +65,42 @@ describe('PersonNode', () => {
     
     expect(onEditNode).toHaveBeenCalledWith(defaultProps.id, expect.any(Object));
   });
+
+  it('applies white text class when customColor is dark', () => {
+    const darkProps = {
+      ...defaultProps,
+      data: {
+        ...defaultProps.data,
+        customColor: '#000000', // Black background
+      }
+    };
+
+    render(
+      <ReactFlowProvider>
+        <PersonNode {...darkProps} />
+      </ReactFlowProvider>
+    );
+
+    const nameElement = screen.getByText('John Doe');
+    expect(nameElement).toHaveClass('text-white');
+  });
+
+  it('applies slate text class when customColor is light', () => {
+    const lightProps = {
+      ...defaultProps,
+      data: {
+        ...defaultProps.data,
+        customColor: '#ffffff', // White background
+      }
+    };
+
+    render(
+      <ReactFlowProvider>
+        <PersonNode {...lightProps} />
+      </ReactFlowProvider>
+    );
+
+    const nameElement = screen.getByText('John Doe');
+    expect(nameElement).toHaveClass('text-slate-900');
+  });
 });

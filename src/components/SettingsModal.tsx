@@ -20,6 +20,8 @@ interface SettingsModalProps {
   setNodeFilters: (filters: NodeFilter[]) => void;
   filterGroups: FilterGroup[];
   setFilterGroups: (groups: FilterGroup[]) => void;
+  defaultFallbackColor?: string;
+  setDefaultFallbackColor: (color: string) => void;
 }
 
 export const SettingsModal = ({ 
@@ -32,7 +34,9 @@ export const SettingsModal = ({
   nodeFilters,
   setNodeFilters,
   filterGroups,
-  setFilterGroups
+  setFilterGroups,
+  defaultFallbackColor = '#ffffff',
+  setDefaultFallbackColor
 }: SettingsModalProps) => {
   if (!isOpen) return null;
 
@@ -90,11 +94,13 @@ export const SettingsModal = ({
       id: Date.now().toString(),
       name: groupName,
       enabled: true,
-      filters: [...nodeFilters]
+      filters: [...nodeFilters],
+      defaultFallbackColor: defaultFallbackColor
     };
 
     setFilterGroups([...filterGroups, newGroup]);
     setNodeFilters([]); // Clear scratchpad after saving
+    setDefaultFallbackColor('#ffffff'); // Reset scratchpad fallback
   };
 
   const removeFilterGroup = (id: string) => {
@@ -113,6 +119,12 @@ export const SettingsModal = ({
     ));
   };
 
+  const updateFilterGroupFallback = (id: string, color: string) => {
+    setFilterGroups(filterGroups.map(g => 
+      g.id === id ? { ...g, defaultFallbackColor: color } : g
+    ));
+  };
+
   const editFilterGroup = (groupId: string) => {
     const groupToEdit = filterGroups.find(g => g.id === groupId);
     if (!groupToEdit) return;
@@ -125,13 +137,17 @@ export const SettingsModal = ({
         id: `temp-${Date.now()}`,
         name: 'Temp Save',
         enabled: true,
-        filters: [...nodeFilters]
+        filters: [...nodeFilters],
+        defaultFallbackColor: defaultFallbackColor
       };
       nextGroups = [...nextGroups, tempGroup];
     }
 
     setFilterGroups(nextGroups);
     setNodeFilters(groupToEdit.filters);
+    if (groupToEdit.defaultFallbackColor) {
+      setDefaultFallbackColor(groupToEdit.defaultFallbackColor);
+    }
   };
 
   const [draggedFilterIndex, setDraggedFilterIndex] = useState<number | null>(null);
@@ -252,6 +268,19 @@ export const SettingsModal = ({
                   </div>
                 </div>
               ))}
+
+              <div className="flex items-center gap-2 p-3 bg-blue-50/30 rounded-lg border border-blue-100/50">
+                <div className="flex-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                  Default Fallback Color
+                </div>
+                <input
+                  type="color"
+                  value={defaultFallbackColor}
+                  onChange={(e) => setDefaultFallbackColor(e.target.value)}
+                  className="w-8 h-8 rounded-md cursor-pointer border-none bg-transparent"
+                  title="Color for nodes that don't match any filter"
+                />
+              </div>
               
               <div className="flex gap-2">
                 <button
@@ -329,6 +358,16 @@ export const SettingsModal = ({
                         </div>
                       )}
                     </div>
+
+                    <div className="w-px h-6 bg-slate-200 mx-1" />
+
+                    <input
+                      type="color"
+                      value={group.defaultFallbackColor || '#ffffff'}
+                      onChange={(e) => updateFilterGroupFallback(group.id, e.target.value)}
+                      className="w-6 h-6 rounded-md cursor-pointer border-none bg-transparent"
+                      title="Fallback color for this group"
+                    />
 
                     <div className="flex items-center gap-1">
                       <button
