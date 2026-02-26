@@ -42,6 +42,9 @@ Build a web application to plan and visualize an engineering organization. The a
       - Departing employees are labeled with a red exit date.
       - **Recruiter Mode:** Refined to automatically hide all nodes that are not vacancies and do not lead to any vacancies, providing a focused view of the hiring pipeline.
       - Integrated into both `EditNodeModal` and `csvParser`.
+   6. **UI Refinements:**
+      - **Multi-line Job Titles:** Job titles now reserve three lines on the node card, allowing longer titles to wrap without being truncated immediately.
+      - **Interactive Cards:** Removed the explicit edit button; clicking anywhere on a node card now opens the edit modal, with hover and active states for better feedback.
    ## Next Steps (Future Enhancements)
 - Real-time team clustering frames (Sub-flows).
 - Detailed person info in a side panel.

@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react';
 import { Handle, Position } from 'reactflow';
 import type { NodeProps } from 'reactflow';
-import { User, UserMinus, Plus, Edit2, ChevronDown, ChevronRight, Calendar } from 'lucide-react';
+import { User, UserMinus, Plus, ChevronDown, ChevronRight, Calendar } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -58,10 +58,13 @@ export const PersonNode = memo(({ data, id }: NodeProps) => {
   const hasExitDate = !!exitDate;
 
   return (
-    <div className={cn(
-      "px-4 py-3 shadow-lg rounded-lg border-2 w-[240px] bg-white transition-all group relative",
-      isFilled ? teamColor : "border-slate-200 border-dashed opacity-80"
-    )}>
+    <div 
+      className={cn(
+        "px-4 py-3 shadow-lg rounded-lg border-2 w-[240px] bg-white transition-all group relative cursor-pointer hover:border-blue-300 active:scale-95",
+        isFilled ? teamColor : "border-slate-200 border-dashed opacity-80"
+      )}
+      onClick={() => onEditNode(id, data)}
+    >
       {/* Date Labels */}
       <div className="absolute -top-3 left-2 flex gap-1">
         {isFutureHire && (
@@ -92,21 +95,10 @@ export const PersonNode = memo(({ data, id }: NodeProps) => {
           <div className="text-sm font-bold text-slate-900 truncate">
             {isFilled ? `${firstName} ${lastName}` : 'EMPTY POSITION'}
           </div>
-          <div className="text-xs font-medium text-slate-500 truncate">
+          <div className="text-xs font-medium text-slate-500 line-clamp-3 h-12 leading-4">
             {jobTitle}
           </div>
         </div>
-
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onEditNode(id, data);
-          }}
-          className="p-1.5 rounded-full text-slate-300 hover:bg-slate-100 hover:text-blue-600 transition-all opacity-0 group-hover:opacity-100"
-          title="Edit Position"
-        >
-          <Edit2 size={14} />
-        </button>
       </div>
       
       <div className="mt-2 flex items-center justify-between border-t border-slate-100 pt-2">
