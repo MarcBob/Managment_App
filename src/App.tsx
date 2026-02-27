@@ -7,7 +7,7 @@ import { parseOrgCsv } from './utils/csvParser';
 import type { OrgNode, OrgEdge } from './utils/csvParser';
 import type { LeadershipLayer } from './utils/leadershipLayers';
 import type { NodeFilter, FilterGroup } from './utils/nodeFilters';
-import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus, FileUp } from 'lucide-react';
+import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus, FileUp, Trash2 } from 'lucide-react';
 import './App.css';
 
 const API_URL = 'http://localhost:3001/api';
@@ -298,6 +298,46 @@ function App() {
     setIsPlanMenuOpen(false);
   };
 
+  const handleDeletePlan = async (name: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!window.confirm(`Are you sure you want to delete the plan "${name}"? This action cannot be undone.`)) {
+      return;
+    }
+
+    try {
+      if (serverReachable) {
+        const response = await fetch(`${API_URL}/plans/${name}`, {
+          method: 'DELETE',
+        });
+        if (!response.ok) {
+          const err = await response.json();
+          alert(`Failed to delete plan: ${err.error || 'Unknown error'}`);
+          return;
+        }
+      }
+
+      // Cleanup local storage
+      localStorage.removeItem(`${LOCAL_STORAGE_KEY}_${name}`);
+
+      // If we deleted the current plan, switch to another or default
+      if (currentPlanName === name) {
+        const remainingPlans = availablePlans.filter(p => p !== name);
+        if (remainingPlans.length > 0) {
+          handleSwitchPlan(remainingPlans[0]);
+        } else {
+          setCurrentPlanName('default');
+          localStorage.setItem(CURRENT_PLAN_KEY, 'default');
+          setData(null);
+        }
+      }
+
+      fetchPlans();
+    } catch (error) {
+      console.error('[FRONTEND] Delete failed', error);
+      alert('Failed to delete plan. Please check your connection.');
+    }
+  };
+
   const handleCreateNew = () => {
     const name = `New Plan ${availablePlans.length + 1}`;
     setCurrentPlanName(name);
@@ -371,16 +411,30 @@ function App() {
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Your Plans</span>
                   </div>
                   {availablePlans.map(plan => (
-                    <button
+                    <div 
                       key={plan}
-                      onClick={() => handleSwitchPlan(plan)}
-                      className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-50 flex items-center justify-between ${
-                        currentPlanName === plan ? "text-blue-600 font-bold bg-blue-50/50" : "text-slate-600"
+                      className={`group w-full flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-50 ${
+                        currentPlanName === plan ? "bg-blue-50/50" : ""
                       }`}
                     >
-                      <span className="truncate">{plan}</span>
-                      {currentPlanName === plan && <CheckCircle2 className="h-4 w-4" />}
-                    </button>
+                      <button
+                        onClick={() => handleSwitchPlan(plan)}
+                        className={`flex-1 text-left flex items-center justify-between gap-2 ${
+                          currentPlanName === plan ? "text-blue-600 font-bold" : "text-slate-600"
+                        }`}
+                      >
+                        <span className="truncate">{plan}</span>
+                        {currentPlanName === plan && <CheckCircle2 className="h-4 w-4 shrink-0" />}
+                      </button>
+                      
+                      <button
+                        onClick={(e) => handleDeletePlan(plan, e)}
+                        className="ml-2 p-1 text-slate-300 hover:text-red-500 rounded transition-colors"
+                        title="Delete Plan"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
                   ))}
                   <div className="border-t border-slate-100 mt-2 pt-2">
                     <button

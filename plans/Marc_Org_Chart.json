@@ -1,4 +1,5 @@
 {
+  "name": "Marc_Org_Chart",
   "nodes": [
     {
       "id": "eric.rosenthal@dkbcodefactory.com",
@@ -10,14 +11,14 @@
         "team": "Card-API",
         "workEmail": "eric.rosenthal@dkbcodefactory.com",
         "supervisorName": "Arumugasami, Sakthi",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "levent.uenver@dkbcodefactory.com",
@@ -25,20 +26,18 @@
       "data": {
         "firstName": "Levent",
         "lastName": "Ünver",
-        "jobTitle": "Senior Software Developer (Backend)",
+        "jobTitle": "Engineering Manager (Backend)",
         "team": "Card-API",
         "workEmail": "levent.uenver@dkbcodefactory.com",
         "supervisorName": "Arumugasami, Sakthi",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      }
     },
     {
       "id": "maximilian.Liemant@dkbcodefactory.com",
@@ -50,14 +49,14 @@
         "team": "Card-API",
         "workEmail": "maximilian.Liemant@dkbcodefactory.com",
         "supervisorName": "Arumugasami, Sakthi",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Anna.Eckhardt@dkbcodefactory.com",
@@ -69,14 +68,14 @@
         "team": "Card-API",
         "workEmail": "Anna.Eckhardt@dkbcodefactory.com",
         "supervisorName": "Arumugasami, Sakthi",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Mohammad.Rahimi@dkbcodefactory.com",
@@ -88,14 +87,14 @@
         "team": "Accounts & Transactions",
         "workEmail": "Mohammad.Rahimi@dkbcodefactory.com",
         "supervisorName": "Baydon, Karim",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Paul.Defois@dkbcodefactory.com",
@@ -107,16 +106,14 @@
         "team": "Accounts & Transactions",
         "workEmail": "Paul.Defois@dkbcodefactory.com",
         "supervisorName": "Baydon, Karim",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      }
     },
     {
       "id": "Ali.Adel@dkbcodefactory.com",
@@ -128,14 +125,33 @@
         "team": "Accounts & Transactions",
         "workEmail": "Ali.Adel@dkbcodefactory.com",
         "supervisorName": "Baydon, Karim",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
+      }
+    },
+    {
+      "id": "Eugen.Puzynin@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Eugen",
+        "lastName": "Puzynin",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Accounts & Transactions",
+        "workEmail": "Eugen.Puzynin@dkbcodefactory.com",
+        "supervisorName": "Baydon, Karim",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
-      "width": 240,
-      "height": 139
+      "position": {
+        "x": 0,
+        "y": 0
+      }
     },
     {
       "id": "Asghar.Mirzaei@dkbcodefactory.com",
@@ -147,14 +163,14 @@
         "team": "Accounts & Transactions",
         "workEmail": "Asghar.Mirzaei@dkbcodefactory.com",
         "supervisorName": "Baydon, Karim",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "manuel.sanchez@dkbcodefactory.com",
@@ -166,14 +182,14 @@
         "team": "",
         "workEmail": "manuel.sanchez@dkbcodefactory.com",
         "supervisorName": "Bobzien, Marc",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "stephan.seigewasser@dkbcodefactory.com",
@@ -185,19 +201,13 @@
         "team": "",
         "workEmail": "stephan.seigewasser@dkbcodefactory.com",
         "supervisorName": "Bobzien, Marc",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
-        "x": -148.7656249909957,
-        "y": 295.40014204406293
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false,
-      "positionAbsolute": {
-        "x": -148.7656249909957,
-        "y": 295.40014204406293
+        "x": 0,
+        "y": 0
       }
     },
     {
@@ -210,14 +220,14 @@
         "team": "Beschluss",
         "workEmail": "Benedict.Roeser@dkbcodefactory.com",
         "supervisorName": "Bobzien, Marc",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "raphaela.wrede@dkbcodefactory.com",
@@ -229,20 +239,14 @@
         "team": "",
         "workEmail": "raphaela.wrede@dkbcodefactory.com",
         "supervisorName": "Bobzien, Marc",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
-        "x": 20615,
-        "y": 239.10677134978164
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "positionAbsolute": {
-        "x": 20615,
-        "y": 239.10677134978164
-      },
-      "dragging": false
+        "x": 0,
+        "y": 0
+      }
     },
     {
       "id": "Christoph.Henzelmann@dkbcodefactory.com",
@@ -254,14 +258,14 @@
         "team": "",
         "workEmail": "Christoph.Henzelmann@dkbcodefactory.com",
         "supervisorName": "Bobzien, Marc",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Oleksii.Vasyliev@dkbcodefactory.com",
@@ -273,14 +277,14 @@
         "team": "Banking App - Nova Services",
         "workEmail": "Oleksii.Vasyliev@dkbcodefactory.com",
         "supervisorName": "Borsa, Iván",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Reza.Lotfi@dkbcodefactory.com",
@@ -292,14 +296,14 @@
         "team": "Banking App - Nova Services",
         "workEmail": "Reza.Lotfi@dkbcodefactory.com",
         "supervisorName": "Borsa, Iván",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Mohsen.Vaziri@dkbcodefactory.com",
@@ -311,14 +315,14 @@
         "team": "Web Banking",
         "workEmail": "Mohsen.Vaziri@dkbcodefactory.com",
         "supervisorName": "Borsa, Iván",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Hanieh.Haddad@dkbcodefactory.com",
@@ -327,17 +331,17 @@
         "firstName": "Hanieh",
         "lastName": "Haddad",
         "jobTitle": "Junior Software Developer (Frontend)",
-        "team": "Bank Account",
+        "team": "",
         "workEmail": "Hanieh.Haddad@dkbcodefactory.com",
         "supervisorName": "Borsa, Iván",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "felix.gruenewald@dkbcodefactory.com",
@@ -349,14 +353,14 @@
         "team": "Communication & Documents",
         "workEmail": "felix.gruenewald@dkbcodefactory.com",
         "supervisorName": "de la Pena Fayos, Javier",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Izuchukwu.Oleka@dkbcodefactory.com",
@@ -368,14 +372,14 @@
         "team": "Communication & Documents",
         "workEmail": "Izuchukwu.Oleka@dkbcodefactory.com",
         "supervisorName": "de la Pena Fayos, Javier",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Umurcan.Emre@dkbcodefactory.com",
@@ -387,14 +391,14 @@
         "team": "Communication & Documents",
         "workEmail": "Umurcan.Emre@dkbcodefactory.com",
         "supervisorName": "de la Pena Fayos, Javier",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Daniel.Schellenberg@dkbcodefactory.com",
@@ -406,14 +410,14 @@
         "team": "Communication & Documents",
         "workEmail": "Daniel.Schellenberg@dkbcodefactory.com",
         "supervisorName": "de la Pena Fayos, Javier",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Georgios.Karanikas@dkbcodefactory.com",
@@ -425,20 +429,14 @@
         "team": "Accounts & Transactions",
         "workEmail": "Georgios.Karanikas@dkbcodefactory.com",
         "supervisorName": "Elo, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
-        "x": 1385.077522925754,
-        "y": 1008.9467587529302
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "positionAbsolute": {
-        "x": 1385.077522925754,
-        "y": 1008.9467587529302
-      },
-      "dragging": false
+        "x": 0,
+        "y": 0
+      }
     },
     {
       "id": "Shanmugam.Muthuraj@dkbcodefactory.com",
@@ -450,14 +448,14 @@
         "team": "Loans",
         "workEmail": "Shanmugam.Muthuraj@dkbcodefactory.com",
         "supervisorName": "Elo, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "mel.grosser@dkbcodefactory.com",
@@ -469,14 +467,14 @@
         "team": "Loans",
         "workEmail": "mel.grosser@dkbcodefactory.com",
         "supervisorName": "Elo, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Chae-Hyuk.Lee@dkbcodefactory.com",
@@ -488,14 +486,14 @@
         "team": "Loans",
         "workEmail": "Chae-Hyuk.Lee@dkbcodefactory.com",
         "supervisorName": "Elo, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Priscila.Flores@dkbcodefactory.com",
@@ -507,14 +505,14 @@
         "team": "Loans",
         "workEmail": "Priscila.Flores@dkbcodefactory.com",
         "supervisorName": "Elo, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Darian.Reck@dkbcodefactory.com",
@@ -526,14 +524,14 @@
         "team": "Loans",
         "workEmail": "Darian.Reck@dkbcodefactory.com",
         "supervisorName": "Elo, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "hannes.Waldschmidt@dkbcodefactory.com",
@@ -545,77 +543,14 @@
         "team": "Card MGMT & Stammdaten",
         "workEmail": "hannes.Waldschmidt@dkbcodefactory.com",
         "supervisorName": "Fürstenau, Martin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
-    },
-    {
-      "id": "Dennis.Hiller@dkbcodefactory.com",
-      "type": "person",
-      "data": {
-        "firstName": "Dennis",
-        "lastName": "Hiller",
-        "jobTitle": "Software Developer (Backend)",
-        "team": "Card MGMT & Stammdaten",
-        "workEmail": "Dennis.Hiller@dkbcodefactory.com",
-        "supervisorName": "Fürstenau, Martin",
-        "status": "FILLED"
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "width": 240,
-      "height": 139
-    },
-    {
-      "id": "Ledion.Spaho@dkbcodefactory.com",
-      "type": "person",
-      "data": {
-        "firstName": "Ledion",
-        "lastName": "Spaho",
-        "jobTitle": "Senior Software Developer (Backend)",
-        "team": "Card MGMT & Stammdaten",
-        "workEmail": "Ledion.Spaho@dkbcodefactory.com",
-        "supervisorName": "Fürstenau, Martin",
-        "status": "FILLED"
-      },
-      "position": {
-        "x": 2935.454684613955,
-        "y": 1618.8635946158136
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "positionAbsolute": {
-        "x": 2935.454684613955,
-        "y": 1618.8635946158136
-      },
-      "dragging": false
-    },
-    {
-      "id": "Fabian.Georgi@dkbcodefactory.com",
-      "type": "person",
-      "data": {
-        "firstName": "Fabian",
-        "lastName": "Georgi",
-        "jobTitle": "Software Developer (Backend)",
-        "team": "Card MGMT & Stammdaten",
-        "workEmail": "Fabian.Georgi@dkbcodefactory.com",
-        "supervisorName": "Fürstenau, Martin",
-        "status": "FILLED"
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Daniel.Stopka@dkbcodefactory.com",
@@ -627,90 +562,14 @@
         "team": "Bank Account",
         "workEmail": "Daniel.Stopka@dkbcodefactory.com",
         "supervisorName": "Gutierrez Reyes, Maria",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
-    },
-    {
-      "id": "Franz.Hefele@dkbcodefactory.com",
-      "type": "person",
-      "data": {
-        "firstName": "Franz",
-        "lastName": "Hefele",
-        "jobTitle": "Pega Developer",
-        "team": "Customer Onboarding",
-        "workEmail": "Franz.Hefele@dkbcodefactory.com",
-        "supervisorName": "Gutierrez Reyes, Maria",
-        "status": "FILLED"
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "width": 240,
-      "height": 139
-    },
-    {
-      "id": "stefan.junge@dkbcodefactory.com",
-      "type": "person",
-      "data": {
-        "firstName": "Stefan",
-        "lastName": "Junge",
-        "jobTitle": "Pega Developer",
-        "team": "Customer Onboarding",
-        "workEmail": "stefan.junge@dkbcodefactory.com",
-        "supervisorName": "Gutierrez Reyes, Maria",
-        "status": "FILLED"
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "width": 240,
-      "height": 139
-    },
-    {
-      "id": "Marie.Jager@dkbcodefactory.com",
-      "type": "person",
-      "data": {
-        "firstName": "Marie",
-        "lastName": "Jager",
-        "jobTitle": "Pega Developer",
-        "team": "Sicherheiten",
-        "workEmail": "Marie.Jager@dkbcodefactory.com",
-        "supervisorName": "Gutierrez Reyes, Maria",
-        "status": "FILLED"
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "width": 240,
-      "height": 139
-    },
-    {
-      "id": "Mounika.Sunkara@dkbcodefactory.com",
-      "type": "person",
-      "data": {
-        "firstName": "Mounika",
-        "lastName": "Sunkara",
-        "jobTitle": "Senior Pega Developer",
-        "team": "Customer Onboarding",
-        "workEmail": "Mounika.Sunkara@dkbcodefactory.com",
-        "supervisorName": "Gutierrez Reyes, Maria",
-        "status": "FILLED"
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "ivan.borsa@dkbcodefactory.com",
@@ -722,16 +581,14 @@
         "team": "Banking App - Nova Services",
         "workEmail": "ivan.borsa@dkbcodefactory.com",
         "supervisorName": "Henzelmann, Christoph-Philipp",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      }
     },
     {
       "id": "michael.steudter@dkbcodefactory.com",
@@ -743,14 +600,14 @@
         "team": "Banking App - Nova Payments",
         "workEmail": "michael.steudter@dkbcodefactory.com",
         "supervisorName": "Henzelmann, Christoph-Philipp",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "vladimir.ignjatijevic@dkbcodefactory.com",
@@ -762,14 +619,14 @@
         "team": "Banking App - Nova Core",
         "workEmail": "vladimir.ignjatijevic@dkbcodefactory.com",
         "supervisorName": "Henzelmann, Christoph-Philipp",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
@@ -781,14 +638,90 @@
         "team": "Banking App - Nova Products",
         "workEmail": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
         "supervisorName": "Henzelmann, Christoph-Philipp",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
+      }
+    },
+    {
+      "id": "Franz.Hefele@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Franz",
+        "lastName": "Hefele",
+        "jobTitle": "Pega Developer",
+        "team": "Customer Onboarding",
+        "workEmail": "Franz.Hefele@dkbcodefactory.com",
+        "supervisorName": "Holweger, Kathrin",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
-      "width": 240,
-      "height": 139
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "stefan.junge@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Stefan",
+        "lastName": "Junge",
+        "jobTitle": "Pega Developer",
+        "team": "Customer Onboarding",
+        "workEmail": "stefan.junge@dkbcodefactory.com",
+        "supervisorName": "Holweger, Kathrin",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Marie.Jager@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Marie",
+        "lastName": "Jager",
+        "jobTitle": "Pega Developer",
+        "team": "Sicherheiten",
+        "workEmail": "Marie.Jager@dkbcodefactory.com",
+        "supervisorName": "Holweger, Kathrin",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Mounika.Sunkara@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Mounika",
+        "lastName": "Sunkara",
+        "jobTitle": "Senior Pega Developer",
+        "team": "Customer Onboarding",
+        "workEmail": "Mounika.Sunkara@dkbcodefactory.com",
+        "supervisorName": "Holweger, Kathrin",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
     },
     {
       "id": "andrej.bielevicius@dkbcodefactory.com",
@@ -800,14 +733,14 @@
         "team": "Banking App - Nova Core",
         "workEmail": "andrej.bielevicius@dkbcodefactory.com",
         "supervisorName": "Ignjatijevic, Vladimir",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Cassiano.Montanari@dkbcodefactory.com",
@@ -819,14 +752,14 @@
         "team": "Web Banking",
         "workEmail": "Cassiano.Montanari@dkbcodefactory.com",
         "supervisorName": "Ignjatijevic, Vladimir",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "adam.kerenyi@dkbcodefactory.com",
@@ -838,14 +771,14 @@
         "team": "Banking App - Nova Core",
         "workEmail": "adam.kerenyi@dkbcodefactory.com",
         "supervisorName": "Ignjatijevic, Vladimir",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "claudinei.bido@dkbcodefactory.com",
@@ -857,14 +790,14 @@
         "team": "Web Banking",
         "workEmail": "claudinei.bido@dkbcodefactory.com",
         "supervisorName": "Ignjatijevic, Vladimir",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Sarangan.Gnanasegaram@dkbcodefactory.com",
@@ -876,14 +809,14 @@
         "team": "Banking App - Nova Core",
         "workEmail": "Sarangan.Gnanasegaram@dkbcodefactory.com",
         "supervisorName": "Ignjatijevic, Vladimir",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Koki.Isshiki@dkbcodefactory.com",
@@ -895,14 +828,14 @@
         "team": "Banking App - Nova Core",
         "workEmail": "Koki.Isshiki@dkbcodefactory.com",
         "supervisorName": "Ignjatijevic, Vladimir",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "dennis.steiner@dkbcodefactory.com",
@@ -914,14 +847,14 @@
         "team": "Payment & Fraud",
         "workEmail": "dennis.steiner@dkbcodefactory.com",
         "supervisorName": "Kefale, Biniam",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Faizan.Hussain@dkbcodefactory.com",
@@ -933,20 +866,14 @@
         "team": "Payment & Fraud",
         "workEmail": "Faizan.Hussain@dkbcodefactory.com",
         "supervisorName": "Kefale, Biniam",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
-        "x": 4845,
-        "y": 730
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "positionAbsolute": {
-        "x": 4845,
-        "y": 730
-      },
-      "dragging": false
+        "x": 0,
+        "y": 0
+      }
     },
     {
       "id": "Denys.Stoianov@dkbcodefactory.com",
@@ -958,33 +885,14 @@
         "team": "Payment & Fraud",
         "workEmail": "Denys.Stoianov@dkbcodefactory.com",
         "supervisorName": "Kefale, Biniam",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
-    },
-    {
-      "id": "Byeonggil.Park@dkbcodefactory.com",
-      "type": "person",
-      "data": {
-        "firstName": "Byeonggil",
-        "lastName": "Park",
-        "jobTitle": "Software Developer (Backend)",
-        "team": "Accounts & Transactions",
-        "workEmail": "Byeonggil.Park@dkbcodefactory.com",
-        "supervisorName": "Kefale, Biniam",
-        "status": "FILLED"
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Mehrdad.Yami@dkbcodefactory.com",
@@ -996,14 +904,14 @@
         "team": "Payment & Fraud",
         "workEmail": "Mehrdad.Yami@dkbcodefactory.com",
         "supervisorName": "Kefale, Biniam",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Hari.Tummala@dkbcodefactory.com",
@@ -1015,14 +923,14 @@
         "team": "Payment & Fraud",
         "workEmail": "Hari.Tummala@dkbcodefactory.com",
         "supervisorName": "Kefale, Biniam",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Marc.Bobzien@dkbcodefactory.com",
@@ -1034,16 +942,14 @@
         "team": "",
         "workEmail": "Marc.Bobzien@dkbcodefactory.com",
         "supervisorName": "Lehsten, Alexander",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      }
     },
     {
       "id": "alexandr.melnic@dkbcodefactory.com",
@@ -1055,14 +961,14 @@
         "team": "Signup",
         "workEmail": "alexandr.melnic@dkbcodefactory.com",
         "supervisorName": "Maghear, Adrian-Florin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Sura.Watthanalamlert@dkbcodefactory.com",
@@ -1074,14 +980,14 @@
         "team": "Signup",
         "workEmail": "Sura.Watthanalamlert@dkbcodefactory.com",
         "supervisorName": "Maghear, Adrian-Florin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Eveline.Kooijman@dkbcodefactory.com",
@@ -1093,14 +999,14 @@
         "team": "Signup",
         "workEmail": "Eveline.Kooijman@dkbcodefactory.com",
         "supervisorName": "Maghear, Adrian-Florin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "miriam.Bah@dkbcodefactory.com",
@@ -1112,14 +1018,14 @@
         "team": "Signup",
         "workEmail": "miriam.Bah@dkbcodefactory.com",
         "supervisorName": "Maghear, Adrian-Florin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Delia.Metzler@dkbcodefactory.com",
@@ -1131,14 +1037,14 @@
         "team": "Signup",
         "workEmail": "Delia.Metzler@dkbcodefactory.com",
         "supervisorName": "Maghear, Adrian-Florin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Serhat.Sungur@dkbcodefactory.com",
@@ -1150,14 +1056,14 @@
         "team": "Signup",
         "workEmail": "Serhat.Sungur@dkbcodefactory.com",
         "supervisorName": "Maghear, Adrian-Florin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Thomas.Juhnke@dkbcodefactory.com",
@@ -1170,20 +1076,13 @@
         "workEmail": "Thomas.Juhnke@dkbcodefactory.com",
         "supervisorName": "Maghear, Adrian-Florin",
         "status": "FILLED",
-        "isCollapsed": true,
-        "directReportsCount": 0,
-        "totalReportsCount": 0,
-        "depth": 4,
+        "startDate": "",
         "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      }
     },
     {
       "id": "Thore.Ottenheym@dkbcodefactory.com",
@@ -1195,14 +1094,14 @@
         "team": "Onboarding",
         "workEmail": "Thore.Ottenheym@dkbcodefactory.com",
         "supervisorName": "Maghear, Adrian-Florin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "samuel.stein@dkbcodefactory.com",
@@ -1214,14 +1113,14 @@
         "team": "Sicherheiten",
         "workEmail": "samuel.stein@dkbcodefactory.com",
         "supervisorName": "Mazur, Maria",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Roman.Uglovskij@dkbcodefactory.com",
@@ -1233,14 +1132,14 @@
         "team": "Kreditwelt & Ablage",
         "workEmail": "Roman.Uglovskij@dkbcodefactory.com",
         "supervisorName": "Mazur, Maria",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Jennifer.Wjertzoch@dkbcodefactory.com",
@@ -1252,14 +1151,14 @@
         "team": "Kreditwelt & Ablage",
         "workEmail": "Jennifer.Wjertzoch@dkbcodefactory.com",
         "supervisorName": "Mazur, Maria",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Renata.Lazarov@dkbcodefactory.com",
@@ -1271,14 +1170,14 @@
         "team": "Verwalterplatform",
         "workEmail": "Renata.Lazarov@dkbcodefactory.com",
         "supervisorName": "Mazur, Maria",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "lucas.lee@dkbcodefactory.com",
@@ -1290,14 +1189,14 @@
         "team": "Broker",
         "workEmail": "lucas.lee@dkbcodefactory.com",
         "supervisorName": "Mösch, Christopher",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Leon.Kranich@dkbcodefactory.com",
@@ -1309,14 +1208,14 @@
         "team": "Broker",
         "workEmail": "Leon.Kranich@dkbcodefactory.com",
         "supervisorName": "Mösch, Christopher",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Naimah.Fowler@dkbcodefactory.com",
@@ -1328,14 +1227,14 @@
         "team": "Broker",
         "workEmail": "Naimah.Fowler@dkbcodefactory.com",
         "supervisorName": "Mösch, Christopher",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Antonio.Martinelli@dkbcodefactory.com",
@@ -1347,14 +1246,14 @@
         "team": "Broker",
         "workEmail": "Antonio.Martinelli@dkbcodefactory.com",
         "supervisorName": "Mösch, Christopher",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Janine.Brennfoerder@dkbcodefactory.com",
@@ -1366,14 +1265,14 @@
         "team": "Broker",
         "workEmail": "Janine.Brennfoerder@dkbcodefactory.com",
         "supervisorName": "Mösch, Christopher",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Bodo.Wissemann@dkbcodefactory.com",
@@ -1385,16 +1284,14 @@
         "team": "Broker",
         "workEmail": "Bodo.Wissemann@dkbcodefactory.com",
         "supervisorName": "Mösch, Christopher",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      }
     },
     {
       "id": "Alessandro.Memoli@dkbcodefactory.com",
@@ -1406,14 +1303,33 @@
         "team": "Broker",
         "workEmail": "Alessandro.Memoli@dkbcodefactory.com",
         "supervisorName": "Mösch, Christopher",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
+      }
+    },
+    {
+      "id": "jannikolai.rueckert@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Jan",
+        "lastName": "Rückert",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Broker",
+        "workEmail": "jannikolai.rueckert@dkbcodefactory.com",
+        "supervisorName": "Mösch, Christopher",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
-      "width": 240,
-      "height": 139
+      "position": {
+        "x": 0,
+        "y": 0
+      }
     },
     {
       "id": "Franziska.Comploi@dkbcodefactory.com",
@@ -1425,14 +1341,14 @@
         "team": "Homepage",
         "workEmail": "Franziska.Comploi@dkbcodefactory.com",
         "supervisorName": "Okumus, Yasin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Cynthia.Akinade@dkbcodefactory.com",
@@ -1444,14 +1360,14 @@
         "team": "Homepage",
         "workEmail": "Cynthia.Akinade@dkbcodefactory.com",
         "supervisorName": "Okumus, Yasin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Nataliia.Tbilieli@dkbcodefactory.com",
@@ -1463,14 +1379,14 @@
         "team": "Homepage",
         "workEmail": "Nataliia.Tbilieli@dkbcodefactory.com",
         "supervisorName": "Okumus, Yasin",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Philipp.Johannes@dkbcodefactory.com",
@@ -1482,14 +1398,14 @@
         "team": "Produktlöschung",
         "workEmail": "Philipp.Johannes@dkbcodefactory.com",
         "supervisorName": "Olukoye, Hannah",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Lena.Strokov@dkbcodefactory.com",
@@ -1501,14 +1417,14 @@
         "team": "Produktlöschung",
         "workEmail": "Lena.Strokov@dkbcodefactory.com",
         "supervisorName": "Olukoye, Hannah",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Marco.Rossow@dkbcodefactory.com",
@@ -1520,14 +1436,14 @@
         "team": "Produktlöschung",
         "workEmail": "Marco.Rossow@dkbcodefactory.com",
         "supervisorName": "Olukoye, Hannah",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Arlik.Florin@dkbcodefactory.com",
@@ -1539,14 +1455,14 @@
         "team": "Digitale Postverteilung",
         "workEmail": "Arlik.Florin@dkbcodefactory.com",
         "supervisorName": "Olukoye, Hannah",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Michael.Kutzner@dkbcodefactory.com",
@@ -1558,14 +1474,14 @@
         "team": "Produktlöschung",
         "workEmail": "Michael.Kutzner@dkbcodefactory.com",
         "supervisorName": "Olukoye, Hannah",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "thomas.Segkoulis@dkbcodefactory.com",
@@ -1577,14 +1493,14 @@
         "team": "Banking App - Nova Products",
         "workEmail": "thomas.Segkoulis@dkbcodefactory.com",
         "supervisorName": "Perez Gonzalez, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Leonard.Scharf@dkbcodefactory.com",
@@ -1596,14 +1512,14 @@
         "team": "Banking App - Nova Products",
         "workEmail": "Leonard.Scharf@dkbcodefactory.com",
         "supervisorName": "Perez Gonzalez, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Philipp.Geissler@dkbcodefactory.com",
@@ -1615,14 +1531,14 @@
         "team": "Banking App - Nova Products",
         "workEmail": "Philipp.Geissler@dkbcodefactory.com",
         "supervisorName": "Perez Gonzalez, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Thomas.Wilson@dkbcodefactory.com",
@@ -1634,14 +1550,14 @@
         "team": "Web Banking",
         "workEmail": "Thomas.Wilson@dkbcodefactory.com",
         "supervisorName": "Perez Gonzalez, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "rafal.Sztajer@dkbcodefactory.com",
@@ -1653,14 +1569,14 @@
         "team": "Broker",
         "workEmail": "rafal.Sztajer@dkbcodefactory.com",
         "supervisorName": "Perez Gonzalez, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Benjamin.Kunz@dkbcodefactory.com",
@@ -1672,14 +1588,14 @@
         "team": "Banking App - Nova Products",
         "workEmail": "Benjamin.Kunz@dkbcodefactory.com",
         "supervisorName": "Perez Gonzalez, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Pavlo.Tereshchuk@dkbcodefactory.com",
@@ -1691,14 +1607,14 @@
         "team": "Banking App - Nova Products",
         "workEmail": "Pavlo.Tereshchuk@dkbcodefactory.com",
         "supervisorName": "Perez Gonzalez, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Leoni.Sperling@dkbcodefactory.com",
@@ -1710,14 +1626,14 @@
         "team": "Banking App - Nova Products",
         "workEmail": "Leoni.Sperling@dkbcodefactory.com",
         "supervisorName": "Perez Gonzalez, Pablo",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "veit.schumacher@dkbcodefactory.com",
@@ -1729,14 +1645,14 @@
         "team": "Bank Account",
         "workEmail": "veit.schumacher@dkbcodefactory.com",
         "supervisorName": "Piotrowski, Lukasz",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Justina.Valda-Rajic@dkbcodefactory.com",
@@ -1744,18 +1660,18 @@
       "data": {
         "firstName": "Justina",
         "lastName": "Valda-Rajić",
-        "jobTitle": "Software Developer (Frontend)",
+        "jobTitle": "Senior Software Developer (Frontend)",
         "team": "",
         "workEmail": "Justina.Valda-Rajic@dkbcodefactory.com",
         "supervisorName": "Piotrowski, Lukasz",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Nabil.Mediouni@dkbcodefactory.com",
@@ -1767,14 +1683,14 @@
         "team": "",
         "workEmail": "Nabil.Mediouni@dkbcodefactory.com",
         "supervisorName": "Piotrowski, Lukasz",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "markus.may@dkbcodefactory.com",
@@ -1786,14 +1702,14 @@
         "team": "Beschluss",
         "workEmail": "markus.may@dkbcodefactory.com",
         "supervisorName": "Roeser, Benedict",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "stefan.kudwien@dkbcodefactory.com",
@@ -1805,14 +1721,14 @@
         "team": "Sicherheiten",
         "workEmail": "stefan.kudwien@dkbcodefactory.com",
         "supervisorName": "Roeser, Benedict",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "michael.Scharni@dkbcodefactory.com",
@@ -1824,14 +1740,14 @@
         "team": "Auflagen & Bonität",
         "workEmail": "michael.Scharni@dkbcodefactory.com",
         "supervisorName": "Roeser, Benedict",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Manuel.Pache@dkbcodefactory.com",
@@ -1843,14 +1759,14 @@
         "team": "Produkte & Wirtschaftlichkeit",
         "workEmail": "Manuel.Pache@dkbcodefactory.com",
         "supervisorName": "Roeser, Benedict",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Miroslav.Dzunic@dkbcodefactory.com",
@@ -1863,19 +1779,13 @@
         "workEmail": "Miroslav.Dzunic@dkbcodefactory.com",
         "supervisorName": "Roeser, Benedict",
         "status": "FILLED",
-        "isCollapsed": false,
-        "directReportsCount": 0,
-        "totalReportsCount": 0,
-        "depth": 3
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      }
     },
     {
       "id": "Rowena.Schmidt@dkbcodefactory.com",
@@ -1887,14 +1797,14 @@
         "team": "Beschluss",
         "workEmail": "Rowena.Schmidt@dkbcodefactory.com",
         "supervisorName": "Roeser, Benedict",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "anton.katzer@dkbcodefactory.com",
@@ -1906,14 +1816,14 @@
         "team": "Kreditwelt & Ablage",
         "workEmail": "anton.katzer@dkbcodefactory.com",
         "supervisorName": "Sanchez Delgado, Jesus Manuel",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "lukasz.Piotrowski@dkbcodefactory.com",
@@ -1925,14 +1835,14 @@
         "team": "Banking App - Nova Payments",
         "workEmail": "lukasz.Piotrowski@dkbcodefactory.com",
         "supervisorName": "Sanchez Delgado, Jesus Manuel",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "judith.hartmann@dkbcodefactory.com",
@@ -1944,14 +1854,14 @@
         "team": "",
         "workEmail": "judith.hartmann@dkbcodefactory.com",
         "supervisorName": "Sanchez Delgado, Jesus Manuel",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Daniel.Neuschaefer-Rube@dkbcodefactory.com",
@@ -1963,14 +1873,14 @@
         "team": "Produkte & Wirtschaftlichkeit",
         "workEmail": "Daniel.Neuschaefer-Rube@dkbcodefactory.com",
         "supervisorName": "Sanchez Delgado, Jesus Manuel",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Mesut.Okumus@dkbcodefactory.com",
@@ -1982,16 +1892,14 @@
         "team": "Homepage",
         "workEmail": "Mesut.Okumus@dkbcodefactory.com",
         "supervisorName": "Sanchez Delgado, Jesus Manuel",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      }
     },
     {
       "id": "Maria.Mazur@dkbcodefactory.com",
@@ -2003,14 +1911,14 @@
         "team": "Kreditwelt & Ablage",
         "workEmail": "Maria.Mazur@dkbcodefactory.com",
         "supervisorName": "Sanchez Delgado, Jesus Manuel",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Stiliyana.Yordanova@dkbcodefactory.com",
@@ -2022,14 +1930,14 @@
         "team": "Web Banking",
         "workEmail": "Stiliyana.Yordanova@dkbcodefactory.com",
         "supervisorName": "Sanchez Delgado, Jesus Manuel",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Tobias.Pohl@dkbcodefactory.com",
@@ -2041,14 +1949,14 @@
         "team": "Stammdaten / Produktänderung",
         "workEmail": "Tobias.Pohl@dkbcodefactory.com",
         "supervisorName": "Schaefer, Elif",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Patrick.Pister@dkbcodefactory.com",
@@ -2060,14 +1968,14 @@
         "team": "Sicherheiten Bearbeitung",
         "workEmail": "Patrick.Pister@dkbcodefactory.com",
         "supervisorName": "Schaefer, Elif",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Sven.Wetzurek@dkbcodefactory.com",
@@ -2079,14 +1987,14 @@
         "team": "Stammdaten / Produktänderung",
         "workEmail": "Sven.Wetzurek@dkbcodefactory.com",
         "supervisorName": "Schaefer, Elif",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Heiko.Ruhm@dkbcodefactory.com",
@@ -2098,14 +2006,14 @@
         "team": "Stammdaten / Produktänderung",
         "workEmail": "Heiko.Ruhm@dkbcodefactory.com",
         "supervisorName": "Schaefer, Elif",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Kristjana.Gjonaj@dkbcodefactory.com",
@@ -2117,33 +2025,14 @@
         "team": "Kredit Consult",
         "workEmail": "Kristjana.Gjonaj@dkbcodefactory.com",
         "supervisorName": "Schaefer, Elif",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
-    },
-    {
-      "id": "Miloslaw.Frey@dkbcodefactory.com",
-      "type": "person",
-      "data": {
-        "firstName": "Miloslaw",
-        "lastName": "Frey",
-        "jobTitle": "Senior Pega Developer",
-        "team": "Stammdaten-/Produktänderung",
-        "workEmail": "Miloslaw.Frey@dkbcodefactory.com",
-        "supervisorName": "Schaefer, Elif",
-        "status": "FILLED"
-      },
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "AkankshaBhardwaj.Rai@dkbcodefactory.com",
@@ -2155,14 +2044,14 @@
         "team": "Stammdaten-/Produktänderung",
         "workEmail": "AkankshaBhardwaj.Rai@dkbcodefactory.com",
         "supervisorName": "Schaefer, Elif",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "martin.fuerstenau@dkbcodefactory.com",
@@ -2174,14 +2063,14 @@
         "team": "Card MGMT & Stammdaten",
         "workEmail": "martin.fuerstenau@dkbcodefactory.com",
         "supervisorName": "Seigewasser, Stephan",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Sakthi.Arumugasami@dkbcodefactory.com",
@@ -2193,14 +2082,14 @@
         "team": "Card-API",
         "workEmail": "Sakthi.Arumugasami@dkbcodefactory.com",
         "supervisorName": "Seigewasser, Stephan",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "pablo.elo@dkbcodefactory.com",
@@ -2212,14 +2101,14 @@
         "team": "Loans",
         "workEmail": "pablo.elo@dkbcodefactory.com",
         "supervisorName": "Seigewasser, Stephan",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Driptaroop.Das@dkbcodefactory.com",
@@ -2231,14 +2120,14 @@
         "team": "",
         "workEmail": "Driptaroop.Das@dkbcodefactory.com",
         "supervisorName": "Seigewasser, Stephan",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Christopher.Moesch@dkbcodefactory.com",
@@ -2250,14 +2139,14 @@
         "team": "Broker",
         "workEmail": "Christopher.Moesch@dkbcodefactory.com",
         "supervisorName": "Seigewasser, Stephan",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Javier.delapena@dkbcodefactory.com",
@@ -2269,16 +2158,14 @@
         "team": "Communication & Documents",
         "workEmail": "Javier.delapena@dkbcodefactory.com",
         "supervisorName": "Seigewasser, Stephan",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      }
     },
     {
       "id": "Adrian.Maghear@dkbcodefactory.com",
@@ -2290,16 +2177,14 @@
         "team": "Signup",
         "workEmail": "Adrian.Maghear@dkbcodefactory.com",
         "supervisorName": "Seigewasser, Stephan",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false
+      }
     },
     {
       "id": "Georgios.Stavrakakis@dkbcodefactory.com",
@@ -2311,14 +2196,14 @@
         "team": "Card MGMT & Stammdaten",
         "workEmail": "Georgios.Stavrakakis@dkbcodefactory.com",
         "supervisorName": "Seigewasser, Stephan",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Biniam.Kefale@dkbcodefactory.com",
@@ -2330,14 +2215,14 @@
         "team": "Payment & Fraud",
         "workEmail": "Biniam.Kefale@dkbcodefactory.com",
         "supervisorName": "Seigewasser, Stephan",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Karim.Baydon@dkbcodefactory.com",
@@ -2349,14 +2234,71 @@
         "team": "Card MGMT & Stammdaten",
         "workEmail": "Karim.Baydon@dkbcodefactory.com",
         "supervisorName": "Seigewasser, Stephan",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
+      }
+    },
+    {
+      "id": "Dennis.Hiller@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Dennis",
+        "lastName": "Hiller",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Card MGMT & Stammdaten",
+        "workEmail": "Dennis.Hiller@dkbcodefactory.com",
+        "supervisorName": "Stavrakakis, Georgios",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
-      "width": 240,
-      "height": 139
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Ledion.Spaho@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Ledion",
+        "lastName": "Spaho",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Card MGMT & Stammdaten",
+        "workEmail": "Ledion.Spaho@dkbcodefactory.com",
+        "supervisorName": "Stavrakakis, Georgios",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Fabian.Georgi@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Fabian",
+        "lastName": "Georgi",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Card MGMT & Stammdaten",
+        "workEmail": "Fabian.Georgi@dkbcodefactory.com",
+        "supervisorName": "Stavrakakis, Georgios",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
     },
     {
       "id": "Hyung-Jun.Yoo@dkbcodefactory.com",
@@ -2368,14 +2310,14 @@
         "team": "Banking App - Nova Services",
         "workEmail": "Hyung-Jun.Yoo@dkbcodefactory.com",
         "supervisorName": "Steudter, Michael",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "fabian.Schaffner@dkbcodefactory.com",
@@ -2387,14 +2329,14 @@
         "team": "Banking App - Nova Payments",
         "workEmail": "fabian.Schaffner@dkbcodefactory.com",
         "supervisorName": "Steudter, Michael",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "anna.Cieslak@dkbcodefactory.com",
@@ -2406,14 +2348,14 @@
         "team": "Banking App - Nova Payments",
         "workEmail": "anna.Cieslak@dkbcodefactory.com",
         "supervisorName": "Steudter, Michael",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "stephan.georgi@dkbcodefactory.com",
@@ -2425,14 +2367,14 @@
         "team": "Banking App - Nova Payments",
         "workEmail": "stephan.georgi@dkbcodefactory.com",
         "supervisorName": "Steudter, Michael",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Mohamed.Abdelhamid@dkbcodefactory.com",
@@ -2444,14 +2386,14 @@
         "team": "Banking App - Nova Payments",
         "workEmail": "Mohamed.Abdelhamid@dkbcodefactory.com",
         "supervisorName": "Steudter, Michael",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "ekin.alcar@dkbcodefactory.com",
@@ -2463,14 +2405,14 @@
         "team": "Web Banking",
         "workEmail": "ekin.alcar@dkbcodefactory.com",
         "supervisorName": "Steudter, Michael",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Brent.Curriden@dkbcodefactory.com",
@@ -2482,14 +2424,33 @@
         "team": "Web Banking",
         "workEmail": "Brent.Curriden@dkbcodefactory.com",
         "supervisorName": "Steudter, Michael",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
+      }
+    },
+    {
+      "id": "Beatriz.Macuco@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Beatriz",
+        "lastName": "Loures Macuco",
+        "jobTitle": "Mobile Developer (iOS)",
+        "team": "Banking App - Nova Payments",
+        "workEmail": "Beatriz.Macuco@dkbcodefactory.com",
+        "supervisorName": "Steudter, Michael",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
-      "width": 240,
-      "height": 139
+      "position": {
+        "x": 0,
+        "y": 0
+      }
     },
     {
       "id": "margarita.gutierrez@dkbcodefactory.com",
@@ -2501,14 +2462,14 @@
         "team": "",
         "workEmail": "margarita.gutierrez@dkbcodefactory.com",
         "supervisorName": "Wrede, Raphaela",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Elif.Schaefer@dkbcodefactory.com",
@@ -2520,20 +2481,14 @@
         "team": "",
         "workEmail": "Elif.Schaefer@dkbcodefactory.com",
         "supervisorName": "Wrede, Raphaela",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
-        "x": 9182.606230762052,
-        "y": 716.4962842802081
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "positionAbsolute": {
-        "x": 9182.606230762052,
-        "y": 716.4962842802081
-      },
-      "dragging": false
+        "x": 0,
+        "y": 0
+      }
     },
     {
       "id": "HannahAkinyi.Olukoye@dkbcodefactory.com",
@@ -2545,14 +2500,33 @@
         "team": "",
         "workEmail": "HannahAkinyi.Olukoye@dkbcodefactory.com",
         "supervisorName": "Wrede, Raphaela",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
+      }
+    },
+    {
+      "id": "Kathrin.Holweger@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Kathrin",
+        "lastName": "Holweger",
+        "jobTitle": "Engineering Manager (Pega)",
+        "team": "",
+        "workEmail": "Kathrin.Holweger@dkbcodefactory.com",
+        "supervisorName": "Wrede, Raphaela",
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
-      "width": 240,
-      "height": 139
+      "position": {
+        "x": 0,
+        "y": 0
+      }
     },
     {
       "id": "Luisa.CruzMolina@dkbcodefactory.com",
@@ -2564,14 +2538,14 @@
         "team": "Banking App - Nova Core",
         "workEmail": "Luisa.CruzMolina@dkbcodefactory.com",
         "supervisorName": "Yordanova, Stiliyana",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Aija.Avota@dkbcodefactory.com",
@@ -2583,14 +2557,14 @@
         "team": "Web Banking",
         "workEmail": "Aija.Avota@dkbcodefactory.com",
         "supervisorName": "Yordanova, Stiliyana",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "luno.forchert@dkbcodefactory.com",
@@ -2602,14 +2576,14 @@
         "team": "Banking App - Nova Payments",
         "workEmail": "luno.forchert@dkbcodefactory.com",
         "supervisorName": "Yordanova, Stiliyana",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Joao.Belchior@dkbcodefactory.com",
@@ -2621,14 +2595,14 @@
         "team": "Web Banking",
         "workEmail": "Joao.Belchior@dkbcodefactory.com",
         "supervisorName": "Yordanova, Stiliyana",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
+      }
     },
     {
       "id": "Christophe.Hoste@dkbcodefactory.com",
@@ -2640,67 +2614,14 @@
         "team": "Banking App - Nova Services",
         "workEmail": "Christophe.Hoste@dkbcodefactory.com",
         "supervisorName": "Yordanova, Stiliyana",
-        "status": "FILLED"
+        "status": "FILLED",
+        "startDate": "",
+        "exitDate": ""
       },
       "position": {
         "x": 0,
         "y": 0
-      },
-      "width": 240,
-      "height": 139
-    },
-    {
-      "id": "empty-1771505245025",
-      "type": "person",
-      "data": {
-        "firstName": "",
-        "lastName": "",
-        "jobTitle": "Senior Software Developer (Backend)",
-        "team": "Communication & Documents",
-        "status": "EMPTY",
-        "startDate": "",
-        "exitDate": "",
-        "isCollapsed": false,
-        "directReportsCount": 0,
-        "totalReportsCount": 0,
-        "depth": 4
-      },
-      "position": {
-        "x": 0,
-        "y": 748.4872620790629
-      },
-      "width": 240,
-      "height": 139,
-      "selected": false,
-      "dragging": false,
-      "positionAbsolute": {
-        "x": 0,
-        "y": 748.4872620790629
       }
-    },
-    {
-      "id": "empty-1771507675448",
-      "type": "person",
-      "data": {
-        "firstName": "",
-        "lastName": "",
-        "jobTitle": "Senior Mobile Developer (iOS)",
-        "team": "Banking App - Nova Services",
-        "status": "EMPTY",
-        "startDate": "",
-        "exitDate": "",
-        "isCollapsed": true,
-        "directReportsCount": 0,
-        "totalReportsCount": 0,
-        "depth": 4,
-        "customColor": "#ffffff"
-      },
-      "position": {
-        "x": 0,
-        "y": 200
-      },
-      "width": 240,
-      "height": 139
     }
   ],
   "edges": [
@@ -2738,6 +2659,11 @@
       "id": "e-Karim.Baydon@dkbcodefactory.com-Ali.Adel@dkbcodefactory.com",
       "source": "Karim.Baydon@dkbcodefactory.com",
       "target": "Ali.Adel@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Karim.Baydon@dkbcodefactory.com-Eugen.Puzynin@dkbcodefactory.com",
+      "source": "Karim.Baydon@dkbcodefactory.com",
+      "target": "Eugen.Puzynin@dkbcodefactory.com"
     },
     {
       "id": "e-Karim.Baydon@dkbcodefactory.com-Asghar.Mirzaei@dkbcodefactory.com",
@@ -2845,44 +2771,9 @@
       "target": "hannes.Waldschmidt@dkbcodefactory.com"
     },
     {
-      "id": "e-martin.fuerstenau@dkbcodefactory.com-Dennis.Hiller@dkbcodefactory.com",
-      "source": "martin.fuerstenau@dkbcodefactory.com",
-      "target": "Dennis.Hiller@dkbcodefactory.com"
-    },
-    {
-      "id": "e-martin.fuerstenau@dkbcodefactory.com-Ledion.Spaho@dkbcodefactory.com",
-      "source": "martin.fuerstenau@dkbcodefactory.com",
-      "target": "Ledion.Spaho@dkbcodefactory.com"
-    },
-    {
-      "id": "e-martin.fuerstenau@dkbcodefactory.com-Fabian.Georgi@dkbcodefactory.com",
-      "source": "martin.fuerstenau@dkbcodefactory.com",
-      "target": "Fabian.Georgi@dkbcodefactory.com"
-    },
-    {
       "id": "e-margarita.gutierrez@dkbcodefactory.com-Daniel.Stopka@dkbcodefactory.com",
       "source": "margarita.gutierrez@dkbcodefactory.com",
       "target": "Daniel.Stopka@dkbcodefactory.com"
-    },
-    {
-      "id": "e-margarita.gutierrez@dkbcodefactory.com-Franz.Hefele@dkbcodefactory.com",
-      "source": "margarita.gutierrez@dkbcodefactory.com",
-      "target": "Franz.Hefele@dkbcodefactory.com"
-    },
-    {
-      "id": "e-margarita.gutierrez@dkbcodefactory.com-stefan.junge@dkbcodefactory.com",
-      "source": "margarita.gutierrez@dkbcodefactory.com",
-      "target": "stefan.junge@dkbcodefactory.com"
-    },
-    {
-      "id": "e-margarita.gutierrez@dkbcodefactory.com-Marie.Jager@dkbcodefactory.com",
-      "source": "margarita.gutierrez@dkbcodefactory.com",
-      "target": "Marie.Jager@dkbcodefactory.com"
-    },
-    {
-      "id": "e-margarita.gutierrez@dkbcodefactory.com-Mounika.Sunkara@dkbcodefactory.com",
-      "source": "margarita.gutierrez@dkbcodefactory.com",
-      "target": "Mounika.Sunkara@dkbcodefactory.com"
     },
     {
       "id": "e-Christoph.Henzelmann@dkbcodefactory.com-ivan.borsa@dkbcodefactory.com",
@@ -2903,6 +2794,26 @@
       "id": "e-Christoph.Henzelmann@dkbcodefactory.com-Pablo.Perez-Gonzalez@dkbcodefactory.com",
       "source": "Christoph.Henzelmann@dkbcodefactory.com",
       "target": "Pablo.Perez-Gonzalez@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Kathrin.Holweger@dkbcodefactory.com-Franz.Hefele@dkbcodefactory.com",
+      "source": "Kathrin.Holweger@dkbcodefactory.com",
+      "target": "Franz.Hefele@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Kathrin.Holweger@dkbcodefactory.com-stefan.junge@dkbcodefactory.com",
+      "source": "Kathrin.Holweger@dkbcodefactory.com",
+      "target": "stefan.junge@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Kathrin.Holweger@dkbcodefactory.com-Marie.Jager@dkbcodefactory.com",
+      "source": "Kathrin.Holweger@dkbcodefactory.com",
+      "target": "Marie.Jager@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Kathrin.Holweger@dkbcodefactory.com-Mounika.Sunkara@dkbcodefactory.com",
+      "source": "Kathrin.Holweger@dkbcodefactory.com",
+      "target": "Mounika.Sunkara@dkbcodefactory.com"
     },
     {
       "id": "e-vladimir.ignjatijevic@dkbcodefactory.com-andrej.bielevicius@dkbcodefactory.com",
@@ -2948,11 +2859,6 @@
       "id": "e-Biniam.Kefale@dkbcodefactory.com-Denys.Stoianov@dkbcodefactory.com",
       "source": "Biniam.Kefale@dkbcodefactory.com",
       "target": "Denys.Stoianov@dkbcodefactory.com"
-    },
-    {
-      "id": "e-Biniam.Kefale@dkbcodefactory.com-Byeonggil.Park@dkbcodefactory.com",
-      "source": "Biniam.Kefale@dkbcodefactory.com",
-      "target": "Byeonggil.Park@dkbcodefactory.com"
     },
     {
       "id": "e-Biniam.Kefale@dkbcodefactory.com-Mehrdad.Yami@dkbcodefactory.com",
@@ -3058,6 +2964,11 @@
       "id": "e-Christopher.Moesch@dkbcodefactory.com-Alessandro.Memoli@dkbcodefactory.com",
       "source": "Christopher.Moesch@dkbcodefactory.com",
       "target": "Alessandro.Memoli@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christopher.Moesch@dkbcodefactory.com-jannikolai.rueckert@dkbcodefactory.com",
+      "source": "Christopher.Moesch@dkbcodefactory.com",
+      "target": "jannikolai.rueckert@dkbcodefactory.com"
     },
     {
       "id": "e-Mesut.Okumus@dkbcodefactory.com-Franziska.Comploi@dkbcodefactory.com",
@@ -3245,11 +3156,6 @@
       "target": "Kristjana.Gjonaj@dkbcodefactory.com"
     },
     {
-      "id": "e-Elif.Schaefer@dkbcodefactory.com-Miloslaw.Frey@dkbcodefactory.com",
-      "source": "Elif.Schaefer@dkbcodefactory.com",
-      "target": "Miloslaw.Frey@dkbcodefactory.com"
-    },
-    {
       "id": "e-Elif.Schaefer@dkbcodefactory.com-AkankshaBhardwaj.Rai@dkbcodefactory.com",
       "source": "Elif.Schaefer@dkbcodefactory.com",
       "target": "AkankshaBhardwaj.Rai@dkbcodefactory.com"
@@ -3305,6 +3211,21 @@
       "target": "Karim.Baydon@dkbcodefactory.com"
     },
     {
+      "id": "e-Georgios.Stavrakakis@dkbcodefactory.com-Dennis.Hiller@dkbcodefactory.com",
+      "source": "Georgios.Stavrakakis@dkbcodefactory.com",
+      "target": "Dennis.Hiller@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Georgios.Stavrakakis@dkbcodefactory.com-Ledion.Spaho@dkbcodefactory.com",
+      "source": "Georgios.Stavrakakis@dkbcodefactory.com",
+      "target": "Ledion.Spaho@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Georgios.Stavrakakis@dkbcodefactory.com-Fabian.Georgi@dkbcodefactory.com",
+      "source": "Georgios.Stavrakakis@dkbcodefactory.com",
+      "target": "Fabian.Georgi@dkbcodefactory.com"
+    },
+    {
       "id": "e-michael.steudter@dkbcodefactory.com-Hyung-Jun.Yoo@dkbcodefactory.com",
       "source": "michael.steudter@dkbcodefactory.com",
       "target": "Hyung-Jun.Yoo@dkbcodefactory.com"
@@ -3340,6 +3261,11 @@
       "target": "Brent.Curriden@dkbcodefactory.com"
     },
     {
+      "id": "e-michael.steudter@dkbcodefactory.com-Beatriz.Macuco@dkbcodefactory.com",
+      "source": "michael.steudter@dkbcodefactory.com",
+      "target": "Beatriz.Macuco@dkbcodefactory.com"
+    },
+    {
       "id": "e-raphaela.wrede@dkbcodefactory.com-margarita.gutierrez@dkbcodefactory.com",
       "source": "raphaela.wrede@dkbcodefactory.com",
       "target": "margarita.gutierrez@dkbcodefactory.com"
@@ -3353,6 +3279,11 @@
       "id": "e-raphaela.wrede@dkbcodefactory.com-HannahAkinyi.Olukoye@dkbcodefactory.com",
       "source": "raphaela.wrede@dkbcodefactory.com",
       "target": "HannahAkinyi.Olukoye@dkbcodefactory.com"
+    },
+    {
+      "id": "e-raphaela.wrede@dkbcodefactory.com-Kathrin.Holweger@dkbcodefactory.com",
+      "source": "raphaela.wrede@dkbcodefactory.com",
+      "target": "Kathrin.Holweger@dkbcodefactory.com"
     },
     {
       "id": "e-Stiliyana.Yordanova@dkbcodefactory.com-Luisa.CruzMolina@dkbcodefactory.com",
@@ -3378,155 +3309,21 @@
       "id": "e-Stiliyana.Yordanova@dkbcodefactory.com-Christophe.Hoste@dkbcodefactory.com",
       "source": "Stiliyana.Yordanova@dkbcodefactory.com",
       "target": "Christophe.Hoste@dkbcodefactory.com"
-    },
-    {
-      "id": "e-Javier.delapena@dkbcodefactory.com-empty-1771505245025",
-      "source": "Javier.delapena@dkbcodefactory.com",
-      "target": "empty-1771505245025"
-    },
-    {
-      "id": "e-ivan.borsa@dkbcodefactory.com-empty-1771507675448",
-      "source": "ivan.borsa@dkbcodefactory.com",
-      "target": "empty-1771507675448"
     }
   ],
+  "lastUpdated": "2026-02-27T20:41:19.395Z",
   "viewState": {
-    "maxDepth": 4,
+    "maxDepth": 10,
     "leafColumns": 2,
-    "collapsedNodes": [
-      "Mesut.Okumus@dkbcodefactory.com"
-    ],
-    "expandedNodes": [
-      "Benedict.Roeser@dkbcodefactory.com",
-      "Marc.Bobzien@dkbcodefactory.com"
-    ],
-    "leadershipLayers": [
-      {
-        "id": "1772127286089",
-        "name": "Layer 1",
-        "identifier": "Chapter Lead"
-      },
-      {
-        "id": "1772127292230",
-        "name": "Layer 2",
-        "identifier": "\"Engineering Manager, Principal\""
-      }
-    ],
+    "collapsedNodes": [],
+    "expandedNodes": [],
+    "leadershipLayers": [],
     "nodeFilters": [],
-    "filterGroups": [
-      {
-        "id": "1772219158005",
-        "name": "Seniority",
-        "enabled": false,
-        "filters": [
-          {
-            "id": "1772129177466",
-            "name": "Filter 2",
-            "pattern": "Junior",
-            "color": "#e5ffeb"
-          },
-          {
-            "id": "1772129079947",
-            "name": "Filter 1",
-            "pattern": "Senior",
-            "color": "#2acb2c"
-          },
-          {
-            "id": "1772131399610",
-            "name": "Filter 3",
-            "pattern": "Principal",
-            "color": "#00ad1d"
-          },
-          {
-            "id": "1772131426102",
-            "name": "Filter 4",
-            "pattern": "Engineering Manager",
-            "color": "#8fabff"
-          },
-          {
-            "id": "1772131584562",
-            "name": "Filter 5",
-            "pattern": "Chapter Lead",
-            "color": "#526eff"
-          },
-          {
-            "id": "1772132183161",
-            "name": "Filter 6",
-            "pattern": "Head",
-            "color": "#0061e0"
-          },
-          {
-            "id": "1772219117210",
-            "name": "Filter 7",
-            "pattern": "Werkstudent",
-            "color": "#ffc2e5"
-          }
-        ],
-        "defaultFallbackColor": "#91ee92"
-      },
-      {
-        "id": "1772134835504",
-        "name": "Plattform",
-        "enabled": false,
-        "filters": [
-          {
-            "id": "1772134162553",
-            "name": "Filter 1",
-            "pattern": "Frontend",
-            "color": "#58d336"
-          },
-          {
-            "id": "1772134191276",
-            "name": "Filter 2",
-            "pattern": "Backend",
-            "color": "#3a24e5"
-          },
-          {
-            "id": "1772134220388",
-            "name": "Filter 3",
-            "pattern": "Pega",
-            "color": "#2f86f9"
-          },
-          {
-            "id": "1772134241521",
-            "name": "Filter 4",
-            "pattern": "Android",
-            "color": "#5bd7c2"
-          },
-          {
-            "id": "1772134272113",
-            "name": "Filter 5",
-            "pattern": "iOS",
-            "color": "#ffe32e"
-          },
-          {
-            "id": "1772134409015",
-            "name": "Filter 6",
-            "pattern": "Mobile",
-            "color": "#fff942"
-          },
-          {
-            "id": "1772134566660",
-            "name": "Filter 7",
-            "pattern": "Werkstudent",
-            "color": "#ffccf8"
-          },
-          {
-            "id": "1772134788204",
-            "name": "Filter 8",
-            "pattern": "Head of Engineering",
-            "color": "#4f8f00"
-          }
-        ],
-        "defaultFallbackColor": "#ffffff"
-      }
-    ],
+    "filterGroups": [],
     "defaultFallbackColor": "#ffffff",
-    "searchShortcut": "meta+f",
+    "searchShortcut": "meta+e",
     "teamsShortcut": "meta+m",
     "companyDomain": "dkb.de",
     "outlookBaseUrl": "https://outlook.office.com/mail/deeplink/compose"
-  },
-  "lastUpdated": "2026-02-27T19:10:04.668Z",
-  "name": "CoFa Engineering"
+  }
 }

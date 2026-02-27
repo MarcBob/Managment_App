@@ -129,6 +129,33 @@ app.post('/api/rename', (req, res) => {
   }
 });
 
+// Delete a plan
+app.delete('/api/plans/:name', (req, res) => {
+  const name = req.params.name;
+  const filePath = path.join(PLANS_DIR, `${name}.json`);
+
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: 'Plan not found' });
+  }
+
+  try {
+    // Delete the plan file
+    fs.unlinkSync(filePath);
+    
+    // Delete associated backups
+    if (fs.existsSync(BACKUP_DIR)) {
+      const backups = fs.readdirSync(BACKUP_DIR).filter(f => f.startsWith(`${name}_`));
+      backups.forEach(f => fs.unlinkSync(path.join(BACKUP_DIR, f)));
+    }
+
+    console.log(`[BACKEND] DELETE - [${name}]`);
+    res.json({ success: true });
+  } catch (error) {
+    console.error('[BACKEND] Error deleting plan:', error);
+    res.status(500).json({ error: 'Failed to delete plan' });
+  }
+});
+
 // Legacy support for /api/load and /api/save (points to 'default')
 app.get('/api/load', noCache, (req, res) => {
   res.redirect('/api/load/default');
