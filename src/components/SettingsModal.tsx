@@ -158,6 +158,8 @@ export const SettingsModal = ({
   };
 
   const [draggedFilterIndex, setDraggedFilterIndex] = useState<number | null>(null);
+  const [draggedGroupIndex, setDraggedGroupIndex] = useState<number | null>(null);
+  const [draggedLayerIndex, setDraggedLayerIndex] = useState<number | null>(null);
 
   const handleDragStart = (index: number) => {
     setDraggedFilterIndex(index);
@@ -177,6 +179,46 @@ export const SettingsModal = ({
 
   const handleDragEnd = () => {
     setDraggedFilterIndex(null);
+  };
+
+  const handleGroupDragStart = (index: number) => {
+    setDraggedGroupIndex(index);
+  };
+
+  const handleGroupDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    if (draggedGroupIndex === null || draggedGroupIndex === index) return;
+
+    const newGroups = [...filterGroups];
+    const draggedItem = newGroups[draggedGroupIndex];
+    newGroups.splice(draggedGroupIndex, 1);
+    newGroups.splice(index, 0, draggedItem);
+    setFilterGroups(newGroups);
+    setDraggedGroupIndex(index);
+  };
+
+  const handleGroupDragEnd = () => {
+    setDraggedGroupIndex(null);
+  };
+
+  const handleLayerDragStart = (index: number) => {
+    setDraggedLayerIndex(index);
+  };
+
+  const handleLayerDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    if (draggedLayerIndex === null || draggedLayerIndex === index) return;
+
+    const newLayers = [...leadershipLayers];
+    const draggedItem = newLayers[draggedLayerIndex];
+    newLayers.splice(draggedLayerIndex, 1);
+    newLayers.splice(index, 0, draggedItem);
+    setLeadershipLayers(newLayers);
+    setDraggedLayerIndex(index);
+  };
+
+  const handleLayerDragEnd = () => {
+    setDraggedLayerIndex(null);
   };
 
   return (
@@ -325,14 +367,23 @@ export const SettingsModal = ({
               </div>
 
               <div className="space-y-2">
-                {filterGroups.map((group) => (
+                {filterGroups.map((group, index) => (
                   <div 
                     key={group.id} 
+                    draggable
+                    onDragStart={() => handleGroupDragStart(index)}
+                    onDragOver={(e) => handleGroupDragOver(e, index)}
+                    onDragEnd={handleGroupDragEnd}
                     className={cn(
                       "flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100 transition-all",
-                      !group.enabled && "opacity-60 bg-slate-100"
+                      !group.enabled && "opacity-60 bg-slate-100",
+                      draggedGroupIndex === index ? "opacity-40 scale-95 border-blue-400 border-dashed" : "opacity-100"
                     )}
                   >
+                    <div className="cursor-grab active:cursor-grabbing text-slate-300 hover:text-slate-500">
+                      <GripVertical size={18} />
+                    </div>
+
                     <button 
                       onClick={() => toggleFilterGroup(group.id)}
                       className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
@@ -408,7 +459,20 @@ export const SettingsModal = ({
 
             <div className="space-y-2">
               {leadershipLayers.map((layer, index) => (
-                <div key={layer.id} className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-100 group">
+                <div 
+                  key={layer.id} 
+                  draggable
+                  onDragStart={() => handleLayerDragStart(index)}
+                  onDragOver={(e) => handleLayerDragOver(e, index)}
+                  onDragEnd={handleLayerDragEnd}
+                  className={cn(
+                    "flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-100 group transition-all",
+                    draggedLayerIndex === index ? "opacity-40 scale-95 border-blue-400 border-dashed" : "opacity-100"
+                  )}
+                >
+                  <div className="cursor-grab active:cursor-grabbing text-slate-300 hover:text-slate-500">
+                    <GripVertical size={18} />
+                  </div>
                   <div className="text-xs font-bold text-slate-400 w-6">
                     L{index + 1}
                   </div>

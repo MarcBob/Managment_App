@@ -68,9 +68,12 @@ Build a web application to plan and visualize an engineering organization. The a
        - Added a statistics modal that displays key metrics: total positions, organizational depth, and minimum/maximum leadership span.
        - Dynamic counts for all active color filters (including those in filter groups).
        - Accessible by clicking the "Positions" label in the top-right corner.
+   12. **Reordering & Priority:**
+       - Added drag-and-drop reordering for Filter Groups and Leadership Layers in the Chart Settings modal.
+       - Allows users to easily adjust the priority of color filter sets and the vertical alignment hierarchy of the organization chart.
    ## Next Steps (Future Enhancements)
-- [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height.
+- [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height. Now supports reordering.
 - [x] Visual Team Clustering: Draw frames around direct reports in the same team. The frame also includes the team lead if they share the same team property.
 - [x] Custom Node Filters: Define color filters for nodes based on job title keywords, with priority-based ordering.
-- [x] Filter Groups: Save sets of filters as higher-level groups that can be toggled on/off collectively.
+- [x] Filter Groups: Save sets of filters as higher-level groups that can be toggled on/off collectively. Now supports reordering.
 - Detailed person info in a side panel.
