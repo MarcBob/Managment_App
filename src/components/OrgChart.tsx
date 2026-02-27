@@ -443,6 +443,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         status: 'EMPTY',
         startDate: '',
         exitDate: '',
+        probationEndDate: '',
       },
       position: parentNode 
         ? { x: parentNode.position.x, y: parentNode.position.y + 200 }

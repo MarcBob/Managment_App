@@ -430,6 +430,16 @@ export const EditNodeModal = ({
               </div>
             </div>
 
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Probation Period Ends</label>
+              <input
+                type="date"
+                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                value={formData.probationEndDate || ''}
+                onChange={(e) => setFormData({ ...formData, probationEndDate: e.target.value })}
+              />
+            </div>
+
             <div className="pt-4 flex flex-col gap-3">
               <div className="flex gap-3">
                 <button

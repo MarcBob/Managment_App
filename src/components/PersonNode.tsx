@@ -1,7 +1,7 @@
 import { memo, useMemo, useContext, useEffect } from 'react';
 import { Handle, Position } from 'reactflow';
 import type { NodeProps } from 'reactflow';
-import { User, UserMinus, Plus, ChevronDown, ChevronRight, Calendar } from 'lucide-react';
+import { User, UserMinus, Plus, ChevronDown, ChevronRight, Calendar, AlertCircle } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -27,10 +27,17 @@ export const PersonNode = memo(({ data, id, xPos, yPos }: NodeProps) => {
     totalReportsCount,
     startDate,
     exitDate,
+    probationEndDate,
     customColor,
   } = data;
 
   const { mousePos, isSpacePressed } = useContext(MouseContext);
+
+  const today = useMemo(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }, []);
 
   const scale = useMemo(() => {
     if (!isSpacePressed) return 1;
@@ -76,12 +83,17 @@ export const PersonNode = memo(({ data, id, xPos, yPos }: NodeProps) => {
   const isFutureHire = useMemo(() => {
     if (!startDate) return false;
     const start = new Date(startDate);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
     return start >= today;
-  }, [startDate]);
+  }, [startDate, today]);
 
   const hasExitDate = !!exitDate;
+
+  const isOnProbation = useMemo(() => {
+    if (!probationEndDate) return false;
+    const end = new Date(probationEndDate);
+    // On probation if today is <= probation end date
+    return today <= end;
+  }, [probationEndDate, today]);
 
   return (
     <div 
@@ -97,17 +109,23 @@ export const PersonNode = memo(({ data, id, xPos, yPos }: NodeProps) => {
       onClick={() => onEditNode(id, data)}
     >
       {/* Date Labels */}
-      <div className="absolute -top-3 left-2 flex gap-1">
+      <div className="absolute -top-3 left-2 flex flex-wrap gap-1 max-w-[220px]">
         {isFutureHire && (
-          <div className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-emerald-600">
+          <div className="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-emerald-600 whitespace-nowrap">
             <Calendar size={10} />
             Starts: {startDate}
           </div>
         )}
         {hasExitDate && (
-          <div className="bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-rose-600">
+          <div className="bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-rose-600 whitespace-nowrap">
             <Calendar size={10} />
             Exits: {exitDate}
+          </div>
+        )}
+        {isOnProbation && (
+          <div className="bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-amber-600 whitespace-nowrap">
+            <AlertCircle size={10} />
+            Probation: {probationEndDate}
           </div>
         )}
       </div>

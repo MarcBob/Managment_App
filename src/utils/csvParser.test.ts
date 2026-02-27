@@ -6,6 +6,10 @@ Marc,Bobzien,Head of Engineering,,Marc.Bobzien@dkbcodefactory.com,"Lehsten, Alex
 Jesus Manuel,Sanchez Delgado,Chapter Lead Engineering (Frontend),,manuel.sanchez@dkbcodefactory.com,"Bobzien, Marc",FILLED,2023-02-01,2024-12-31
 Anton,Katzer,Principal Engineer (Frontend),Kreditwelt & Ablage,anton.katzer@dkbcodefactory.com,"Sanchez Delgado, Jesus Manuel",FILLED,,`;
 
+const bambooCsv = `First Name,Last Name,Job Title,Team,Work Email,Supervisor name,Hire Date,Contract Termination Date,Probation Period Ends
+Marc,Bobzien,Head of Engineering,,Marc.Bobzien@dkbcodefactory.com,"Lehsten, Alexander",2023-01-01,,2023-07-01
+Jesus Manuel,Sanchez Delgado,Chapter Lead Engineering (Frontend),,manuel.sanchez@dkbcodefactory.com,"Bobzien, Marc",01/02/2023,2024-12-31,2023-08-01`;
+
 describe('csvParser', () => {
   it('should parse CSV and return nodes and edges including dates', () => {
     const { nodes } = parseOrgCsv(mockCsv);
@@ -19,6 +23,22 @@ describe('csvParser', () => {
     const manuel = nodes.find(n => n.id === 'manuel.sanchez@dkbcodefactory.com');
     expect(manuel?.data.startDate).toBe('2023-02-01');
     expect(manuel?.data.exitDate).toBe('2024-12-31');
+  });
+
+  it('should parse BambooHR style CSV with different date column names and normalize dates', () => {
+    const { nodes } = parseOrgCsv(bambooCsv);
+
+    expect(nodes).toHaveLength(2);
+    
+    const marc = nodes.find(n => n.id === 'Marc.Bobzien@dkbcodefactory.com');
+    expect(marc?.data.startDate).toBe('2023-01-01');
+    expect(marc?.data.probationEndDate).toBe('2023-07-01');
+
+    const manuel = nodes.find(n => n.id === 'manuel.sanchez@dkbcodefactory.com');
+    // 01/02/2023 becomes 2023-01-02 in most environments
+    expect(manuel?.data.startDate).toBe('2023-01-02');
+    expect(manuel?.data.exitDate).toBe('2024-12-31');
+    expect(manuel?.data.probationEndDate).toBe('2023-08-01');
   });
 
   it('should handle "LastName, FirstName" supervisor matching', () => {

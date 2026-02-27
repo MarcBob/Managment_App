@@ -10,6 +10,7 @@ export interface OrgNodeData {
   status: 'FILLED' | 'EMPTY';
   startDate?: string;
   exitDate?: string;
+  probationEndDate?: string;
 }
 
 export interface OrgNode {
@@ -25,10 +26,41 @@ export interface OrgEdge {
   target: string;
 }
 
+const normalizeDate = (dateStr: string) => {
+  if (!dateStr) return '';
+  
+  // Try to parse the date
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) {
+    // If native parsing fails, try manual DD.MM.YYYY or MM/DD/YYYY
+    const parts = dateStr.split(/[\/\-\.]/);
+    if (parts.length === 3) {
+      // Check if first part is year (YYYY-MM-DD)
+      if (parts[0].length === 4) {
+        return `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`;
+      }
+      // Check if third part is year (DD.MM.YYYY or MM/DD/YYYY)
+      if (parts[2].length === 4) {
+        // We'll return it in a way that can be parsed or just return as is
+        // But the native Date constructor is better for this
+        return `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+      }
+    }
+    return dateStr;
+  }
+  
+  // Format as YYYY-MM-DD using local time to avoid timezone shifts
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+};
+
 export const parseOrgCsv = (csvString: string) => {
   const result = Papa.parse(csvString, {
     header: true,
     skipEmptyLines: true,
+    transformHeader: (header) => header.trim(),
     transform: (value) => value.trim(),
   });
 
@@ -62,8 +94,9 @@ export const parseOrgCsv = (csvString: string) => {
         workEmail: email,
         supervisorName: row['Supervisor name'],
         status: status === 'EMPTY' ? 'EMPTY' : 'FILLED',
-        startDate: row['Start Date'] || '',
-        exitDate: row['Exit Date'] || '',
+        startDate: normalizeDate(row['Hire Date'] || row['Start Date'] || ''),
+        exitDate: normalizeDate(row['Contract Termination Date'] || row['Exit Date'] || ''),
+        probationEndDate: normalizeDate(row['Probation Period Ends'] || ''),
       },
       position: { x: 0, y: 0 },
     });
@@ -112,6 +145,7 @@ export const exportToCsv = (nodes: OrgNode[], edges: OrgEdge[]) => {
       'Status': node.data.status,
       'Start Date': node.data.startDate || '',
       'Exit Date': node.data.exitDate || '',
+      'Probation Period Ends': node.data.probationEndDate || '',
     };
   });
 

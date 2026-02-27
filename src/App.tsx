@@ -88,7 +88,7 @@ function App() {
 
   const syncToServer = useCallback(async (state: PlanData) => {
     try {
-      const response = await fetch(`${API_URL}/save/${state.name}`, {
+      const response = await fetch(`${API_URL}/save/${encodeURIComponent(state.name)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(state),
@@ -306,7 +306,7 @@ function App() {
 
     try {
       if (serverReachable) {
-        const response = await fetch(`${API_URL}/plans/${name}`, {
+        const response = await fetch(`${API_URL}/plans/${encodeURIComponent(name)}`, {
           method: 'DELETE',
         });
         if (!response.ok) {
@@ -380,7 +380,7 @@ function App() {
     if (!data || !serverReachable) return;
 
     try {
-      const response = await fetch(`${API_URL}/load/${planName}`);
+      const response = await fetch(`${API_URL}/load/${encodeURIComponent(planName)}`);
       if (response.ok) {
         const targetPlan: LegacyPlanData = await response.json();
         let importedViewState: ViewState | undefined;

@@ -13,7 +13,13 @@
         "supervisorName": "Arumugasami, Sakthi",
         "status": "FILLED",
         "startDate": "",
-        "exitDate": ""
+        "exitDate": "",
+        "isCollapsed": true,
+        "directReportsCount": 0,
+        "totalReportsCount": 0,
+        "depth": 4,
+        "customColor": "#ffffff",
+        "probationEndDate": ""
       },
       "position": {
         "x": 0,
@@ -3311,7 +3317,7 @@
       "target": "Christophe.Hoste@dkbcodefactory.com"
     }
   ],
-  "lastUpdated": "2026-02-27T20:46:55.650Z",
+  "lastUpdated": "2026-02-27T21:07:03.781Z",
   "viewState": {
     "maxDepth": 4,
     "leafColumns": 2,

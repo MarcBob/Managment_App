@@ -83,6 +83,11 @@ Build a web application to plan and visualize an engineering organization. The a
            - Added the ability to import settings (filters, layers, shortcuts, etc.) from another plan.
            - Accessible from the Chart Settings modal.
            - Allows sharing organizational styles and configurations across different datasets.
+       16. **Extended Data Import & Probation Visibility:**
+           - Added support for additional CSV columns from BambooHR: `Hire Date`, `Contract Termination Date`, and `Probation Period Ends`.
+           - Automatically maps `Hire Date` to `Start Date` and `Contract Termination Date` to `Exit Date` during import.
+           - **Probation Tracking:** Added a "Probation" label to node cards for employees currently in their probation period.
+           - Integrated `Probation Period Ends` field into the position edit modal for manual adjustment.
       ## Next Steps (Future Enhancements)
    
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height. Now supports reordering.
