@@ -219,74 +219,6 @@ export const SettingsModal = ({
             </div>
           </div>
 
-          {/* Keyboard Shortcuts */}
-          <div className="space-y-3">
-            <div className="flex flex-col">
-              <label className="text-sm font-bold text-slate-700">Keyboard Shortcuts</label>
-              <p className="text-xs text-slate-500 mt-1">
-                Configure shortcuts for quick actions. Use 'meta' for Command (Mac) or Windows key.
-              </p>
-            </div>
-            
-            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
-              <span className="text-sm text-slate-600 flex-1">Focus Search</span>
-              <input
-                type="text"
-                value={searchShortcut}
-                onChange={(e) => setSearchShortcut(e.target.value.toLowerCase())}
-                placeholder="e.g. meta+e"
-                className="w-32 px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white font-mono"
-              />
-            </div>
-
-            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
-              <span className="text-sm text-slate-600 flex-1">Open Teams Chat</span>
-              <input
-                type="text"
-                value={teamsShortcut}
-                onChange={(e) => setTeamsShortcut(e.target.value.toLowerCase())}
-                placeholder="e.g. meta+m"
-                className="w-32 px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white font-mono"
-              />
-            </div>
-          </div>
-
-          {/* Company & Outlook Settings */}
-          <div className="space-y-4">
-            <div className="flex flex-col">
-              <label className="text-sm font-bold text-slate-700">Company & Outlook Settings</label>
-              <p className="text-xs text-slate-500 mt-1">
-                Configure the company domain and Outlook Web access.
-              </p>
-            </div>
-
-            <div className="space-y-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Company Email Domain</label>
-                <input
-                  type="text"
-                  value={companyDomain}
-                  onChange={(e) => setCompanyDomain(e.target.value)}
-                  placeholder="e.g. dkb.de"
-                  className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                />
-              </div>
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Outlook Compose URL</label>
-                <input
-                  type="text"
-                  value={outlookBaseUrl}
-                  onChange={(e) => setOutlookBaseUrl(e.target.value)}
-                  placeholder="https://outlook.office.com/mail/deeplink/compose"
-                  className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                />
-                <p className="text-[10px] text-slate-400">
-                  Used for "Send Email" deep links.
-                </p>
-              </div>
-            </div>
-          </div>
-
           {/* Node Filters */}
           <div className="space-y-4">
             <div className="flex flex-col">
@@ -503,6 +435,74 @@ export const SettingsModal = ({
                 <Plus size={16} />
                 Add Leadership Layer
               </button>
+            </div>
+          </div>
+
+          {/* Keyboard Shortcuts */}
+          <div className="space-y-3 pt-4 border-t border-slate-100">
+            <div className="flex flex-col">
+              <label className="text-sm font-bold text-slate-700">Keyboard Shortcuts</label>
+              <p className="text-xs text-slate-500 mt-1">
+                Configure shortcuts for quick actions. Use 'meta' for Command (Mac) or Windows key.
+              </p>
+            </div>
+            
+            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <span className="text-sm text-slate-600 flex-1">Focus Search</span>
+              <input
+                type="text"
+                value={searchShortcut}
+                onChange={(e) => setSearchShortcut(e.target.value.toLowerCase())}
+                placeholder="e.g. meta+e"
+                className="w-32 px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white font-mono"
+              />
+            </div>
+
+            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <span className="text-sm text-slate-600 flex-1">Open Teams Chat</span>
+              <input
+                type="text"
+                value={teamsShortcut}
+                onChange={(e) => setTeamsShortcut(e.target.value.toLowerCase())}
+                placeholder="e.g. meta+m"
+                className="w-32 px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white font-mono"
+              />
+            </div>
+          </div>
+
+          {/* Company & Outlook Settings */}
+          <div className="space-y-4">
+            <div className="flex flex-col">
+              <label className="text-sm font-bold text-slate-700">Company & Outlook Settings</label>
+              <p className="text-xs text-slate-500 mt-1">
+                Configure the company domain and Outlook Web access.
+              </p>
+            </div>
+
+            <div className="space-y-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Company Email Domain</label>
+                <input
+                  type="text"
+                  value={companyDomain}
+                  onChange={(e) => setCompanyDomain(e.target.value)}
+                  placeholder="e.g. dkb.de"
+                  className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Outlook Compose URL</label>
+                <input
+                  type="text"
+                  value={outlookBaseUrl}
+                  onChange={(e) => setOutlookBaseUrl(e.target.value)}
+                  placeholder="https://outlook.office.com/mail/deeplink/compose"
+                  className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                />
+                <p className="text-[10px] text-slate-400">
+                  Used for "Send Email" deep links.
+                </p>
+              </div>
             </div>
           </div>
         </div>
