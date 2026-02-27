@@ -68,30 +68,34 @@ export const parseOrgCsv = (csvString: string) => {
   const nodes: OrgNode[] = [];
   const edges: OrgEdge[] = [];
 
-  // Map to find email by "LastName, FirstName"
-  const nameToEmailMap: Record<string, string> = {};
+  // Map to find ID by "LastName, FirstName" (case-insensitive)
+  const nameToIdMap: Record<string, string> = {};
   const teams = new Set<string>();
 
-  rawData.forEach((row) => {
+  rawData.forEach((row, index) => {
     const email = row['Work Email'];
     const firstName = row['First Name'];
     const lastName = row['Last Name'];
     const team = row['Team'];
-    const nameKey = `${lastName}, ${firstName}`;
-    nameToEmailMap[nameKey] = email;
+    
+    // Generate a unique ID: use email if available, otherwise a generated one
+    const id = email || `node-${lastName}-${firstName}-${index}`.replace(/\s+/g, '_');
+    
+    const nameKey = `${lastName}, ${firstName}`.toLowerCase();
+    nameToIdMap[nameKey] = id;
     if (team) teams.add(team);
-
+    // ... (rest of first loop)
     const status = (row['Status'] || 'FILLED').toUpperCase() as 'FILLED' | 'EMPTY';
 
     nodes.push({
-      id: email,
+      id,
       type: 'person',
       data: {
         firstName,
         lastName,
         jobTitle: row['Job Title'],
         team,
-        workEmail: email,
+        workEmail: email || '',
         supervisorName: row['Supervisor name'],
         status: status === 'EMPTY' ? 'EMPTY' : 'FILLED',
         startDate: normalizeDate(row['Hire Date'] || row['Start Date'] || ''),
@@ -102,20 +106,24 @@ export const parseOrgCsv = (csvString: string) => {
     });
   });
 
-  // Create team group nodes (optional, but requested in plan)
-  // For now, let's just make sure we have the team info in data
-  // We will handle visual grouping in the OrgChart component if needed
-
-  rawData.forEach((row) => {
+  rawData.forEach((row, index) => {
     const supervisorName = row['Supervisor name'];
     const email = row['Work Email'];
+    const firstName = row['First Name'];
+    const lastName = row['Last Name'];
     
-    if (supervisorName && nameToEmailMap[supervisorName]) {
-      edges.push({
-        id: `e-${nameToEmailMap[supervisorName]}-${email}`,
-        source: nameToEmailMap[supervisorName],
-        target: email,
-      });
+    // The ID of the current node
+    const id = email || `node-${lastName}-${firstName}-${index}`.replace(/\s+/g, '_');
+    
+    if (supervisorName) {
+      const normalizedSupervisorName = supervisorName.toLowerCase();
+      if (nameToIdMap[normalizedSupervisorName]) {
+        edges.push({
+          id: `e-${nameToIdMap[normalizedSupervisorName]}-${id}`,
+          source: nameToIdMap[normalizedSupervisorName],
+          target: id,
+        });
+      }
     }
   });
 

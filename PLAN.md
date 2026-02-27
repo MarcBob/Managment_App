@@ -25,6 +25,7 @@ Build a web application to plan and visualize an engineering organization. The a
 ## Completed Features
 1. **CSV Parser:**
    - Normalizes supervisor names and handles hierarchy mapping.
+   - **Improved Robustness:** Handles missing emails by generating unique IDs and uses case-insensitive name matching for supervisors.
    - Unit tested with Vitest.
 2. **Visual Hierarchy:**
    - Automatic layout using Dagre (Vertical and Horizontal).
