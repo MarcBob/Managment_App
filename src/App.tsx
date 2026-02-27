@@ -376,6 +376,59 @@ function App() {
     event.target.value = '';
   }, [serverReachable, syncToServer, fetchPlans]);
 
+  const handleImportSettings = async (planName: string) => {
+    if (!data || !serverReachable) return;
+
+    try {
+      const response = await fetch(`${API_URL}/load/${planName}`);
+      if (response.ok) {
+        const targetPlan: LegacyPlanData = await response.json();
+        let importedViewState: ViewState | undefined;
+
+        // Extract viewState from target plan, handling migration if necessary
+        if (targetPlan.viewState) {
+          importedViewState = targetPlan.viewState;
+        } else if (targetPlan.maxDepth || targetPlan.leafColumns || targetPlan.leadershipLayers) {
+          importedViewState = {
+            maxDepth: targetPlan.maxDepth,
+            leafColumns: targetPlan.leafColumns,
+            collapsedNodes: targetPlan.collapsedNodes,
+            expandedNodes: targetPlan.expandedNodes,
+            leadershipLayers: targetPlan.leadershipLayers,
+            nodeFilters: targetPlan.nodeFilters,
+            filterGroups: targetPlan.filterGroups,
+            searchShortcut: targetPlan.searchShortcut,
+            teamsShortcut: targetPlan.teamsShortcut,
+            companyDomain: targetPlan.companyDomain,
+            outlookBaseUrl: targetPlan.outlookBaseUrl
+          };
+        }
+
+        if (importedViewState) {
+          // Merge with current viewState to preserve things like collapsed nodes if desired, 
+          // or just overwrite settings-related things.
+          // User asked to "import the settings", so we'll overwrite common settings.
+          const currentViewState = data.viewState || {};
+          const newViewState: ViewState = {
+            ...currentViewState,
+            ...importedViewState,
+            // We might want to KEEP current expanded/collapsed state as they are data-specific,
+            // but the prompt said "import settings". Let's decide which are settings.
+            // Usually filters, layers, shortcuts, domains are settings.
+            // collapsed/expanded are more like "current view state".
+            collapsedNodes: currentViewState.collapsedNodes,
+            expandedNodes: currentViewState.expandedNodes,
+          };
+
+          handleDataChange({ viewState: newViewState });
+        }
+      }
+    } catch (error) {
+      console.error('[FRONTEND] Failed to import settings', error);
+      alert('Failed to import settings from plan.');
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
@@ -526,6 +579,8 @@ function App() {
                 initialViewState={data.viewState}
                 onDataChange={handleDataChange}
                 isRecruiterMode={isRecruiterMode}
+                availablePlans={availablePlans}
+                onImportSettings={handleImportSettings}
               />
             </div>
 

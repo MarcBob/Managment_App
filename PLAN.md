@@ -75,11 +75,16 @@ Build a web application to plan and visualize an engineering organization. The a
        - Consolidated the two top bars into a single, clean header.
        - Moved the "Recruiter Mode" toggle and "Positions" count to the main header.
        - Removed the redundant "Organization Chart" title and "Reset View" button to maximize vertical space for the org chart.
-   14. **Plan Import:**
-       - Added an "Import CSV" feature to the plan management menu.
-       - Allows users to create new plans by uploading CSV files directly from the dropdown.
-       - Automatically uses the file name as the new plan name.
-   ## Next Steps (Future Enhancements)
+       14. **Plan Import:**
+           - Added an "Import CSV" feature to the plan management menu.
+           - Allows users to create new plans by uploading CSV files directly from the dropdown.
+           - Automatically uses the file name as the new plan name.
+       15. **Import Settings:**
+           - Added the ability to import settings (filters, layers, shortcuts, etc.) from another plan.
+           - Accessible from the Chart Settings modal.
+           - Allows sharing organizational styles and configurations across different datasets.
+      ## Next Steps (Future Enhancements)
+   
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height. Now supports reordering.
 - [x] Visual Team Clustering: Draw frames around direct reports in the same team. The frame also includes the team lead if they share the same team property.
 - [x] Custom Node Filters: Define color filters for nodes based on job title keywords, with priority-based ordering.

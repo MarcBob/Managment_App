@@ -210,6 +210,8 @@ interface OrgChartProps {
   };
   onDataChange?: (state: any) => void;
   isRecruiterMode?: boolean;
+  availablePlans?: string[];
+  onImportSettings?: (planName: string) => void;
 }
 
 const OrgChartInner: React.FC<OrgChartProps> = ({ 
@@ -217,7 +219,9 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   initialEdges,
   initialViewState = {},
   onDataChange,
-  isRecruiterMode = false
+  isRecruiterMode = false,
+  availablePlans = [],
+  onImportSettings
 }) => {
   const { getViewport, setViewport, getNode, fitView, fitBounds, screenToFlowPosition } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
@@ -395,6 +399,64 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       window.removeEventListener('keyup', handleGlobalKeyUp, true);
     };
   }, [searchShortcut, teamsShortcut, editingNode, nodes, openTeamsChat, getSearchMatches, isSpacePressed]);
+
+  const onEditNode = useCallback((id: string, data: any) => {
+    setEditingNode({ id, data });
+  }, []);
+
+  const onToggleCollapse = useCallback((id: string) => {
+    const node = getNode(id);
+    if (node) {
+      lastToggledRef.current = { id, oldPos: { ...node.position } };
+    }
+
+    setCollapsedNodes(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+        setExpandedNodes(e => new Set(e).add(id));
+      } else {
+        next.add(id);
+        setExpandedNodes(e => {
+          const nextE = new Set(e);
+          nextE.delete(id);
+          return nextE;
+        });
+      }
+      return next;
+    });
+  }, [getNode]);
+
+  const onAddSubordinate = useCallback((parentId: string) => {
+    const newId = `empty-${Date.now()}`;
+    const parentNode = rawNodes.find(n => n.id === parentId);
+    
+    const newNode: any = {
+      id: newId,
+      type: 'person',
+      data: {
+        firstName: '',
+        lastName: '',
+        jobTitle: 'New Position',
+        team: parentNode?.data.team || '',
+        workEmail: '',
+        status: 'EMPTY',
+        startDate: '',
+        exitDate: '',
+      },
+      position: parentNode 
+        ? { x: parentNode.position.x, y: parentNode.position.y + 200 }
+        : { x: 0, y: 0 },
+    };
+
+    setRawNodes((nds) => nds.concat(newNode));
+    setRawEdges((eds) => eds.concat({
+      id: `e-${parentId}-${newId}`,
+      source: parentId,
+      target: newId,
+    }));
+  }, [rawNodes]);
+
   // Handle structural or filter changes with side-effect layout
   useEffect(() => {
     if (rawNodes.length === 0) return;
@@ -637,62 +699,6 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     });
     setMousePos(pos);
   }, [screenToFlowPosition]);
-
-  const onEditNode = useCallback((id: string, data: any) => {
-    setEditingNode({ id, data });
-  }, []);
-  const onToggleCollapse = useCallback((id: string) => {
-    const node = getNode(id);
-    if (node) {
-      lastToggledRef.current = { id, oldPos: { ...node.position } };
-    }
-
-    setCollapsedNodes(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-        setExpandedNodes(e => new Set(e).add(id));
-      } else {
-        next.add(id);
-        setExpandedNodes(e => {
-          const nextE = new Set(e);
-          nextE.delete(id);
-          return nextE;
-        });
-      }
-      return next;
-    });
-  }, [getNode]);
-
-  const onAddSubordinate = useCallback((parentId: string) => {
-    const newId = `empty-${Date.now()}`;
-    const parentNode = rawNodes.find(n => n.id === parentId);
-    
-    const newNode: any = {
-      id: newId,
-      type: 'person',
-      data: {
-        firstName: '',
-        lastName: '',
-        jobTitle: 'New Position',
-        team: parentNode?.data.team || '',
-        workEmail: '',
-        status: 'EMPTY',
-        startDate: '',
-        exitDate: '',
-      },
-      position: parentNode 
-        ? { x: parentNode.position.x, y: parentNode.position.y + 200 }
-        : { x: 0, y: 0 },
-    };
-
-    setRawNodes((nds) => nds.concat(newNode));
-    setRawEdges((eds) => eds.concat({
-      id: `e-${parentId}-${newId}`,
-      source: parentId,
-      target: newId,
-    }));
-  }, [rawNodes]);
 
   const handleDeleteNode = useCallback((id: string) => {
     setRawNodes((nds) => nds.filter((node) => node.id !== id));
@@ -947,6 +953,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         setCompanyDomain={setCompanyDomain}
         outlookBaseUrl={outlookBaseUrl}
         setOutlookBaseUrl={setOutlookBaseUrl}
+        availablePlans={availablePlans}
+        onImportSettings={onImportSettings}
       />
     </div>
   );
