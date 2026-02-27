@@ -383,17 +383,30 @@ function App() {
           </div>
 
           {data && (
-            <button 
-              onClick={() => {
-                if (confirm('Are you sure you want to reset the view? This will NOT delete the saved file on the server.')) {
-                  localStorage.removeItem(`${LOCAL_STORAGE_KEY}_${currentPlanName}`);
-                  setData(null);
-                }
-              }}
-              className="text-sm font-medium text-slate-500 hover:text-slate-800"
-            >
-              Reset View
-            </button>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3 pr-6 border-r border-slate-200">
+                <div className="flex flex-col items-end">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Recruiter Mode</span>
+                  <span className="text-[9px] text-slate-400 italic">Focus on vacancies</span>
+                </div>
+                <button 
+                  onClick={() => setIsRecruiterMode(!isRecruiterMode)}
+                  className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                    isRecruiterMode ? "bg-blue-600" : "bg-slate-200"
+                  }`}
+                >
+                  <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    isRecruiterMode ? "translate-x-5" : "translate-x-0"
+                  }`} />
+                </button>
+              </div>
+              <button 
+                onClick={() => setIsStatsModalOpen(true)}
+                className="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1 rounded-full text-sm font-medium transition-colors"
+              >
+                {data.nodes.length} Positions
+              </button>
+            </div>
           )}
         </div>
       </header>
@@ -404,38 +417,8 @@ function App() {
             <FileUpload onDataLoaded={handleDataLoaded} />
           </div>
         ) : (
-          <div className="flex flex-col gap-6 h-[calc(100vh-120px)]">
-            <div className="flex items-center justify-between shrink-0">
-              <h2 className="text-2xl font-bold text-slate-900">Organization Chart</h2>
-              <div className="flex items-center gap-6">
-                <div className="flex items-center gap-3 pr-6 border-r border-slate-200">
-                  <div className="flex flex-col items-end">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Recruiter Mode</span>
-                    <span className="text-[9px] text-slate-400 italic">Focus on vacancies</span>
-                  </div>
-                  <button 
-                    onClick={() => setIsRecruiterMode(!isRecruiterMode)}
-                    className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                      isRecruiterMode ? "bg-blue-600" : "bg-slate-200"
-                    }`}
-                  >
-                    <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                      isRecruiterMode ? "translate-x-5" : "translate-x-0"
-                    }`} />
-                  </button>
-                </div>
-                <div className="flex gap-4">
-                  <button 
-                    onClick={() => setIsStatsModalOpen(true)}
-                    className="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1 rounded-full text-sm font-medium transition-colors"
-                  >
-                    {data.nodes.length} Positions
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex-1 min-h-[500px]">
+          <div className="h-[calc(100vh-112px)]">
+            <div className="h-full min-h-[500px]">
               <OrgChart 
                 key={`${data.name}-${data.nodes.length}`}
                 initialNodes={data.nodes} 

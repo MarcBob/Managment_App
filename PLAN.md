@@ -71,6 +71,10 @@ Build a web application to plan and visualize an engineering organization. The a
    12. **Reordering & Priority:**
        - Added drag-and-drop reordering for Filter Groups and Leadership Layers in the Chart Settings modal.
        - Allows users to easily adjust the priority of color filter sets and the vertical alignment hierarchy of the organization chart.
+   13. **UI Cleanup:**
+       - Consolidated the two top bars into a single, clean header.
+       - Moved the "Recruiter Mode" toggle and "Positions" count to the main header.
+       - Removed the redundant "Organization Chart" title and "Reset View" button to maximize vertical space for the org chart.
    ## Next Steps (Future Enhancements)
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height. Now supports reordering.
 - [x] Visual Team Clustering: Draw frames around direct reports in the same team. The frame also includes the team lead if they share the same team property.

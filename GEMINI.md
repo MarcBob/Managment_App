@@ -10,6 +10,9 @@
 - Supervisor link uses `LastName, FirstName` matching.
 - Includes `Start Date` and `Exit Date` for hiring and exit planning.
 
+## UI Structure
+- Consolidated header: All main controls (Plan switcher, Title, Recruiter Mode, Stats) are in the single top header to maximize vertical space for the org chart.
+---
 ## Tools
 - React Flow for graph visualization.
 - Papa Parse for CSV processing.
