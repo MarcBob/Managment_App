@@ -21,7 +21,6 @@ describe('PersonNode', () => {
       team: 'Engineering',
       status: 'FILLED',
       directReportsCount: 0,
-      totalReportsCount: 0,
       onEditNode: vi.fn(),
       onAddSubordinate: vi.fn(),
       onToggleCollapse: vi.fn(),

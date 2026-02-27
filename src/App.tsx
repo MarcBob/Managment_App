@@ -409,9 +409,6 @@ function App() {
                   <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-sm font-medium">
                     {data.nodes.length} Positions
                   </span>
-                  <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">
-                    {data.edges.length} Connections
-                  </span>
                 </div>
               </div>
             </div>
