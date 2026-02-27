@@ -3,10 +3,11 @@ import { FileUpload } from './components/FileUpload';
 import { OrgChart } from './components/OrgChart';
 import { EditableTitle } from './components/EditableTitle';
 import { StatsModal } from './components/StatsModal';
+import { parseOrgCsv } from './utils/csvParser';
 import type { OrgNode, OrgEdge } from './utils/csvParser';
 import type { LeadershipLayer } from './utils/leadershipLayers';
 import type { NodeFilter, FilterGroup } from './utils/nodeFilters';
-import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus } from 'lucide-react';
+import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus, FileUp } from 'lucide-react';
 import './App.css';
 
 const API_URL = 'http://localhost:3001/api';
@@ -65,6 +66,7 @@ function App() {
   const [isPlanMenuOpen, setIsPlanMenuOpen] = useState(false);
   const planMenuRef = useRef<HTMLDivElement>(null);
   const planMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const importInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -304,6 +306,36 @@ function App() {
     setIsPlanMenuOpen(false);
   };
 
+  const handleImportFile = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const text = e.target?.result as string;
+      const { nodes, edges } = parseOrgCsv(text);
+      
+      const fileName = file.name.replace(/\.[^/.]+$/, "");
+      
+      const newData: PlanData = { 
+        name: fileName, 
+        nodes, 
+        edges, 
+        lastUpdated: new Date().toISOString() 
+      };
+      
+      setData(newData);
+      setCurrentPlanName(fileName);
+      localStorage.setItem(CURRENT_PLAN_KEY, fileName);
+      localStorage.setItem(`${LOCAL_STORAGE_KEY}_${fileName}`, JSON.stringify(newData));
+      if (serverReachable) await syncToServer(newData);
+      fetchPlans();
+      setIsPlanMenuOpen(false);
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  }, [serverReachable, syncToServer, fetchPlans]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
@@ -358,6 +390,20 @@ function App() {
                       <Plus className="h-4 w-4" />
                       Create New Plan
                     </button>
+                    <button
+                      onClick={() => importInputRef.current?.click()}
+                      className="w-full text-left px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 flex items-center gap-2 font-medium"
+                    >
+                      <FileUp className="h-4 w-4" />
+                      Import CSV
+                    </button>
+                    <input 
+                      type="file" 
+                      ref={importInputRef} 
+                      className="hidden" 
+                      accept=".csv" 
+                      onChange={handleImportFile} 
+                    />
                   </div>
                 </div>
               )}

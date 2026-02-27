@@ -29,6 +29,7 @@ export const parseOrgCsv = (csvString: string) => {
   const result = Papa.parse(csvString, {
     header: true,
     skipEmptyLines: true,
+    transform: (value) => value.trim(),
   });
 
   const rawData = result.data as any[];
@@ -48,6 +49,8 @@ export const parseOrgCsv = (csvString: string) => {
     nameToEmailMap[nameKey] = email;
     if (team) teams.add(team);
 
+    const status = (row['Status'] || 'FILLED').toUpperCase() as 'FILLED' | 'EMPTY';
+
     nodes.push({
       id: email,
       type: 'person',
@@ -58,7 +61,7 @@ export const parseOrgCsv = (csvString: string) => {
         team,
         workEmail: email,
         supervisorName: row['Supervisor name'],
-        status: row['Status'] as 'FILLED' | 'EMPTY',
+        status: status === 'EMPTY' ? 'EMPTY' : 'FILLED',
         startDate: row['Start Date'] || '',
         exitDate: row['Exit Date'] || '',
       },
