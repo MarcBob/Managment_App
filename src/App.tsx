@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { FileUpload } from './components/FileUpload';
 import { OrgChart } from './components/OrgChart';
 import { EditableTitle } from './components/EditableTitle';
@@ -63,6 +63,25 @@ function App() {
   const [serverReachable, setServerReachable] = useState(true);
   const [isRecruiterMode, setIsRecruiterMode] = useState(false);
   const [isPlanMenuOpen, setIsPlanMenuOpen] = useState(false);
+  const planMenuRef = useRef<HTMLDivElement>(null);
+  const planMenuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isPlanMenuOpen && 
+        planMenuRef.current && 
+        !planMenuRef.current.contains(event.target as Node) &&
+        planMenuButtonRef.current &&
+        !planMenuButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsPlanMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside, true);
+    return () => document.removeEventListener('mousedown', handleClickOutside, true);
+  }, [isPlanMenuOpen]);
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false);
 
   const syncToServer = useCallback(async (state: PlanData) => {
@@ -303,6 +322,7 @@ function App() {
           <div className="flex items-center gap-6">
             <div className="relative">
               <button 
+                ref={planMenuButtonRef}
                 onClick={() => setIsPlanMenuOpen(!isPlanMenuOpen)}
                 className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-600"
                 title="Manage Plans"
@@ -311,38 +331,35 @@ function App() {
               </button>
               
               {isPlanMenuOpen && (
-                <>
-                  <div 
-                    className="fixed inset-0 z-30" 
-                    onClick={() => setIsPlanMenuOpen(false)} 
-                  />
-                  <div className="absolute left-0 mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow-xl z-40 py-2">
-                    <div className="px-4 py-2 border-b border-slate-100 mb-2">
-                      <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Your Plans</span>
-                    </div>
-                    {availablePlans.map(plan => (
-                      <button
-                        key={plan}
-                        onClick={() => handleSwitchPlan(plan)}
-                        className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-50 flex items-center justify-between ${
-                          currentPlanName === plan ? "text-blue-600 font-bold bg-blue-50/50" : "text-slate-600"
-                        }`}
-                      >
-                        <span className="truncate">{plan}</span>
-                        {currentPlanName === plan && <CheckCircle2 className="h-4 w-4" />}
-                      </button>
-                    ))}
-                    <div className="border-t border-slate-100 mt-2 pt-2">
-                      <button
-                        onClick={handleCreateNew}
-                        className="w-full text-left px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 flex items-center gap-2 font-medium"
-                      >
-                        <Plus className="h-4 w-4" />
-                        Create New Plan
-                      </button>
-                    </div>
+                <div 
+                  ref={planMenuRef}
+                  className="absolute left-0 mt-2 w-64 bg-white border border-slate-200 rounded-xl shadow-xl z-40 py-2"
+                >
+                  <div className="px-4 py-2 border-b border-slate-100 mb-2">
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Your Plans</span>
                   </div>
-                </>
+                  {availablePlans.map(plan => (
+                    <button
+                      key={plan}
+                      onClick={() => handleSwitchPlan(plan)}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-50 flex items-center justify-between ${
+                        currentPlanName === plan ? "text-blue-600 font-bold bg-blue-50/50" : "text-slate-600"
+                      }`}
+                    >
+                      <span className="truncate">{plan}</span>
+                      {currentPlanName === plan && <CheckCircle2 className="h-4 w-4" />}
+                    </button>
+                  ))}
+                  <div className="border-t border-slate-100 mt-2 pt-2">
+                    <button
+                      onClick={handleCreateNew}
+                      className="w-full text-left px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 flex items-center gap-2 font-medium"
+                    >
+                      <Plus className="h-4 w-4" />
+                      Create New Plan
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
 
