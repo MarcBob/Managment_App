@@ -150,8 +150,8 @@ export const EditNodeModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
-      <div ref={modalRef} className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+      <div ref={modalRef} className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col max-h-[90vh]">
+        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50 shrink-0">
           <h3 className="font-bold text-slate-800">
             {showConfirmDelete ? 'Confirm Deletion' : 'Edit Position'}
           </h3>
@@ -161,7 +161,7 @@ export const EditNodeModal = ({
         </div>
         
         {showConfirmDelete ? (
-          <div className="p-6 space-y-4">
+          <div className="p-6 space-y-4 overflow-y-auto">
             <div className="flex items-center gap-3 text-amber-600 bg-amber-50 p-3 rounded-lg border border-amber-100">
               <AlertCircle size={20} className="shrink-0" />
               <p className="text-sm font-medium">
@@ -186,7 +186,7 @@ export const EditNodeModal = ({
             </div>
           </div>
         ) : (
-          <form className="p-6 space-y-4" onSubmit={(e) => {
+          <form className="p-6 space-y-4 overflow-y-auto" onSubmit={(e) => {
             e.preventDefault();
             onSave(formData);
           }}>

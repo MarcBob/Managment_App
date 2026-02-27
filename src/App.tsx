@@ -472,7 +472,7 @@ function App() {
                     >
                       <button
                         onClick={() => handleSwitchPlan(plan)}
-                        className={`flex-1 text-left flex items-center justify-between gap-2 ${
+                        className={`flex-1 min-w-0 text-left flex items-center justify-between gap-2 ${
                           currentPlanName === plan ? "text-blue-600 font-bold" : "text-slate-600"
                         }`}
                       >
@@ -482,7 +482,7 @@ function App() {
                       
                       <button
                         onClick={(e) => handleDeletePlan(plan, e)}
-                        className="ml-2 p-1 text-slate-300 hover:text-red-500 rounded transition-colors"
+                        className="ml-2 p-1 text-slate-300 hover:text-red-500 rounded transition-colors shrink-0"
                         title="Delete Plan"
                       >
                         <Trash2 className="h-4 w-4" />
