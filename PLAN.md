@@ -64,6 +64,10 @@ Build a web application to plan and visualize an engineering organization. The a
       - Dynamically calculates scale and z-index for person nodes based on distance to the cursor.
    10. **Plan & Settings Persistence:**
        - All chart settings (leadership layers, color filters, shortcuts, etc.) are now saved within the individual organization plan JSON file on the server.
+   11. **Organization Statistics:**
+       - Added a statistics modal that displays key metrics: total positions, organizational depth, and minimum/maximum leadership span.
+       - Dynamic counts for all active color filters (including those in filter groups).
+       - Accessible by clicking the "Positions" label in the top-right corner.
    ## Next Steps (Future Enhancements)
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height.
 - [x] Visual Team Clustering: Draw frames around direct reports in the same team. The frame also includes the team lead if they share the same team property.

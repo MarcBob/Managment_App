@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { FileUpload } from './components/FileUpload';
 import { OrgChart } from './components/OrgChart';
 import { EditableTitle } from './components/EditableTitle';
+import { StatsModal } from './components/StatsModal';
 import type { OrgNode, OrgEdge } from './utils/csvParser';
 import type { LeadershipLayer } from './utils/leadershipLayers';
 import type { NodeFilter, FilterGroup } from './utils/nodeFilters';
@@ -62,6 +63,7 @@ function App() {
   const [serverReachable, setServerReachable] = useState(true);
   const [isRecruiterMode, setIsRecruiterMode] = useState(false);
   const [isPlanMenuOpen, setIsPlanMenuOpen] = useState(false);
+  const [isStatsModalOpen, setIsStatsModalOpen] = useState(false);
 
   const syncToServer = useCallback(async (state: PlanData) => {
     try {
@@ -406,9 +408,12 @@ function App() {
                   </button>
                 </div>
                 <div className="flex gap-4">
-                  <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-sm font-medium">
+                  <button 
+                    onClick={() => setIsStatsModalOpen(true)}
+                    className="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1 rounded-full text-sm font-medium transition-colors"
+                  >
                     {data.nodes.length} Positions
-                  </span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -423,6 +428,15 @@ function App() {
                 isRecruiterMode={isRecruiterMode}
               />
             </div>
+
+            <StatsModal 
+              isOpen={isStatsModalOpen}
+              onClose={() => setIsStatsModalOpen(false)}
+              nodes={data.nodes}
+              edges={data.edges}
+              scratchpadFilters={data.viewState?.nodeFilters || []}
+              filterGroups={data.viewState?.filterGroups || []}
+            />
           </div>
         )}
       </main>

@@ -3415,50 +3415,6 @@
     "nodeFilters": [],
     "filterGroups": [
       {
-        "id": "1772134156451",
-        "name": "Seniority",
-        "enabled": false,
-        "filters": [
-          {
-            "id": "1772129079947",
-            "name": "Filter 1",
-            "pattern": "Senior",
-            "color": "#2acb2c"
-          },
-          {
-            "id": "1772129177466",
-            "name": "Filter 2",
-            "pattern": "Junior",
-            "color": "#e5ffeb"
-          },
-          {
-            "id": "1772131399610",
-            "name": "Filter 3",
-            "pattern": "Principal",
-            "color": "#00ad1d"
-          },
-          {
-            "id": "1772131426102",
-            "name": "Filter 4",
-            "pattern": "Engineering Manager",
-            "color": "#8fabff"
-          },
-          {
-            "id": "1772131584562",
-            "name": "Filter 5",
-            "pattern": "Chapter Lead",
-            "color": "#526eff"
-          },
-          {
-            "id": "1772132183161",
-            "name": "Filter 6",
-            "pattern": "Head",
-            "color": "#0061e0"
-          }
-        ],
-        "defaultFallbackColor": "#91ee92"
-      },
-      {
         "id": "1772134835504",
         "name": "Plattform",
         "enabled": false,
@@ -3513,6 +3469,56 @@
           }
         ],
         "defaultFallbackColor": "#ffffff"
+      },
+      {
+        "id": "1772219158005",
+        "name": "Seniority",
+        "enabled": false,
+        "filters": [
+          {
+            "id": "1772129177466",
+            "name": "Filter 2",
+            "pattern": "Junior",
+            "color": "#e5ffeb"
+          },
+          {
+            "id": "1772129079947",
+            "name": "Filter 1",
+            "pattern": "Senior",
+            "color": "#2acb2c"
+          },
+          {
+            "id": "1772131399610",
+            "name": "Filter 3",
+            "pattern": "Principal",
+            "color": "#00ad1d"
+          },
+          {
+            "id": "1772131426102",
+            "name": "Filter 4",
+            "pattern": "Engineering Manager",
+            "color": "#8fabff"
+          },
+          {
+            "id": "1772131584562",
+            "name": "Filter 5",
+            "pattern": "Chapter Lead",
+            "color": "#526eff"
+          },
+          {
+            "id": "1772132183161",
+            "name": "Filter 6",
+            "pattern": "Head",
+            "color": "#0061e0"
+          },
+          {
+            "id": "1772219117210",
+            "name": "Filter 7",
+            "pattern": "Werkstudent",
+            "color": "#ffc2e5"
+          }
+        ],
+        "defaultFallbackColor": "#91ee92"
       }
     ],
     "defaultFallbackColor": "#ffffff",
@@ -3521,6 +3527,6 @@
     "companyDomain": "dkb.de",
     "outlookBaseUrl": "https://outlook.office.com/mail/deeplink/compose"
   },
-  "lastUpdated": "2026-02-27T18:41:22.851Z",
+  "lastUpdated": "2026-02-27T19:06:21.732Z",
   "name": "CoFa Engineering"
 }

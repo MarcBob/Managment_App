@@ -46,3 +46,39 @@ export const getActiveFilters = (
     ...groups.filter(g => g.enabled).flatMap(g => g.filters)
   ];
 };
+
+export interface FilterGroupStats {
+  id: string;
+  name: string;
+  isActive: boolean;
+  filters: (NodeFilter & { isActive: boolean })[];
+}
+
+export const getAllFiltersWithStatus = (
+  scratchpadFilters: NodeFilter[],
+  groups: FilterGroup[]
+): FilterGroupStats[] => {
+  const result: FilterGroupStats[] = [];
+
+  // 1. Add scratchpad filters as a "Custom Filters" group if any exist
+  if (scratchpadFilters.length > 0) {
+    result.push({
+      id: 'scratchpad',
+      name: 'Custom Filters',
+      isActive: true,
+      filters: scratchpadFilters.map(f => ({ ...f, isActive: true }))
+    });
+  }
+
+  // 2. Add each group in order
+  groups.forEach(group => {
+    result.push({
+      id: group.id,
+      name: group.name,
+      isActive: group.enabled,
+      filters: group.filters.map(f => ({ ...f, isActive: group.enabled }))
+    });
+  });
+
+  return result;
+};
