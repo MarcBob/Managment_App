@@ -240,38 +240,6 @@ export const SettingsModal = ({
         </div>
         
         <div className="p-6 space-y-8 overflow-y-auto">
-          {/* Import Settings */}
-          {availablePlans.length > 0 && onImportSettings && (
-            <div className="p-4 bg-blue-50 rounded-xl border border-blue-100 space-y-3">
-              <div className="flex flex-col">
-                <label className="text-sm font-bold text-blue-900 flex items-center gap-2">
-                  <FileUp size={16} />
-                  Import Settings
-                </label>
-                <p className="text-xs text-blue-700 mt-1">
-                  Overwrite current filters, layers, and preferences with settings from another plan.
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <select 
-                  onChange={(e) => {
-                    if (e.target.value && window.confirm(`Are you sure you want to import settings from "${e.target.value}"? This will overwrite your current settings.`)) {
-                      onImportSettings(e.target.value);
-                    }
-                    e.target.value = '';
-                  }}
-                  className="flex-1 px-3 py-2 text-sm bg-white border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-700"
-                  defaultValue=""
-                >
-                  <option value="" disabled>Select a plan to import from...</option>
-                  {availablePlans.map(plan => (
-                    <option key={plan} value={plan}>{plan}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          )}
-
           {/* Leaf Columns */}
           <div className="space-y-3">
             <div className="flex flex-col">
@@ -606,6 +574,38 @@ export const SettingsModal = ({
               </div>
             </div>
           </div>
+
+          {/* Import Settings */}
+          {availablePlans.length > 0 && onImportSettings && (
+            <div className="p-4 bg-blue-50 rounded-xl border border-blue-100 space-y-3">
+              <div className="flex flex-col">
+                <label className="text-sm font-bold text-blue-900 flex items-center gap-2">
+                  <FileUp size={16} />
+                  Import Settings
+                </label>
+                <p className="text-xs text-blue-700 mt-1">
+                  Overwrite current filters, layers, and preferences with settings from another plan.
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <select 
+                  onChange={(e) => {
+                    if (e.target.value && window.confirm(`Are you sure you want to import settings from "${e.target.value}"? This will overwrite your current settings.`)) {
+                      onImportSettings(e.target.value);
+                    }
+                    e.target.value = '';
+                  }}
+                  className="flex-1 px-3 py-2 text-sm bg-white border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-700"
+                  defaultValue=""
+                >
+                  <option value="" disabled>Select a plan to import from...</option>
+                  {availablePlans.map(plan => (
+                    <option key={plan} value={plan}>{plan}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="p-6 pt-2 border-t border-slate-50 shrink-0">
