@@ -704,7 +704,7 @@ function App() {
           <div className="h-[calc(100vh-112px)]">
             <div className="h-full min-h-[500px]">
               <OrgChart 
-                key={`${data.name}-${data.nodes.length}`}
+                key={data.name}
                 initialNodes={data.nodes} 
                 initialEdges={data.edges}
                 initialViewState={data.viewState}
