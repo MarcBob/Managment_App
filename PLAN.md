@@ -94,6 +94,11 @@ Build a web application to plan and visualize an engineering organization. The a
            - Added ability to import vacancies into an existing plan, automatically replacing current vacancies while preserving filled positions.
            - **Automatic Backup:** Triggers a "REVERT" CSV download of current vacancies before performing an import to prevent accidental data loss.
            - Simplifies the process of transferring hiring plans from one organization chart version to another.
+       18. **Update Plan (Intelligent CSV Merge):**
+           - Added an "Update current Plan" feature that merges a new CSV (e.g., from BambooHR) into the active plan.
+           - **Data Integrity:** Replaces the existing filled organization with the new CSV data while preserving all local open positions.
+           - **Recursive Re-linking:** Automatically re-links open positions to the next available supervisor in the new hierarchy if their original supervisor is no longer in the organization.
+           - Traces the supervisor chain upwards until an existing node is found or the open position becomes a root.
       ## Next Steps (Future Enhancements)
    
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height. Now supports reordering.

@@ -147,7 +147,10 @@ export const PersonNode = memo(({ data, id, xPos, yPos }: NodeProps) => {
             "text-sm font-bold truncate",
             isDark ? "text-white" : "text-slate-900"
           )}>
-            {isFilled ? `${firstName} ${lastName}` : 'EMPTY POSITION'}
+            {isFilled 
+              ? `${firstName} ${lastName}` 
+              : (firstName || lastName ? `${firstName} ${lastName}` : 'EMPTY POSITION')
+            }
           </div>
           <div className={cn(
             "text-xs font-medium line-clamp-3 h-12 leading-4",

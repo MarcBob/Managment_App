@@ -1,0 +1,5265 @@
+{
+  "name": "CoFa - All",
+  "nodes": [
+    {
+      "id": "alexander.lehsten@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Alexander",
+        "lastName": "Lehsten",
+        "jobTitle": "Geschäftsführung",
+        "team": "",
+        "workEmail": "alexander.lehsten@dkbcodefactory.com",
+        "supervisorName": "",
+        "status": "FILLED",
+        "startDate": "2020-01-07",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "eric.rosenthal@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Eric",
+        "lastName": "Rosenthal",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Card-API",
+        "workEmail": "eric.rosenthal@dkbcodefactory.com",
+        "supervisorName": "Arumugasami, Sakthi",
+        "status": "FILLED",
+        "startDate": "2019-01-11",
+        "exitDate": "",
+        "probationEndDate": "2020-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "levent.uenver@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Levent",
+        "lastName": "Ünver",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Card-API",
+        "workEmail": "levent.uenver@dkbcodefactory.com",
+        "supervisorName": "Arumugasami, Sakthi",
+        "status": "FILLED",
+        "startDate": "2021-01-01",
+        "exitDate": "",
+        "probationEndDate": "2021-06-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "maximilian.Liemant@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Maximilian",
+        "lastName": "Liemant",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Card-API",
+        "workEmail": "maximilian.Liemant@dkbcodefactory.com",
+        "supervisorName": "Arumugasami, Sakthi",
+        "status": "FILLED",
+        "startDate": "2022-01-03",
+        "exitDate": "",
+        "probationEndDate": "2022-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Anna.Eckhardt@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Anna",
+        "lastName": "Eckhardt",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Card-API",
+        "workEmail": "Anna.Eckhardt@dkbcodefactory.com",
+        "supervisorName": "Arumugasami, Sakthi",
+        "status": "FILLED",
+        "startDate": "2023-01-04",
+        "exitDate": "",
+        "probationEndDate": "2023-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Mohammad.Rahimi@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Mohammad",
+        "lastName": "Rahimi Shoushtari",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Accounts & Transactions",
+        "workEmail": "Mohammad.Rahimi@dkbcodefactory.com",
+        "supervisorName": "Baydon, Karim",
+        "status": "FILLED",
+        "startDate": "2022-01-11",
+        "exitDate": "",
+        "probationEndDate": "2023-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Paul.Defois@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Paul",
+        "lastName": "Defois",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Accounts & Transactions",
+        "workEmail": "Paul.Defois@dkbcodefactory.com",
+        "supervisorName": "Baydon, Karim",
+        "status": "FILLED",
+        "startDate": "2023-01-03",
+        "exitDate": "",
+        "probationEndDate": "2023-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Ali.Adel@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Ali",
+        "lastName": "Adel Ismail Aboelela",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Accounts & Transactions",
+        "workEmail": "Ali.Adel@dkbcodefactory.com",
+        "supervisorName": "Baydon, Karim",
+        "status": "FILLED",
+        "startDate": "2023-01-03",
+        "exitDate": "",
+        "probationEndDate": "2023-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Eugen.Puzynin@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Eugen",
+        "lastName": "Puzynin",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Accounts & Transactions",
+        "workEmail": "Eugen.Puzynin@dkbcodefactory.com",
+        "supervisorName": "Baydon, Karim",
+        "status": "FILLED",
+        "startDate": "2023-01-04",
+        "exitDate": "",
+        "probationEndDate": "2023-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Asghar.Mirzaei@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Asghar",
+        "lastName": "Mirzaei",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Accounts & Transactions",
+        "workEmail": "Asghar.Mirzaei@dkbcodefactory.com",
+        "supervisorName": "Baydon, Karim",
+        "status": "FILLED",
+        "startDate": "2025-01-07",
+        "exitDate": "",
+        "probationEndDate": "2025-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "manuel.sanchez@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Jesus Manuel",
+        "lastName": "Sanchez Delgado",
+        "jobTitle": "Chapter Lead Engineering (Frontend)",
+        "team": "",
+        "workEmail": "manuel.sanchez@dkbcodefactory.com",
+        "supervisorName": "Bobzien, Marc",
+        "status": "FILLED",
+        "startDate": "2019-01-10",
+        "exitDate": "",
+        "probationEndDate": "2020-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "stephan.seigewasser@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Stephan",
+        "lastName": "Seigewasser",
+        "jobTitle": "Chapter Lead Engineering (Backend)",
+        "team": "",
+        "workEmail": "stephan.seigewasser@dkbcodefactory.com",
+        "supervisorName": "Bobzien, Marc",
+        "status": "FILLED",
+        "startDate": "2020-01-01",
+        "exitDate": "",
+        "probationEndDate": "2020-06-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Benedict.Roeser@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Benedict",
+        "lastName": "Roeser",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Beschluss",
+        "workEmail": "Benedict.Roeser@dkbcodefactory.com",
+        "supervisorName": "Bobzien, Marc",
+        "status": "FILLED",
+        "startDate": "2021-01-08",
+        "exitDate": "",
+        "probationEndDate": "2022-01-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "raphaela.wrede@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Raphaela",
+        "lastName": "Wrede",
+        "jobTitle": "Chapter Lead (Pega)",
+        "team": "",
+        "workEmail": "raphaela.wrede@dkbcodefactory.com",
+        "supervisorName": "Bobzien, Marc",
+        "status": "FILLED",
+        "startDate": "2024-01-06",
+        "exitDate": "",
+        "probationEndDate": "2024-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Christoph.Henzelmann@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Christoph-Philipp",
+        "lastName": "Henzelmann",
+        "jobTitle": "Chapter Lead Engineering (Mobile)",
+        "team": "",
+        "workEmail": "Christoph.Henzelmann@dkbcodefactory.com",
+        "supervisorName": "Bobzien, Marc",
+        "status": "FILLED",
+        "startDate": "2024-01-11",
+        "exitDate": "",
+        "probationEndDate": "2025-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "amelie.Stavrakakis@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Amelie",
+        "lastName": "Stavrakakis",
+        "jobTitle": "Senior UI/UX Designer",
+        "team": "",
+        "workEmail": "amelie.Stavrakakis@dkbcodefactory.com",
+        "supervisorName": "Bonness, Lissy",
+        "status": "FILLED",
+        "startDate": "2020-01-12",
+        "exitDate": "",
+        "probationEndDate": "2021-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "katja.Margulis@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Ekaterina",
+        "lastName": "Margulis",
+        "jobTitle": "UI/UX Designer",
+        "team": "",
+        "workEmail": "katja.Margulis@dkbcodefactory.com",
+        "supervisorName": "Bonness, Lissy",
+        "status": "FILLED",
+        "startDate": "2022-01-02",
+        "exitDate": "",
+        "probationEndDate": "2022-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Suyoung.Jung@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Suyoung",
+        "lastName": "Jung",
+        "jobTitle": "Senior UI/UX Designer",
+        "team": "",
+        "workEmail": "Suyoung.Jung@dkbcodefactory.com",
+        "supervisorName": "Bonness, Lissy",
+        "status": "FILLED",
+        "startDate": "2022-01-04",
+        "exitDate": "",
+        "probationEndDate": "2022-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Isabel.Haefner@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Isabel",
+        "lastName": "Häfner",
+        "jobTitle": "UI/UX Designer",
+        "team": "",
+        "workEmail": "Isabel.Haefner@dkbcodefactory.com",
+        "supervisorName": "Bonness, Lissy",
+        "status": "FILLED",
+        "startDate": "2022-01-04",
+        "exitDate": "",
+        "probationEndDate": "2022-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Hanna.Borbola@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Hanna",
+        "lastName": "Borbola",
+        "jobTitle": "Visual Designer",
+        "team": "",
+        "workEmail": "Hanna.Borbola@dkbcodefactory.com",
+        "supervisorName": "Bonness, Lissy",
+        "status": "FILLED",
+        "startDate": "2022-01-07",
+        "exitDate": "",
+        "probationEndDate": "2022-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "sebastian.metel@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Sebastian",
+        "lastName": "Metel",
+        "jobTitle": "Senior UI/UX Designer",
+        "team": "",
+        "workEmail": "sebastian.metel@dkbcodefactory.com",
+        "supervisorName": "Bonness, Lissy",
+        "status": "FILLED",
+        "startDate": "2024-01-10",
+        "exitDate": "",
+        "probationEndDate": "2025-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Carina.Hoffmann@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Carina",
+        "lastName": "Hoffmann",
+        "jobTitle": "Senior UI/UX Designer",
+        "team": "Homepage",
+        "workEmail": "Carina.Hoffmann@dkbcodefactory.com",
+        "supervisorName": "Bonness, Lissy",
+        "status": "FILLED",
+        "startDate": "2025-01-06",
+        "exitDate": "",
+        "probationEndDate": "2025-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Monique.Mehler@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Monique",
+        "lastName": "Mehler",
+        "jobTitle": "UI/UX Designer",
+        "team": "Web Banking",
+        "workEmail": "Monique.Mehler@dkbcodefactory.com",
+        "supervisorName": "Bonness, Lissy",
+        "status": "FILLED",
+        "startDate": "2025-01-10",
+        "exitDate": "",
+        "probationEndDate": "2026-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Oleksii.Vasyliev@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Oleksii",
+        "lastName": "Vasyliev",
+        "jobTitle": "Mobile Developer (iOS)",
+        "team": "Banking App - Nova Services",
+        "workEmail": "Oleksii.Vasyliev@dkbcodefactory.com",
+        "supervisorName": "Borsa, Iván",
+        "status": "FILLED",
+        "startDate": "2022-01-05",
+        "exitDate": "",
+        "probationEndDate": "2022-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Reza.Lotfi@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Reza",
+        "lastName": "Lotfi",
+        "jobTitle": "Senior Mobile Developer (Android)",
+        "team": "Banking App - Nova Services",
+        "workEmail": "Reza.Lotfi@dkbcodefactory.com",
+        "supervisorName": "Borsa, Iván",
+        "status": "FILLED",
+        "startDate": "2023-01-05",
+        "exitDate": "",
+        "probationEndDate": "2023-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Mohsen.Vaziri@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Seyed",
+        "lastName": "Vaziri",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Web Banking",
+        "workEmail": "Mohsen.Vaziri@dkbcodefactory.com",
+        "supervisorName": "Borsa, Iván",
+        "status": "FILLED",
+        "startDate": "2024-01-05",
+        "exitDate": "",
+        "probationEndDate": "2024-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Hanieh.Haddad@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Hanieh",
+        "lastName": "Haddad",
+        "jobTitle": "Junior Software Developer (Frontend)",
+        "team": "",
+        "workEmail": "Hanieh.Haddad@dkbcodefactory.com",
+        "supervisorName": "Borsa, Iván",
+        "status": "FILLED",
+        "startDate": "2025-01-01",
+        "exitDate": "",
+        "probationEndDate": "2025-06-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Fabian.Schluesener@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Fabian",
+        "lastName": "Schlüsener",
+        "jobTitle": "Senior Talent Acquisition Manager",
+        "team": "",
+        "workEmail": "Fabian.Schluesener@dkbcodefactory.com",
+        "supervisorName": "Brandherm, Victoria",
+        "status": "FILLED",
+        "startDate": "2022-01-04",
+        "exitDate": "",
+        "probationEndDate": "2022-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Eva.Haymoz@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Eva",
+        "lastName": "Haymoz",
+        "jobTitle": "Talent Acquisition Manager",
+        "team": "",
+        "workEmail": "Eva.Haymoz@dkbcodefactory.com",
+        "supervisorName": "Brandherm, Victoria",
+        "status": "FILLED",
+        "startDate": "2025-01-06",
+        "exitDate": "",
+        "probationEndDate": "2025-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Alice.Liebrecht@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Alice",
+        "lastName": "Liebrecht",
+        "jobTitle": "Senior Talent Acquisition Manager",
+        "team": "",
+        "workEmail": "Alice.Liebrecht@dkbcodefactory.com",
+        "supervisorName": "Brandherm, Victoria",
+        "status": "FILLED",
+        "startDate": "2026-01-02",
+        "exitDate": "",
+        "probationEndDate": "2026-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Brady.Richards@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Brady",
+        "lastName": "Richards",
+        "jobTitle": "Senior Talent Acquisition Manager",
+        "team": "",
+        "workEmail": "Brady.Richards@dkbcodefactory.com",
+        "supervisorName": "Brandherm, Victoria",
+        "status": "FILLED",
+        "startDate": "2026-01-02",
+        "exitDate": "",
+        "probationEndDate": "2026-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Aya.Chamra@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Aya",
+        "lastName": "Chamra",
+        "jobTitle": "Talent Acquisition Manager",
+        "team": "",
+        "workEmail": "Aya.Chamra@dkbcodefactory.com",
+        "supervisorName": "Brandherm, Victoria",
+        "status": "FILLED",
+        "startDate": "2026-01-02",
+        "exitDate": "",
+        "probationEndDate": "2026-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "julian.dorn@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Julian",
+        "lastName": "Dorn",
+        "jobTitle": "Principal UI/UX Designer",
+        "team": "",
+        "workEmail": "julian.dorn@dkbcodefactory.com",
+        "supervisorName": "Cepkenli, Sirin",
+        "status": "FILLED",
+        "startDate": "2021-01-02",
+        "exitDate": "",
+        "probationEndDate": "2021-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "steffen.mueller@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Steffen",
+        "lastName": "Müller",
+        "jobTitle": "Principal UI/UX Designer",
+        "team": "Stella",
+        "workEmail": "steffen.mueller@dkbcodefactory.com",
+        "supervisorName": "Cepkenli, Sirin",
+        "status": "FILLED",
+        "startDate": "2021-01-04",
+        "exitDate": "",
+        "probationEndDate": "2021-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "lissy.Bonness@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Lissy",
+        "lastName": "Bonness",
+        "jobTitle": "UI/UX Design Manager",
+        "team": "",
+        "workEmail": "lissy.Bonness@dkbcodefactory.com",
+        "supervisorName": "Cepkenli, Sirin",
+        "status": "FILLED",
+        "startDate": "2022-01-03",
+        "exitDate": "",
+        "probationEndDate": "2022-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Joshua.Gnizak@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Joshua",
+        "lastName": "Gnizak",
+        "jobTitle": "UI/UX Design Manager",
+        "team": "",
+        "workEmail": "Joshua.Gnizak@dkbcodefactory.com",
+        "supervisorName": "Cepkenli, Sirin",
+        "status": "FILLED",
+        "startDate": "2025-01-04",
+        "exitDate": "",
+        "probationEndDate": "2025-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "HanJu.Kim@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Han",
+        "lastName": "Kim",
+        "jobTitle": "Senior UI/UX Designer",
+        "team": "",
+        "workEmail": "HanJu.Kim@dkbcodefactory.com",
+        "supervisorName": "Cepkenli, Sirin",
+        "status": "FILLED",
+        "startDate": "2026-01-03",
+        "exitDate": "",
+        "probationEndDate": "2026-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "felix.gruenewald@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Felix",
+        "lastName": "Grünewald",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Communication & Documents",
+        "workEmail": "felix.gruenewald@dkbcodefactory.com",
+        "supervisorName": "de la Pena Fayos, Javier",
+        "status": "FILLED",
+        "startDate": "2021-01-07",
+        "exitDate": "",
+        "probationEndDate": "2021-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Izuchukwu.Oleka@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Izuchukwu",
+        "lastName": "Oleka",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Communication & Documents",
+        "workEmail": "Izuchukwu.Oleka@dkbcodefactory.com",
+        "supervisorName": "de la Pena Fayos, Javier",
+        "status": "FILLED",
+        "startDate": "2022-01-12",
+        "exitDate": "",
+        "probationEndDate": "2023-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Umurcan.Emre@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Ibrahim",
+        "lastName": "Emre",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Communication & Documents",
+        "workEmail": "Umurcan.Emre@dkbcodefactory.com",
+        "supervisorName": "de la Pena Fayos, Javier",
+        "status": "FILLED",
+        "startDate": "2023-01-08",
+        "exitDate": "",
+        "probationEndDate": "2024-01-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Daniel.Schellenberg@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Daniel",
+        "lastName": "Schellenberg",
+        "jobTitle": "Junior Software Developer (Backend)",
+        "team": "Communication & Documents",
+        "workEmail": "Daniel.Schellenberg@dkbcodefactory.com",
+        "supervisorName": "de la Pena Fayos, Javier",
+        "status": "FILLED",
+        "startDate": "2025-01-08",
+        "exitDate": "",
+        "probationEndDate": "2026-01-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "AlanOmar.HernandezLopez@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Alan",
+        "lastName": "Hernandez Lopez",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Communication & Document (Void)",
+        "workEmail": "AlanOmar.HernandezLopez@dkbcodefactory.com",
+        "supervisorName": "de la Pena Fayos, Javier",
+        "status": "FILLED",
+        "startDate": "2026-01-04",
+        "exitDate": "",
+        "probationEndDate": "2026-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Georgios.Karanikas@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Georgios",
+        "lastName": "Karanikas",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Accounts & Transactions",
+        "workEmail": "Georgios.Karanikas@dkbcodefactory.com",
+        "supervisorName": "Elo, Pablo",
+        "status": "FILLED",
+        "startDate": "2020-01-10",
+        "exitDate": "",
+        "probationEndDate": "2021-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Shanmugam.Muthuraj@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Shanmugam",
+        "lastName": "Muthuraj",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Loans",
+        "workEmail": "Shanmugam.Muthuraj@dkbcodefactory.com",
+        "supervisorName": "Elo, Pablo",
+        "status": "FILLED",
+        "startDate": "2022-01-09",
+        "exitDate": "",
+        "probationEndDate": "2023-02-28"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "mel.grosser@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Mel",
+        "lastName": "Grosser",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Loans",
+        "workEmail": "mel.grosser@dkbcodefactory.com",
+        "supervisorName": "Elo, Pablo",
+        "status": "FILLED",
+        "startDate": "2024-01-02",
+        "exitDate": "",
+        "probationEndDate": "2024-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Chae-Hyuk.Lee@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Chae",
+        "lastName": "Lee",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Loans",
+        "workEmail": "Chae-Hyuk.Lee@dkbcodefactory.com",
+        "supervisorName": "Elo, Pablo",
+        "status": "FILLED",
+        "startDate": "2023-01-12",
+        "exitDate": "",
+        "probationEndDate": "2024-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Priscila.Flores@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Priscila",
+        "lastName": "Duarte Uchoa Lopes Flores",
+        "jobTitle": "Software Developer (Frontend)",
+        "team": "Loans",
+        "workEmail": "Priscila.Flores@dkbcodefactory.com",
+        "supervisorName": "Elo, Pablo",
+        "status": "FILLED",
+        "startDate": "2024-01-07",
+        "exitDate": "",
+        "probationEndDate": "2024-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Darian.Reck@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Darian",
+        "lastName": "Reck",
+        "jobTitle": "Junior Software Developer (Backend)",
+        "team": "Loans",
+        "workEmail": "Darian.Reck@dkbcodefactory.com",
+        "supervisorName": "Elo, Pablo",
+        "status": "FILLED",
+        "startDate": "2025-01-10",
+        "exitDate": "",
+        "probationEndDate": "2026-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Sebastian.Spier@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Sebastian",
+        "lastName": "Spier",
+        "jobTitle": "Senior Delivery Manager",
+        "team": "Mission Control",
+        "workEmail": "Sebastian.Spier@dkbcodefactory.com",
+        "supervisorName": "Friedag, Joschka",
+        "status": "FILLED",
+        "startDate": "2024-01-03",
+        "exitDate": "",
+        "probationEndDate": "2024-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Alexis.Froehlich@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Alexis",
+        "lastName": "Fröhlich",
+        "jobTitle": "Delivery Manager",
+        "team": "Mission Control",
+        "workEmail": "Alexis.Froehlich@dkbcodefactory.com",
+        "supervisorName": "Friedag, Joschka",
+        "status": "FILLED",
+        "startDate": "2024-01-09",
+        "exitDate": "",
+        "probationEndDate": "2025-02-28"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Imani.Arunga@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Imani",
+        "lastName": "Arunga",
+        "jobTitle": "Delivery Manager",
+        "team": "Mission Control",
+        "workEmail": "Imani.Arunga@dkbcodefactory.com",
+        "supervisorName": "Friedag, Joschka",
+        "status": "FILLED",
+        "startDate": "2024-01-10",
+        "exitDate": "",
+        "probationEndDate": "2025-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Pauline.Kern@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Pauline",
+        "lastName": "Kern",
+        "jobTitle": "Delivery Manager",
+        "team": "Mission Control",
+        "workEmail": "Pauline.Kern@dkbcodefactory.com",
+        "supervisorName": "Friedag, Joschka",
+        "status": "FILLED",
+        "startDate": "2025-01-02",
+        "exitDate": "",
+        "probationEndDate": "2025-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "dmitri.awerkowschaefer@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Dmitri",
+        "lastName": "Awerkow-Schäfer",
+        "jobTitle": "Senior Delivery Manager",
+        "team": "",
+        "workEmail": "dmitri.awerkowschaefer@dkbcodefactory.com",
+        "supervisorName": "Friedag, Joschka",
+        "status": "FILLED",
+        "startDate": "2026-01-02",
+        "exitDate": "",
+        "probationEndDate": "2026-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "hedyvictoria.born@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Hedy",
+        "lastName": "Born",
+        "jobTitle": "Senior Delivery Manager",
+        "team": "",
+        "workEmail": "hedyvictoria.born@dkbcodefactory.com",
+        "supervisorName": "Friedag, Joschka",
+        "status": "FILLED",
+        "startDate": "2026-01-02",
+        "exitDate": "",
+        "probationEndDate": "2026-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "hannes.Waldschmidt@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Hannes",
+        "lastName": "Waldschmidt",
+        "jobTitle": "Werkstudent",
+        "team": "Card MGMT & Stammdaten",
+        "workEmail": "hannes.Waldschmidt@dkbcodefactory.com",
+        "supervisorName": "Fürstenau, Martin",
+        "status": "FILLED",
+        "startDate": "2021-01-12",
+        "exitDate": "",
+        "probationEndDate": "2022-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Luise-Caroline.Gall@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Luise-Caroline",
+        "lastName": "Gall",
+        "jobTitle": "Senior UI/UX Designer",
+        "team": "",
+        "workEmail": "Luise-Caroline.Gall@dkbcodefactory.com",
+        "supervisorName": "Gnizak, Joshua",
+        "status": "FILLED",
+        "startDate": "2021-01-10",
+        "exitDate": "",
+        "probationEndDate": "2022-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Martina.Morth@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Martina",
+        "lastName": "Morth",
+        "jobTitle": "Senior UI/UX Designer",
+        "team": "",
+        "workEmail": "Martina.Morth@dkbcodefactory.com",
+        "supervisorName": "Gnizak, Joshua",
+        "status": "FILLED",
+        "startDate": "2022-01-03",
+        "exitDate": "",
+        "probationEndDate": "2022-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Freshta.Hussain@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Freshta",
+        "lastName": "Hussain",
+        "jobTitle": "UI/UX Designer",
+        "team": "",
+        "workEmail": "Freshta.Hussain@dkbcodefactory.com",
+        "supervisorName": "Gnizak, Joshua",
+        "status": "FILLED",
+        "startDate": "2022-01-07",
+        "exitDate": "",
+        "probationEndDate": "2022-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Angelina.Stroese@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Angelina",
+        "lastName": "Ströse",
+        "jobTitle": "UI/UX Designer",
+        "team": "",
+        "workEmail": "Angelina.Stroese@dkbcodefactory.com",
+        "supervisorName": "Gnizak, Joshua",
+        "status": "FILLED",
+        "startDate": "2023-01-06",
+        "exitDate": "",
+        "probationEndDate": "2023-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Marianna.Shults@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Marianna",
+        "lastName": "Shults",
+        "jobTitle": "UI/UX Designer",
+        "team": "",
+        "workEmail": "Marianna.Shults@dkbcodefactory.com",
+        "supervisorName": "Gnizak, Joshua",
+        "status": "FILLED",
+        "startDate": "2023-01-07",
+        "exitDate": "",
+        "probationEndDate": "2023-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Daniel.Stopka@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Daniel",
+        "lastName": "Stopka",
+        "jobTitle": "Pega Developer",
+        "team": "Bank Account",
+        "workEmail": "Daniel.Stopka@dkbcodefactory.com",
+        "supervisorName": "Gutierrez Reyes, Maria",
+        "status": "FILLED",
+        "startDate": "2024-01-05",
+        "exitDate": "",
+        "probationEndDate": "2024-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "ivan.borsa@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Iván",
+        "lastName": "Borsa",
+        "jobTitle": "Engineering Manager (iOS)",
+        "team": "Banking App - Nova Services",
+        "workEmail": "ivan.borsa@dkbcodefactory.com",
+        "supervisorName": "Henzelmann, Christoph-Philipp",
+        "status": "FILLED",
+        "startDate": "2019-01-12",
+        "exitDate": "",
+        "probationEndDate": "2020-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "michael.steudter@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Michael",
+        "lastName": "Steudter",
+        "jobTitle": "Engineering Manager (iOS)",
+        "team": "Banking App - Nova Payments",
+        "workEmail": "michael.steudter@dkbcodefactory.com",
+        "supervisorName": "Henzelmann, Christoph-Philipp",
+        "status": "FILLED",
+        "startDate": "2019-01-11",
+        "exitDate": "",
+        "probationEndDate": "2020-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "vladimir.ignjatijevic@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Vladimir",
+        "lastName": "Ignjatijevic",
+        "jobTitle": "Engineering Manager (Android)",
+        "team": "Banking App - Nova Core",
+        "workEmail": "vladimir.ignjatijevic@dkbcodefactory.com",
+        "supervisorName": "Henzelmann, Christoph-Philipp",
+        "status": "FILLED",
+        "startDate": "2020-01-05",
+        "exitDate": "",
+        "probationEndDate": "2020-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Pablo",
+        "lastName": "Perez Gonzalez",
+        "jobTitle": "Engineering Manager (Android)",
+        "team": "Banking App - Nova Products",
+        "workEmail": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
+        "supervisorName": "Henzelmann, Christoph-Philipp",
+        "status": "FILLED",
+        "startDate": "2021-01-02",
+        "exitDate": "",
+        "probationEndDate": "2021-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Franz.Hefele@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Franz",
+        "lastName": "Hefele",
+        "jobTitle": "Pega Developer",
+        "team": "Customer Onboarding",
+        "workEmail": "Franz.Hefele@dkbcodefactory.com",
+        "supervisorName": "Holweger, Kathrin",
+        "status": "FILLED",
+        "startDate": "2024-01-05",
+        "exitDate": "",
+        "probationEndDate": "2024-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "stefan.junge@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Stefan",
+        "lastName": "Junge",
+        "jobTitle": "Pega Developer",
+        "team": "Customer Onboarding",
+        "workEmail": "stefan.junge@dkbcodefactory.com",
+        "supervisorName": "Holweger, Kathrin",
+        "status": "FILLED",
+        "startDate": "2024-01-05",
+        "exitDate": "",
+        "probationEndDate": "2024-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Marie.Jager@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Marie",
+        "lastName": "Jager",
+        "jobTitle": "Pega Developer",
+        "team": "Sicherheiten",
+        "workEmail": "Marie.Jager@dkbcodefactory.com",
+        "supervisorName": "Holweger, Kathrin",
+        "status": "FILLED",
+        "startDate": "2024-01-12",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Mounika.Sunkara@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Mounika",
+        "lastName": "Sunkara",
+        "jobTitle": "Senior Pega Developer",
+        "team": "Customer Onboarding",
+        "workEmail": "Mounika.Sunkara@dkbcodefactory.com",
+        "supervisorName": "Holweger, Kathrin",
+        "status": "FILLED",
+        "startDate": "2025-01-04",
+        "exitDate": "",
+        "probationEndDate": "2025-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "andrej.bielevicius@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Andrej",
+        "lastName": "Bielevicius",
+        "jobTitle": "Senior Mobile Developer (Android)",
+        "team": "Banking App - Nova Core",
+        "workEmail": "andrej.bielevicius@dkbcodefactory.com",
+        "supervisorName": "Ignjatijevic, Vladimir",
+        "status": "FILLED",
+        "startDate": "2021-01-08",
+        "exitDate": "",
+        "probationEndDate": "2022-01-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Cassiano.Montanari@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Cassiano",
+        "lastName": "Guareschi Montanari",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Web Banking",
+        "workEmail": "Cassiano.Montanari@dkbcodefactory.com",
+        "supervisorName": "Ignjatijevic, Vladimir",
+        "status": "FILLED",
+        "startDate": "2021-01-12",
+        "exitDate": "",
+        "probationEndDate": "2022-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "adam.kerenyi@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Adam",
+        "lastName": "Kerenyi",
+        "jobTitle": "Senior Mobile Developer (iOS)",
+        "team": "Banking App - Nova Core",
+        "workEmail": "adam.kerenyi@dkbcodefactory.com",
+        "supervisorName": "Ignjatijevic, Vladimir",
+        "status": "FILLED",
+        "startDate": "2021-01-11",
+        "exitDate": "",
+        "probationEndDate": "2022-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "claudinei.bido@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Claudinei",
+        "lastName": "Bido",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Web Banking",
+        "workEmail": "claudinei.bido@dkbcodefactory.com",
+        "supervisorName": "Ignjatijevic, Vladimir",
+        "status": "FILLED",
+        "startDate": "2022-01-03",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Sarangan.Gnanasegaram@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Sarangan",
+        "lastName": "Gnanasegaram",
+        "jobTitle": "Senior Mobile Developer (Android)",
+        "team": "Banking App - Nova Core",
+        "workEmail": "Sarangan.Gnanasegaram@dkbcodefactory.com",
+        "supervisorName": "Ignjatijevic, Vladimir",
+        "status": "FILLED",
+        "startDate": "2023-01-04",
+        "exitDate": "",
+        "probationEndDate": "2023-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Koki.Isshiki@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Koki",
+        "lastName": "Isshiki",
+        "jobTitle": "Mobile Developer (iOS)",
+        "team": "Banking App - Nova Core",
+        "workEmail": "Koki.Isshiki@dkbcodefactory.com",
+        "supervisorName": "Ignjatijevic, Vladimir",
+        "status": "FILLED",
+        "startDate": "2025-01-10",
+        "exitDate": "",
+        "probationEndDate": "2026-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "dennis.steiner@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Dennis",
+        "lastName": "Steiner",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Payment & Fraud",
+        "workEmail": "dennis.steiner@dkbcodefactory.com",
+        "supervisorName": "Kefale, Biniam",
+        "status": "FILLED",
+        "startDate": "2020-06-01",
+        "exitDate": "",
+        "probationEndDate": "2020-05-07"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Faizan.Hussain@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Faizan",
+        "lastName": "Hussain",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Payment & Fraud",
+        "workEmail": "Faizan.Hussain@dkbcodefactory.com",
+        "supervisorName": "Kefale, Biniam",
+        "status": "FILLED",
+        "startDate": "2021-01-08",
+        "exitDate": "",
+        "probationEndDate": "2022-01-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Denys.Stoianov@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Denys",
+        "lastName": "Stoianov",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Payment & Fraud",
+        "workEmail": "Denys.Stoianov@dkbcodefactory.com",
+        "supervisorName": "Kefale, Biniam",
+        "status": "FILLED",
+        "startDate": "2022-01-04",
+        "exitDate": "",
+        "probationEndDate": "2022-01-04"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Mehrdad.Yami@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Mehrdad",
+        "lastName": "Hosseinnejad Yami",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Payment & Fraud",
+        "workEmail": "Mehrdad.Yami@dkbcodefactory.com",
+        "supervisorName": "Kefale, Biniam",
+        "status": "FILLED",
+        "startDate": "2025-01-07",
+        "exitDate": "",
+        "probationEndDate": "2025-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Hari.Tummala@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Hari",
+        "lastName": "Tummala",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Payment & Fraud",
+        "workEmail": "Hari.Tummala@dkbcodefactory.com",
+        "supervisorName": "Kefale, Biniam",
+        "status": "FILLED",
+        "startDate": "2025-01-06",
+        "exitDate": "",
+        "probationEndDate": "2025-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "judith-marie.graf@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Judith-Marie",
+        "lastName": "Graf",
+        "jobTitle": "Human Resources & Executive Manager",
+        "team": "",
+        "workEmail": "judith-marie.graf@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2018-07-15",
+        "exitDate": "",
+        "probationEndDate": "2019-01-14"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "victoria.brandherm@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Victoria",
+        "lastName": "Brandherm",
+        "jobTitle": "Expert Talent Acquisition Manager",
+        "team": "People Operations - Talent Acquisition",
+        "workEmail": "victoria.brandherm@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2018-10-15",
+        "exitDate": "",
+        "probationEndDate": "2019-04-14"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "joschka.friedag@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Joschka",
+        "lastName": "Friedag",
+        "jobTitle": "Tribe Lead",
+        "team": "",
+        "workEmail": "joschka.friedag@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2018-10-15",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Konrad.Maruschewski@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Konrad",
+        "lastName": "Maruschewski",
+        "jobTitle": "Chapter Lead Research & Data Analytics",
+        "team": "",
+        "workEmail": "Konrad.Maruschewski@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2018-10-15",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "britta.proefrock@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Britta",
+        "lastName": "Pröfrock",
+        "jobTitle": "Personnel Developer",
+        "team": "",
+        "workEmail": "britta.proefrock@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2020-01-05",
+        "exitDate": "",
+        "probationEndDate": "2020-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "eric.piotrowski@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Eric",
+        "lastName": "Piotrowski",
+        "jobTitle": "IT Manager",
+        "team": "",
+        "workEmail": "eric.piotrowski@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2020-01-07",
+        "exitDate": "",
+        "probationEndDate": "2020-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Emre.Soenmez@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Ekin",
+        "lastName": "Sönmez",
+        "jobTitle": "Chapter Lead Agile",
+        "team": "",
+        "workEmail": "Emre.Soenmez@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2020-01-10",
+        "exitDate": "",
+        "probationEndDate": "2021-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "sirin.Cepkenli@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Sirin",
+        "lastName": "Cepkenli",
+        "jobTitle": "Chapter Lead UI/UX Design",
+        "team": "",
+        "workEmail": "sirin.Cepkenli@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2021-01-12",
+        "exitDate": "",
+        "probationEndDate": "2022-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "maria.silva@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Maria",
+        "lastName": "Silva",
+        "jobTitle": "Workplace & Culture Manager",
+        "team": "",
+        "workEmail": "maria.silva@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2022-01-06",
+        "exitDate": "",
+        "probationEndDate": "2022-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Marc.Bobzien@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Marc",
+        "lastName": "Bobzien",
+        "jobTitle": "Head of Engineering",
+        "team": "",
+        "workEmail": "Marc.Bobzien@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2023-01-15",
+        "exitDate": "",
+        "probationEndDate": "2023-07-14"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Kaan.Tan@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Kaan",
+        "lastName": "Tan",
+        "jobTitle": "Chapter Lead Delivery Management",
+        "team": "",
+        "workEmail": "Kaan.Tan@dkbcodefactory.com",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2026-01-06",
+        "exitDate": "",
+        "probationEndDate": "2026-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "node-Müller-Alexander-91",
+      "type": "person",
+      "data": {
+        "firstName": "Alexander",
+        "lastName": "Müller",
+        "jobTitle": "Head of Valencia Branch",
+        "team": "",
+        "workEmail": "",
+        "supervisorName": "Lehsten, Alexander",
+        "status": "FILLED",
+        "startDate": "2026-03-15",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Selina.Kunkel@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Selina",
+        "lastName": "Kunkel",
+        "jobTitle": "Junior UX Researcher",
+        "team": "",
+        "workEmail": "Selina.Kunkel@dkbcodefactory.com",
+        "supervisorName": "Litvinova, Aleksandra",
+        "status": "FILLED",
+        "startDate": "2023-01-10",
+        "exitDate": "",
+        "probationEndDate": "2024-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Franziska.Berndt@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Franziska",
+        "lastName": "Berndt",
+        "jobTitle": "Werkstudent",
+        "team": "",
+        "workEmail": "Franziska.Berndt@dkbcodefactory.com",
+        "supervisorName": "Litvinova, Aleksandra",
+        "status": "FILLED",
+        "startDate": "2025-01-06",
+        "exitDate": "",
+        "probationEndDate": "2025-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Steven.Raschke@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Steven",
+        "lastName": "Raschke",
+        "jobTitle": "Junior UX Researcher",
+        "team": "User Research (Curiosity)",
+        "workEmail": "Steven.Raschke@dkbcodefactory.com",
+        "supervisorName": "Litvinova, Aleksandra",
+        "status": "FILLED",
+        "startDate": "2025-01-10",
+        "exitDate": "",
+        "probationEndDate": "2026-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "BenitaMaria.Marx@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Benita",
+        "lastName": "Marx",
+        "jobTitle": "UX Researcher",
+        "team": "",
+        "workEmail": "BenitaMaria.Marx@dkbcodefactory.com",
+        "supervisorName": "Litvinova, Aleksandra",
+        "status": "FILLED",
+        "startDate": "2025-01-12",
+        "exitDate": "",
+        "probationEndDate": "2026-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "alexandr.melnic@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Alexandr",
+        "lastName": "Melnic",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Signup",
+        "workEmail": "alexandr.melnic@dkbcodefactory.com",
+        "supervisorName": "Maghear, Adrian-Florin",
+        "status": "FILLED",
+        "startDate": "2020-01-12",
+        "exitDate": "",
+        "probationEndDate": "2021-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Sura.Watthanalamlert@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Sura",
+        "lastName": "Watthanalamlert",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Signup",
+        "workEmail": "Sura.Watthanalamlert@dkbcodefactory.com",
+        "supervisorName": "Maghear, Adrian-Florin",
+        "status": "FILLED",
+        "startDate": "2022-01-10",
+        "exitDate": "",
+        "probationEndDate": "2023-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Eveline.Kooijman@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Eveline",
+        "lastName": "Kooijman",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Signup",
+        "workEmail": "Eveline.Kooijman@dkbcodefactory.com",
+        "supervisorName": "Maghear, Adrian-Florin",
+        "status": "FILLED",
+        "startDate": "2022-01-09",
+        "exitDate": "",
+        "probationEndDate": "2023-02-28"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "miriam.Bah@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Miriam",
+        "lastName": "Bah",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Signup",
+        "workEmail": "miriam.Bah@dkbcodefactory.com",
+        "supervisorName": "Maghear, Adrian-Florin",
+        "status": "FILLED",
+        "startDate": "2024-01-06",
+        "exitDate": "",
+        "probationEndDate": "2024-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Delia.Metzler@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Delia",
+        "lastName": "Metzler",
+        "jobTitle": "Software Developer (Frontend)",
+        "team": "Signup",
+        "workEmail": "Delia.Metzler@dkbcodefactory.com",
+        "supervisorName": "Maghear, Adrian-Florin",
+        "status": "FILLED",
+        "startDate": "2025-01-02",
+        "exitDate": "",
+        "probationEndDate": "2025-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Serhat.Sungur@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Serhat",
+        "lastName": "Sungur",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Signup",
+        "workEmail": "Serhat.Sungur@dkbcodefactory.com",
+        "supervisorName": "Maghear, Adrian-Florin",
+        "status": "FILLED",
+        "startDate": "2025-01-04",
+        "exitDate": "",
+        "probationEndDate": "2025-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Thomas.Juhnke@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Thomas",
+        "lastName": "Juhnke",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Onboarding",
+        "workEmail": "Thomas.Juhnke@dkbcodefactory.com",
+        "supervisorName": "Maghear, Adrian-Florin",
+        "status": "FILLED",
+        "startDate": "2025-01-07",
+        "exitDate": "",
+        "probationEndDate": "2025-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Thore.Ottenheym@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Thore",
+        "lastName": "Ottenheym",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Onboarding",
+        "workEmail": "Thore.Ottenheym@dkbcodefactory.com",
+        "supervisorName": "Maghear, Adrian-Florin",
+        "status": "FILLED",
+        "startDate": "2026-01-03",
+        "exitDate": "",
+        "probationEndDate": "2026-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "veronika.villain@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Veronika",
+        "lastName": "Villain",
+        "jobTitle": "Research Manager",
+        "team": "",
+        "workEmail": "veronika.villain@dkbcodefactory.com",
+        "supervisorName": "Maruschewski, Konrad",
+        "status": "FILLED",
+        "startDate": "2020-01-04",
+        "exitDate": "",
+        "probationEndDate": "2020-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "diana.loeffler@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Diana",
+        "lastName": "Löffler",
+        "jobTitle": "Principal UX Researcher",
+        "team": "",
+        "workEmail": "diana.loeffler@dkbcodefactory.com",
+        "supervisorName": "Maruschewski, Konrad",
+        "status": "FILLED",
+        "startDate": "2020-01-11",
+        "exitDate": "",
+        "probationEndDate": "2021-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Sebastian.Herzberg@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Sebastian",
+        "lastName": "Herzberg",
+        "jobTitle": "Principal UX Researcher",
+        "team": "",
+        "workEmail": "Sebastian.Herzberg@dkbcodefactory.com",
+        "supervisorName": "Maruschewski, Konrad",
+        "status": "FILLED",
+        "startDate": "2022-01-02",
+        "exitDate": "",
+        "probationEndDate": "2022-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Sasha.Litvinova@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Aleksandra",
+        "lastName": "Litvinova",
+        "jobTitle": "Principal UX Researcher",
+        "team": "",
+        "workEmail": "Sasha.Litvinova@dkbcodefactory.com",
+        "supervisorName": "Maruschewski, Konrad",
+        "status": "FILLED",
+        "startDate": "2022-01-01",
+        "exitDate": "",
+        "probationEndDate": "2022-06-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Manfred.Jormakka@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Manfred",
+        "lastName": "Jormakka",
+        "jobTitle": "UX Researcher",
+        "team": "",
+        "workEmail": "Manfred.Jormakka@dkbcodefactory.com",
+        "supervisorName": "Maruschewski, Konrad",
+        "status": "FILLED",
+        "startDate": "2023-01-05",
+        "exitDate": "",
+        "probationEndDate": "2023-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Evelin.Mazny@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Evelin",
+        "lastName": "Mazny",
+        "jobTitle": "Analytics Manager",
+        "team": "",
+        "workEmail": "Evelin.Mazny@dkbcodefactory.com",
+        "supervisorName": "Maruschewski, Konrad",
+        "status": "FILLED",
+        "startDate": "2023-01-06",
+        "exitDate": "",
+        "probationEndDate": "2023-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "annelyruth.sima@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Annely",
+        "lastName": "Sima",
+        "jobTitle": "Werkstudent",
+        "team": "User Research (Curiosity)",
+        "workEmail": "annelyruth.sima@dkbcodefactory.com",
+        "supervisorName": "Maruschewski, Konrad",
+        "status": "FILLED",
+        "startDate": "2026-01-02",
+        "exitDate": "",
+        "probationEndDate": "2026-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "doratheklamechthild.brune@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Dora",
+        "lastName": "Brune",
+        "jobTitle": "Senior UX Researcher",
+        "team": "",
+        "workEmail": "doratheklamechthild.brune@dkbcodefactory.com",
+        "supervisorName": "Maruschewski, Konrad",
+        "status": "FILLED",
+        "startDate": "2026-01-02",
+        "exitDate": "",
+        "probationEndDate": "2026-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Peter.Geschwandtner@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Peter",
+        "lastName": "Geschwandtner",
+        "jobTitle": "Senior Analyst",
+        "team": "",
+        "workEmail": "Peter.Geschwandtner@dkbcodefactory.com",
+        "supervisorName": "Mazny, Evelin",
+        "status": "FILLED",
+        "startDate": "2023-01-12",
+        "exitDate": "",
+        "probationEndDate": "2024-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Margarete.Block@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Margarete",
+        "lastName": "Block",
+        "jobTitle": "Junior Analyst",
+        "team": "",
+        "workEmail": "Margarete.Block@dkbcodefactory.com",
+        "supervisorName": "Mazny, Evelin",
+        "status": "FILLED",
+        "startDate": "2025-01-02",
+        "exitDate": "",
+        "probationEndDate": "2025-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "samuel.stein@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Samuel",
+        "lastName": "Stein",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Sicherheiten",
+        "workEmail": "samuel.stein@dkbcodefactory.com",
+        "supervisorName": "Mazur, Maria",
+        "status": "FILLED",
+        "startDate": "2018-01-12",
+        "exitDate": "",
+        "probationEndDate": "2019-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Roman.Uglovskij@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Roman",
+        "lastName": "Drischel",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Kreditwelt & Ablage",
+        "workEmail": "Roman.Uglovskij@dkbcodefactory.com",
+        "supervisorName": "Mazur, Maria",
+        "status": "FILLED",
+        "startDate": "2022-01-04",
+        "exitDate": "",
+        "probationEndDate": "2022-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Jennifer.Wjertzoch@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Jennifer",
+        "lastName": "Wjertzoch",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Kreditwelt & Ablage",
+        "workEmail": "Jennifer.Wjertzoch@dkbcodefactory.com",
+        "supervisorName": "Mazur, Maria",
+        "status": "FILLED",
+        "startDate": "2023-01-09",
+        "exitDate": "",
+        "probationEndDate": "2024-02-29"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Renata.Lazarov@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Renata",
+        "lastName": "Lazarov",
+        "jobTitle": "Junior Software Developer (Frontend)",
+        "team": "Verwalterplatform",
+        "workEmail": "Renata.Lazarov@dkbcodefactory.com",
+        "supervisorName": "Mazur, Maria",
+        "status": "FILLED",
+        "startDate": "2025-01-08",
+        "exitDate": "",
+        "probationEndDate": "2026-01-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "lucas.lee@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Lucas",
+        "lastName": "Lee",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Broker",
+        "workEmail": "lucas.lee@dkbcodefactory.com",
+        "supervisorName": "Mösch, Christopher",
+        "status": "FILLED",
+        "startDate": "2019-01-11",
+        "exitDate": "",
+        "probationEndDate": "2020-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Leon.Kranich@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Leon",
+        "lastName": "Kranich",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Broker",
+        "workEmail": "Leon.Kranich@dkbcodefactory.com",
+        "supervisorName": "Mösch, Christopher",
+        "status": "FILLED",
+        "startDate": "2022-01-07",
+        "exitDate": "",
+        "probationEndDate": "2022-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Naimah.Fowler@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Naimah",
+        "lastName": "Fowler",
+        "jobTitle": "Junior Software Developer (Backend)",
+        "team": "Broker",
+        "workEmail": "Naimah.Fowler@dkbcodefactory.com",
+        "supervisorName": "Mösch, Christopher",
+        "status": "FILLED",
+        "startDate": "2022-01-04",
+        "exitDate": "",
+        "probationEndDate": "2022-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Antonio.Martinelli@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Antonio",
+        "lastName": "Martinelli",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Broker",
+        "workEmail": "Antonio.Martinelli@dkbcodefactory.com",
+        "supervisorName": "Mösch, Christopher",
+        "status": "FILLED",
+        "startDate": "2022-01-05",
+        "exitDate": "",
+        "probationEndDate": "2022-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Janine.Brennfoerder@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Janine",
+        "lastName": "Brennförder",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Broker",
+        "workEmail": "Janine.Brennfoerder@dkbcodefactory.com",
+        "supervisorName": "Mösch, Christopher",
+        "status": "FILLED",
+        "startDate": "2022-01-10",
+        "exitDate": "",
+        "probationEndDate": "2022-01-10"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Bodo.Wissemann@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Bodo",
+        "lastName": "Wissemann",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Broker",
+        "workEmail": "Bodo.Wissemann@dkbcodefactory.com",
+        "supervisorName": "Mösch, Christopher",
+        "status": "FILLED",
+        "startDate": "2025-01-03",
+        "exitDate": "",
+        "probationEndDate": "2025-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Alessandro.Memoli@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Alessandro",
+        "lastName": "Memoli",
+        "jobTitle": "Junior Software Developer (Backend)",
+        "team": "Broker",
+        "workEmail": "Alessandro.Memoli@dkbcodefactory.com",
+        "supervisorName": "Mösch, Christopher",
+        "status": "FILLED",
+        "startDate": "2025-01-09",
+        "exitDate": "",
+        "probationEndDate": "2026-02-28"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "jannikolai.rueckert@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Jan",
+        "lastName": "Rückert",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Broker",
+        "workEmail": "jannikolai.rueckert@dkbcodefactory.com",
+        "supervisorName": "Mösch, Christopher",
+        "status": "FILLED",
+        "startDate": "2026-01-02",
+        "exitDate": "",
+        "probationEndDate": "2026-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "node-Rodriguez-Kamila-126",
+      "type": "person",
+      "data": {
+        "firstName": "Kamila",
+        "lastName": "Rodriguez",
+        "jobTitle": "HR Operations Manager",
+        "team": "",
+        "workEmail": "",
+        "supervisorName": "Müller, Alexander",
+        "status": "FILLED",
+        "startDate": "2026-01-04",
+        "exitDate": "",
+        "probationEndDate": "2026-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Franziska.Comploi@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Franziska",
+        "lastName": "Comploi",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Homepage",
+        "workEmail": "Franziska.Comploi@dkbcodefactory.com",
+        "supervisorName": "Okumus, Yasin",
+        "status": "FILLED",
+        "startDate": "2022-01-10",
+        "exitDate": "",
+        "probationEndDate": "2023-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Cynthia.Akinade@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Cynthia",
+        "lastName": "Akinade",
+        "jobTitle": "Software Developer (Frontend)",
+        "team": "Homepage",
+        "workEmail": "Cynthia.Akinade@dkbcodefactory.com",
+        "supervisorName": "Okumus, Yasin",
+        "status": "FILLED",
+        "startDate": "2023-01-05",
+        "exitDate": "",
+        "probationEndDate": "2023-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Nataliia.Tbilieli@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Nataliia",
+        "lastName": "Tbilieli",
+        "jobTitle": "Software Developer (Frontend)",
+        "team": "Homepage",
+        "workEmail": "Nataliia.Tbilieli@dkbcodefactory.com",
+        "supervisorName": "Okumus, Yasin",
+        "status": "FILLED",
+        "startDate": "2025-01-08",
+        "exitDate": "",
+        "probationEndDate": "2026-01-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Philipp.Johannes@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Philipp",
+        "lastName": "Johannes",
+        "jobTitle": "Pega Developer",
+        "team": "Produktlöschung",
+        "workEmail": "Philipp.Johannes@dkbcodefactory.com",
+        "supervisorName": "Olukoye, Hannah",
+        "status": "FILLED",
+        "startDate": "2024-01-05",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Lena.Strokov@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Lena",
+        "lastName": "Strokov",
+        "jobTitle": "Pega Developer",
+        "team": "Produktlöschung",
+        "workEmail": "Lena.Strokov@dkbcodefactory.com",
+        "supervisorName": "Olukoye, Hannah",
+        "status": "FILLED",
+        "startDate": "2024-01-05",
+        "exitDate": "",
+        "probationEndDate": "2024-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Marco.Rossow@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Marco",
+        "lastName": "Rossow",
+        "jobTitle": "Pega Developer",
+        "team": "Produktlöschung",
+        "workEmail": "Marco.Rossow@dkbcodefactory.com",
+        "supervisorName": "Olukoye, Hannah",
+        "status": "FILLED",
+        "startDate": "2024-01-05",
+        "exitDate": "",
+        "probationEndDate": "2024-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Arlik.Florin@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Arlik",
+        "lastName": "Florin",
+        "jobTitle": "Pega Developer",
+        "team": "Digitale Postverteilung",
+        "workEmail": "Arlik.Florin@dkbcodefactory.com",
+        "supervisorName": "Olukoye, Hannah",
+        "status": "FILLED",
+        "startDate": "2024-01-12",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Michael.Kutzner@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Michael",
+        "lastName": "Kutzner",
+        "jobTitle": "Junior Pega Developer",
+        "team": "Produktlöschung",
+        "workEmail": "Michael.Kutzner@dkbcodefactory.com",
+        "supervisorName": "Olukoye, Hannah",
+        "status": "FILLED",
+        "startDate": "2025-01-06",
+        "exitDate": "",
+        "probationEndDate": "2025-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Sai.Muttavarapu@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Sai",
+        "lastName": "Muttavarapu",
+        "jobTitle": "Senior Pega Developer",
+        "team": "",
+        "workEmail": "Sai.Muttavarapu@dkbcodefactory.com",
+        "supervisorName": "Olukoye, Hannah",
+        "status": "FILLED",
+        "startDate": "2026-01-04",
+        "exitDate": "",
+        "probationEndDate": "2026-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "thomas.Segkoulis@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Thomas",
+        "lastName": "Segkoulis",
+        "jobTitle": "Senior Mobile Developer (iOS)",
+        "team": "Banking App - Nova Products",
+        "workEmail": "thomas.Segkoulis@dkbcodefactory.com",
+        "supervisorName": "Perez Gonzalez, Pablo",
+        "status": "FILLED",
+        "startDate": "2021-01-10",
+        "exitDate": "",
+        "probationEndDate": "2022-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Leonard.Scharf@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Richard",
+        "lastName": "Scharf",
+        "jobTitle": "Mobile Developer (iOS)",
+        "team": "Banking App - Nova Products",
+        "workEmail": "Leonard.Scharf@dkbcodefactory.com",
+        "supervisorName": "Perez Gonzalez, Pablo",
+        "status": "FILLED",
+        "startDate": "2022-01-01",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Philipp.Geissler@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Philipp",
+        "lastName": "Geißler",
+        "jobTitle": "Senior Mobile Developer (Android)",
+        "team": "Banking App - Nova Products",
+        "workEmail": "Philipp.Geissler@dkbcodefactory.com",
+        "supervisorName": "Perez Gonzalez, Pablo",
+        "status": "FILLED",
+        "startDate": "2022-01-07",
+        "exitDate": "",
+        "probationEndDate": "2022-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Thomas.Wilson@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Thomas",
+        "lastName": "Wilson",
+        "jobTitle": "Software Developer (Frontend)",
+        "team": "Web Banking",
+        "workEmail": "Thomas.Wilson@dkbcodefactory.com",
+        "supervisorName": "Perez Gonzalez, Pablo",
+        "status": "FILLED",
+        "startDate": "2022-01-09",
+        "exitDate": "",
+        "probationEndDate": "2023-02-28"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "rafal.Sztajer@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Rafal",
+        "lastName": "Sztajer",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Broker",
+        "workEmail": "rafal.Sztajer@dkbcodefactory.com",
+        "supervisorName": "Perez Gonzalez, Pablo",
+        "status": "FILLED",
+        "startDate": "2023-01-02",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Benjamin.Kunz@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Benjamin",
+        "lastName": "Kunz",
+        "jobTitle": "Mobile Developer (Android)",
+        "team": "Banking App - Nova Products",
+        "workEmail": "Benjamin.Kunz@dkbcodefactory.com",
+        "supervisorName": "Perez Gonzalez, Pablo",
+        "status": "FILLED",
+        "startDate": "2023-01-09",
+        "exitDate": "",
+        "probationEndDate": "2024-02-29"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Pavlo.Tereshchuk@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Pavlo",
+        "lastName": "Tereshchuk",
+        "jobTitle": "Mobile Developer (iOS)",
+        "team": "Banking App - Nova Products",
+        "workEmail": "Pavlo.Tereshchuk@dkbcodefactory.com",
+        "supervisorName": "Perez Gonzalez, Pablo",
+        "status": "FILLED",
+        "startDate": "2024-01-02",
+        "exitDate": "",
+        "probationEndDate": "2024-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Leoni.Sperling@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Leoni",
+        "lastName": "Sperling",
+        "jobTitle": "Software Developer (Frontend)",
+        "team": "Banking App - Nova Products",
+        "workEmail": "Leoni.Sperling@dkbcodefactory.com",
+        "supervisorName": "Perez Gonzalez, Pablo",
+        "status": "FILLED",
+        "startDate": "2025-01-10",
+        "exitDate": "",
+        "probationEndDate": "2026-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "veit.schumacher@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Veit",
+        "lastName": "Schumacher",
+        "jobTitle": "Software Developer (Frontend)",
+        "team": "Bank Account",
+        "workEmail": "veit.schumacher@dkbcodefactory.com",
+        "supervisorName": "Piotrowski, Lukasz",
+        "status": "FILLED",
+        "startDate": "2019-01-06",
+        "exitDate": "",
+        "probationEndDate": "2019-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Justina.Valda-Rajic@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Justina",
+        "lastName": "Valda-Rajić",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "",
+        "workEmail": "Justina.Valda-Rajic@dkbcodefactory.com",
+        "supervisorName": "Piotrowski, Lukasz",
+        "status": "FILLED",
+        "startDate": "2021-01-12",
+        "exitDate": "",
+        "probationEndDate": "2022-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Nabil.Mediouni@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Nabil",
+        "lastName": "Mediouni",
+        "jobTitle": "Software Developer (Frontend)",
+        "team": "",
+        "workEmail": "Nabil.Mediouni@dkbcodefactory.com",
+        "supervisorName": "Piotrowski, Lukasz",
+        "status": "FILLED",
+        "startDate": "2023-01-02",
+        "exitDate": "",
+        "probationEndDate": "2023-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "markus.may@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Markus",
+        "lastName": "May",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Beschluss",
+        "workEmail": "markus.may@dkbcodefactory.com",
+        "supervisorName": "Roeser, Benedict",
+        "status": "FILLED",
+        "startDate": "2019-01-05",
+        "exitDate": "",
+        "probationEndDate": "2019-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "stefan.kudwien@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Stefan",
+        "lastName": "Kudwien",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Sicherheiten",
+        "workEmail": "stefan.kudwien@dkbcodefactory.com",
+        "supervisorName": "Roeser, Benedict",
+        "status": "FILLED",
+        "startDate": "2019-01-06",
+        "exitDate": "",
+        "probationEndDate": "2019-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "michael.Scharni@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Michael",
+        "lastName": "Scharni",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Auflagen & Bonität",
+        "workEmail": "michael.Scharni@dkbcodefactory.com",
+        "supervisorName": "Roeser, Benedict",
+        "status": "FILLED",
+        "startDate": "2022-01-02",
+        "exitDate": "",
+        "probationEndDate": "2022-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Manuel.Pache@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Manuel",
+        "lastName": "Pache",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Produkte & Wirtschaftlichkeit",
+        "workEmail": "Manuel.Pache@dkbcodefactory.com",
+        "supervisorName": "Roeser, Benedict",
+        "status": "FILLED",
+        "startDate": "2022-01-07",
+        "exitDate": "",
+        "probationEndDate": "2022-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Miroslav.Dzunic@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Miroslav",
+        "lastName": "Dzunic",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Beschluss",
+        "workEmail": "Miroslav.Dzunic@dkbcodefactory.com",
+        "supervisorName": "Roeser, Benedict",
+        "status": "FILLED",
+        "startDate": "2023-01-07",
+        "exitDate": "",
+        "probationEndDate": "2023-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Rowena.Schmidt@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Rowena",
+        "lastName": "Schmidt",
+        "jobTitle": "Junior Software Developer (Frontend)",
+        "team": "Beschluss",
+        "workEmail": "Rowena.Schmidt@dkbcodefactory.com",
+        "supervisorName": "Roeser, Benedict",
+        "status": "FILLED",
+        "startDate": "2025-01-10",
+        "exitDate": "",
+        "probationEndDate": "2026-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "anton.katzer@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Anton",
+        "lastName": "Katzer",
+        "jobTitle": "Principal Engineer (Frontend)",
+        "team": "Kreditwelt & Ablage",
+        "workEmail": "anton.katzer@dkbcodefactory.com",
+        "supervisorName": "Sanchez Delgado, Jesus Manuel",
+        "status": "FILLED",
+        "startDate": "2019-01-11",
+        "exitDate": "",
+        "probationEndDate": "2020-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "lukasz.Piotrowski@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Lukasz",
+        "lastName": "Piotrowski",
+        "jobTitle": "Engineering Manager (Frontend)",
+        "team": "Banking App - Nova Payments",
+        "workEmail": "lukasz.Piotrowski@dkbcodefactory.com",
+        "supervisorName": "Sanchez Delgado, Jesus Manuel",
+        "status": "FILLED",
+        "startDate": "2021-01-01",
+        "exitDate": "",
+        "probationEndDate": "2021-06-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "judith.hartmann@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Judith",
+        "lastName": "Hartmann",
+        "jobTitle": "Principal Engineer (Frontend)",
+        "team": "",
+        "workEmail": "judith.hartmann@dkbcodefactory.com",
+        "supervisorName": "Sanchez Delgado, Jesus Manuel",
+        "status": "FILLED",
+        "startDate": "2021-01-03",
+        "exitDate": "",
+        "probationEndDate": "2021-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Daniel.Neuschaefer-Rube@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Daniel",
+        "lastName": "Neuschäfer-Rube",
+        "jobTitle": "Engineering Manager (Frontend)",
+        "team": "Produkte & Wirtschaftlichkeit",
+        "workEmail": "Daniel.Neuschaefer-Rube@dkbcodefactory.com",
+        "supervisorName": "Sanchez Delgado, Jesus Manuel",
+        "status": "FILLED",
+        "startDate": "2021-01-12",
+        "exitDate": "",
+        "probationEndDate": "2022-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Mesut.Okumus@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Yasin",
+        "lastName": "Okumus",
+        "jobTitle": "Engineering Manager (Frontend)",
+        "team": "Homepage",
+        "workEmail": "Mesut.Okumus@dkbcodefactory.com",
+        "supervisorName": "Sanchez Delgado, Jesus Manuel",
+        "status": "FILLED",
+        "startDate": "2022-01-09",
+        "exitDate": "",
+        "probationEndDate": "2023-02-28"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Maria.Mazur@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Maria",
+        "lastName": "Mazur",
+        "jobTitle": "Engineering Manager (Frontend)",
+        "team": "Kreditwelt & Ablage",
+        "workEmail": "Maria.Mazur@dkbcodefactory.com",
+        "supervisorName": "Sanchez Delgado, Jesus Manuel",
+        "status": "FILLED",
+        "startDate": "2023-01-09",
+        "exitDate": "",
+        "probationEndDate": "2024-02-29"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Stiliyana.Yordanova@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Stiliyana",
+        "lastName": "Yordanova",
+        "jobTitle": "Engineering Manager (Frontend)",
+        "team": "Web Banking",
+        "workEmail": "Stiliyana.Yordanova@dkbcodefactory.com",
+        "supervisorName": "Sanchez Delgado, Jesus Manuel",
+        "status": "FILLED",
+        "startDate": "2024-01-10",
+        "exitDate": "",
+        "probationEndDate": "2025-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Tobias.Pohl@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Tobias",
+        "lastName": "Pohl",
+        "jobTitle": "Pega Developer",
+        "team": "Stammdaten / Produktänderung",
+        "workEmail": "Tobias.Pohl@dkbcodefactory.com",
+        "supervisorName": "Schaefer, Elif",
+        "status": "FILLED",
+        "startDate": "2024-01-05",
+        "exitDate": "",
+        "probationEndDate": "2024-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Patrick.Pister@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Patrick",
+        "lastName": "Pister",
+        "jobTitle": "Pega Developer",
+        "team": "Sicherheiten Bearbeitung",
+        "workEmail": "Patrick.Pister@dkbcodefactory.com",
+        "supervisorName": "Schaefer, Elif",
+        "status": "FILLED",
+        "startDate": "2025-01-03",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Sven.Wetzurek@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Sven",
+        "lastName": "Wetzurek",
+        "jobTitle": "Pega Developer (noch kein Level)",
+        "team": "Stammdaten / Produktänderung",
+        "workEmail": "Sven.Wetzurek@dkbcodefactory.com",
+        "supervisorName": "Schaefer, Elif",
+        "status": "FILLED",
+        "startDate": "2025-01-03",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Heiko.Ruhm@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Heiko",
+        "lastName": "Ruhm",
+        "jobTitle": "Pega Developer",
+        "team": "Stammdaten / Produktänderung",
+        "workEmail": "Heiko.Ruhm@dkbcodefactory.com",
+        "supervisorName": "Schaefer, Elif",
+        "status": "FILLED",
+        "startDate": "2025-01-03",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Kristjana.Gjonaj@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Kristjana",
+        "lastName": "Gjonaj",
+        "jobTitle": "Pega Developer",
+        "team": "Kredit Consult",
+        "workEmail": "Kristjana.Gjonaj@dkbcodefactory.com",
+        "supervisorName": "Schaefer, Elif",
+        "status": "FILLED",
+        "startDate": "2025-01-07",
+        "exitDate": "",
+        "probationEndDate": "2025-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "AkankshaBhardwaj.Rai@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Akanksha",
+        "lastName": "Rai",
+        "jobTitle": "Senior Pega Developer",
+        "team": "Stammdaten-/Produktänderung",
+        "workEmail": "AkankshaBhardwaj.Rai@dkbcodefactory.com",
+        "supervisorName": "Schaefer, Elif",
+        "status": "FILLED",
+        "startDate": "2025-01-12",
+        "exitDate": "",
+        "probationEndDate": "2026-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "martin.fuerstenau@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Martin",
+        "lastName": "Fürstenau",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Card MGMT & Stammdaten",
+        "workEmail": "martin.fuerstenau@dkbcodefactory.com",
+        "supervisorName": "Seigewasser, Stephan",
+        "status": "FILLED",
+        "startDate": "2020-01-08",
+        "exitDate": "",
+        "probationEndDate": "2021-01-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Sakthi.Arumugasami@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Sakthi",
+        "lastName": "Arumugasami",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Card-API",
+        "workEmail": "Sakthi.Arumugasami@dkbcodefactory.com",
+        "supervisorName": "Seigewasser, Stephan",
+        "status": "FILLED",
+        "startDate": "2020-01-10",
+        "exitDate": "",
+        "probationEndDate": "2021-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "pablo.elo@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Pablo",
+        "lastName": "Elo",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Loans",
+        "workEmail": "pablo.elo@dkbcodefactory.com",
+        "supervisorName": "Seigewasser, Stephan",
+        "status": "FILLED",
+        "startDate": "2020-01-11",
+        "exitDate": "",
+        "probationEndDate": "2021-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Driptaroop.Das@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Driptaroop",
+        "lastName": "Das",
+        "jobTitle": "Principal Engineering (Backend)",
+        "team": "",
+        "workEmail": "Driptaroop.Das@dkbcodefactory.com",
+        "supervisorName": "Seigewasser, Stephan",
+        "status": "FILLED",
+        "startDate": "2020-01-11",
+        "exitDate": "",
+        "probationEndDate": "2021-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Christopher.Moesch@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Christopher",
+        "lastName": "Mösch",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Broker",
+        "workEmail": "Christopher.Moesch@dkbcodefactory.com",
+        "supervisorName": "Seigewasser, Stephan",
+        "status": "FILLED",
+        "startDate": "2021-01-10",
+        "exitDate": "",
+        "probationEndDate": "2022-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Javier.delapena@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Javier",
+        "lastName": "de la Pena Fayos",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Communication & Documents",
+        "workEmail": "Javier.delapena@dkbcodefactory.com",
+        "supervisorName": "Seigewasser, Stephan",
+        "status": "FILLED",
+        "startDate": "2022-01-07",
+        "exitDate": "",
+        "probationEndDate": "2022-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Adrian.Maghear@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Adrian-Florin",
+        "lastName": "Maghear",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Signup",
+        "workEmail": "Adrian.Maghear@dkbcodefactory.com",
+        "supervisorName": "Seigewasser, Stephan",
+        "status": "FILLED",
+        "startDate": "2022-01-11",
+        "exitDate": "",
+        "probationEndDate": "2023-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Georgios.Stavrakakis@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Georgios",
+        "lastName": "Stavrakakis",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Card MGMT & Stammdaten",
+        "workEmail": "Georgios.Stavrakakis@dkbcodefactory.com",
+        "supervisorName": "Seigewasser, Stephan",
+        "status": "FILLED",
+        "startDate": "2023-01-02",
+        "exitDate": "",
+        "probationEndDate": "2023-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Biniam.Kefale@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Biniam",
+        "lastName": "Kefale",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Payment & Fraud",
+        "workEmail": "Biniam.Kefale@dkbcodefactory.com",
+        "supervisorName": "Seigewasser, Stephan",
+        "status": "FILLED",
+        "startDate": "2023-01-08",
+        "exitDate": "",
+        "probationEndDate": "2024-01-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Karim.Baydon@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Karim",
+        "lastName": "Baydon",
+        "jobTitle": "Engineering Manager (Backend)",
+        "team": "Card MGMT & Stammdaten",
+        "workEmail": "Karim.Baydon@dkbcodefactory.com",
+        "supervisorName": "Seigewasser, Stephan",
+        "status": "FILLED",
+        "startDate": "2023-01-07",
+        "exitDate": "",
+        "probationEndDate": "2023-12-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Enas.Nasr@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Enas",
+        "lastName": "Nasr",
+        "jobTitle": "Senior Agile Coach",
+        "team": "",
+        "workEmail": "Enas.Nasr@dkbcodefactory.com",
+        "supervisorName": "Sönmez, Ekin",
+        "status": "FILLED",
+        "startDate": "2022-01-09",
+        "exitDate": "",
+        "probationEndDate": "2023-02-28"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Sebastian.Mansilla@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Sebastián",
+        "lastName": "Mansilla",
+        "jobTitle": "Senior Agile Coach",
+        "team": "",
+        "workEmail": "Sebastian.Mansilla@dkbcodefactory.com",
+        "supervisorName": "Sönmez, Ekin",
+        "status": "FILLED",
+        "startDate": "2023-01-06",
+        "exitDate": "",
+        "probationEndDate": "2023-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Mariann.Seibert@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Mariann",
+        "lastName": "Seibert",
+        "jobTitle": "Agile Coach",
+        "team": "",
+        "workEmail": "Mariann.Seibert@dkbcodefactory.com",
+        "supervisorName": "Sönmez, Ekin",
+        "status": "FILLED",
+        "startDate": "2025-01-06",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Alina.Abelianova@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Alina",
+        "lastName": "Abelianova",
+        "jobTitle": "Agile Coach",
+        "team": "",
+        "workEmail": "Alina.Abelianova@dkbcodefactory.com",
+        "supervisorName": "Sönmez, Ekin",
+        "status": "FILLED",
+        "startDate": "2025-01-06",
+        "exitDate": "",
+        "probationEndDate": "2025-11-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Janna.Koziol@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Janna",
+        "lastName": "Koziol",
+        "jobTitle": "Senior Agile Coach",
+        "team": "",
+        "workEmail": "Janna.Koziol@dkbcodefactory.com",
+        "supervisorName": "Sönmez, Ekin",
+        "status": "FILLED",
+        "startDate": "2025-01-07",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Kevin.Kroschwald@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Kevin",
+        "lastName": "Kroschwald",
+        "jobTitle": "Senior Agile Coach",
+        "team": "",
+        "workEmail": "Kevin.Kroschwald@dkbcodefactory.com",
+        "supervisorName": "Sönmez, Ekin",
+        "status": "FILLED",
+        "startDate": "2026-01-03",
+        "exitDate": "",
+        "probationEndDate": "2026-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Dennis.Hiller@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Dennis",
+        "lastName": "Hiller",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Card MGMT & Stammdaten",
+        "workEmail": "Dennis.Hiller@dkbcodefactory.com",
+        "supervisorName": "Stavrakakis, Georgios",
+        "status": "FILLED",
+        "startDate": "2022-01-03",
+        "exitDate": "",
+        "probationEndDate": "2022-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Ledion.Spaho@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Ledion",
+        "lastName": "Spaho",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "Card MGMT & Stammdaten",
+        "workEmail": "Ledion.Spaho@dkbcodefactory.com",
+        "supervisorName": "Stavrakakis, Georgios",
+        "status": "FILLED",
+        "startDate": "2022-01-11",
+        "exitDate": "",
+        "probationEndDate": "2023-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Fabian.Georgi@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Fabian",
+        "lastName": "Georgi",
+        "jobTitle": "Software Developer (Backend)",
+        "team": "Card MGMT & Stammdaten",
+        "workEmail": "Fabian.Georgi@dkbcodefactory.com",
+        "supervisorName": "Stavrakakis, Georgios",
+        "status": "FILLED",
+        "startDate": "2025-01-04",
+        "exitDate": "",
+        "probationEndDate": "2025-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Hyung-Jun.Yoo@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Hyung-Jun",
+        "lastName": "Yoo",
+        "jobTitle": "Senior Mobile Developer (Android)",
+        "team": "Banking App - Nova Services",
+        "workEmail": "Hyung-Jun.Yoo@dkbcodefactory.com",
+        "supervisorName": "Steudter, Michael",
+        "status": "FILLED",
+        "startDate": "2018-10-15",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "fabian.Schaffner@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Fabian",
+        "lastName": "Schaffner",
+        "jobTitle": "Senior Mobile Developer (iOS)",
+        "team": "Banking App - Nova Payments",
+        "workEmail": "fabian.Schaffner@dkbcodefactory.com",
+        "supervisorName": "Steudter, Michael",
+        "status": "FILLED",
+        "startDate": "2022-01-05",
+        "exitDate": "",
+        "probationEndDate": "2022-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "anna.Cieslak@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Anna",
+        "lastName": "Cieślak",
+        "jobTitle": "Mobile Developer (Android)",
+        "team": "Banking App - Nova Payments",
+        "workEmail": "anna.Cieslak@dkbcodefactory.com",
+        "supervisorName": "Steudter, Michael",
+        "status": "FILLED",
+        "startDate": "2022-01-03",
+        "exitDate": "",
+        "probationEndDate": "2022-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "stephan.georgi@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Stephan",
+        "lastName": "Georgi",
+        "jobTitle": "Senior Mobile Developer (iOS)",
+        "team": "Banking App - Nova Payments",
+        "workEmail": "stephan.georgi@dkbcodefactory.com",
+        "supervisorName": "Steudter, Michael",
+        "status": "FILLED",
+        "startDate": "2023-01-04",
+        "exitDate": "",
+        "probationEndDate": "2023-09-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Mohamed.Abdelhamid@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Mohamed",
+        "lastName": "Abdelhamid",
+        "jobTitle": "Senior Mobile Developer (Android)",
+        "team": "Banking App - Nova Payments",
+        "workEmail": "Mohamed.Abdelhamid@dkbcodefactory.com",
+        "supervisorName": "Steudter, Michael",
+        "status": "FILLED",
+        "startDate": "2023-01-05",
+        "exitDate": "",
+        "probationEndDate": "2023-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "ekin.alcar@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Ekin",
+        "lastName": "Alçar",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Web Banking",
+        "workEmail": "ekin.alcar@dkbcodefactory.com",
+        "supervisorName": "Steudter, Michael",
+        "status": "FILLED",
+        "startDate": "2023-01-10",
+        "exitDate": "",
+        "probationEndDate": "2024-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Brent.Curriden@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Brent",
+        "lastName": "Curriden",
+        "jobTitle": "Junior Software Developer (Frontend)",
+        "team": "Web Banking",
+        "workEmail": "Brent.Curriden@dkbcodefactory.com",
+        "supervisorName": "Steudter, Michael",
+        "status": "FILLED",
+        "startDate": "2025-01-08",
+        "exitDate": "",
+        "probationEndDate": "2026-01-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Beatriz.Macuco@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Beatriz",
+        "lastName": "Loures Macuco",
+        "jobTitle": "Mobile Developer (iOS)",
+        "team": "Banking App - Nova Payments",
+        "workEmail": "Beatriz.Macuco@dkbcodefactory.com",
+        "supervisorName": "Steudter, Michael",
+        "status": "FILLED",
+        "startDate": "2025-01-10",
+        "exitDate": "",
+        "probationEndDate": "2026-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "AndrzejKrzysztof.Dajnowski@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Andrzej",
+        "lastName": "Dajnowski",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "",
+        "workEmail": "AndrzejKrzysztof.Dajnowski@dkbcodefactory.com",
+        "supervisorName": "Ünver, Levent",
+        "status": "FILLED",
+        "startDate": "2026-01-05",
+        "exitDate": "",
+        "probationEndDate": "2026-10-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Nivedita.Pastor@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Nivedita",
+        "lastName": "Pastor",
+        "jobTitle": "Senior Software Developer (Backend)",
+        "team": "",
+        "workEmail": "Nivedita.Pastor@dkbcodefactory.com",
+        "supervisorName": "Ünver, Levent",
+        "status": "FILLED",
+        "startDate": "2026-01-03",
+        "exitDate": "",
+        "probationEndDate": "2026-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "margarita.gutierrez@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Maria",
+        "lastName": "Gutierrez Reyes",
+        "jobTitle": "Engineering Manager (Pega)",
+        "team": "",
+        "workEmail": "margarita.gutierrez@dkbcodefactory.com",
+        "supervisorName": "Wrede, Raphaela",
+        "status": "FILLED",
+        "startDate": "2025-01-02",
+        "exitDate": "",
+        "probationEndDate": "2025-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Elif.Schaefer@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Elif",
+        "lastName": "Schaefer",
+        "jobTitle": "Engineering Manager (Pega)",
+        "team": "",
+        "workEmail": "Elif.Schaefer@dkbcodefactory.com",
+        "supervisorName": "Wrede, Raphaela",
+        "status": "FILLED",
+        "startDate": "2025-01-09",
+        "exitDate": "",
+        "probationEndDate": "2026-02-28"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "HannahAkinyi.Olukoye@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Hannah",
+        "lastName": "Olukoye",
+        "jobTitle": "Engineering Manager (Pega)",
+        "team": "",
+        "workEmail": "HannahAkinyi.Olukoye@dkbcodefactory.com",
+        "supervisorName": "Wrede, Raphaela",
+        "status": "FILLED",
+        "startDate": "2025-01-12",
+        "exitDate": "",
+        "probationEndDate": "2026-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Kathrin.Holweger@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Kathrin",
+        "lastName": "Holweger",
+        "jobTitle": "Engineering Manager (Pega)",
+        "team": "",
+        "workEmail": "Kathrin.Holweger@dkbcodefactory.com",
+        "supervisorName": "Wrede, Raphaela",
+        "status": "FILLED",
+        "startDate": "2026-01-02",
+        "exitDate": "",
+        "probationEndDate": "2026-07-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Luisa.CruzMolina@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Maria",
+        "lastName": "Cruz Molina",
+        "jobTitle": "Senior Mobile Developer (iOS)",
+        "team": "Banking App - Nova Core",
+        "workEmail": "Luisa.CruzMolina@dkbcodefactory.com",
+        "supervisorName": "Yordanova, Stiliyana",
+        "status": "FILLED",
+        "startDate": "2023-01-03",
+        "exitDate": "",
+        "probationEndDate": "2023-08-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Aija.Avota@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Aija",
+        "lastName": "Avota",
+        "jobTitle": "Software Developer (Frontend)",
+        "team": "Web Banking",
+        "workEmail": "Aija.Avota@dkbcodefactory.com",
+        "supervisorName": "Yordanova, Stiliyana",
+        "status": "FILLED",
+        "startDate": "2024-01-10",
+        "exitDate": "",
+        "probationEndDate": "2025-03-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "luno.forchert@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Ben",
+        "lastName": "Forchert",
+        "jobTitle": "Mobile Developer (Android)",
+        "team": "Banking App - Nova Payments",
+        "workEmail": "luno.forchert@dkbcodefactory.com",
+        "supervisorName": "Yordanova, Stiliyana",
+        "status": "FILLED",
+        "startDate": "2025-01-01",
+        "exitDate": "",
+        "probationEndDate": "2025-06-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Joao.Belchior@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "João",
+        "lastName": "Raimundo Belchior",
+        "jobTitle": "Senior Software Developer (Frontend)",
+        "team": "Web Banking",
+        "workEmail": "Joao.Belchior@dkbcodefactory.com",
+        "supervisorName": "Yordanova, Stiliyana",
+        "status": "FILLED",
+        "startDate": "2024-01-12",
+        "exitDate": "",
+        "probationEndDate": "2025-05-31"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "Christophe.Hoste@dkbcodefactory.com",
+      "type": "person",
+      "data": {
+        "firstName": "Christophe",
+        "lastName": "Hoste",
+        "jobTitle": "Senior Mobile Developer (iOS)",
+        "team": "Banking App - Nova Services",
+        "workEmail": "Christophe.Hoste@dkbcodefactory.com",
+        "supervisorName": "Yordanova, Stiliyana",
+        "status": "FILLED",
+        "startDate": "2025-01-11",
+        "exitDate": "",
+        "probationEndDate": "2026-04-30"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "empty-1772230037977-stpiis1hn",
+      "type": "person",
+      "data": {
+        "firstName": "",
+        "lastName": "",
+        "jobTitle": "New Position",
+        "team": "",
+        "workEmail": "",
+        "supervisorName": "Gutierrez Reyes, Maria",
+        "status": "EMPTY",
+        "startDate": "",
+        "exitDate": "",
+        "probationEndDate": ""
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-Sakthi.Arumugasami@dkbcodefactory.com-eric.rosenthal@dkbcodefactory.com",
+      "source": "Sakthi.Arumugasami@dkbcodefactory.com",
+      "target": "eric.rosenthal@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Sakthi.Arumugasami@dkbcodefactory.com-levent.uenver@dkbcodefactory.com",
+      "source": "Sakthi.Arumugasami@dkbcodefactory.com",
+      "target": "levent.uenver@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Sakthi.Arumugasami@dkbcodefactory.com-maximilian.Liemant@dkbcodefactory.com",
+      "source": "Sakthi.Arumugasami@dkbcodefactory.com",
+      "target": "maximilian.Liemant@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Sakthi.Arumugasami@dkbcodefactory.com-Anna.Eckhardt@dkbcodefactory.com",
+      "source": "Sakthi.Arumugasami@dkbcodefactory.com",
+      "target": "Anna.Eckhardt@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Karim.Baydon@dkbcodefactory.com-Mohammad.Rahimi@dkbcodefactory.com",
+      "source": "Karim.Baydon@dkbcodefactory.com",
+      "target": "Mohammad.Rahimi@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Karim.Baydon@dkbcodefactory.com-Paul.Defois@dkbcodefactory.com",
+      "source": "Karim.Baydon@dkbcodefactory.com",
+      "target": "Paul.Defois@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Karim.Baydon@dkbcodefactory.com-Ali.Adel@dkbcodefactory.com",
+      "source": "Karim.Baydon@dkbcodefactory.com",
+      "target": "Ali.Adel@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Karim.Baydon@dkbcodefactory.com-Eugen.Puzynin@dkbcodefactory.com",
+      "source": "Karim.Baydon@dkbcodefactory.com",
+      "target": "Eugen.Puzynin@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Karim.Baydon@dkbcodefactory.com-Asghar.Mirzaei@dkbcodefactory.com",
+      "source": "Karim.Baydon@dkbcodefactory.com",
+      "target": "Asghar.Mirzaei@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Marc.Bobzien@dkbcodefactory.com-manuel.sanchez@dkbcodefactory.com",
+      "source": "Marc.Bobzien@dkbcodefactory.com",
+      "target": "manuel.sanchez@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Marc.Bobzien@dkbcodefactory.com-stephan.seigewasser@dkbcodefactory.com",
+      "source": "Marc.Bobzien@dkbcodefactory.com",
+      "target": "stephan.seigewasser@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Marc.Bobzien@dkbcodefactory.com-Benedict.Roeser@dkbcodefactory.com",
+      "source": "Marc.Bobzien@dkbcodefactory.com",
+      "target": "Benedict.Roeser@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Marc.Bobzien@dkbcodefactory.com-raphaela.wrede@dkbcodefactory.com",
+      "source": "Marc.Bobzien@dkbcodefactory.com",
+      "target": "raphaela.wrede@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Marc.Bobzien@dkbcodefactory.com-Christoph.Henzelmann@dkbcodefactory.com",
+      "source": "Marc.Bobzien@dkbcodefactory.com",
+      "target": "Christoph.Henzelmann@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lissy.Bonness@dkbcodefactory.com-amelie.Stavrakakis@dkbcodefactory.com",
+      "source": "lissy.Bonness@dkbcodefactory.com",
+      "target": "amelie.Stavrakakis@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lissy.Bonness@dkbcodefactory.com-katja.Margulis@dkbcodefactory.com",
+      "source": "lissy.Bonness@dkbcodefactory.com",
+      "target": "katja.Margulis@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lissy.Bonness@dkbcodefactory.com-Suyoung.Jung@dkbcodefactory.com",
+      "source": "lissy.Bonness@dkbcodefactory.com",
+      "target": "Suyoung.Jung@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lissy.Bonness@dkbcodefactory.com-Isabel.Haefner@dkbcodefactory.com",
+      "source": "lissy.Bonness@dkbcodefactory.com",
+      "target": "Isabel.Haefner@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lissy.Bonness@dkbcodefactory.com-Hanna.Borbola@dkbcodefactory.com",
+      "source": "lissy.Bonness@dkbcodefactory.com",
+      "target": "Hanna.Borbola@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lissy.Bonness@dkbcodefactory.com-sebastian.metel@dkbcodefactory.com",
+      "source": "lissy.Bonness@dkbcodefactory.com",
+      "target": "sebastian.metel@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lissy.Bonness@dkbcodefactory.com-Carina.Hoffmann@dkbcodefactory.com",
+      "source": "lissy.Bonness@dkbcodefactory.com",
+      "target": "Carina.Hoffmann@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lissy.Bonness@dkbcodefactory.com-Monique.Mehler@dkbcodefactory.com",
+      "source": "lissy.Bonness@dkbcodefactory.com",
+      "target": "Monique.Mehler@dkbcodefactory.com"
+    },
+    {
+      "id": "e-ivan.borsa@dkbcodefactory.com-Oleksii.Vasyliev@dkbcodefactory.com",
+      "source": "ivan.borsa@dkbcodefactory.com",
+      "target": "Oleksii.Vasyliev@dkbcodefactory.com"
+    },
+    {
+      "id": "e-ivan.borsa@dkbcodefactory.com-Reza.Lotfi@dkbcodefactory.com",
+      "source": "ivan.borsa@dkbcodefactory.com",
+      "target": "Reza.Lotfi@dkbcodefactory.com"
+    },
+    {
+      "id": "e-ivan.borsa@dkbcodefactory.com-Mohsen.Vaziri@dkbcodefactory.com",
+      "source": "ivan.borsa@dkbcodefactory.com",
+      "target": "Mohsen.Vaziri@dkbcodefactory.com"
+    },
+    {
+      "id": "e-ivan.borsa@dkbcodefactory.com-Hanieh.Haddad@dkbcodefactory.com",
+      "source": "ivan.borsa@dkbcodefactory.com",
+      "target": "Hanieh.Haddad@dkbcodefactory.com"
+    },
+    {
+      "id": "e-victoria.brandherm@dkbcodefactory.com-Fabian.Schluesener@dkbcodefactory.com",
+      "source": "victoria.brandherm@dkbcodefactory.com",
+      "target": "Fabian.Schluesener@dkbcodefactory.com"
+    },
+    {
+      "id": "e-victoria.brandherm@dkbcodefactory.com-Eva.Haymoz@dkbcodefactory.com",
+      "source": "victoria.brandherm@dkbcodefactory.com",
+      "target": "Eva.Haymoz@dkbcodefactory.com"
+    },
+    {
+      "id": "e-victoria.brandherm@dkbcodefactory.com-Alice.Liebrecht@dkbcodefactory.com",
+      "source": "victoria.brandherm@dkbcodefactory.com",
+      "target": "Alice.Liebrecht@dkbcodefactory.com"
+    },
+    {
+      "id": "e-victoria.brandherm@dkbcodefactory.com-Brady.Richards@dkbcodefactory.com",
+      "source": "victoria.brandherm@dkbcodefactory.com",
+      "target": "Brady.Richards@dkbcodefactory.com"
+    },
+    {
+      "id": "e-victoria.brandherm@dkbcodefactory.com-Aya.Chamra@dkbcodefactory.com",
+      "source": "victoria.brandherm@dkbcodefactory.com",
+      "target": "Aya.Chamra@dkbcodefactory.com"
+    },
+    {
+      "id": "e-sirin.Cepkenli@dkbcodefactory.com-julian.dorn@dkbcodefactory.com",
+      "source": "sirin.Cepkenli@dkbcodefactory.com",
+      "target": "julian.dorn@dkbcodefactory.com"
+    },
+    {
+      "id": "e-sirin.Cepkenli@dkbcodefactory.com-steffen.mueller@dkbcodefactory.com",
+      "source": "sirin.Cepkenli@dkbcodefactory.com",
+      "target": "steffen.mueller@dkbcodefactory.com"
+    },
+    {
+      "id": "e-sirin.Cepkenli@dkbcodefactory.com-lissy.Bonness@dkbcodefactory.com",
+      "source": "sirin.Cepkenli@dkbcodefactory.com",
+      "target": "lissy.Bonness@dkbcodefactory.com"
+    },
+    {
+      "id": "e-sirin.Cepkenli@dkbcodefactory.com-Joshua.Gnizak@dkbcodefactory.com",
+      "source": "sirin.Cepkenli@dkbcodefactory.com",
+      "target": "Joshua.Gnizak@dkbcodefactory.com"
+    },
+    {
+      "id": "e-sirin.Cepkenli@dkbcodefactory.com-HanJu.Kim@dkbcodefactory.com",
+      "source": "sirin.Cepkenli@dkbcodefactory.com",
+      "target": "HanJu.Kim@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Javier.delapena@dkbcodefactory.com-felix.gruenewald@dkbcodefactory.com",
+      "source": "Javier.delapena@dkbcodefactory.com",
+      "target": "felix.gruenewald@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Javier.delapena@dkbcodefactory.com-Izuchukwu.Oleka@dkbcodefactory.com",
+      "source": "Javier.delapena@dkbcodefactory.com",
+      "target": "Izuchukwu.Oleka@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Javier.delapena@dkbcodefactory.com-Umurcan.Emre@dkbcodefactory.com",
+      "source": "Javier.delapena@dkbcodefactory.com",
+      "target": "Umurcan.Emre@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Javier.delapena@dkbcodefactory.com-Daniel.Schellenberg@dkbcodefactory.com",
+      "source": "Javier.delapena@dkbcodefactory.com",
+      "target": "Daniel.Schellenberg@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Javier.delapena@dkbcodefactory.com-AlanOmar.HernandezLopez@dkbcodefactory.com",
+      "source": "Javier.delapena@dkbcodefactory.com",
+      "target": "AlanOmar.HernandezLopez@dkbcodefactory.com"
+    },
+    {
+      "id": "e-pablo.elo@dkbcodefactory.com-Georgios.Karanikas@dkbcodefactory.com",
+      "source": "pablo.elo@dkbcodefactory.com",
+      "target": "Georgios.Karanikas@dkbcodefactory.com"
+    },
+    {
+      "id": "e-pablo.elo@dkbcodefactory.com-Shanmugam.Muthuraj@dkbcodefactory.com",
+      "source": "pablo.elo@dkbcodefactory.com",
+      "target": "Shanmugam.Muthuraj@dkbcodefactory.com"
+    },
+    {
+      "id": "e-pablo.elo@dkbcodefactory.com-mel.grosser@dkbcodefactory.com",
+      "source": "pablo.elo@dkbcodefactory.com",
+      "target": "mel.grosser@dkbcodefactory.com"
+    },
+    {
+      "id": "e-pablo.elo@dkbcodefactory.com-Chae-Hyuk.Lee@dkbcodefactory.com",
+      "source": "pablo.elo@dkbcodefactory.com",
+      "target": "Chae-Hyuk.Lee@dkbcodefactory.com"
+    },
+    {
+      "id": "e-pablo.elo@dkbcodefactory.com-Priscila.Flores@dkbcodefactory.com",
+      "source": "pablo.elo@dkbcodefactory.com",
+      "target": "Priscila.Flores@dkbcodefactory.com"
+    },
+    {
+      "id": "e-pablo.elo@dkbcodefactory.com-Darian.Reck@dkbcodefactory.com",
+      "source": "pablo.elo@dkbcodefactory.com",
+      "target": "Darian.Reck@dkbcodefactory.com"
+    },
+    {
+      "id": "e-joschka.friedag@dkbcodefactory.com-Sebastian.Spier@dkbcodefactory.com",
+      "source": "joschka.friedag@dkbcodefactory.com",
+      "target": "Sebastian.Spier@dkbcodefactory.com"
+    },
+    {
+      "id": "e-joschka.friedag@dkbcodefactory.com-Alexis.Froehlich@dkbcodefactory.com",
+      "source": "joschka.friedag@dkbcodefactory.com",
+      "target": "Alexis.Froehlich@dkbcodefactory.com"
+    },
+    {
+      "id": "e-joschka.friedag@dkbcodefactory.com-Imani.Arunga@dkbcodefactory.com",
+      "source": "joschka.friedag@dkbcodefactory.com",
+      "target": "Imani.Arunga@dkbcodefactory.com"
+    },
+    {
+      "id": "e-joschka.friedag@dkbcodefactory.com-Pauline.Kern@dkbcodefactory.com",
+      "source": "joschka.friedag@dkbcodefactory.com",
+      "target": "Pauline.Kern@dkbcodefactory.com"
+    },
+    {
+      "id": "e-joschka.friedag@dkbcodefactory.com-dmitri.awerkowschaefer@dkbcodefactory.com",
+      "source": "joschka.friedag@dkbcodefactory.com",
+      "target": "dmitri.awerkowschaefer@dkbcodefactory.com"
+    },
+    {
+      "id": "e-joschka.friedag@dkbcodefactory.com-hedyvictoria.born@dkbcodefactory.com",
+      "source": "joschka.friedag@dkbcodefactory.com",
+      "target": "hedyvictoria.born@dkbcodefactory.com"
+    },
+    {
+      "id": "e-martin.fuerstenau@dkbcodefactory.com-hannes.Waldschmidt@dkbcodefactory.com",
+      "source": "martin.fuerstenau@dkbcodefactory.com",
+      "target": "hannes.Waldschmidt@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Joshua.Gnizak@dkbcodefactory.com-Luise-Caroline.Gall@dkbcodefactory.com",
+      "source": "Joshua.Gnizak@dkbcodefactory.com",
+      "target": "Luise-Caroline.Gall@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Joshua.Gnizak@dkbcodefactory.com-Martina.Morth@dkbcodefactory.com",
+      "source": "Joshua.Gnizak@dkbcodefactory.com",
+      "target": "Martina.Morth@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Joshua.Gnizak@dkbcodefactory.com-Freshta.Hussain@dkbcodefactory.com",
+      "source": "Joshua.Gnizak@dkbcodefactory.com",
+      "target": "Freshta.Hussain@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Joshua.Gnizak@dkbcodefactory.com-Angelina.Stroese@dkbcodefactory.com",
+      "source": "Joshua.Gnizak@dkbcodefactory.com",
+      "target": "Angelina.Stroese@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Joshua.Gnizak@dkbcodefactory.com-Marianna.Shults@dkbcodefactory.com",
+      "source": "Joshua.Gnizak@dkbcodefactory.com",
+      "target": "Marianna.Shults@dkbcodefactory.com"
+    },
+    {
+      "id": "e-margarita.gutierrez@dkbcodefactory.com-Daniel.Stopka@dkbcodefactory.com",
+      "source": "margarita.gutierrez@dkbcodefactory.com",
+      "target": "Daniel.Stopka@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christoph.Henzelmann@dkbcodefactory.com-ivan.borsa@dkbcodefactory.com",
+      "source": "Christoph.Henzelmann@dkbcodefactory.com",
+      "target": "ivan.borsa@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christoph.Henzelmann@dkbcodefactory.com-michael.steudter@dkbcodefactory.com",
+      "source": "Christoph.Henzelmann@dkbcodefactory.com",
+      "target": "michael.steudter@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christoph.Henzelmann@dkbcodefactory.com-vladimir.ignjatijevic@dkbcodefactory.com",
+      "source": "Christoph.Henzelmann@dkbcodefactory.com",
+      "target": "vladimir.ignjatijevic@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christoph.Henzelmann@dkbcodefactory.com-Pablo.Perez-Gonzalez@dkbcodefactory.com",
+      "source": "Christoph.Henzelmann@dkbcodefactory.com",
+      "target": "Pablo.Perez-Gonzalez@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Kathrin.Holweger@dkbcodefactory.com-Franz.Hefele@dkbcodefactory.com",
+      "source": "Kathrin.Holweger@dkbcodefactory.com",
+      "target": "Franz.Hefele@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Kathrin.Holweger@dkbcodefactory.com-stefan.junge@dkbcodefactory.com",
+      "source": "Kathrin.Holweger@dkbcodefactory.com",
+      "target": "stefan.junge@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Kathrin.Holweger@dkbcodefactory.com-Marie.Jager@dkbcodefactory.com",
+      "source": "Kathrin.Holweger@dkbcodefactory.com",
+      "target": "Marie.Jager@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Kathrin.Holweger@dkbcodefactory.com-Mounika.Sunkara@dkbcodefactory.com",
+      "source": "Kathrin.Holweger@dkbcodefactory.com",
+      "target": "Mounika.Sunkara@dkbcodefactory.com"
+    },
+    {
+      "id": "e-vladimir.ignjatijevic@dkbcodefactory.com-andrej.bielevicius@dkbcodefactory.com",
+      "source": "vladimir.ignjatijevic@dkbcodefactory.com",
+      "target": "andrej.bielevicius@dkbcodefactory.com"
+    },
+    {
+      "id": "e-vladimir.ignjatijevic@dkbcodefactory.com-Cassiano.Montanari@dkbcodefactory.com",
+      "source": "vladimir.ignjatijevic@dkbcodefactory.com",
+      "target": "Cassiano.Montanari@dkbcodefactory.com"
+    },
+    {
+      "id": "e-vladimir.ignjatijevic@dkbcodefactory.com-adam.kerenyi@dkbcodefactory.com",
+      "source": "vladimir.ignjatijevic@dkbcodefactory.com",
+      "target": "adam.kerenyi@dkbcodefactory.com"
+    },
+    {
+      "id": "e-vladimir.ignjatijevic@dkbcodefactory.com-claudinei.bido@dkbcodefactory.com",
+      "source": "vladimir.ignjatijevic@dkbcodefactory.com",
+      "target": "claudinei.bido@dkbcodefactory.com"
+    },
+    {
+      "id": "e-vladimir.ignjatijevic@dkbcodefactory.com-Sarangan.Gnanasegaram@dkbcodefactory.com",
+      "source": "vladimir.ignjatijevic@dkbcodefactory.com",
+      "target": "Sarangan.Gnanasegaram@dkbcodefactory.com"
+    },
+    {
+      "id": "e-vladimir.ignjatijevic@dkbcodefactory.com-Koki.Isshiki@dkbcodefactory.com",
+      "source": "vladimir.ignjatijevic@dkbcodefactory.com",
+      "target": "Koki.Isshiki@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Biniam.Kefale@dkbcodefactory.com-dennis.steiner@dkbcodefactory.com",
+      "source": "Biniam.Kefale@dkbcodefactory.com",
+      "target": "dennis.steiner@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Biniam.Kefale@dkbcodefactory.com-Faizan.Hussain@dkbcodefactory.com",
+      "source": "Biniam.Kefale@dkbcodefactory.com",
+      "target": "Faizan.Hussain@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Biniam.Kefale@dkbcodefactory.com-Denys.Stoianov@dkbcodefactory.com",
+      "source": "Biniam.Kefale@dkbcodefactory.com",
+      "target": "Denys.Stoianov@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Biniam.Kefale@dkbcodefactory.com-Mehrdad.Yami@dkbcodefactory.com",
+      "source": "Biniam.Kefale@dkbcodefactory.com",
+      "target": "Mehrdad.Yami@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Biniam.Kefale@dkbcodefactory.com-Hari.Tummala@dkbcodefactory.com",
+      "source": "Biniam.Kefale@dkbcodefactory.com",
+      "target": "Hari.Tummala@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-judith-marie.graf@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "judith-marie.graf@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-victoria.brandherm@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "victoria.brandherm@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-joschka.friedag@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "joschka.friedag@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-Konrad.Maruschewski@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "Konrad.Maruschewski@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-britta.proefrock@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "britta.proefrock@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-eric.piotrowski@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "eric.piotrowski@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-Emre.Soenmez@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "Emre.Soenmez@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-sirin.Cepkenli@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "sirin.Cepkenli@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-maria.silva@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "maria.silva@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-Marc.Bobzien@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "Marc.Bobzien@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-Kaan.Tan@dkbcodefactory.com",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "Kaan.Tan@dkbcodefactory.com"
+    },
+    {
+      "id": "e-alexander.lehsten@dkbcodefactory.com-node-Müller-Alexander-91",
+      "source": "alexander.lehsten@dkbcodefactory.com",
+      "target": "node-Müller-Alexander-91"
+    },
+    {
+      "id": "e-Sasha.Litvinova@dkbcodefactory.com-Selina.Kunkel@dkbcodefactory.com",
+      "source": "Sasha.Litvinova@dkbcodefactory.com",
+      "target": "Selina.Kunkel@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Sasha.Litvinova@dkbcodefactory.com-Franziska.Berndt@dkbcodefactory.com",
+      "source": "Sasha.Litvinova@dkbcodefactory.com",
+      "target": "Franziska.Berndt@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Sasha.Litvinova@dkbcodefactory.com-Steven.Raschke@dkbcodefactory.com",
+      "source": "Sasha.Litvinova@dkbcodefactory.com",
+      "target": "Steven.Raschke@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Sasha.Litvinova@dkbcodefactory.com-BenitaMaria.Marx@dkbcodefactory.com",
+      "source": "Sasha.Litvinova@dkbcodefactory.com",
+      "target": "BenitaMaria.Marx@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Adrian.Maghear@dkbcodefactory.com-alexandr.melnic@dkbcodefactory.com",
+      "source": "Adrian.Maghear@dkbcodefactory.com",
+      "target": "alexandr.melnic@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Adrian.Maghear@dkbcodefactory.com-Sura.Watthanalamlert@dkbcodefactory.com",
+      "source": "Adrian.Maghear@dkbcodefactory.com",
+      "target": "Sura.Watthanalamlert@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Adrian.Maghear@dkbcodefactory.com-Eveline.Kooijman@dkbcodefactory.com",
+      "source": "Adrian.Maghear@dkbcodefactory.com",
+      "target": "Eveline.Kooijman@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Adrian.Maghear@dkbcodefactory.com-miriam.Bah@dkbcodefactory.com",
+      "source": "Adrian.Maghear@dkbcodefactory.com",
+      "target": "miriam.Bah@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Adrian.Maghear@dkbcodefactory.com-Delia.Metzler@dkbcodefactory.com",
+      "source": "Adrian.Maghear@dkbcodefactory.com",
+      "target": "Delia.Metzler@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Adrian.Maghear@dkbcodefactory.com-Serhat.Sungur@dkbcodefactory.com",
+      "source": "Adrian.Maghear@dkbcodefactory.com",
+      "target": "Serhat.Sungur@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Adrian.Maghear@dkbcodefactory.com-Thomas.Juhnke@dkbcodefactory.com",
+      "source": "Adrian.Maghear@dkbcodefactory.com",
+      "target": "Thomas.Juhnke@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Adrian.Maghear@dkbcodefactory.com-Thore.Ottenheym@dkbcodefactory.com",
+      "source": "Adrian.Maghear@dkbcodefactory.com",
+      "target": "Thore.Ottenheym@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Konrad.Maruschewski@dkbcodefactory.com-veronika.villain@dkbcodefactory.com",
+      "source": "Konrad.Maruschewski@dkbcodefactory.com",
+      "target": "veronika.villain@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Konrad.Maruschewski@dkbcodefactory.com-diana.loeffler@dkbcodefactory.com",
+      "source": "Konrad.Maruschewski@dkbcodefactory.com",
+      "target": "diana.loeffler@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Konrad.Maruschewski@dkbcodefactory.com-Sebastian.Herzberg@dkbcodefactory.com",
+      "source": "Konrad.Maruschewski@dkbcodefactory.com",
+      "target": "Sebastian.Herzberg@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Konrad.Maruschewski@dkbcodefactory.com-Sasha.Litvinova@dkbcodefactory.com",
+      "source": "Konrad.Maruschewski@dkbcodefactory.com",
+      "target": "Sasha.Litvinova@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Konrad.Maruschewski@dkbcodefactory.com-Manfred.Jormakka@dkbcodefactory.com",
+      "source": "Konrad.Maruschewski@dkbcodefactory.com",
+      "target": "Manfred.Jormakka@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Konrad.Maruschewski@dkbcodefactory.com-Evelin.Mazny@dkbcodefactory.com",
+      "source": "Konrad.Maruschewski@dkbcodefactory.com",
+      "target": "Evelin.Mazny@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Konrad.Maruschewski@dkbcodefactory.com-annelyruth.sima@dkbcodefactory.com",
+      "source": "Konrad.Maruschewski@dkbcodefactory.com",
+      "target": "annelyruth.sima@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Konrad.Maruschewski@dkbcodefactory.com-doratheklamechthild.brune@dkbcodefactory.com",
+      "source": "Konrad.Maruschewski@dkbcodefactory.com",
+      "target": "doratheklamechthild.brune@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Evelin.Mazny@dkbcodefactory.com-Peter.Geschwandtner@dkbcodefactory.com",
+      "source": "Evelin.Mazny@dkbcodefactory.com",
+      "target": "Peter.Geschwandtner@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Evelin.Mazny@dkbcodefactory.com-Margarete.Block@dkbcodefactory.com",
+      "source": "Evelin.Mazny@dkbcodefactory.com",
+      "target": "Margarete.Block@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Maria.Mazur@dkbcodefactory.com-samuel.stein@dkbcodefactory.com",
+      "source": "Maria.Mazur@dkbcodefactory.com",
+      "target": "samuel.stein@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Maria.Mazur@dkbcodefactory.com-Roman.Uglovskij@dkbcodefactory.com",
+      "source": "Maria.Mazur@dkbcodefactory.com",
+      "target": "Roman.Uglovskij@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Maria.Mazur@dkbcodefactory.com-Jennifer.Wjertzoch@dkbcodefactory.com",
+      "source": "Maria.Mazur@dkbcodefactory.com",
+      "target": "Jennifer.Wjertzoch@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Maria.Mazur@dkbcodefactory.com-Renata.Lazarov@dkbcodefactory.com",
+      "source": "Maria.Mazur@dkbcodefactory.com",
+      "target": "Renata.Lazarov@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christopher.Moesch@dkbcodefactory.com-lucas.lee@dkbcodefactory.com",
+      "source": "Christopher.Moesch@dkbcodefactory.com",
+      "target": "lucas.lee@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christopher.Moesch@dkbcodefactory.com-Leon.Kranich@dkbcodefactory.com",
+      "source": "Christopher.Moesch@dkbcodefactory.com",
+      "target": "Leon.Kranich@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christopher.Moesch@dkbcodefactory.com-Naimah.Fowler@dkbcodefactory.com",
+      "source": "Christopher.Moesch@dkbcodefactory.com",
+      "target": "Naimah.Fowler@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christopher.Moesch@dkbcodefactory.com-Antonio.Martinelli@dkbcodefactory.com",
+      "source": "Christopher.Moesch@dkbcodefactory.com",
+      "target": "Antonio.Martinelli@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christopher.Moesch@dkbcodefactory.com-Janine.Brennfoerder@dkbcodefactory.com",
+      "source": "Christopher.Moesch@dkbcodefactory.com",
+      "target": "Janine.Brennfoerder@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christopher.Moesch@dkbcodefactory.com-Bodo.Wissemann@dkbcodefactory.com",
+      "source": "Christopher.Moesch@dkbcodefactory.com",
+      "target": "Bodo.Wissemann@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christopher.Moesch@dkbcodefactory.com-Alessandro.Memoli@dkbcodefactory.com",
+      "source": "Christopher.Moesch@dkbcodefactory.com",
+      "target": "Alessandro.Memoli@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Christopher.Moesch@dkbcodefactory.com-jannikolai.rueckert@dkbcodefactory.com",
+      "source": "Christopher.Moesch@dkbcodefactory.com",
+      "target": "jannikolai.rueckert@dkbcodefactory.com"
+    },
+    {
+      "id": "e-node-Müller-Alexander-91-node-Rodriguez-Kamila-126",
+      "source": "node-Müller-Alexander-91",
+      "target": "node-Rodriguez-Kamila-126"
+    },
+    {
+      "id": "e-Mesut.Okumus@dkbcodefactory.com-Franziska.Comploi@dkbcodefactory.com",
+      "source": "Mesut.Okumus@dkbcodefactory.com",
+      "target": "Franziska.Comploi@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Mesut.Okumus@dkbcodefactory.com-Cynthia.Akinade@dkbcodefactory.com",
+      "source": "Mesut.Okumus@dkbcodefactory.com",
+      "target": "Cynthia.Akinade@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Mesut.Okumus@dkbcodefactory.com-Nataliia.Tbilieli@dkbcodefactory.com",
+      "source": "Mesut.Okumus@dkbcodefactory.com",
+      "target": "Nataliia.Tbilieli@dkbcodefactory.com"
+    },
+    {
+      "id": "e-HannahAkinyi.Olukoye@dkbcodefactory.com-Philipp.Johannes@dkbcodefactory.com",
+      "source": "HannahAkinyi.Olukoye@dkbcodefactory.com",
+      "target": "Philipp.Johannes@dkbcodefactory.com"
+    },
+    {
+      "id": "e-HannahAkinyi.Olukoye@dkbcodefactory.com-Lena.Strokov@dkbcodefactory.com",
+      "source": "HannahAkinyi.Olukoye@dkbcodefactory.com",
+      "target": "Lena.Strokov@dkbcodefactory.com"
+    },
+    {
+      "id": "e-HannahAkinyi.Olukoye@dkbcodefactory.com-Marco.Rossow@dkbcodefactory.com",
+      "source": "HannahAkinyi.Olukoye@dkbcodefactory.com",
+      "target": "Marco.Rossow@dkbcodefactory.com"
+    },
+    {
+      "id": "e-HannahAkinyi.Olukoye@dkbcodefactory.com-Arlik.Florin@dkbcodefactory.com",
+      "source": "HannahAkinyi.Olukoye@dkbcodefactory.com",
+      "target": "Arlik.Florin@dkbcodefactory.com"
+    },
+    {
+      "id": "e-HannahAkinyi.Olukoye@dkbcodefactory.com-Michael.Kutzner@dkbcodefactory.com",
+      "source": "HannahAkinyi.Olukoye@dkbcodefactory.com",
+      "target": "Michael.Kutzner@dkbcodefactory.com"
+    },
+    {
+      "id": "e-HannahAkinyi.Olukoye@dkbcodefactory.com-Sai.Muttavarapu@dkbcodefactory.com",
+      "source": "HannahAkinyi.Olukoye@dkbcodefactory.com",
+      "target": "Sai.Muttavarapu@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Pablo.Perez-Gonzalez@dkbcodefactory.com-thomas.Segkoulis@dkbcodefactory.com",
+      "source": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
+      "target": "thomas.Segkoulis@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Pablo.Perez-Gonzalez@dkbcodefactory.com-Leonard.Scharf@dkbcodefactory.com",
+      "source": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
+      "target": "Leonard.Scharf@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Pablo.Perez-Gonzalez@dkbcodefactory.com-Philipp.Geissler@dkbcodefactory.com",
+      "source": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
+      "target": "Philipp.Geissler@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Pablo.Perez-Gonzalez@dkbcodefactory.com-Thomas.Wilson@dkbcodefactory.com",
+      "source": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
+      "target": "Thomas.Wilson@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Pablo.Perez-Gonzalez@dkbcodefactory.com-rafal.Sztajer@dkbcodefactory.com",
+      "source": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
+      "target": "rafal.Sztajer@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Pablo.Perez-Gonzalez@dkbcodefactory.com-Benjamin.Kunz@dkbcodefactory.com",
+      "source": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
+      "target": "Benjamin.Kunz@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Pablo.Perez-Gonzalez@dkbcodefactory.com-Pavlo.Tereshchuk@dkbcodefactory.com",
+      "source": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
+      "target": "Pavlo.Tereshchuk@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Pablo.Perez-Gonzalez@dkbcodefactory.com-Leoni.Sperling@dkbcodefactory.com",
+      "source": "Pablo.Perez-Gonzalez@dkbcodefactory.com",
+      "target": "Leoni.Sperling@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lukasz.Piotrowski@dkbcodefactory.com-veit.schumacher@dkbcodefactory.com",
+      "source": "lukasz.Piotrowski@dkbcodefactory.com",
+      "target": "veit.schumacher@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lukasz.Piotrowski@dkbcodefactory.com-Justina.Valda-Rajic@dkbcodefactory.com",
+      "source": "lukasz.Piotrowski@dkbcodefactory.com",
+      "target": "Justina.Valda-Rajic@dkbcodefactory.com"
+    },
+    {
+      "id": "e-lukasz.Piotrowski@dkbcodefactory.com-Nabil.Mediouni@dkbcodefactory.com",
+      "source": "lukasz.Piotrowski@dkbcodefactory.com",
+      "target": "Nabil.Mediouni@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Benedict.Roeser@dkbcodefactory.com-markus.may@dkbcodefactory.com",
+      "source": "Benedict.Roeser@dkbcodefactory.com",
+      "target": "markus.may@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Benedict.Roeser@dkbcodefactory.com-stefan.kudwien@dkbcodefactory.com",
+      "source": "Benedict.Roeser@dkbcodefactory.com",
+      "target": "stefan.kudwien@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Benedict.Roeser@dkbcodefactory.com-michael.Scharni@dkbcodefactory.com",
+      "source": "Benedict.Roeser@dkbcodefactory.com",
+      "target": "michael.Scharni@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Benedict.Roeser@dkbcodefactory.com-Manuel.Pache@dkbcodefactory.com",
+      "source": "Benedict.Roeser@dkbcodefactory.com",
+      "target": "Manuel.Pache@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Benedict.Roeser@dkbcodefactory.com-Miroslav.Dzunic@dkbcodefactory.com",
+      "source": "Benedict.Roeser@dkbcodefactory.com",
+      "target": "Miroslav.Dzunic@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Benedict.Roeser@dkbcodefactory.com-Rowena.Schmidt@dkbcodefactory.com",
+      "source": "Benedict.Roeser@dkbcodefactory.com",
+      "target": "Rowena.Schmidt@dkbcodefactory.com"
+    },
+    {
+      "id": "e-manuel.sanchez@dkbcodefactory.com-anton.katzer@dkbcodefactory.com",
+      "source": "manuel.sanchez@dkbcodefactory.com",
+      "target": "anton.katzer@dkbcodefactory.com"
+    },
+    {
+      "id": "e-manuel.sanchez@dkbcodefactory.com-lukasz.Piotrowski@dkbcodefactory.com",
+      "source": "manuel.sanchez@dkbcodefactory.com",
+      "target": "lukasz.Piotrowski@dkbcodefactory.com"
+    },
+    {
+      "id": "e-manuel.sanchez@dkbcodefactory.com-judith.hartmann@dkbcodefactory.com",
+      "source": "manuel.sanchez@dkbcodefactory.com",
+      "target": "judith.hartmann@dkbcodefactory.com"
+    },
+    {
+      "id": "e-manuel.sanchez@dkbcodefactory.com-Daniel.Neuschaefer-Rube@dkbcodefactory.com",
+      "source": "manuel.sanchez@dkbcodefactory.com",
+      "target": "Daniel.Neuschaefer-Rube@dkbcodefactory.com"
+    },
+    {
+      "id": "e-manuel.sanchez@dkbcodefactory.com-Mesut.Okumus@dkbcodefactory.com",
+      "source": "manuel.sanchez@dkbcodefactory.com",
+      "target": "Mesut.Okumus@dkbcodefactory.com"
+    },
+    {
+      "id": "e-manuel.sanchez@dkbcodefactory.com-Maria.Mazur@dkbcodefactory.com",
+      "source": "manuel.sanchez@dkbcodefactory.com",
+      "target": "Maria.Mazur@dkbcodefactory.com"
+    },
+    {
+      "id": "e-manuel.sanchez@dkbcodefactory.com-Stiliyana.Yordanova@dkbcodefactory.com",
+      "source": "manuel.sanchez@dkbcodefactory.com",
+      "target": "Stiliyana.Yordanova@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Elif.Schaefer@dkbcodefactory.com-Tobias.Pohl@dkbcodefactory.com",
+      "source": "Elif.Schaefer@dkbcodefactory.com",
+      "target": "Tobias.Pohl@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Elif.Schaefer@dkbcodefactory.com-Patrick.Pister@dkbcodefactory.com",
+      "source": "Elif.Schaefer@dkbcodefactory.com",
+      "target": "Patrick.Pister@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Elif.Schaefer@dkbcodefactory.com-Sven.Wetzurek@dkbcodefactory.com",
+      "source": "Elif.Schaefer@dkbcodefactory.com",
+      "target": "Sven.Wetzurek@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Elif.Schaefer@dkbcodefactory.com-Heiko.Ruhm@dkbcodefactory.com",
+      "source": "Elif.Schaefer@dkbcodefactory.com",
+      "target": "Heiko.Ruhm@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Elif.Schaefer@dkbcodefactory.com-Kristjana.Gjonaj@dkbcodefactory.com",
+      "source": "Elif.Schaefer@dkbcodefactory.com",
+      "target": "Kristjana.Gjonaj@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Elif.Schaefer@dkbcodefactory.com-AkankshaBhardwaj.Rai@dkbcodefactory.com",
+      "source": "Elif.Schaefer@dkbcodefactory.com",
+      "target": "AkankshaBhardwaj.Rai@dkbcodefactory.com"
+    },
+    {
+      "id": "e-stephan.seigewasser@dkbcodefactory.com-martin.fuerstenau@dkbcodefactory.com",
+      "source": "stephan.seigewasser@dkbcodefactory.com",
+      "target": "martin.fuerstenau@dkbcodefactory.com"
+    },
+    {
+      "id": "e-stephan.seigewasser@dkbcodefactory.com-Sakthi.Arumugasami@dkbcodefactory.com",
+      "source": "stephan.seigewasser@dkbcodefactory.com",
+      "target": "Sakthi.Arumugasami@dkbcodefactory.com"
+    },
+    {
+      "id": "e-stephan.seigewasser@dkbcodefactory.com-pablo.elo@dkbcodefactory.com",
+      "source": "stephan.seigewasser@dkbcodefactory.com",
+      "target": "pablo.elo@dkbcodefactory.com"
+    },
+    {
+      "id": "e-stephan.seigewasser@dkbcodefactory.com-Driptaroop.Das@dkbcodefactory.com",
+      "source": "stephan.seigewasser@dkbcodefactory.com",
+      "target": "Driptaroop.Das@dkbcodefactory.com"
+    },
+    {
+      "id": "e-stephan.seigewasser@dkbcodefactory.com-Christopher.Moesch@dkbcodefactory.com",
+      "source": "stephan.seigewasser@dkbcodefactory.com",
+      "target": "Christopher.Moesch@dkbcodefactory.com"
+    },
+    {
+      "id": "e-stephan.seigewasser@dkbcodefactory.com-Javier.delapena@dkbcodefactory.com",
+      "source": "stephan.seigewasser@dkbcodefactory.com",
+      "target": "Javier.delapena@dkbcodefactory.com"
+    },
+    {
+      "id": "e-stephan.seigewasser@dkbcodefactory.com-Adrian.Maghear@dkbcodefactory.com",
+      "source": "stephan.seigewasser@dkbcodefactory.com",
+      "target": "Adrian.Maghear@dkbcodefactory.com"
+    },
+    {
+      "id": "e-stephan.seigewasser@dkbcodefactory.com-Georgios.Stavrakakis@dkbcodefactory.com",
+      "source": "stephan.seigewasser@dkbcodefactory.com",
+      "target": "Georgios.Stavrakakis@dkbcodefactory.com"
+    },
+    {
+      "id": "e-stephan.seigewasser@dkbcodefactory.com-Biniam.Kefale@dkbcodefactory.com",
+      "source": "stephan.seigewasser@dkbcodefactory.com",
+      "target": "Biniam.Kefale@dkbcodefactory.com"
+    },
+    {
+      "id": "e-stephan.seigewasser@dkbcodefactory.com-Karim.Baydon@dkbcodefactory.com",
+      "source": "stephan.seigewasser@dkbcodefactory.com",
+      "target": "Karim.Baydon@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Emre.Soenmez@dkbcodefactory.com-Enas.Nasr@dkbcodefactory.com",
+      "source": "Emre.Soenmez@dkbcodefactory.com",
+      "target": "Enas.Nasr@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Emre.Soenmez@dkbcodefactory.com-Sebastian.Mansilla@dkbcodefactory.com",
+      "source": "Emre.Soenmez@dkbcodefactory.com",
+      "target": "Sebastian.Mansilla@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Emre.Soenmez@dkbcodefactory.com-Mariann.Seibert@dkbcodefactory.com",
+      "source": "Emre.Soenmez@dkbcodefactory.com",
+      "target": "Mariann.Seibert@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Emre.Soenmez@dkbcodefactory.com-Alina.Abelianova@dkbcodefactory.com",
+      "source": "Emre.Soenmez@dkbcodefactory.com",
+      "target": "Alina.Abelianova@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Emre.Soenmez@dkbcodefactory.com-Janna.Koziol@dkbcodefactory.com",
+      "source": "Emre.Soenmez@dkbcodefactory.com",
+      "target": "Janna.Koziol@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Emre.Soenmez@dkbcodefactory.com-Kevin.Kroschwald@dkbcodefactory.com",
+      "source": "Emre.Soenmez@dkbcodefactory.com",
+      "target": "Kevin.Kroschwald@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Georgios.Stavrakakis@dkbcodefactory.com-Dennis.Hiller@dkbcodefactory.com",
+      "source": "Georgios.Stavrakakis@dkbcodefactory.com",
+      "target": "Dennis.Hiller@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Georgios.Stavrakakis@dkbcodefactory.com-Ledion.Spaho@dkbcodefactory.com",
+      "source": "Georgios.Stavrakakis@dkbcodefactory.com",
+      "target": "Ledion.Spaho@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Georgios.Stavrakakis@dkbcodefactory.com-Fabian.Georgi@dkbcodefactory.com",
+      "source": "Georgios.Stavrakakis@dkbcodefactory.com",
+      "target": "Fabian.Georgi@dkbcodefactory.com"
+    },
+    {
+      "id": "e-michael.steudter@dkbcodefactory.com-Hyung-Jun.Yoo@dkbcodefactory.com",
+      "source": "michael.steudter@dkbcodefactory.com",
+      "target": "Hyung-Jun.Yoo@dkbcodefactory.com"
+    },
+    {
+      "id": "e-michael.steudter@dkbcodefactory.com-fabian.Schaffner@dkbcodefactory.com",
+      "source": "michael.steudter@dkbcodefactory.com",
+      "target": "fabian.Schaffner@dkbcodefactory.com"
+    },
+    {
+      "id": "e-michael.steudter@dkbcodefactory.com-anna.Cieslak@dkbcodefactory.com",
+      "source": "michael.steudter@dkbcodefactory.com",
+      "target": "anna.Cieslak@dkbcodefactory.com"
+    },
+    {
+      "id": "e-michael.steudter@dkbcodefactory.com-stephan.georgi@dkbcodefactory.com",
+      "source": "michael.steudter@dkbcodefactory.com",
+      "target": "stephan.georgi@dkbcodefactory.com"
+    },
+    {
+      "id": "e-michael.steudter@dkbcodefactory.com-Mohamed.Abdelhamid@dkbcodefactory.com",
+      "source": "michael.steudter@dkbcodefactory.com",
+      "target": "Mohamed.Abdelhamid@dkbcodefactory.com"
+    },
+    {
+      "id": "e-michael.steudter@dkbcodefactory.com-ekin.alcar@dkbcodefactory.com",
+      "source": "michael.steudter@dkbcodefactory.com",
+      "target": "ekin.alcar@dkbcodefactory.com"
+    },
+    {
+      "id": "e-michael.steudter@dkbcodefactory.com-Brent.Curriden@dkbcodefactory.com",
+      "source": "michael.steudter@dkbcodefactory.com",
+      "target": "Brent.Curriden@dkbcodefactory.com"
+    },
+    {
+      "id": "e-michael.steudter@dkbcodefactory.com-Beatriz.Macuco@dkbcodefactory.com",
+      "source": "michael.steudter@dkbcodefactory.com",
+      "target": "Beatriz.Macuco@dkbcodefactory.com"
+    },
+    {
+      "id": "e-levent.uenver@dkbcodefactory.com-AndrzejKrzysztof.Dajnowski@dkbcodefactory.com",
+      "source": "levent.uenver@dkbcodefactory.com",
+      "target": "AndrzejKrzysztof.Dajnowski@dkbcodefactory.com"
+    },
+    {
+      "id": "e-levent.uenver@dkbcodefactory.com-Nivedita.Pastor@dkbcodefactory.com",
+      "source": "levent.uenver@dkbcodefactory.com",
+      "target": "Nivedita.Pastor@dkbcodefactory.com"
+    },
+    {
+      "id": "e-raphaela.wrede@dkbcodefactory.com-margarita.gutierrez@dkbcodefactory.com",
+      "source": "raphaela.wrede@dkbcodefactory.com",
+      "target": "margarita.gutierrez@dkbcodefactory.com"
+    },
+    {
+      "id": "e-raphaela.wrede@dkbcodefactory.com-Elif.Schaefer@dkbcodefactory.com",
+      "source": "raphaela.wrede@dkbcodefactory.com",
+      "target": "Elif.Schaefer@dkbcodefactory.com"
+    },
+    {
+      "id": "e-raphaela.wrede@dkbcodefactory.com-HannahAkinyi.Olukoye@dkbcodefactory.com",
+      "source": "raphaela.wrede@dkbcodefactory.com",
+      "target": "HannahAkinyi.Olukoye@dkbcodefactory.com"
+    },
+    {
+      "id": "e-raphaela.wrede@dkbcodefactory.com-Kathrin.Holweger@dkbcodefactory.com",
+      "source": "raphaela.wrede@dkbcodefactory.com",
+      "target": "Kathrin.Holweger@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Stiliyana.Yordanova@dkbcodefactory.com-Luisa.CruzMolina@dkbcodefactory.com",
+      "source": "Stiliyana.Yordanova@dkbcodefactory.com",
+      "target": "Luisa.CruzMolina@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Stiliyana.Yordanova@dkbcodefactory.com-Aija.Avota@dkbcodefactory.com",
+      "source": "Stiliyana.Yordanova@dkbcodefactory.com",
+      "target": "Aija.Avota@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Stiliyana.Yordanova@dkbcodefactory.com-luno.forchert@dkbcodefactory.com",
+      "source": "Stiliyana.Yordanova@dkbcodefactory.com",
+      "target": "luno.forchert@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Stiliyana.Yordanova@dkbcodefactory.com-Joao.Belchior@dkbcodefactory.com",
+      "source": "Stiliyana.Yordanova@dkbcodefactory.com",
+      "target": "Joao.Belchior@dkbcodefactory.com"
+    },
+    {
+      "id": "e-Stiliyana.Yordanova@dkbcodefactory.com-Christophe.Hoste@dkbcodefactory.com",
+      "source": "Stiliyana.Yordanova@dkbcodefactory.com",
+      "target": "Christophe.Hoste@dkbcodefactory.com"
+    },
+    {
+      "id": "e-margarita.gutierrez@dkbcodefactory.com-empty-1772230037977-stpiis1hn",
+      "source": "margarita.gutierrez@dkbcodefactory.com",
+      "target": "empty-1772230037977-stpiis1hn"
+    }
+  ],
+  "lastUpdated": "2026-02-28T13:08:22.514Z",
+  "viewState": {
+    "maxDepth": 7,
+    "leafColumns": 2,
+    "collapsedNodes": [],
+    "expandedNodes": [],
+    "leadershipLayers": [
+      {
+        "id": "1772228982602",
+        "name": "Layer 3",
+        "identifier": "Head"
+      },
+      {
+        "id": "1772127286089",
+        "name": "Layer 1",
+        "identifier": "Chapter Lead"
+      },
+      {
+        "id": "1772127292230",
+        "name": "Layer 2",
+        "identifier": "\"Manager, Principal\""
+      }
+    ],
+    "nodeFilters": [],
+    "filterGroups": [
+      {
+        "id": "1772219158005",
+        "name": "Seniority",
+        "enabled": false,
+        "filters": [
+          {
+            "id": "1772129177466",
+            "name": "Filter 2",
+            "pattern": "Junior",
+            "color": "#e5ffeb"
+          },
+          {
+            "id": "1772129079947",
+            "name": "Filter 1",
+            "pattern": "Senior",
+            "color": "#2acb2c"
+          },
+          {
+            "id": "1772131399610",
+            "name": "Filter 3",
+            "pattern": "Principal",
+            "color": "#00ad1d"
+          },
+          {
+            "id": "1772131426102",
+            "name": "Filter 4",
+            "pattern": "Engineering Manager",
+            "color": "#8fabff"
+          },
+          {
+            "id": "1772131584562",
+            "name": "Filter 5",
+            "pattern": "Chapter Lead",
+            "color": "#526eff"
+          },
+          {
+            "id": "1772132183161",
+            "name": "Filter 6",
+            "pattern": "Head",
+            "color": "#0061e0"
+          },
+          {
+            "id": "1772219117210",
+            "name": "Filter 7",
+            "pattern": "Werkstudent",
+            "color": "#ffc2e5"
+          }
+        ],
+        "defaultFallbackColor": "#91ee92"
+      },
+      {
+        "id": "1772134835504",
+        "name": "Plattform",
+        "enabled": false,
+        "filters": [
+          {
+            "id": "1772134162553",
+            "name": "Filter 1",
+            "pattern": "Frontend",
+            "color": "#58d336"
+          },
+          {
+            "id": "1772134191276",
+            "name": "Filter 2",
+            "pattern": "Backend",
+            "color": "#3a24e5"
+          },
+          {
+            "id": "1772134220388",
+            "name": "Filter 3",
+            "pattern": "Pega",
+            "color": "#2f86f9"
+          },
+          {
+            "id": "1772134241521",
+            "name": "Filter 4",
+            "pattern": "Android",
+            "color": "#5bd7c2"
+          },
+          {
+            "id": "1772134272113",
+            "name": "Filter 5",
+            "pattern": "iOS",
+            "color": "#ffe32e"
+          },
+          {
+            "id": "1772134409015",
+            "name": "Filter 6",
+            "pattern": "Mobile",
+            "color": "#fff942"
+          },
+          {
+            "id": "1772134566660",
+            "name": "Filter 7",
+            "pattern": "Werkstudent",
+            "color": "#ffccf8"
+          },
+          {
+            "id": "1772134788204",
+            "name": "Filter 8",
+            "pattern": "Head of Engineering",
+            "color": "#4f8f00"
+          }
+        ],
+        "defaultFallbackColor": "#ffffff"
+      }
+    ],
+    "defaultFallbackColor": "#ffffff",
+    "searchShortcut": "meta+f",
+    "teamsShortcut": "meta+m",
+    "companyDomain": "dkb.de",
+    "outlookBaseUrl": "https://outlook.office.com/mail/deeplink/compose"
+  }
+}

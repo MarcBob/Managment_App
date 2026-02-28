@@ -253,3 +253,106 @@ export const importRecruiterViewFromCsv = (
 
   return { nodes: resultNodes, edges: finalEdges };
 };
+
+export const updatePlanWithCsv = (
+  currentNodes: OrgNode[],
+  currentEdges: OrgEdge[],
+  newCsvContent: string
+) => {
+  // 1. Parse the new CSV to get the new filled organization
+  const { nodes: newFilledNodes, edges: newFilledEdges } = parseOrgCsv(newCsvContent);
+  
+  // 2. Extract existing open positions (EMPTY)
+  // We only preserve "true" open positions that don't have a name yet.
+  // If an empty position was given a name, it's treated as a person that should 
+  // be in the CSV to stay in the plan.
+  const existingEmptyNodes = currentNodes
+    .filter(node => 
+      node.data.status === 'EMPTY' && 
+      !node.data.firstName?.trim() && 
+      !node.data.lastName?.trim()
+    )
+    .map(node => ({ ...node, data: { ...node.data } }));
+  
+  // 3. Prepare for re-linking: Map of nodes in the new organization for quick lookup
+  // We match by Work Email or by "LastName, FirstName"
+  const newNodesMapByEmail: Record<string, OrgNode> = {};
+  const newNodesMapByName: Record<string, OrgNode> = {};
+  
+  newFilledNodes.forEach(node => {
+    if (node.data.workEmail) {
+      newNodesMapByEmail[node.data.workEmail.toLowerCase()] = node;
+    }
+    const nameKey = `${node.data.lastName}, ${node.data.firstName}`.toLowerCase();
+    newNodesMapByName[nameKey] = node;
+  });
+
+  // Map of ALL current nodes (for tracing the chain up)
+  const currentNodesMap: Record<string, OrgNode> = {};
+  currentNodes.forEach(node => {
+    currentNodesMap[node.id] = node;
+  });
+
+  const finalNodes = [...newFilledNodes, ...existingEmptyNodes];
+  const finalEdges = [...newFilledEdges];
+
+  // 4. Re-link existing open positions
+  const finalNodesIds = new Set(finalNodes.map(n => n.id));
+
+  existingEmptyNodes.forEach(emptyNode => {
+    // Find who the supervisor was in the OLD plan
+    const oldEdge = currentEdges.find(e => e.target === emptyNode.id);
+    if (!oldEdge) {
+      // It was a root node, keep it as root if no supervisor found
+      return;
+    }
+
+    let currentSupervisorId: string | undefined = oldEdge.source;
+    let foundNewSupervisorId: string | null = null;
+
+    // Follow the chain up in the OLD plan until we find someone who exists in the FINAL nodes
+    while (currentSupervisorId) {
+      // If the current supervisor in the chain is in our final set, we stop
+      if (finalNodesIds.has(currentSupervisorId)) {
+        foundNewSupervisorId = currentSupervisorId;
+        break;
+      }
+
+      // If not, we check if they correspond to a node in the NEW filled org (by email or name)
+      const supervisor = currentNodesMap[currentSupervisorId];
+      if (supervisor) {
+        const matchingNewNode = 
+          (supervisor.data.workEmail ? newNodesMapByEmail[supervisor.data.workEmail.toLowerCase()] : null) ||
+          newNodesMapByName[`${supervisor.data.lastName}, ${supervisor.data.firstName}`.toLowerCase()];
+        
+        if (matchingNewNode) {
+          foundNewSupervisorId = matchingNewNode.id;
+          break;
+        }
+      }
+
+      // Move up to the next supervisor in the OLD plan
+      const nextEdge = currentEdges.find(e => e.target === currentSupervisorId);
+      currentSupervisorId = nextEdge ? nextEdge.source : undefined;
+    }
+
+    if (foundNewSupervisorId) {
+      finalEdges.push({
+        id: `e-${foundNewSupervisorId}-${emptyNode.id}`,
+        source: foundNewSupervisorId,
+        target: emptyNode.id,
+      });
+      
+      // Update supervisor name in data for consistency
+      const supervisorNode = finalNodes.find(n => n.id === foundNewSupervisorId);
+      if (supervisorNode) {
+        emptyNode.data.supervisorName = `${supervisorNode.data.lastName}, ${supervisorNode.data.firstName}`;
+      }
+    } else {
+      // No supervisor found in the new chain, becomes a root
+      emptyNode.data.supervisorName = '';
+    }
+  });
+
+  return { nodes: finalNodes, edges: finalEdges };
+};

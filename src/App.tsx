@@ -3,7 +3,7 @@ import { FileUpload } from './components/FileUpload';
 import { OrgChart } from './components/OrgChart';
 import { EditableTitle } from './components/EditableTitle';
 import { StatsModal } from './components/StatsModal';
-import { parseOrgCsv, exportRecruiterViewToCsv, importRecruiterViewFromCsv } from './utils/csvParser';
+import { parseOrgCsv, exportRecruiterViewToCsv, importRecruiterViewFromCsv, updatePlanWithCsv } from './utils/csvParser';
 import type { OrgNode, OrgEdge } from './utils/csvParser';
 import type { LeadershipLayer } from './utils/leadershipLayers';
 import type { NodeFilter, FilterGroup } from './utils/nodeFilters';
@@ -68,6 +68,7 @@ function App() {
   const planMenuButtonRef = useRef<HTMLButtonElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
   const recruiterImportInputRef = useRef<HTMLInputElement>(null);
+  const updateInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -240,6 +241,27 @@ function App() {
       setServerReachable(false);
     }
   }, [data, serverReachable, syncToServer]);
+
+  const handleUpdatePlan = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file || !data) return;
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const csvContent = e.target?.result as string;
+      try {
+        const { nodes, edges } = updatePlanWithCsv(data.nodes, data.edges, csvContent);
+        handleDataChange({ nodes, edges });
+        setIsPlanMenuOpen(false);
+      } catch (error) {
+        console.error('Failed to update plan:', error);
+        alert('Failed to update plan. Please check the CSV format.');
+      }
+    };
+    reader.readAsText(file);
+    // Reset the input so the same file can be uploaded again
+    if (event.target) event.target.value = '';
+  }, [data, handleDataChange]);
 
   const handleRename = async (newName: string) => {
     const oldName = data?.name || currentPlanName;
@@ -562,6 +584,25 @@ function App() {
                       accept=".csv" 
                       onChange={handleImportFile} 
                     />
+
+                    {data && (
+                      <>
+                        <button
+                          onClick={() => updateInputRef.current?.click()}
+                          className="w-full text-left px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 flex items-center gap-2 font-medium"
+                        >
+                          <RefreshCw className="h-4 w-4" />
+                          Update current Plan
+                        </button>
+                        <input 
+                          type="file" 
+                          ref={updateInputRef} 
+                          className="hidden" 
+                          accept=".csv" 
+                          onChange={handleUpdatePlan} 
+                        />
+                      </>
+                    )}
                   </div>
                 </div>
               )}

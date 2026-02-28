@@ -216,11 +216,11 @@ export const EditNodeModal = ({
               <div className="flex gap-2">
                 <input
                   type="email"
-                  required
+                  required={formData.status === 'FILLED'}
                   className="flex-1 px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   value={formData.workEmail || ''}
                   onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
-                  placeholder={`first.last@${companyDomain || 'dkb.de'}`}
+                  placeholder={formData.status === 'EMPTY' ? 'Optional for empty positions' : `first.last@${companyDomain || 'dkb.de'}`}
                 />
                 
                 <div className="flex shrink-0 gap-1">
