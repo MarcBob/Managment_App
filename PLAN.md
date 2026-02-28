@@ -99,6 +99,10 @@ Build a web application to plan and visualize an engineering organization. The a
            - **Data Integrity:** Replaces the existing filled organization with the new CSV data while preserving all local open positions.
            - **Recursive Re-linking:** Automatically re-links open positions to the next available supervisor in the new hierarchy if their original supervisor is no longer in the organization.
            - Traces the supervisor chain upwards until an existing node is found or the open position becomes a root.
+       19. **Viewport Stability Improvements:**
+           - Optimized `fitView` behavior to prevent jarring zoom-outs during common planning actions.
+           - Viewport is now preserved when adding, deleting, or re-linking positions.
+           - `fitView` is intelligently triggered only during full plan imports or initial data loads.
       ## Next Steps (Future Enhancements)
    
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height. Now supports reordering.

@@ -212,6 +212,7 @@ interface OrgChartProps {
   isRecruiterMode?: boolean;
   availablePlans?: string[];
   onImportSettings?: (planName: string) => void;
+  forceFitView?: boolean;
 }
 
 const OrgChartInner: React.FC<OrgChartProps> = ({ 
@@ -221,7 +222,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   onDataChange,
   isRecruiterMode = false,
   availablePlans = [],
-  onImportSettings
+  onImportSettings,
+  forceFitView = false
 }) => {
   const { getViewport, setViewport, getNode, fitView, fitBounds, screenToFlowPosition } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
@@ -252,15 +254,19 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [outlookBaseUrl, setOutlookBaseUrl] = useState<string>(initialViewState.outlookBaseUrl || 'https://outlook.office.com/mail/deeplink/compose');
   
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
+  const suppressFitViewRef = useRef(false);
   const isFirstMount = useRef(true);
   const lastSavedRef = useRef<string>('');
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Sync initial data
   useEffect(() => {
+    if (!forceFitView) {
+      suppressFitViewRef.current = true;
+    }
     setRawNodes(initialNodes);
     setRawEdges(initialEdges);
-  }, [initialNodes, initialEdges]);
+  }, [initialNodes, initialEdges, forceFitView]);
 
   // Sync settings from props
   useEffect(() => {
@@ -449,7 +455,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         ? { x: parentNode.position.x, y: parentNode.position.y + 200 }
         : { x: 0, y: 0 },
     };
-
+    
+    suppressFitViewRef.current = true;
     setRawNodes((nds) => nds.concat(newNode));
     setRawEdges((eds) => eds.concat({
       id: `e-${parentId}-${newId}`,
@@ -643,6 +650,12 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
 
   useEffect(() => {
     if (layoutVersion > 0) {
+      if (suppressFitViewRef.current) {
+        suppressFitViewRef.current = false;
+        isFirstMount.current = false;
+        return;
+      }
+      
       const duration = isFirstMount.current ? 0 : 400;
       const timer = setTimeout(() => {
         fitView({ duration, padding: 0.2 });
@@ -702,6 +715,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   }, [screenToFlowPosition]);
 
   const handleDeleteNode = useCallback((id: string) => {
+    suppressFitViewRef.current = true;
     setRawNodes((nds) => nds.filter((node) => node.id !== id));
     setRawEdges((eds) => eds.filter((edge) => edge.source !== id && edge.target !== id));
     setEditingNode(null);
@@ -711,6 +725,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     if (!editingNode) return;
     const { managerId: newManagerId, ...restData } = updatedData;
 
+    suppressFitViewRef.current = true;
     setRawNodes((nds) =>
       nds.map((node) => {
         if (node.id === editingNode.id) {
@@ -744,8 +759,15 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     setEditingNode(null);
   }, [editingNode]);
 
-  const onConnect = useCallback((params: Connection) => setRawEdges((eds) => addEdge(params, eds)), []);
-  const onEdgeUpdate = useCallback((oldEdge: Edge, newConnection: Connection) => setRawEdges((els) => updateEdge(oldEdge, newConnection, els)), []);
+  const onConnect = useCallback((params: Connection) => {
+    suppressFitViewRef.current = true;
+    setRawEdges((eds) => addEdge(params, eds));
+  }, []);
+  
+  const onEdgeUpdate = useCallback((oldEdge: Edge, newConnection: Connection) => {
+    suppressFitViewRef.current = true;
+    setRawEdges((els) => updateEdge(oldEdge, newConnection, els));
+  }, []);
 
   const handleExport = useCallback(() => {
     const csv = exportToCsv(rawNodes as any, rawEdges as any);

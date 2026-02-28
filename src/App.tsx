@@ -63,6 +63,7 @@ function App() {
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('saved');
   const [serverReachable, setServerReachable] = useState(true);
   const [isRecruiterMode, setIsRecruiterMode] = useState(false);
+  const [forceFitView, setForceFitView] = useState(false);
   const [isPlanMenuOpen, setIsPlanMenuOpen] = useState(false);
   const planMenuRef = useRef<HTMLDivElement>(null);
   const planMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -87,6 +88,13 @@ function App() {
     return () => document.removeEventListener('mousedown', handleClickOutside, true);
   }, [isPlanMenuOpen]);
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (forceFitView) {
+      const timer = setTimeout(() => setForceFitView(false), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [forceFitView]);
 
   const syncToServer = useCallback(async (state: PlanData) => {
     try {
@@ -196,6 +204,7 @@ function App() {
       edges, 
       lastUpdated: new Date().toISOString() 
     };
+    setForceFitView(true);
     setData(newData);
     setCurrentPlanName(newName);
     localStorage.setItem(CURRENT_PLAN_KEY, newName);
@@ -251,6 +260,7 @@ function App() {
       const csvContent = e.target?.result as string;
       try {
         const { nodes, edges } = updatePlanWithCsv(data.nodes, data.edges, csvContent);
+        setForceFitView(true);
         handleDataChange({ nodes, edges });
         setIsPlanMenuOpen(false);
       } catch (error) {
@@ -387,6 +397,7 @@ function App() {
         lastUpdated: new Date().toISOString() 
       };
       
+      setForceFitView(true);
       setData(newData);
       setCurrentPlanName(fileName);
       localStorage.setItem(CURRENT_PLAN_KEY, fileName);
@@ -434,6 +445,7 @@ function App() {
       // 2. Perform the import
       const { nodes: nextNodes, edges: nextEdges } = importRecruiterViewFromCsv(data.nodes, data.edges, text);
       
+      setForceFitView(true);
       const newState: PlanData = {
         ...data,
         nodes: nextNodes,
@@ -700,6 +712,7 @@ function App() {
                 isRecruiterMode={isRecruiterMode}
                 availablePlans={availablePlans}
                 onImportSettings={handleImportSettings}
+                forceFitView={forceFitView}
               />
             </div>
 
