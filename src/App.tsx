@@ -3,11 +3,11 @@ import { FileUpload } from './components/FileUpload';
 import { OrgChart } from './components/OrgChart';
 import { EditableTitle } from './components/EditableTitle';
 import { StatsModal } from './components/StatsModal';
-import { parseOrgCsv } from './utils/csvParser';
+import { parseOrgCsv, exportRecruiterViewToCsv, importRecruiterViewFromCsv } from './utils/csvParser';
 import type { OrgNode, OrgEdge } from './utils/csvParser';
 import type { LeadershipLayer } from './utils/leadershipLayers';
 import type { NodeFilter, FilterGroup } from './utils/nodeFilters';
-import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus, FileUp, Trash2 } from 'lucide-react';
+import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus, FileUp, Trash2, Download, Upload } from 'lucide-react';
 import './App.css';
 
 const API_URL = 'http://localhost:3001/api';
@@ -67,6 +67,7 @@ function App() {
   const planMenuRef = useRef<HTMLDivElement>(null);
   const planMenuButtonRef = useRef<HTMLButtonElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
+  const recruiterImportInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -376,6 +377,56 @@ function App() {
     event.target.value = '';
   }, [serverReachable, syncToServer, fetchPlans]);
 
+  const handleExportRecruiterView = useCallback(() => {
+    if (!data) return;
+    const csv = exportRecruiterViewToCsv(data.nodes, data.edges);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const fileName = `recruiter_view_${data.name}_${new Date().toISOString().split('T')[0]}.csv`;
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }, [data]);
+
+  const handleImportRecruiterView = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file || !data) return;
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const text = e.target?.result as string;
+      
+      // 1. Export current recruiter view to a temp "revert" file (download)
+      const currentRecruiterCsv = exportRecruiterViewToCsv(data.nodes, data.edges);
+      const blob = new Blob([currentRecruiterCsv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const revertFileName = `REVERT_recruiter_view_${data.name}_${Date.now()}.csv`;
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute('download', revertFileName);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // 2. Perform the import
+      const { nodes: nextNodes, edges: nextEdges } = importRecruiterViewFromCsv(data.nodes, data.edges, text);
+      
+      const newState: PlanData = {
+        ...data,
+        nodes: nextNodes,
+        edges: nextEdges,
+        lastUpdated: new Date().toISOString()
+      };
+
+      setData(newState);
+      localStorage.setItem(`${LOCAL_STORAGE_KEY}_${newState.name}`, JSON.stringify(newState));
+      if (serverReachable) await syncToServer(newState);
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  }, [data, serverReachable, syncToServer]);
+
   const handleImportSettings = async (planName: string) => {
     if (!data || !serverReachable) return;
 
@@ -538,6 +589,33 @@ function App() {
           {data && (
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-3 pr-6 border-r border-slate-200">
+                {isRecruiterMode && (
+                  <div className="flex items-center gap-2 mr-4 animate-in fade-in slide-in-from-right-4">
+                    <button
+                      onClick={handleExportRecruiterView}
+                      className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg text-xs font-bold transition-colors border border-blue-100"
+                      title="Export Vacancies to CSV"
+                    >
+                      <Download className="h-3.5 w-3.5" />
+                      Export Vacancies
+                    </button>
+                    <button
+                      onClick={() => recruiterImportInputRef.current?.click()}
+                      className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-lg text-xs font-bold transition-colors border border-emerald-100"
+                      title="Import Vacancies from CSV"
+                    >
+                      <Upload className="h-3.5 w-3.5" />
+                      Import Vacancies
+                    </button>
+                    <input 
+                      type="file" 
+                      ref={recruiterImportInputRef} 
+                      className="hidden" 
+                      accept=".csv" 
+                      onChange={handleImportRecruiterView} 
+                    />
+                  </div>
+                )}
                 <div className="flex flex-col items-end">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Recruiter Mode</span>
                   <span className="text-[9px] text-slate-400 italic">Focus on vacancies</span>

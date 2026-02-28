@@ -159,3 +159,97 @@ export const exportToCsv = (nodes: OrgNode[], edges: OrgEdge[]) => {
 
   return Papa.unparse(csvRows);
 };
+
+export const exportRecruiterViewToCsv = (nodes: OrgNode[], edges: OrgEdge[]) => {
+  const emptyNodes = nodes.filter(node => node.data.status === 'EMPTY');
+  
+  const nameToEmailMap: Record<string, string> = {};
+  nodes.forEach(node => {
+    if (node.data.status === 'FILLED') {
+      const nameKey = `${node.data.lastName}, ${node.data.firstName}`;
+      nameToEmailMap[node.id] = nameKey;
+    }
+  });
+
+  const csvRows = emptyNodes.map(node => {
+    const parentEdge = edges.find(e => e.target === node.id);
+    const supervisorName = parentEdge ? (nameToEmailMap[parentEdge.source] || '') : '';
+    
+    return {
+      'First Name': node.data.firstName,
+      'Last Name': node.data.lastName,
+      'Job Title': node.data.jobTitle,
+      'Team': node.data.team,
+      'Work Email': node.data.workEmail,
+      'Supervisor name': supervisorName,
+      'Status': node.data.status,
+      'Start Date': node.data.startDate || '',
+      'Exit Date': node.data.exitDate || '',
+      'Probation Period Ends': node.data.probationEndDate || '',
+    };
+  });
+
+  return Papa.unparse(csvRows);
+};
+
+export const importRecruiterViewFromCsv = (
+  currentNodes: OrgNode[], 
+  currentEdges: OrgEdge[], 
+  csvContent: string
+) => {
+  // 1. Remove existing EMPTY positions
+  const filledNodes = currentNodes.filter(node => node.data.status !== 'EMPTY');
+  const filledNodeIds = new Set(filledNodes.map(n => n.id));
+  const remainingEdges = currentEdges.filter(edge => 
+    filledNodeIds.has(edge.source) && filledNodeIds.has(edge.target)
+  );
+
+  // 2. Parse the new recruiter CSV
+  const { nodes: newEmptyNodes, edges: newEdges } = parseOrgCsv(csvContent);
+
+  // 3. Ensure all imported nodes are marked as EMPTY (just in case)
+  newEmptyNodes.forEach(node => {
+    node.data.status = 'EMPTY';
+    // Ensure ID is unique or clearly an empty ID if not already
+    if (!node.id.startsWith('empty-')) {
+      node.id = `empty-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    }
+  });
+
+  // 4. Create a name-to-id map for existing nodes for re-linking
+  const nameToIdMap: Record<string, string> = {};
+  filledNodes.forEach(node => {
+    const nameKey = `${node.data.lastName}, ${node.data.firstName}`.toLowerCase();
+    nameToIdMap[nameKey] = node.id;
+  });
+
+  // 5. Re-link the new empty nodes to their supervisors if they exist in current plan
+  const finalEdges = [...remainingEdges];
+  
+  // PapaParse unparse/parse might have changed supervisor names or they come from CSV
+  // parseOrgCsv already tried to create edges based on Supervisor name.
+  // We need to make sure those edges point to EXISTING filled nodes.
+  
+  // Actually, parseOrgCsv uses its own internal nameToIdMap. 
+  // We should probably manually re-process the new empty nodes' supervisors against our current nodes.
+  
+  const resultNodes = [...filledNodes, ...newEmptyNodes];
+  
+  // We need to find the supervisor for each new empty node in the current filledNodes
+  newEmptyNodes.forEach(node => {
+    const supervisorName = node.data.supervisorName;
+    if (supervisorName) {
+      const normalizedSupervisorName = supervisorName.toLowerCase();
+      const supervisorId = nameToIdMap[normalizedSupervisorName];
+      if (supervisorId) {
+        finalEdges.push({
+          id: `e-${supervisorId}-${node.id}`,
+          source: supervisorId,
+          target: node.id
+        });
+      }
+    }
+  });
+
+  return { nodes: resultNodes, edges: finalEdges };
+};

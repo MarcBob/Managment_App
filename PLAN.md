@@ -89,6 +89,11 @@ Build a web application to plan and visualize an engineering organization. The a
            - Automatically maps `Hire Date` to `Start Date` and `Contract Termination Date` to `Exit Date` during import.
            - **Probation Tracking:** Added a "Probation" label to node cards for employees currently in their probation period.
            - Integrated `Probation Period Ends` field into the position edit modal for manual adjustment.
+       17. **Recruiter View Transfer (CSV Import/Export):**
+           - Added ability to export only vacancies (empty positions) to a dedicated CSV file.
+           - Added ability to import vacancies into an existing plan, automatically replacing current vacancies while preserving filled positions.
+           - **Automatic Backup:** Triggers a "REVERT" CSV download of current vacancies before performing an import to prevent accidental data loss.
+           - Simplifies the process of transferring hiring plans from one organization chart version to another.
       ## Next Steps (Future Enhancements)
    
 - [x] Leadership Layers: Define layers based on job title identifiers to align nodes at the same height. Now supports reordering.
