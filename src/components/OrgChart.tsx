@@ -858,7 +858,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           onEdgeUpdate={onEdgeUpdate}
           nodeTypes={nodeTypes}
           defaultEdgeOptions={defaultEdgeOptions}
-          minZoom={0.1}
+          minZoom={0.01}
           onMouseMove={onMouseMove}
         >
           <Panel position="top-left" className="bg-white p-2 rounded-lg shadow-md border border-slate-200 w-64">

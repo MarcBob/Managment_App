@@ -3914,7 +3914,12 @@
         "status": "FILLED",
         "startDate": "2025-01-02",
         "exitDate": "",
-        "probationEndDate": "2025-07-31"
+        "probationEndDate": "2025-07-31",
+        "isCollapsed": false,
+        "directReportsCount": 2,
+        "totalReportsCount": 2,
+        "depth": 4,
+        "customColor": "#ffffff"
       },
       "position": {
         "x": 0,
@@ -4087,14 +4092,19 @@
       "data": {
         "firstName": "",
         "lastName": "",
-        "jobTitle": "New Position",
-        "team": "",
+        "jobTitle": "Pega Developer",
+        "team": "Card MGMT & Stammdaten",
         "workEmail": "",
         "supervisorName": "Gutierrez Reyes, Maria",
         "status": "EMPTY",
         "startDate": "",
         "exitDate": "",
-        "probationEndDate": ""
+        "probationEndDate": "",
+        "isCollapsed": false,
+        "directReportsCount": 0,
+        "totalReportsCount": 0,
+        "depth": 5,
+        "customColor": "#ffffff"
       },
       "position": {
         "x": 0,
@@ -5124,7 +5134,7 @@
       "target": "empty-1772230037977-stpiis1hn"
     }
   ],
-  "lastUpdated": "2026-02-28T13:32:19.844Z",
+  "lastUpdated": "2026-02-28T13:54:20.128Z",
   "viewState": {
     "maxDepth": 7,
     "leafColumns": 2,
@@ -5254,12 +5264,86 @@
           }
         ],
         "defaultFallbackColor": "#ffffff"
+      },
+      {
+        "id": "1772286583413",
+        "name": "Chapters",
+        "enabled": true,
+        "filters": [
+          {
+            "id": "1772285790076",
+            "name": "Filter 1",
+            "pattern": "Agile",
+            "color": "#dbff29"
+          },
+          {
+            "id": "1772285837143",
+            "name": "Filter 2",
+            "pattern": "Design",
+            "color": "#e4b3ff"
+          },
+          {
+            "id": "1772285855468",
+            "name": "Filter 3",
+            "pattern": "Research",
+            "color": "#91fdeb"
+          },
+          {
+            "id": "1772285956857",
+            "name": "Filter 4",
+            "pattern": "Analyst, Analytics",
+            "color": "#ffd970"
+          },
+          {
+            "id": "1772286020945",
+            "name": "Filter 5",
+            "pattern": "Delivery Manager, Delivery Management",
+            "color": "#ff9e9e"
+          },
+          {
+            "id": "1772286057444",
+            "name": "Filter 6",
+            "pattern": "Talent Acquisition",
+            "color": "#f755c4"
+          },
+          {
+            "id": "1772286106595",
+            "name": "Filter 7",
+            "pattern": "Backend",
+            "color": "#358cfd"
+          },
+          {
+            "id": "1772286135877",
+            "name": "Filter 8",
+            "pattern": "Frontend",
+            "color": "#70ff33"
+          },
+          {
+            "id": "1772286168080",
+            "name": "Filter 9",
+            "pattern": "Pega",
+            "color": "#003c8a"
+          },
+          {
+            "id": "1772286180935",
+            "name": "Filter 10",
+            "pattern": "Android, iOS, mobile",
+            "color": "#faffad"
+          },
+          {
+            "id": "1772286370032",
+            "name": "Filter 11",
+            "pattern": "Human Resource, Personnel Developer, IT Manager, Workplace & Culture Manager",
+            "color": "#e72eff"
+          }
+        ],
+        "defaultFallbackColor": "#ffffff"
       }
     ],
     "defaultFallbackColor": "#ffffff",
     "searchShortcut": "meta+f",
     "teamsShortcut": "meta+m",
-    "companyDomain": "dkb.de",
+    "companyDomain": "dkbcodefactory.com",
     "outlookBaseUrl": "https://outlook.office.com/mail/deeplink/compose"
   }
 }
