@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Settings as SettingsIcon, Plus, Trash2, Palette, GripVertical, Layers, Save, Edit2, FileUp } from 'lucide-react';
+import { X, Settings as SettingsIcon, Plus, Trash2, Palette, GripVertical, Layers, Save, Edit2, FileUp, RotateCcw } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import type { LeadershipLayer } from '../utils/leadershipLayers';
@@ -22,6 +22,10 @@ interface SettingsModalProps {
   setFilterGroups: (groups: FilterGroup[]) => void;
   defaultFallbackColor?: string;
   setDefaultFallbackColor: (color: string) => void;
+  connectionColor?: string;
+  setConnectionColor: (color: string) => void;
+  backgroundColor?: string;
+  setBackgroundColor: (color: string) => void;
   searchShortcut: string;
   setSearchShortcut: (shortcut: string) => void;
   teamsShortcut: string;
@@ -47,6 +51,10 @@ export const SettingsModal = ({
   setFilterGroups,
   defaultFallbackColor = '#ffffff',
   setDefaultFallbackColor,
+  connectionColor = '#94a3b8',
+  setConnectionColor,
+  backgroundColor = '#f8fafc',
+  setBackgroundColor,
   searchShortcut,
   setSearchShortcut,
   teamsShortcut,
@@ -240,32 +248,6 @@ export const SettingsModal = ({
         </div>
         
         <div className="p-6 space-y-8 overflow-y-auto">
-          {/* Leaf Columns */}
-          <div className="space-y-3">
-            <div className="flex flex-col">
-              <label className="text-sm font-bold text-slate-700">Leaf Node Columns</label>
-              <p className="text-xs text-slate-500 mt-1">
-                Arrange positions with no subordinates into multiple columns to save horizontal space.
-              </p>
-            </div>
-            
-            <div className="flex gap-2 p-1 bg-slate-100 rounded-lg">
-              {[1, 2, 3, 4].map((cols) => (
-                <button
-                  key={cols}
-                  onClick={() => setLeafColumns(cols)}
-                  className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${
-                    leafColumns === cols
-                      ? 'bg-white text-blue-600 shadow-sm'
-                      : 'text-slate-500 hover:text-slate-700 hover:bg-slate-200'
-                  }`}
-                >
-                  {cols} {cols === 1 ? 'Col' : 'Cols'}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Node Filters */}
           <div className="space-y-4">
             <div className="flex flex-col">
@@ -322,19 +304,6 @@ export const SettingsModal = ({
                   </div>
                 </div>
               ))}
-
-              <div className="flex items-center gap-2 p-3 bg-blue-50/30 rounded-lg border border-blue-100/50">
-                <div className="flex-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                  Default Fallback Color
-                </div>
-                <input
-                  type="color"
-                  value={defaultFallbackColor}
-                  onChange={(e) => setDefaultFallbackColor(e.target.value)}
-                  className="w-8 h-8 rounded-md cursor-pointer border-none bg-transparent"
-                  title="Color for nodes that don't match any filter"
-                />
-              </div>
               
               <div className="flex gap-2">
                 <button
@@ -504,6 +473,102 @@ export const SettingsModal = ({
                 <Plus size={16} />
                 Add Leadership Layer
               </button>
+            </div>
+          </div>
+
+          {/* Visual Settings */}
+          <div className="space-y-4">
+            <div className="flex flex-col">
+              <label className="text-sm font-bold text-slate-700">Visual Theme</label>
+              <p className="text-xs text-slate-500 mt-1">
+                Customize colors for nodes, connections, and background.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
+                <div className="flex-1 text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                  Default Node Color
+                </div>
+                <input
+                  type="color"
+                  value={defaultFallbackColor}
+                  onChange={(e) => setDefaultFallbackColor(e.target.value)}
+                  className="w-8 h-8 rounded-md cursor-pointer border-none bg-transparent"
+                  title="Color for nodes that don't match any filter"
+                />
+                <button
+                  onClick={() => setDefaultFallbackColor('#ffffff')}
+                  className="p-1 text-slate-400 hover:text-blue-500 transition-colors"
+                  title="Reset to default"
+                >
+                  <RotateCcw size={14} />
+                </button>
+              </div>
+
+              <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
+                <div className="flex-1 text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                  Connection Color
+                </div>
+                <input
+                  type="color"
+                  value={connectionColor}
+                  onChange={(e) => setConnectionColor(e.target.value)}
+                  className="w-8 h-8 rounded-md cursor-pointer border-none bg-transparent"
+                />
+                <button
+                  onClick={() => setConnectionColor('#94a3b8')}
+                  className="p-1 text-slate-400 hover:text-blue-500 transition-colors"
+                  title="Reset to default"
+                >
+                  <RotateCcw size={14} />
+                </button>
+              </div>
+
+              <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
+                <div className="flex-1 text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                  Background Color
+                </div>
+                <input
+                  type="color"
+                  value={backgroundColor}
+                  onChange={(e) => setBackgroundColor(e.target.value)}
+                  className="w-8 h-8 rounded-md cursor-pointer border-none bg-transparent"
+                />
+                <button
+                  onClick={() => setBackgroundColor('#f8fafc')}
+                  className="p-1 text-slate-400 hover:text-blue-500 transition-colors"
+                  title="Reset to default"
+                >
+                  <RotateCcw size={14} />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Leaf Columns */}
+          <div className="space-y-3">
+            <div className="flex flex-col">
+              <label className="text-sm font-bold text-slate-700">Leaf Node Columns</label>
+              <p className="text-xs text-slate-500 mt-1">
+                Arrange positions with no subordinates into multiple columns to save horizontal space.
+              </p>
+            </div>
+            
+            <div className="flex gap-2 p-1 bg-slate-100 rounded-lg">
+              {[1, 2, 3, 4].map((cols) => (
+                <button
+                  key={cols}
+                  onClick={() => setLeafColumns(cols)}
+                  className={`flex-1 py-2 text-sm font-bold rounded-md transition-all ${
+                    leafColumns === cols
+                      ? 'bg-white text-blue-600 shadow-sm'
+                      : 'text-slate-500 hover:text-slate-700 hover:bg-slate-200'
+                  }`}
+                >
+                  {cols} {cols === 1 ? 'Col' : 'Cols'}
+                </button>
+              ))}
             </div>
           </div>
 

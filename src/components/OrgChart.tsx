@@ -40,22 +40,14 @@ const nodeTypes = {
   teamGroup: TeamGroupNode,
 };
 
-const defaultEdgeOptions = {
-  type: ConnectionLineType.SmoothStep,
-  markerEnd: {
-    type: MarkerType.ArrowClosed,
-    color: '#94a3b8',
-  },
-  style: {
-    strokeWidth: 2,
-    stroke: '#94a3b8',
-  },
-};
-
 const nodeWidth = 240;
 const nodeHeight = 150;
 const horizontalSpacing = 50;
 const verticalSpacing = 50;
+
+const DEFAULT_NODE_COLOR = '#ffffff';
+const DEFAULT_CONNECTION_COLOR = '#94a3b8';
+const DEFAULT_BACKGROUND_COLOR = '#f8fafc';
 
 const getLayoutedElements = (
   nodes: any[], 
@@ -203,6 +195,8 @@ interface OrgChartProps {
     nodeFilters?: NodeFilter[];
     filterGroups?: FilterGroup[];
     defaultFallbackColor?: string;
+    connectionColor?: string;
+    backgroundColor?: string;
     searchShortcut?: string;
     teamsShortcut?: string;
     companyDomain?: string;
@@ -248,11 +242,25 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   const [nodeFilters, setNodeFilters] = useState<NodeFilter[]>(initialViewState.nodeFilters || []);
   const [filterGroups, setFilterGroups] = useState<FilterGroup[]>(initialViewState.filterGroups || []);
   const [defaultFallbackColor, setDefaultFallbackColor] = useState<string>(initialViewState.defaultFallbackColor || '#ffffff');
+  const [connectionColor, setConnectionColor] = useState<string>(initialViewState.connectionColor || DEFAULT_CONNECTION_COLOR);
+  const [backgroundColor, setBackgroundColor] = useState<string>(initialViewState.backgroundColor || DEFAULT_BACKGROUND_COLOR);
   const [searchShortcut, setSearchShortcut] = useState<string>(initialViewState.searchShortcut || 'meta+e');
   const [teamsShortcut, setTeamsShortcut] = useState<string>(initialViewState.teamsShortcut || 'meta+m');
   const [companyDomain, setCompanyDomain] = useState<string>(initialViewState.companyDomain || 'dkb.de');
   const [outlookBaseUrl, setOutlookBaseUrl] = useState<string>(initialViewState.outlookBaseUrl || 'https://outlook.office.com/mail/deeplink/compose');
   
+  const defaultEdgeOptions = useMemo(() => ({
+    type: ConnectionLineType.SmoothStep,
+    markerEnd: {
+      type: MarkerType.ArrowClosed,
+      color: connectionColor,
+    },
+    style: {
+      strokeWidth: 2,
+      stroke: connectionColor,
+    },
+  }), [connectionColor]);
+
   const lastToggledRef = useRef<{ id: string, oldPos: { x: number, y: number } } | null>(null);
   const suppressFitViewRef = useRef(false);
   const isFirstMount = useRef(true);
@@ -278,11 +286,13 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     if (initialViewState.nodeFilters !== undefined) setNodeFilters(initialViewState.nodeFilters);
     if (initialViewState.filterGroups !== undefined) setFilterGroups(initialViewState.filterGroups);
     if (initialViewState.defaultFallbackColor !== undefined) setDefaultFallbackColor(initialViewState.defaultFallbackColor);
+    if (initialViewState.connectionColor !== undefined) setConnectionColor(initialViewState.connectionColor);
+    if (initialViewState.backgroundColor !== undefined) setBackgroundColor(initialViewState.backgroundColor);
     if (initialViewState.searchShortcut !== undefined) setSearchShortcut(initialViewState.searchShortcut);
     if (initialViewState.teamsShortcut !== undefined) setTeamsShortcut(initialViewState.teamsShortcut);
     if (initialViewState.companyDomain !== undefined) setCompanyDomain(initialViewState.companyDomain);
     if (initialViewState.outlookBaseUrl !== undefined) setOutlookBaseUrl(initialViewState.outlookBaseUrl);
-  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups, initialViewState.defaultFallbackColor, initialViewState.searchShortcut, initialViewState.teamsShortcut, initialViewState.companyDomain, initialViewState.outlookBaseUrl]);
+  }, [initialViewState.leafColumns, initialViewState.maxDepth, initialViewState.collapsedNodes, initialViewState.expandedNodes, initialViewState.leadershipLayers, initialViewState.nodeFilters, initialViewState.filterGroups, initialViewState.defaultFallbackColor, initialViewState.connectionColor, initialViewState.backgroundColor, initialViewState.searchShortcut, initialViewState.teamsShortcut, initialViewState.companyDomain, initialViewState.outlookBaseUrl]);
 
   const openTeamsChat = useCallback((email: string) => {
     if (!email) return;
@@ -683,6 +693,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         nodeFilters,
         filterGroups,
         defaultFallbackColor,
+        connectionColor,
+        backgroundColor,
         searchShortcut,
         teamsShortcut,
         companyDomain,
@@ -704,7 +716,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor, searchShortcut, teamsShortcut, companyDomain, outlookBaseUrl]);
+  }, [rawNodes, rawEdges, maxDepth, leafColumns, collapsedNodes, expandedNodes, onDataChange, leadershipLayers, nodeFilters, filterGroups, defaultFallbackColor, connectionColor, backgroundColor, searchShortcut, teamsShortcut, companyDomain, outlookBaseUrl]);
 
   const onMouseMove = useCallback((event: React.MouseEvent) => {
     const pos = screenToFlowPosition({
@@ -847,7 +859,10 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   };
 
   return (
-    <div className="w-full h-full bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-inner relative min-h-[500px]">
+    <div 
+      className="w-full h-full border border-slate-200 rounded-xl overflow-hidden shadow-inner relative min-h-[500px]"
+      style={{ backgroundColor }}
+    >
       <MouseContext.Provider value={{ mousePos, isSpacePressed }}>
         <ReactFlow
           nodes={nodes}
@@ -884,7 +899,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
               )}
             </div>
           </Panel>
-          <Background color="#cbd5e1" gap={20} />
+          <Background color={connectionColor} gap={20} opacity={0.2} />
           <Controls />
           <Panel position="top-right" className="bg-white p-2 rounded-lg shadow-md border border-slate-200 flex gap-2">
             <button
@@ -968,6 +983,10 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
         setFilterGroups={setFilterGroups}
         defaultFallbackColor={defaultFallbackColor}
         setDefaultFallbackColor={setDefaultFallbackColor}
+        connectionColor={connectionColor}
+        setConnectionColor={setConnectionColor}
+        backgroundColor={backgroundColor}
+        setBackgroundColor={setBackgroundColor}
         searchShortcut={searchShortcut}
         setSearchShortcut={setSearchShortcut}
         teamsShortcut={teamsShortcut}

@@ -24,6 +24,9 @@ interface ViewState {
   leadershipLayers?: LeadershipLayer[];
   nodeFilters?: NodeFilter[];
   filterGroups?: FilterGroup[];
+  defaultFallbackColor?: string;
+  connectionColor?: string;
+  backgroundColor?: string;
   searchShortcut?: string;
   teamsShortcut?: string;
   companyDomain?: string;
@@ -47,6 +50,9 @@ interface LegacyPlanData extends PlanData {
   leadershipLayers?: LeadershipLayer[];
   nodeFilters?: NodeFilter[];
   filterGroups?: FilterGroup[];
+  defaultFallbackColor?: string;
+  connectionColor?: string;
+  backgroundColor?: string;
   searchShortcut?: string;
   teamsShortcut?: string;
   companyDomain?: string;
@@ -141,7 +147,7 @@ function App() {
         if (response.ok) {
           serverData = await response.json();
           // Migration for old flat schema
-          if (serverData && !serverData.viewState && (serverData.maxDepth || serverData.leafColumns || serverData.leadershipLayers || serverData.nodeFilters || serverData.filterGroups || serverData.searchShortcut || serverData.teamsShortcut || serverData.companyDomain || serverData.outlookBaseUrl)) {
+          if (serverData && !serverData.viewState && (serverData.maxDepth || serverData.leafColumns || serverData.leadershipLayers || serverData.nodeFilters || serverData.filterGroups || serverData.searchShortcut || serverData.teamsShortcut || serverData.companyDomain || serverData.outlookBaseUrl || serverData.defaultFallbackColor || serverData.connectionColor || serverData.backgroundColor)) {
             serverData.viewState = {
               maxDepth: serverData.maxDepth,
               leafColumns: serverData.leafColumns,
@@ -150,6 +156,9 @@ function App() {
               leadershipLayers: serverData.leadershipLayers,
               nodeFilters: serverData.nodeFilters,
               filterGroups: serverData.filterGroups,
+              defaultFallbackColor: serverData.defaultFallbackColor,
+              connectionColor: serverData.connectionColor,
+              backgroundColor: serverData.backgroundColor,
               searchShortcut: serverData.searchShortcut,
               teamsShortcut: serverData.teamsShortcut,
               companyDomain: serverData.companyDomain,
@@ -482,6 +491,9 @@ function App() {
             leadershipLayers: targetPlan.leadershipLayers,
             nodeFilters: targetPlan.nodeFilters,
             filterGroups: targetPlan.filterGroups,
+            defaultFallbackColor: targetPlan.defaultFallbackColor,
+            connectionColor: targetPlan.connectionColor,
+            backgroundColor: targetPlan.backgroundColor,
             searchShortcut: targetPlan.searchShortcut,
             teamsShortcut: targetPlan.teamsShortcut,
             companyDomain: targetPlan.companyDomain,

@@ -5134,7 +5134,7 @@
       "target": "empty-1772230037977-stpiis1hn"
     }
   ],
-  "lastUpdated": "2026-02-28T13:54:20.128Z",
+  "lastUpdated": "2026-02-28T19:47:25.016Z",
   "viewState": {
     "maxDepth": 7,
     "leafColumns": 2,
@@ -5266,9 +5266,23 @@
         "defaultFallbackColor": "#ffffff"
       },
       {
+        "id": "1772308015642",
+        "name": "Engineering - All",
+        "enabled": false,
+        "filters": [
+          {
+            "id": "1772307881938",
+            "name": "Filter 1",
+            "pattern": "Backend, Frontend, iOS, Android, Mobile, Pega, Head of Engineering",
+            "color": "#015dd5"
+          }
+        ],
+        "defaultFallbackColor": "#ffffff"
+      },
+      {
         "id": "1772286583413",
         "name": "Chapters",
-        "enabled": true,
+        "enabled": false,
         "filters": [
           {
             "id": "1772285790076",
@@ -5341,6 +5355,8 @@
       }
     ],
     "defaultFallbackColor": "#ffffff",
+    "connectionColor": "#d9d9d9",
+    "backgroundColor": "#1b1c1d",
     "searchShortcut": "meta+f",
     "teamsShortcut": "meta+m",
     "companyDomain": "dkbcodefactory.com",
