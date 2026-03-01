@@ -16,7 +16,7 @@ Build a web application to plan and visualize an engineering organization. The a
     - [x] Sub-band calculation logic (Learning, Fulfilling, Mastering, Exceeding).
     - [x] Auto-calculation of midpoints for progression.
     - [x] Visualization of salary bands.
-    - [x] Bidirectional sync with Leading Node (Anchor) support.
+    - [x] Bidirectional sync with Anchor node support.
     - [x] Extract and visualize compensation data (Pay Rate, Compensation Date, Salary Sub-band) from imported CSVs.
 
 ## Tech Stack

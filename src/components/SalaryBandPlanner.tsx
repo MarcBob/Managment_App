@@ -219,8 +219,8 @@ const BandCard: React.FC<BandCardProps> = ({
   const parent = activeFamily.salaryBands.find(b => b.id === band.parentId);
 
   return (
-    <div className={`bg-white border rounded-xl shadow-sm overflow-hidden mb-6 transition-all ${band.isLeading && !band.isAutoCalculated ? 'border-amber-400 ring-2 ring-amber-100' : 'border-slate-200'}`}>
-      <div className={`p-4 border-b flex items-center justify-between ${band.isLeading && !band.isAutoCalculated ? 'bg-amber-50/30 border-amber-100' : 'bg-slate-50/50 border-slate-100'}`}>
+    <div className="bg-white border rounded-xl shadow-sm overflow-hidden mb-6 transition-all border-slate-200">
+      <div className="p-4 border-b flex items-center justify-between bg-slate-50/50 border-slate-100">
         <div className="flex items-center gap-4">
           <input 
             type="text"
@@ -244,10 +244,10 @@ const BandCard: React.FC<BandCardProps> = ({
                   ? 'bg-amber-100 text-amber-700' 
                   : 'bg-slate-100 text-slate-400 hover:bg-amber-50 hover:text-amber-600'
               }`}
-              title={band.isLeading ? 'Leading Node (Anchor)' : 'Set as Leading Node'}
+              title={band.isLeading ? 'Anchor Node' : 'Set as Anchor Node'}
             >
               <Anchor className="h-3.5 w-3.5" />
-              LEADER
+              ANCHOR
             </button>
           )}
           <button 
