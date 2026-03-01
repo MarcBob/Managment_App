@@ -22,6 +22,7 @@ interface EditNodeModalProps {
   outlookBaseUrl: string;
   allNodes: any[];
   allEdges: any[];
+  jobFamilies?: any[];
 }
 
 export const EditNodeModal = ({ 
@@ -38,19 +39,54 @@ export const EditNodeModal = ({
   companyDomain,
   outlookBaseUrl,
   allNodes,
-  allEdges
+  allEdges,
+  jobFamilies = []
 }: EditNodeModalProps) => {
-  const [formData, setFormData] = useState({ ...nodeData, managerId: currentManagerId });
+  const [formData, setFormData] = useState(() => {
+    // If node doesn't have an explicit salaryBandId, try to find it from mappings
+    let salaryBandId = nodeData.salaryBandId;
+    if (!salaryBandId && nodeData.jobTitle) {
+      for (const family of jobFamilies) {
+        const matchingBand = family.salaryBands.find((b: any) => b.jobTitles?.includes(nodeData.jobTitle));
+        if (matchingBand) {
+          salaryBandId = matchingBand.id;
+          break;
+        }
+      }
+    }
+    return { ...nodeData, managerId: currentManagerId, salaryBandId };
+  });
+
+  const [selectedFamilyId, setSelectedFamilyId] = useState<string>(() => {
+    const currentBandId = formData.salaryBandId || '';
+    return jobFamilies.find(f => f.salaryBands.some((b: any) => b.id === currentBandId))?.id || '';
+  });
+
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [showActionMenu, setShowActionMenu] = useState(false);
   const actionMenuRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setFormData({ ...nodeData, managerId: currentManagerId });
+    // Sync with new nodeData or managerId
+    let salaryBandId = nodeData.salaryBandId;
+    if (!salaryBandId && nodeData.jobTitle) {
+      for (const family of jobFamilies) {
+        const matchingBand = family.salaryBands.find((b: any) => b.jobTitles?.includes(nodeData.jobTitle));
+        if (matchingBand) {
+          salaryBandId = matchingBand.id;
+          break;
+        }
+      }
+    }
+
+    const nextFormData = { ...nodeData, managerId: currentManagerId, salaryBandId };
+    setFormData(nextFormData);
+    setSelectedFamilyId(jobFamilies.find(f => f.salaryBands.some((b: any) => b.id === salaryBandId))?.id || '');
+    
     setShowConfirmDelete(false);
     setShowActionMenu(false);
-  }, [nodeData, currentManagerId]);
+  }, [nodeData, currentManagerId, jobFamilies]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -87,6 +123,25 @@ export const EditNodeModal = ({
     if (!formData.workEmail || formData.workEmail === currentAutoEmail) {
       nextData.workEmail = generateEmail(nextData.firstName || '', nextData.lastName || '');
     }
+    setFormData(nextData);
+  };
+
+  const handleJobTitleChange = (title: string) => {
+    const nextData = { ...formData, jobTitle: title };
+    
+    // Always clear current band when title changes manually, then try to find a mapping
+    nextData.salaryBandId = '';
+    setSelectedFamilyId('');
+
+    for (const family of jobFamilies) {
+      const matchingBand = family.salaryBands.find((b: any) => b.jobTitles?.includes(title));
+      if (matchingBand) {
+        setSelectedFamilyId(family.id);
+        nextData.salaryBandId = matchingBand.id;
+        break;
+      }
+    }
+    
     setFormData(nextData);
   };
 
@@ -352,7 +407,7 @@ export const EditNodeModal = ({
                 list="existing-job-titles"
                 className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                 value={formData.jobTitle || ''}
-                onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
+                onChange={(e) => handleJobTitleChange(e.target.value)}
               />
               <datalist id="existing-job-titles">
                 {existingJobTitles.map(title => (
@@ -360,6 +415,72 @@ export const EditNodeModal = ({
                 ))}
               </datalist>
             </div>
+
+            {jobFamilies.length > 0 && (
+              <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-xl space-y-3">
+                <div className="flex items-center gap-2 text-blue-600 mb-1">
+                  <div className="p-1 bg-blue-100 rounded">
+                    <Users size={14} className="shrink-0" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Compensation Level</span>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Job Family</label>
+                    <select
+                      className="w-full px-2 py-1.5 text-xs border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-medium"
+                      value={selectedFamilyId}
+                      onChange={(e) => {
+                        setSelectedFamilyId(e.target.value);
+                        setFormData({ ...formData, salaryBandId: '' });
+                      }}
+                    >
+                      <option value="">Select Family...</option>
+                      {jobFamilies.map(f => (
+                        <option key={f.id} value={f.id}>{f.name}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Salary Band</label>
+                    <select
+                      className="w-full px-2 py-1.5 text-xs border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-medium disabled:opacity-50"
+                      value={formData.salaryBandId || ''}
+                      disabled={!selectedFamilyId}
+                      onChange={(e) => setFormData({ ...formData, salaryBandId: e.target.value })}
+                    >
+                      <option value="">Select Band...</option>
+                      {selectedFamilyId && jobFamilies.find(f => f.id === selectedFamilyId)?.salaryBands.map((b: any) => (
+                        <option key={b.id} value={b.id}>{b.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {formData.salaryBandId && (() => {
+                  const band = jobFamilies.flatMap(f => f.salaryBands).find(b => b.id === formData.salaryBandId);
+                  if (!band) return null;
+                  return (
+                    <div className="pt-1 flex flex-col gap-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold text-slate-500">Range (100% Midpoint)</span>
+                        <span className="text-[11px] font-black text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">
+                          ${Math.round(band.midpoint).toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold text-slate-500 italic">Expected Spread: ±{Math.round(band.spread * 200)}%</span>
+                        <span className="text-[10px] font-medium text-slate-400">
+                          ${Math.round(band.midpoint * (1 - 2 * band.spread)).toLocaleString()} - ${Math.round(band.midpoint * (1 + 2 * band.spread)).toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            )}
 
             <div className="space-y-1">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Direct Manager</label>

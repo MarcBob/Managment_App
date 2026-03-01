@@ -206,6 +206,7 @@ interface OrgChartProps {
   availablePlans?: string[];
   onImportSettings?: (planName: string) => void;
   forceFitView?: boolean;
+  jobFamilies?: any[];
 }
 
 const OrgChartInner: React.FC<OrgChartProps> = ({ 
@@ -216,7 +217,8 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
   isRecruiterMode = false,
   availablePlans = [],
   onImportSettings,
-  forceFitView = false
+  forceFitView = false,
+  jobFamilies = []
 }) => {
   const { getViewport, setViewport, getNode, fitView, fitBounds, screenToFlowPosition } = useReactFlow();
   const [searchQuery, setSearchQuery] = useState('');
@@ -967,6 +969,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           onClose={() => setEditingNode(null)} 
           onSave={handleSaveNode} 
           onDelete={handleDeleteNode} 
+          jobFamilies={jobFamilies}
         />
       )}
       <SettingsModal 

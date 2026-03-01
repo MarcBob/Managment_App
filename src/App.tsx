@@ -230,9 +230,79 @@ function App() {
   const handleDataChange = useCallback(async (newState: Partial<PlanData>) => {
     if (!data) return;
 
+    let updatedNodes = newState.nodes || data.nodes;
+    let updatedFamilies = newState.jobFamilies || data.jobFamilies || [];
+
+    // Sync Logic: Ensure Job Title -> Salary Band mapping is consistent
+    if (newState.jobFamilies) {
+      // 1. If job families changed (e.g. mapping updated in Salary screen), update nodes
+      updatedNodes = updatedNodes.map(node => {
+        const title = node.data.jobTitle;
+        if (!title) return node;
+
+        // Find if this title is mapped to any band
+        let foundBandId = '';
+        for (const family of updatedFamilies) {
+          const band = family.salaryBands.find(b => b.jobTitles?.includes(title));
+          if (band) {
+            foundBandId = band.id;
+            break;
+          }
+        }
+
+        // Only update if it's different (and we found a mapping)
+        if (foundBandId && node.data.salaryBandId !== foundBandId) {
+          return {
+            ...node,
+            data: { ...node.data, salaryBandId: foundBandId }
+          };
+        }
+        return node;
+      });
+    } else if (newState.nodes) {
+      // 2. If nodes changed (e.g. manual assignment in Modal), update job families mapping
+      // We look for nodes that have a salaryBandId set and ensure that title is in that band
+      let familiesChanged = false;
+      const newFamilies = updatedFamilies.map(f => ({
+        ...f,
+        salaryBands: f.salaryBands.map(b => ({ ...b, jobTitles: [...(b.jobTitles || [])] }))
+      }));
+
+      updatedNodes.forEach(node => {
+        const title = node.data.jobTitle;
+        const bandId = node.data.salaryBandId;
+        if (!title || !bandId) return;
+
+        // Check if title is already in THIS band
+        const targetFamily = newFamilies.find(f => f.salaryBands.some(b => b.id === bandId));
+        const targetBand = targetFamily?.salaryBands.find(b => b.id === bandId);
+        
+        if (targetBand && !targetBand.jobTitles.includes(title)) {
+          // Remove from all other bands first to maintain 1-to-1
+          newFamilies.forEach(f => {
+            f.salaryBands.forEach(b => {
+              if (b.jobTitles.includes(title)) {
+                b.jobTitles = b.jobTitles.filter(t => t !== title);
+                familiesChanged = true;
+              }
+            });
+          });
+          // Add to target band
+          targetBand.jobTitles.push(title);
+          familiesChanged = true;
+        }
+      });
+
+      if (familiesChanged) {
+        updatedFamilies = newFamilies;
+      }
+    }
+
     const timestampedState: PlanData = {
       ...data,
       ...newState,
+      nodes: updatedNodes,
+      jobFamilies: updatedFamilies,
       lastUpdated: new Date().toISOString()
     };
 
@@ -757,6 +827,7 @@ function App() {
                   availablePlans={availablePlans}
                   onImportSettings={handleImportSettings}
                   forceFitView={forceFitView}
+                  jobFamilies={data.jobFamilies || []}
                 />
               </div>
             ) : (

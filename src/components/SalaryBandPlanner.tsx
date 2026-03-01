@@ -59,7 +59,7 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily }) =
               {band.name}
             </div>
             <div 
-              className="absolute h-full rounded-md overflow-hidden border border-white/40 shadow-sm flex"
+              className="absolute h-full rounded-md border border-white/40 shadow-sm flex"
               style={{ 
                 left: `${getPos(band.subBands[0].start)}%`, 
                 width: `${getPos(band.subBands[3].end) - getPos(band.subBands[0].start)}%` 
@@ -68,15 +68,25 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily }) =
               {band.subBands.map((sub, sIdx) => (
                 <div 
                   key={sub.name}
-                  className={`h-full border-r last:border-r-0 border-white/20 ${
-                    sIdx === 0 ? 'bg-blue-100' : 
+                  className={`h-full border-r last:border-r-0 border-white/20 relative group/sub transition-all hover:brightness-110 ${
+                    sIdx === 0 ? 'bg-blue-100 rounded-l-[5px]' : 
                     sIdx === 1 ? 'bg-blue-200' : 
                     sIdx === 2 ? 'bg-blue-300' : 
-                    'bg-blue-400'
+                    'bg-blue-400 rounded-r-[5px]'
                   }`}
                   style={{ width: '25%' }}
-                  title={`${band.name} - ${sub.name}: $${Math.round(sub.start).toLocaleString()} - $${Math.round(sub.end).toLocaleString()}`}
-                />
+                >
+                  {/* Tooltip */}
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/sub:block z-50 pointer-events-none animate-in fade-in zoom-in-95 duration-200">
+                    <div className="bg-slate-800 text-white text-[10px] py-1.5 px-2.5 rounded shadow-xl whitespace-nowrap flex flex-col items-center">
+                      <span className="font-black text-[9px] text-slate-400 uppercase tracking-widest mb-0.5">{band.name} • {sub.name}</span>
+                      <span className="font-bold font-mono">
+                        ${Math.round(sub.start).toLocaleString()} - ${Math.round(sub.end).toLocaleString()}
+                      </span>
+                    </div>
+                    <div className="w-2 h-2 bg-slate-800 rotate-45 absolute left-1/2 -translate-x-1/2 -bottom-1" />
+                  </div>
+                </div>
               ))}
             </div>
           </div>

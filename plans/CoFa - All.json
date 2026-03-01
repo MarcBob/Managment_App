@@ -5134,7 +5134,7 @@
       "target": "empty-1772230037977-stpiis1hn"
     }
   ],
-  "lastUpdated": "2026-03-01T18:48:02.149Z",
+  "lastUpdated": "2026-03-01T18:58:37.157Z",
   "viewState": {
     "maxDepth": 7,
     "leafColumns": 2,
@@ -5162,7 +5162,7 @@
       {
         "id": "1772219158005",
         "name": "Seniority",
-        "enabled": true,
+        "enabled": false,
         "filters": [
           {
             "id": "1772129177466",
@@ -5212,7 +5212,7 @@
       {
         "id": "1772134835504",
         "name": "Plattform",
-        "enabled": false,
+        "enabled": true,
         "filters": [
           {
             "id": "1772134162553",
@@ -5389,11 +5389,11 @@
           "parentId": "037ecca4-ca70-4f64-b6ec-f67c03a5e029",
           "isLeading": true,
           "jobTitles": [
-            "Software Developer (Backend)",
             "Software Developer (Frontend)",
             "Pega Developer",
             "Mobile Developer (Android)",
-            "Mobile Developer (iOS)"
+            "Mobile Developer (iOS)",
+            "Software Developer (Backend)"
           ]
         },
         {
