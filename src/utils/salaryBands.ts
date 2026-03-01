@@ -11,7 +11,8 @@ export interface SalaryBand {
   spread: number; // e.g., 0.075 for 7.5%
   isAutoCalculated: boolean;
   parentId?: string; // For progression tracking
-  isLeading?: boolean;
+  isLeading: boolean;
+  jobTitles: string[];
 }
 
 export interface JobFamily {

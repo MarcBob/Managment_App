@@ -1,9 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { type JobFamily, type SalaryBand, calculateSubBands, calculateNextMidpoint, calculatePreviousMidpoint } from '../utils/salaryBands';
-import { Plus, Trash2, ChevronRight, Calculator, BarChart3, ChevronDown, ChevronUp, Layers, Anchor } from 'lucide-react';
+import { Plus, Trash2, ChevronRight, Calculator, BarChart3, ChevronDown, Layers, Anchor, X, Tag } from 'lucide-react';
 
 interface SalaryBandPlannerProps {
   jobFamilies: JobFamily[];
+  allJobTitles: string[];
   onDataChange: (jobFamilies: JobFamily[]) => void;
 }
 
@@ -52,7 +53,7 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily }) =
         </div>
 
         {/* Level Bars */}
-        {sortedBands.map((band, idx) => (
+        {sortedBands.map((band) => (
           <div key={band.id} className="relative h-8 group">
             <div className="absolute left-0 -translate-x-full pr-4 w-32 text-right truncate text-[10px] font-bold text-slate-500 uppercase tracking-tight leading-8">
               {band.name}
@@ -88,6 +89,8 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily }) =
 interface BandCardProps {
   band: SalaryBand;
   activeFamily: JobFamily;
+  jobFamilies: JobFamily[];
+  allJobTitles: string[];
   onUpdateBand: (bandId: string, updates: Partial<SalaryBand>) => void;
   onToggleAutoCalc: (bandId: string) => void;
   onSetLeading: (bandId: string) => void;
@@ -98,6 +101,8 @@ interface BandCardProps {
 const BandCard: React.FC<BandCardProps> = ({ 
   band, 
   activeFamily, 
+  jobFamilies,
+  allJobTitles,
   onUpdateBand, 
   onToggleAutoCalc, 
   onSetLeading,
@@ -169,7 +174,7 @@ const BandCard: React.FC<BandCardProps> = ({
       </div>
 
       <div className="p-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Midpoint (100%)</label>
             <div className="flex items-center gap-2">
@@ -197,12 +202,58 @@ const BandCard: React.FC<BandCardProps> = ({
               <span className="text-slate-400 font-medium">%</span>
             </div>
           </div>
-          <div className="flex flex-col justify-end">
-             <div className="text-[10px] text-slate-400 italic leading-tight">
-               {band.isAutoCalculated 
-                 ? "Calculating based on connected levels."
-                 : band.isLeading ? "Leading anchor node." : "Manual configuration."}
-             </div>
+          <div className="md:col-span-2">
+            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 flex items-center gap-2">
+              <Tag className="h-3 w-3" />
+              Assigned Job Titles
+            </label>
+            <div className="flex flex-wrap gap-2 mb-2 min-h-[42px] p-2 bg-slate-50 border border-slate-200 rounded-lg">
+              {(band.jobTitles || []).map(title => (
+                <div 
+                  key={title} 
+                  className="flex items-center gap-1.5 bg-white border border-slate-200 px-2 py-1 rounded-md shadow-sm animate-in fade-in zoom-in-95 duration-200"
+                >
+                  <span className="text-[11px] font-bold text-slate-600">{title}</span>
+                  <button 
+                    onClick={() => {
+                      const nextTitles = band.jobTitles.filter(t => t !== title);
+                      onUpdateBand(band.id, { jobTitles: nextTitles });
+                    }}
+                    className="p-0.5 hover:bg-red-50 hover:text-red-500 rounded-md transition-colors"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              ))}
+              <select 
+                className="bg-transparent text-[11px] font-bold text-blue-600 outline-none border-none focus:ring-0 cursor-pointer hover:underline p-0 m-0"
+                value=""
+                onChange={(e) => {
+                  const title = e.target.value;
+                  if (title && !band.jobTitles?.includes(title)) {
+                    const nextTitles = [...(band.jobTitles || []), title];
+                    onUpdateBand(band.id, { jobTitles: nextTitles });
+                  }
+                }}
+              >
+                <option value="" disabled>+ Add Title</option>
+                {allJobTitles
+                  .filter(title => {
+                    // Filter out titles already in THIS band
+                    if (band.jobTitles?.includes(title)) return false;
+                    
+                    // Filter out titles already in ANY band of ANY job family
+                    const isAlreadyAssignedGlobally = jobFamilies.some(f => 
+                      f.salaryBands.some(b => b.jobTitles?.includes(title))
+                    );
+                    return !isAlreadyAssignedGlobally;
+                  })
+                  .map(title => (
+                    <option key={title} value={title}>{title}</option>
+                  ))
+                }
+              </select>
+            </div>
           </div>
         </div>
 
@@ -247,6 +298,8 @@ const BandCard: React.FC<BandCardProps> = ({
 interface BandNodeProps {
   bandId: string;
   activeFamily: JobFamily;
+  jobFamilies: JobFamily[];
+  allJobTitles: string[];
   onUpdateBand: (bandId: string, updates: Partial<SalaryBand>) => void;
   onToggleAutoCalc: (bandId: string) => void;
   onSetLeading: (bandId: string) => void;
@@ -257,6 +310,8 @@ interface BandNodeProps {
 const BandNode: React.FC<BandNodeProps> = ({ 
   bandId, 
   activeFamily, 
+  jobFamilies,
+  allJobTitles,
   onUpdateBand, 
   onToggleAutoCalc, 
   onSetLeading,
@@ -275,6 +330,8 @@ const BandNode: React.FC<BandNodeProps> = ({
           <BandCard 
             band={band} 
             activeFamily={activeFamily}
+            jobFamilies={jobFamilies}
+            allJobTitles={allJobTitles}
             onUpdateBand={onUpdateBand}
             onToggleAutoCalc={onToggleAutoCalc}
             onSetLeading={onSetLeading}
@@ -291,6 +348,8 @@ const BandNode: React.FC<BandNodeProps> = ({
               key={child.id} 
               bandId={child.id} 
               activeFamily={activeFamily}
+              jobFamilies={jobFamilies}
+              allJobTitles={allJobTitles}
               onUpdateBand={onUpdateBand}
               onToggleAutoCalc={onToggleAutoCalc}
               onSetLeading={onSetLeading}
@@ -304,7 +363,7 @@ const BandNode: React.FC<BandNodeProps> = ({
   );
 };
 
-export const SalaryBandPlanner: React.FC<SalaryBandPlannerProps> = ({ jobFamilies, onDataChange }) => {
+export const SalaryBandPlanner: React.FC<SalaryBandPlannerProps> = ({ jobFamilies, allJobTitles, onDataChange }) => {
   const [activeFamilyId, setActiveFamilyId] = useState<string | null>(
     jobFamilies.length > 0 ? jobFamilies[0].id : null
   );
@@ -483,6 +542,7 @@ export const SalaryBandPlanner: React.FC<SalaryBandPlannerProps> = ({ jobFamilie
       isAutoCalculated: isAuto,
       parentId,
       isLeading: activeFamily.salaryBands.length === 0,
+      jobTitles: [],
     };
 
     let bands = [...activeFamily.salaryBands, newBand];
@@ -616,6 +676,8 @@ export const SalaryBandPlanner: React.FC<SalaryBandPlannerProps> = ({ jobFamilie
                     key={rootBand.id} 
                     bandId={rootBand.id} 
                     activeFamily={activeFamily} 
+                    jobFamilies={jobFamilies}
+                    allJobTitles={allJobTitles}
                     onUpdateBand={handleUpdateBand}
                     onToggleAutoCalc={handleToggleAutoCalc}
                     onSetLeading={handleSetLeading}

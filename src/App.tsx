@@ -762,6 +762,7 @@ function App() {
             ) : (
               <SalaryBandPlanner 
                 jobFamilies={data.jobFamilies || []}
+                allJobTitles={Array.from(new Set(data.nodes.map(n => n.data.jobTitle).filter(Boolean))).sort()}
                 onDataChange={(jobFamilies) => handleDataChange({ jobFamilies })}
               />
             )}

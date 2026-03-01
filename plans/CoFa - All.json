@@ -5134,7 +5134,7 @@
       "target": "empty-1772230037977-stpiis1hn"
     }
   ],
-  "lastUpdated": "2026-03-01T17:15:24.845Z",
+  "lastUpdated": "2026-03-01T18:48:02.149Z",
   "viewState": {
     "maxDepth": 7,
     "leafColumns": 2,
@@ -5162,7 +5162,7 @@
       {
         "id": "1772219158005",
         "name": "Seniority",
-        "enabled": false,
+        "enabled": true,
         "filters": [
           {
             "id": "1772129177466",
@@ -5370,17 +5370,31 @@
         {
           "id": "037ecca4-ca70-4f64-b6ec-f67c03a5e029",
           "name": "Junior Engineer",
-          "midpoint": 55000,
+          "midpoint": 54999.99999999999,
           "spread": 0.075,
-          "isAutoCalculated": false
+          "isAutoCalculated": true,
+          "jobTitles": [
+            "Junior Pega Developer",
+            "Junior Software Developer (Backend)",
+            "Junior Software Developer (Frontend)"
+          ],
+          "isLeading": false
         },
         {
           "id": "d5354bf2-ecc8-47f7-9189-3b913af296ab",
           "name": "Mid Engineer",
           "midpoint": 69558.82352941176,
           "spread": 0.075,
-          "isAutoCalculated": true,
-          "parentId": "037ecca4-ca70-4f64-b6ec-f67c03a5e029"
+          "isAutoCalculated": false,
+          "parentId": "037ecca4-ca70-4f64-b6ec-f67c03a5e029",
+          "isLeading": true,
+          "jobTitles": [
+            "Software Developer (Backend)",
+            "Software Developer (Frontend)",
+            "Pega Developer",
+            "Mobile Developer (Android)",
+            "Mobile Developer (iOS)"
+          ]
         },
         {
           "id": "b997533d-278a-48da-a95f-48f584aa58b9",
@@ -5388,7 +5402,15 @@
           "midpoint": 87971.45328719722,
           "spread": 0.075,
           "isAutoCalculated": true,
-          "parentId": "d5354bf2-ecc8-47f7-9189-3b913af296ab"
+          "parentId": "d5354bf2-ecc8-47f7-9189-3b913af296ab",
+          "isLeading": false,
+          "jobTitles": [
+            "Senior Mobile Developer (Android)",
+            "Senior Mobile Developer (iOS)",
+            "Senior Pega Developer",
+            "Senior Software Developer (Backend)",
+            "Senior Software Developer (Frontend)"
+          ]
         },
         {
           "id": "a1f6916c-cc34-47ca-906c-4c2c82377934",
@@ -5396,7 +5418,15 @@
           "midpoint": 111258.0144514553,
           "spread": 0.075,
           "isAutoCalculated": true,
-          "parentId": "b997533d-278a-48da-a95f-48f584aa58b9"
+          "parentId": "b997533d-278a-48da-a95f-48f584aa58b9",
+          "isLeading": false,
+          "jobTitles": [
+            "Engineering Manager (Android)",
+            "Engineering Manager (Backend)",
+            "Engineering Manager (Frontend)",
+            "Engineering Manager (Pega)",
+            "Engineering Manager (iOS)"
+          ]
         },
         {
           "id": "c59e200a-e5b0-4855-9618-1adada058b4e",
@@ -5404,7 +5434,12 @@
           "midpoint": 111258.0144514553,
           "spread": 0.075,
           "isAutoCalculated": true,
-          "parentId": "b997533d-278a-48da-a95f-48f584aa58b9"
+          "parentId": "b997533d-278a-48da-a95f-48f584aa58b9",
+          "isLeading": false,
+          "jobTitles": [
+            "Principal Engineer (Frontend)",
+            "Principal Engineering (Backend)"
+          ]
         },
         {
           "id": "0fa457ca-125b-4133-a566-1b30bc36cc60",
@@ -5413,7 +5448,13 @@
           "spread": 0.075,
           "isAutoCalculated": true,
           "parentId": "a1f6916c-cc34-47ca-906c-4c2c82377934",
-          "isLeading": false
+          "isLeading": false,
+          "jobTitles": [
+            "Chapter Lead Engineering (Backend)",
+            "Chapter Lead Engineering (Frontend)",
+            "Chapter Lead Engineering (Mobile)",
+            "Chapter Lead (Pega)"
+          ]
         },
         {
           "id": "18ffd7a3-bfbb-45cb-ab73-fb49cc37eeb6",
@@ -5422,7 +5463,10 @@
           "spread": 0.075,
           "isAutoCalculated": true,
           "parentId": "0fa457ca-125b-4133-a566-1b30bc36cc60",
-          "isLeading": false
+          "isLeading": false,
+          "jobTitles": [
+            "Head of Engineering"
+          ]
         }
       ]
     },
