@@ -40,13 +40,19 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily, sho
   // Calculate distribution data if enabled
   const getSubBandCounts = (bandId: string, subBandIndex: number) => {
     if (!showDistribution) return 0;
-    
-    // Find people with this specific band ID
-    const peopleInBand = allNodes.filter(n => n.data.salaryBandId === bandId && n.data.payRate);
-    if (peopleInBand.length === 0) return 0;
 
     const band = bandData.find(b => b.id === bandId);
     if (!band) return 0;
+    
+    // Find people with this specific band ID OR matching job title
+    const peopleInBand = allNodes.filter(n => {
+      if (!n.data.payRate) return false;
+      if (n.data.salaryBandId === bandId) return true;
+      if (!n.data.salaryBandId && n.data.jobTitle && band.jobTitles?.includes(n.data.jobTitle)) return true;
+      return false;
+    });
+
+    if (peopleInBand.length === 0) return 0;
 
     const subBand = band.subBands[subBandIndex];
     
