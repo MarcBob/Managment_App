@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { type JobFamily, type SalaryBand, calculateSubBands, calculateNextMidpoint, calculatePreviousMidpoint } from '../utils/salaryBands';
-import { Plus, Trash2, ChevronRight, Calculator, BarChart3, ChevronDown, Layers, Anchor, X, Tag } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { type JobFamily, type SalaryBand, calculateSubBands, calculateNextMidpoint, calculatePreviousMidpoint, sanitizeJobFamilies } from '../utils/salaryBands';
+import { Plus, Trash2, ChevronRight, Calculator, BarChart3, ChevronDown, Layers, Anchor, X, Tag, Download, Upload } from 'lucide-react';
 
 interface SalaryBandPlannerProps {
   jobFamilies: JobFamily[];
@@ -378,6 +378,55 @@ export const SalaryBandPlanner: React.FC<SalaryBandPlannerProps> = ({ jobFamilie
     jobFamilies.length > 0 ? jobFamilies[0].id : null
   );
   const [isOverviewCollapsed, setIsOverviewCollapsed] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleExport = () => {
+    const data = JSON.stringify(jobFamilies, null, 2);
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `salary_bands_${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const content = event.target?.result as string;
+        const importedData = JSON.parse(content);
+        
+        if (!Array.isArray(importedData)) {
+          throw new Error('Invalid format: expected an array of job families');
+        }
+
+        const sanitizedData = sanitizeJobFamilies(importedData, allJobTitles);
+        onDataChange(sanitizedData);
+        
+        if (sanitizedData.length > 0) {
+          setActiveFamilyId(sanitizedData[0].id);
+        }
+        
+        alert('Salary bands imported and sanitized successfully.');
+      } catch (err) {
+        console.error('Failed to import salary bands:', err);
+        alert('Failed to import salary bands. Please ensure the file is valid JSON.');
+      }
+    };
+    reader.readAsText(file);
+    
+    // Reset input value to allow re-importing the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
 
   const handleAddFamily = () => {
     const name = window.prompt('Enter job family name (e.g., Engineering, Design):');
@@ -601,18 +650,43 @@ export const SalaryBandPlanner: React.FC<SalaryBandPlannerProps> = ({ jobFamilie
     <div className="flex h-full bg-slate-50 overflow-hidden">
       {/* Sidebar */}
       <div className="w-64 border-r border-slate-200 bg-white flex flex-col">
-        <div className="p-4 border-b border-slate-100 flex items-center justify-between">
-          <h2 className="font-bold text-slate-800 flex items-center gap-2">
-            <BarChart3 className="h-4 w-4 text-blue-600" />
-            Job Families
-          </h2>
-          <button 
-            onClick={handleAddFamily}
-            className="p-1 hover:bg-slate-100 rounded text-blue-600 transition-colors"
-            title="Add Job Family"
-          >
-            <Plus className="h-5 w-5" />
-          </button>
+        <div className="p-4 border-b border-slate-100 flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <h2 className="font-bold text-slate-800 flex items-center gap-2">
+              <BarChart3 className="h-4 w-4 text-blue-600" />
+              Job Families
+            </h2>
+            <div className="flex items-center gap-1">
+              <button 
+                onClick={() => fileInputRef.current?.click()}
+                className="p-1 hover:bg-slate-100 rounded text-slate-500 hover:text-blue-600 transition-colors"
+                title="Import Salary Bands"
+              >
+                <Upload className="h-4 w-4" />
+              </button>
+              <button 
+                onClick={handleExport}
+                className="p-1 hover:bg-slate-100 rounded text-slate-500 hover:text-blue-600 transition-colors"
+                title="Export Salary Bands"
+              >
+                <Download className="h-4 w-4" />
+              </button>
+              <button 
+                onClick={handleAddFamily}
+                className="p-1 hover:bg-slate-100 rounded text-blue-600 transition-colors"
+                title="Add Job Family"
+              >
+                <Plus className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+          <input 
+            type="file"
+            ref={fileInputRef}
+            onChange={handleImport}
+            accept=".json"
+            className="hidden"
+          />
         </div>
         <div className="flex-1 overflow-y-auto py-2">
           {jobFamilies.map(family => (

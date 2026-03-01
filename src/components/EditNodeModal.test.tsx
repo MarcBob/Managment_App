@@ -22,10 +22,10 @@ describe('EditNodeModal', () => {
 
   it('calls onClose when clicking outside the modal content', () => {
     const props = createProps();
-    const { container } = render(<EditNodeModal {...props} />);
+    render(<EditNodeModal {...props} />);
     
-    // The overlay is the first div
-    const overlay = container.firstChild as HTMLElement;
+    // The overlay has data-testid="modal-overlay"
+    const overlay = screen.getByTestId('modal-overlay');
     
     // Click on the overlay (which is outside the modal content)
     fireEvent.mouseDown(overlay);

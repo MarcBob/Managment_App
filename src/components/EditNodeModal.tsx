@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X, Trash2, AlertCircle, MessageSquare, ChevronDown, Users } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { type JobFamily } from '../utils/salaryBands';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -22,8 +23,10 @@ interface EditNodeModalProps {
   outlookBaseUrl: string;
   allNodes: any[];
   allEdges: any[];
-  jobFamilies?: any[];
+  jobFamilies?: JobFamily[];
 }
+
+const EMPTY_JOB_FAMILIES: JobFamily[] = [];
 
 export const EditNodeModal = ({ 
   isOpen, 
@@ -40,7 +43,7 @@ export const EditNodeModal = ({
   outlookBaseUrl,
   allNodes,
   allEdges,
-  jobFamilies = []
+  jobFamilies = EMPTY_JOB_FAMILIES
 }: EditNodeModalProps) => {
   const [formData, setFormData] = useState(() => {
     // If node doesn't have an explicit salaryBandId, try to find it from mappings
@@ -204,7 +207,7 @@ export const EditNodeModal = ({
   const fullOrgEmails = getFullOrgEmails();
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+    <div data-testid="modal-overlay" className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
       <div ref={modalRef} className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col max-h-[90vh]">
         <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50 shrink-0">
           <h3 className="font-bold text-slate-800">

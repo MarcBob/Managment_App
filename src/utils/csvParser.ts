@@ -11,6 +11,7 @@ export interface OrgNodeData {
   startDate?: string;
   exitDate?: string;
   probationEndDate?: string;
+  salaryBandId?: string;
 }
 
 export interface OrgNode {

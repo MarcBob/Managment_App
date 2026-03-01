@@ -250,8 +250,8 @@ function App() {
           }
         }
 
-        // Only update if it's different (and we found a mapping)
-        if (foundBandId && node.data.salaryBandId !== foundBandId) {
+        // Update if it's different (including clearing if no band found)
+        if (node.data.salaryBandId !== foundBandId) {
           return {
             ...node,
             data: { ...node.data, salaryBandId: foundBandId }

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateSubBands, calculateNextMidpoint } from './salaryBands';
+import { calculateSubBands, calculateNextMidpoint, sanitizeJobFamilies, type JobFamily } from './salaryBands';
 
 describe('salaryBands utility', () => {
   describe('calculateSubBands', () => {
@@ -41,6 +41,58 @@ describe('salaryBands utility', () => {
 
       expect(learningStartNplus1).toBeCloseTo(exceedingStartN);
       expect(midpointNplus1).toBeCloseTo(126.470588, 5);
+    });
+  });
+
+  describe('sanitizeJobFamilies', () => {
+    it('should remove job titles that are not present in allJobTitles', () => {
+      const jobFamilies: JobFamily[] = [
+        {
+          id: '1',
+          name: 'Engineering',
+          salaryBands: [
+            {
+              id: 'b1',
+              name: 'Senior Engineer',
+              midpoint: 100000,
+              spread: 0.1,
+              isAutoCalculated: false,
+              isLeading: true,
+              jobTitles: ['Software Engineer III', 'Platform Engineer'],
+            },
+          ],
+        },
+      ];
+      const allJobTitles = ['Software Engineer III']; // Platform Engineer is missing
+
+      const sanitized = sanitizeJobFamilies(jobFamilies, allJobTitles);
+
+      expect(sanitized[0].salaryBands[0].jobTitles).toEqual(['Software Engineer III']);
+    });
+
+    it('should handle undefined jobTitles gracefully', () => {
+      const jobFamilies: any[] = [
+        {
+          id: '1',
+          name: 'Engineering',
+          salaryBands: [
+            {
+              id: 'b1',
+              name: 'Senior Engineer',
+              midpoint: 100000,
+              spread: 0.1,
+              isAutoCalculated: false,
+              isLeading: true,
+              // jobTitles is missing
+            },
+          ],
+        },
+      ];
+      const allJobTitles = ['Software Engineer III'];
+
+      const sanitized = sanitizeJobFamilies(jobFamilies as JobFamily[], allJobTitles);
+
+      expect(sanitized[0].salaryBands[0].jobTitles).toEqual([]);
     });
   });
 });

@@ -59,3 +59,13 @@ export function calculatePreviousMidpoint(currentMidpoint: number, spread: numbe
   // Midpoint_N = Midpoint_{N+1} * (1 - 2 * spread) / (1 + spread)
   return (currentMidpoint * (1 - 2 * spread)) / (1 + spread);
 }
+
+export function sanitizeJobFamilies(jobFamilies: JobFamily[], allJobTitles: string[]): JobFamily[] {
+  return jobFamilies.map(family => ({
+    ...family,
+    salaryBands: (family.salaryBands || []).map(band => ({
+      ...band,
+      jobTitles: (band.jobTitles || []).filter(title => allJobTitles.includes(title))
+    }))
+  }));
+}
