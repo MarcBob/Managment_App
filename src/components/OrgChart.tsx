@@ -668,7 +668,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
       
       const duration = isFirstMount.current ? 0 : 400;
       const timer = setTimeout(() => {
-        fitView({ duration, padding: 0.2 });
+        fitView({ duration, padding: 0.1 });
         isFirstMount.current = false;
       }, 50);
       return () => clearTimeout(timer);
@@ -835,7 +835,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
 
         console.log('Bounds:', { minX, minY, maxX, maxY });
 
-        const padding = 50;
+        const padding = 25;
         const bounds = { 
           x: minX - padding, 
           y: minY - padding, 
@@ -848,7 +848,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
           fitView({
             nodes: matchingNodes,
             duration: 800,
-            padding: 2, // Larger padding to avoid max zoom
+            padding: 1, // Larger padding to avoid max zoom
             maxZoom: 0.8
           });
         } else {

@@ -707,13 +707,13 @@ function App() {
         </div>
       </header>
 
-      <main className={data ? "px-4 py-6" : "max-w-7xl mx-auto px-4 py-12"}>
+      <main className={data ? "px-2 py-3" : "max-w-7xl mx-auto px-4 py-12"}>
         {!data ? (
           <div className="max-w-xl mx-auto">
             <FileUpload onDataLoaded={handleDataLoaded} />
           </div>
         ) : (
-          <div className="h-[calc(100vh-112px)]">
+          <div className="h-[calc(100vh-88px)]">
             <div className="h-full min-h-[500px]">
               <OrgChart 
                 key={data.name}
