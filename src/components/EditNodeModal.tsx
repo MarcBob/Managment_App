@@ -419,91 +419,121 @@ export const EditNodeModal = ({
               </datalist>
             </div>
 
-            {jobFamilies.length > 0 && (
-              <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-xl space-y-3">
-                <div className="flex items-center gap-2 text-blue-600 mb-1">
-                  <div className="p-1 bg-blue-100 rounded">
-                    <Users size={14} className="shrink-0" />
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest">Compensation Level</span>
+            <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-xl space-y-4">
+              <div className="flex items-center gap-2 text-blue-600 mb-1">
+                <div className="p-1 bg-blue-100 rounded">
+                  <Users size={14} className="shrink-0" />
                 </div>
-                
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Job Family</label>
-                    <select
-                      className="w-full px-2 py-1.5 text-xs border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-medium"
-                      value={selectedFamilyId}
-                      onChange={(e) => {
-                        setSelectedFamilyId(e.target.value);
-                        setFormData({ ...formData, salaryBandId: '' });
-                      }}
-                    >
-                      <option value="">Select Family...</option>
-                      {jobFamilies.map(f => (
-                        <option key={f.id} value={f.id}>{f.name}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Salary Band</label>
-                    <select
-                      className="w-full px-2 py-1.5 text-xs border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-medium disabled:opacity-50"
-                      value={formData.salaryBandId || ''}
-                      disabled={!selectedFamilyId}
-                      onChange={(e) => setFormData({ ...formData, salaryBandId: e.target.value })}
-                    >
-                      <option value="">Select Band...</option>
-                      {selectedFamilyId && jobFamilies.find(f => f.id === selectedFamilyId)?.salaryBands.map((b: any) => (
-                        <option key={b.id} value={b.id}>{b.name}</option>
-                      ))}
-                    </select>
+                <span className="text-[10px] font-bold uppercase tracking-widest">Compensation</span>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Pay Rate</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
+                      <span className="text-slate-400 font-medium text-sm">€</span>
+                    </div>
+                    <input
+                      type="text"
+                      className="w-full pl-7 pr-3 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-medium"
+                      value={formData.payRate || ''}
+                      onChange={(e) => setFormData({ ...formData, payRate: e.target.value })}
+                      placeholder="e.g. 150000"
+                    />
                   </div>
                 </div>
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Effective Date</label>
+                  <input
+                    type="date"
+                    className="w-full px-3 py-1.5 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-medium"
+                    value={formData.compensationDate || ''}
+                    onChange={(e) => setFormData({ ...formData, compensationDate: e.target.value })}
+                  />
+                </div>
+              </div>
 
-                {formData.salaryBandId && (() => {
-                  const band = jobFamilies.flatMap(f => f.salaryBands).find(b => b.id === formData.salaryBandId);
-                  if (!band) return null;
-                  
-                  let currentSubBandName = '';
-                  if (formData.payRate) {
-                    const pay = parseFloat(formData.payRate.replace(/[^\d.-]/g, ''));
-                    if (!isNaN(pay)) {
-                      const subBands = calculateSubBands(band.midpoint, band.spread);
-                      const matchingSubBand = subBands.find(sb => pay >= sb.start && pay <= sb.end);
-                      if (matchingSubBand) currentSubBandName = matchingSubBand.name;
-                      else if (pay < subBands[0].start) currentSubBandName = 'Below Band';
-                      else if (pay > subBands[subBands.length - 1].end) currentSubBandName = 'Above Band';
+              {jobFamilies.length > 0 && (
+                <>
+                  <div className="w-full h-px bg-blue-100/50 my-2" />
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Job Family</label>
+                      <select
+                        className="w-full px-2 py-1.5 text-xs border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-medium"
+                        value={selectedFamilyId}
+                        onChange={(e) => {
+                          setSelectedFamilyId(e.target.value);
+                          setFormData({ ...formData, salaryBandId: '' });
+                        }}
+                      >
+                        <option value="">Select Family...</option>
+                        {jobFamilies.map(f => (
+                          <option key={f.id} value={f.id}>{f.name}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Salary Band</label>
+                      <select
+                        className="w-full px-2 py-1.5 text-xs border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white font-medium disabled:opacity-50"
+                        value={formData.salaryBandId || ''}
+                        disabled={!selectedFamilyId}
+                        onChange={(e) => setFormData({ ...formData, salaryBandId: e.target.value })}
+                      >
+                        <option value="">Select Band...</option>
+                        {selectedFamilyId && jobFamilies.find(f => f.id === selectedFamilyId)?.salaryBands.map((b: any) => (
+                          <option key={b.id} value={b.id}>{b.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {formData.salaryBandId && (() => {
+                    const band = jobFamilies.flatMap(f => f.salaryBands).find(b => b.id === formData.salaryBandId);
+                    if (!band) return null;
+                    
+                    let currentSubBandName = '';
+                    if (formData.payRate) {
+                      const pay = parseFloat(formData.payRate.replace(/[^\d.-]/g, ''));
+                      if (!isNaN(pay)) {
+                        const subBands = calculateSubBands(band.midpoint, band.spread);
+                        const matchingSubBand = subBands.find(sb => pay >= sb.start && pay <= sb.end);
+                        if (matchingSubBand) currentSubBandName = matchingSubBand.name;
+                        else if (pay < subBands[0].start) currentSubBandName = 'Below Band';
+                        else if (pay > subBands[subBands.length - 1].end) currentSubBandName = 'Above Band';
+                      }
                     }
-                  }
 
-                  return (
-                    <div className="pt-1 flex flex-col gap-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-bold text-slate-500">Range (100% Midpoint)</span>
-                        <div className="flex items-center gap-2">
-                          {currentSubBandName && (
-                            <span className={cn("text-[11px] font-bold px-2 py-0.5 rounded-full", currentSubBandName.includes('Band') ? "text-amber-700 bg-amber-100" : "text-emerald-700 bg-emerald-100")}>
-                              {currentSubBandName}
+                    return (
+                      <div className="pt-1 flex flex-col gap-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold text-slate-500">Range (100% Midpoint)</span>
+                          <div className="flex items-center gap-2">
+                            {currentSubBandName && (
+                              <span className={cn("text-[11px] font-bold px-2 py-0.5 rounded-full", currentSubBandName.includes('Band') ? "text-amber-700 bg-amber-100" : "text-emerald-700 bg-emerald-100")}>
+                                {currentSubBandName}
+                              </span>
+                            )}
+                            <span className="text-[11px] font-black text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">
+                              €{Math.round(band.midpoint).toLocaleString()}
                             </span>
-                          )}
-                          <span className="text-[11px] font-black text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">
-                            €{Math.round(band.midpoint).toLocaleString()}
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold text-slate-500 italic">Expected Spread: ±{Math.round(band.spread * 200)}%</span>
+                          <span className="text-[10px] font-medium text-slate-400">
+                            €{Math.round(band.midpoint * (1 - 2 * band.spread)).toLocaleString()} - €{Math.round(band.midpoint * (1 + 2 * band.spread)).toLocaleString()}
                           </span>
                         </div>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-bold text-slate-500 italic">Expected Spread: ±{Math.round(band.spread * 200)}%</span>
-                        <span className="text-[10px] font-medium text-slate-400">
-                          €{Math.round(band.midpoint * (1 - 2 * band.spread)).toLocaleString()} - €{Math.round(band.midpoint * (1 + 2 * band.spread)).toLocaleString()}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })()}
-              </div>
-            )}
+                    );
+                  })()}
+                </>
+              )}
+            </div>
 
             <div className="space-y-1">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Direct Manager</label>
@@ -584,32 +614,7 @@ export const EditNodeModal = ({
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Compensation Date</label>
-                <input
-                  type="date"
-                  className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                  value={formData.compensationDate || ''}
-                  onChange={(e) => setFormData({ ...formData, compensationDate: e.target.value })}
-                />
-              </div>
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Pay Rate</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-slate-400 font-medium">€</span>
-                  </div>
-                  <input
-                    type="text"
-                    className="w-full pl-8 pr-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                    value={formData.payRate || ''}
-                    onChange={(e) => setFormData({ ...formData, payRate: e.target.value })}
-                    placeholder="e.g. 150000"
-                  />
-                </div>
-              </div>
-            </div>
+
 
             <div className="pt-4 flex flex-col gap-3">
               <div className="flex gap-3">
