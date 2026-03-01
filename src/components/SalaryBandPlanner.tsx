@@ -1,18 +1,23 @@
 import React, { useState, useRef } from 'react';
 import { type JobFamily, type SalaryBand, calculateSubBands, calculateNextMidpoint, calculatePreviousMidpoint, sanitizeJobFamilies } from '../utils/salaryBands';
-import { Plus, Trash2, ChevronRight, Calculator, BarChart3, ChevronDown, Layers, Anchor, X, Tag, Download, Upload } from 'lucide-react';
+import { Plus, Trash2, ChevronRight, Calculator, BarChart3, ChevronDown, Layers, Anchor, X, Tag, Download, Upload, Users } from 'lucide-react';
+
+import { type OrgNode } from '../utils/csvParser';
 
 interface SalaryBandPlannerProps {
   jobFamilies: JobFamily[];
   allJobTitles: string[];
+  allNodes?: OrgNode[];
   onDataChange: (jobFamilies: JobFamily[]) => void;
 }
 
 interface JobFamilyOverviewProps {
   activeFamily: JobFamily;
+  showDistribution?: boolean;
+  allNodes?: OrgNode[];
 }
 
-const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily }) => {
+const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily, showDistribution, allNodes = [] }) => {
   const bands = activeFamily.salaryBands;
   if (bands.length === 0) return null;
 
@@ -31,6 +36,32 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily }) =
 
   // Simple sort by midpoint to show progression
   const sortedBands = [...bandData].sort((a, b) => a.midpoint - b.midpoint);
+  
+  // Calculate distribution data if enabled
+  const getSubBandCounts = (bandId: string, subBandIndex: number) => {
+    if (!showDistribution) return 0;
+    
+    // Find people with this specific band ID
+    const peopleInBand = allNodes.filter(n => n.data.salaryBandId === bandId && n.data.payRate);
+    if (peopleInBand.length === 0) return 0;
+
+    const band = bandData.find(b => b.id === bandId);
+    if (!band) return 0;
+
+    const subBand = band.subBands[subBandIndex];
+    
+    return peopleInBand.filter(p => {
+      const pay = parseFloat(p.data.payRate!.replace(/[^\d.-]/g, ''));
+      if (isNaN(pay)) return false;
+      
+      // Handle edge cases for first and last sub-band bounds
+      if (subBandIndex === 0 && pay < subBand.start) return false; // Below band
+      if (subBandIndex === 3 && pay > subBand.end) return false; // Above band
+      
+      // Standard inclusion
+      return pay >= subBand.start && pay <= subBand.end;
+    }).length;
+  };
 
   return (
     <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-6 mb-8 overflow-x-auto">
@@ -65,18 +96,24 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily }) =
               }}
             >
               {band.subBands.map((sub, sIdx) => (
-                <div 
-                  key={sub.name}
-                  className={`h-full border-r last:border-r-0 border-white/20 relative group/sub transition-all hover:brightness-110 ${
-                    sIdx === 0 ? 'bg-blue-100 rounded-l-[5px]' : 
-                    sIdx === 1 ? 'bg-blue-200' : 
-                    sIdx === 2 ? 'bg-blue-300' : 
-                    'bg-blue-400 rounded-r-[5px]'
-                  }`}
-                  style={{ width: '25%' }}
-                >
-                  {/* Tooltip */}
-                                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/sub:block z-50 pointer-events-none animate-in fade-in zoom-in-95 duration-200">
+                                  <div 
+                                    key={sub.name}
+                                    className={`h-full border-r last:border-r-0 border-white/20 relative group/sub transition-all hover:brightness-110 flex items-center justify-center ${
+                                      sIdx === 0 ? 'bg-blue-100 rounded-l-[5px]' : 
+                                      sIdx === 1 ? 'bg-blue-200' : 
+                                      sIdx === 2 ? 'bg-blue-300' : 
+                                      'bg-blue-400 rounded-r-[5px]'
+                                    }`}
+                                    style={{ width: '25%' }}
+                                  >
+                                    {showDistribution && getSubBandCounts(band.id, sIdx) > 0 && (
+                                      <div className="absolute inset-1 bg-white/40 rounded flex items-center justify-center pointer-events-none">
+                                        <span className="text-[10px] font-bold text-blue-900 mix-blend-multiply drop-shadow-sm">
+                                          {getSubBandCounts(band.id, sIdx)}
+                                        </span>
+                                      </div>
+                                    )}
+                                    {/* Tooltip */}                                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/sub:block z-50 pointer-events-none animate-in fade-in zoom-in-95 duration-200">
                                         <div className="bg-slate-800 text-white text-[10px] py-1.5 px-2.5 rounded shadow-xl whitespace-nowrap flex flex-col items-center">
                                           <span className="font-black text-[9px] text-slate-400 uppercase tracking-widest mb-0.5">{band.name} • {sub.name}</span>
                                           <span className="font-bold font-mono">
@@ -368,11 +405,12 @@ const BandNode: React.FC<BandNodeProps> = ({
   );
 };
 
-export const SalaryBandPlanner: React.FC<SalaryBandPlannerProps> = ({ jobFamilies, allJobTitles, onDataChange }) => {
+export const SalaryBandPlanner: React.FC<SalaryBandPlannerProps> = ({ jobFamilies, allJobTitles, allNodes = [], onDataChange }) => {
   const [activeFamilyId, setActiveFamilyId] = useState<string | null>(
     jobFamilies.length > 0 ? jobFamilies[0].id : null
   );
   const [isOverviewCollapsed, setIsOverviewCollapsed] = useState(false);
+  const [showDistribution, setShowDistribution] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleExport = () => {
@@ -729,24 +767,42 @@ export const SalaryBandPlanner: React.FC<SalaryBandPlannerProps> = ({ jobFamilie
               </div>
             </div>
 
-            {/* Overview Section */}
-            {activeFamily.salaryBands.length > 0 && (
-              <div className="mb-12">
-                <button 
-                  onClick={() => setIsOverviewCollapsed(!isOverviewCollapsed)}
-                  className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 hover:text-slate-600 transition-colors"
-                >
-                  {isOverviewCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                  Salary Progression Overview
-                  <Layers className="h-3.5 w-3.5 ml-1" />
-                </button>
-                
-                {!isOverviewCollapsed && (
-                  <JobFamilyOverview activeFamily={activeFamily} />
-                )}
-              </div>
-            )}
-
+                          {/* Overview Section */}
+                          {activeFamily.salaryBands.length > 0 && (
+                            <div className="mb-12">
+                              <div className="flex items-center justify-between mb-4">
+                                <button 
+                                  onClick={() => setIsOverviewCollapsed(!isOverviewCollapsed)}
+                                  className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-slate-600 transition-colors"
+                                >
+                                  {isOverviewCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                                  Salary Progression Overview
+                                  <Layers className="h-3.5 w-3.5 ml-1" />
+                                </button>
+                                {!isOverviewCollapsed && (
+                                  <button
+                                    onClick={() => setShowDistribution(!showDistribution)}
+                                    className={`flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg transition-colors ${
+                                      showDistribution 
+                                        ? 'bg-blue-100 text-blue-700' 
+                                        : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                                    }`}
+                                  >
+                                    <Users className="h-3.5 w-3.5" />
+                                    Show Distribution
+                                  </button>
+                                )}
+                              </div>
+                              
+                              {!isOverviewCollapsed && (
+                                <JobFamilyOverview 
+                                  activeFamily={activeFamily} 
+                                  showDistribution={showDistribution}
+                                  allNodes={allNodes}
+                                />
+                              )}
+                            </div>
+                          )}
             <div className="space-y-6">
               {activeFamily.salaryBands
                 .filter(b => !b.parentId)

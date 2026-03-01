@@ -830,14 +830,14 @@ function App() {
                   jobFamilies={data.jobFamilies || []}
                 />
               </div>
-            ) : (
-              <SalaryBandPlanner 
-                jobFamilies={data.jobFamilies || []}
-                allJobTitles={Array.from(new Set(data.nodes.map(n => n.data.jobTitle).filter(Boolean))).sort()}
-                onDataChange={(jobFamilies) => handleDataChange({ jobFamilies })}
-              />
-            )}
-
+                          ) : (
+                            <SalaryBandPlanner 
+                              jobFamilies={data.jobFamilies || []}
+                              allJobTitles={Array.from(new Set(data.nodes.map(n => n.data.jobTitle).filter(Boolean))).sort()}
+                              allNodes={data.nodes}
+                              onDataChange={(jobFamilies) => handleDataChange({ jobFamilies })}
+                            />
+                          )}
             <StatsModal 
               isOpen={isStatsModalOpen}
               onClose={() => setIsStatsModalOpen(false)}
