@@ -5134,7 +5134,7 @@
       "target": "empty-1772230037977-stpiis1hn"
     }
   ],
-  "lastUpdated": "2026-02-28T19:47:25.016Z",
+  "lastUpdated": "2026-03-01T17:15:24.845Z",
   "viewState": {
     "maxDepth": 7,
     "leafColumns": 2,
@@ -5361,5 +5361,120 @@
     "teamsShortcut": "meta+m",
     "companyDomain": "dkbcodefactory.com",
     "outlookBaseUrl": "https://outlook.office.com/mail/deeplink/compose"
-  }
+  },
+  "jobFamilies": [
+    {
+      "id": "6009d1f8-3400-4462-9adf-1d67128b68af",
+      "name": "Engineering",
+      "salaryBands": [
+        {
+          "id": "037ecca4-ca70-4f64-b6ec-f67c03a5e029",
+          "name": "Junior Engineer",
+          "midpoint": 55000,
+          "spread": 0.075,
+          "isAutoCalculated": false
+        },
+        {
+          "id": "d5354bf2-ecc8-47f7-9189-3b913af296ab",
+          "name": "Mid Engineer",
+          "midpoint": 69558.82352941176,
+          "spread": 0.075,
+          "isAutoCalculated": true,
+          "parentId": "037ecca4-ca70-4f64-b6ec-f67c03a5e029"
+        },
+        {
+          "id": "b997533d-278a-48da-a95f-48f584aa58b9",
+          "name": "Senior Engineer",
+          "midpoint": 87971.45328719722,
+          "spread": 0.075,
+          "isAutoCalculated": true,
+          "parentId": "d5354bf2-ecc8-47f7-9189-3b913af296ab"
+        },
+        {
+          "id": "a1f6916c-cc34-47ca-906c-4c2c82377934",
+          "name": "Engineering Manager",
+          "midpoint": 111258.0144514553,
+          "spread": 0.075,
+          "isAutoCalculated": true,
+          "parentId": "b997533d-278a-48da-a95f-48f584aa58b9"
+        },
+        {
+          "id": "c59e200a-e5b0-4855-9618-1adada058b4e",
+          "name": "Principal Engineer",
+          "midpoint": 111258.0144514553,
+          "spread": 0.075,
+          "isAutoCalculated": true,
+          "parentId": "b997533d-278a-48da-a95f-48f584aa58b9"
+        },
+        {
+          "id": "0fa457ca-125b-4133-a566-1b30bc36cc60",
+          "name": "Chapter Lead",
+          "midpoint": 140708.66533566406,
+          "spread": 0.075,
+          "isAutoCalculated": true,
+          "parentId": "a1f6916c-cc34-47ca-906c-4c2c82377934",
+          "isLeading": false
+        },
+        {
+          "id": "18ffd7a3-bfbb-45cb-ab73-fb49cc37eeb6",
+          "name": "Head of Engineering",
+          "midpoint": 177955.0767480457,
+          "spread": 0.075,
+          "isAutoCalculated": true,
+          "parentId": "0fa457ca-125b-4133-a566-1b30bc36cc60",
+          "isLeading": false
+        }
+      ]
+    },
+    {
+      "id": "ebac3899-1380-451d-889e-b1ff78392057",
+      "name": "Design",
+      "salaryBands": [
+        {
+          "id": "29198d33-da1e-46b2-9d21-31fcecd84b2d",
+          "name": "Junior Designer",
+          "midpoint": 49813.95348837209,
+          "spread": 0.075,
+          "isAutoCalculated": true,
+          "isLeading": false
+        },
+        {
+          "id": "6b6a14f3-6b33-42a5-a0b0-80c16606a8fb",
+          "name": "Mid Designer",
+          "midpoint": 63000,
+          "spread": 0.075,
+          "isAutoCalculated": false,
+          "parentId": "29198d33-da1e-46b2-9d21-31fcecd84b2d",
+          "isLeading": true
+        },
+        {
+          "id": "611ab231-455d-4958-bcee-b16f7322b4db",
+          "name": "Senior Designer",
+          "midpoint": 79676.4705882353,
+          "spread": 0.075,
+          "isAutoCalculated": true,
+          "parentId": "6b6a14f3-6b33-42a5-a0b0-80c16606a8fb",
+          "isLeading": false
+        },
+        {
+          "id": "2f3bcf42-63c6-4b88-93a3-59fcc00ed8c2",
+          "name": "Design Manager",
+          "midpoint": 100767.3010380623,
+          "spread": 0.075,
+          "isAutoCalculated": true,
+          "parentId": "611ab231-455d-4958-bcee-b16f7322b4db",
+          "isLeading": false
+        },
+        {
+          "id": "f355299b-3b8f-467d-83a5-fe318fdf4f25",
+          "name": "Principal Designer",
+          "midpoint": 100767.3010380623,
+          "spread": 0.075,
+          "isAutoCalculated": true,
+          "parentId": "611ab231-455d-4958-bcee-b16f7322b4db",
+          "isLeading": false
+        }
+      ]
+    }
+  ]
 }

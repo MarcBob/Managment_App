@@ -205,7 +205,7 @@ export const importRecruiterViewFromCsv = (
   );
 
   // 2. Parse the new recruiter CSV
-  const { nodes: newEmptyNodes, edges: newEdges } = parseOrgCsv(csvContent);
+  const { nodes: newEmptyNodes } = parseOrgCsv(csvContent);
 
   // 3. Ensure all imported nodes are marked as EMPTY (just in case)
   newEmptyNodes.forEach(node => {

@@ -45,7 +45,6 @@ const nodeHeight = 150;
 const horizontalSpacing = 50;
 const verticalSpacing = 50;
 
-const DEFAULT_NODE_COLOR = '#ffffff';
 const DEFAULT_CONNECTION_COLOR = '#94a3b8';
 const DEFAULT_BACKGROUND_COLOR = '#f8fafc';
 
@@ -899,7 +898,7 @@ const OrgChartInner: React.FC<OrgChartProps> = ({
               )}
             </div>
           </Panel>
-          <Background color={connectionColor} gap={20} opacity={0.2} />
+          <Background color={connectionColor} gap={20} />
           <Controls />
           <Panel position="top-right" className="bg-white p-2 rounded-lg shadow-md border border-slate-200 flex gap-2">
             <button

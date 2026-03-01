@@ -3,11 +3,13 @@ import { FileUpload } from './components/FileUpload';
 import { OrgChart } from './components/OrgChart';
 import { EditableTitle } from './components/EditableTitle';
 import { StatsModal } from './components/StatsModal';
+import { SalaryBandPlanner } from './components/SalaryBandPlanner';
 import { parseOrgCsv, exportRecruiterViewToCsv, importRecruiterViewFromCsv, updatePlanWithCsv } from './utils/csvParser';
 import type { OrgNode, OrgEdge } from './utils/csvParser';
 import type { LeadershipLayer } from './utils/leadershipLayers';
 import type { NodeFilter, FilterGroup } from './utils/nodeFilters';
-import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus, FileUp, Trash2, Download, Upload } from 'lucide-react';
+import type { JobFamily } from './utils/salaryBands';
+import { CloudOff, RefreshCw, CheckCircle2, FolderOpen, Plus, FileUp, Trash2, Download, Upload, LayoutPanelLeft, BarChart3 } from 'lucide-react';
 import './App.css';
 
 const API_URL = 'http://localhost:3001/api';
@@ -15,6 +17,7 @@ const LOCAL_STORAGE_KEY = 'org-planner-state';
 const CURRENT_PLAN_KEY = 'org-planner-current-plan';
 
 type SaveStatus = 'saved' | 'saving' | 'offline' | 'error';
+type AppView = 'chart' | 'salary';
 
 interface ViewState {
   maxDepth?: number;
@@ -39,6 +42,7 @@ interface PlanData {
   edges: OrgEdge[];
   lastUpdated?: string;
   viewState?: ViewState;
+  jobFamilies?: JobFamily[];
 }
 
 // Interface for old schema during migration
@@ -71,6 +75,7 @@ function App() {
   const [isRecruiterMode, setIsRecruiterMode] = useState(false);
   const [forceFitView, setForceFitView] = useState(false);
   const [isPlanMenuOpen, setIsPlanMenuOpen] = useState(false);
+  const [currentView, setCurrentView] = useState<AppView>('chart');
   const planMenuRef = useRef<HTMLDivElement>(null);
   const planMenuButtonRef = useRef<HTMLButtonElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
@@ -638,6 +643,32 @@ function App() {
                 onChange={handleRename}
               />
               {data && (
+                <div className="flex items-center bg-slate-100 rounded-lg p-1 border border-slate-200">
+                  <button
+                    onClick={() => setCurrentView('chart')}
+                    className={`flex items-center gap-2 px-3 py-1 rounded-md text-xs font-bold transition-all ${
+                      currentView === 'chart' 
+                        ? 'bg-white text-blue-600 shadow-sm' 
+                        : 'text-slate-500 hover:text-slate-700'
+                    }`}
+                  >
+                    <LayoutPanelLeft className="h-3.5 w-3.5" />
+                    ORG CHART
+                  </button>
+                  <button
+                    onClick={() => setCurrentView('salary')}
+                    className={`flex items-center gap-2 px-3 py-1 rounded-md text-xs font-bold transition-all ${
+                      currentView === 'salary' 
+                        ? 'bg-white text-blue-600 shadow-sm' 
+                        : 'text-slate-500 hover:text-slate-700'
+                    }`}
+                  >
+                    <BarChart3 className="h-3.5 w-3.5" />
+                    SALARY BANDS
+                  </button>
+                </div>
+              )}
+              {data && (
                 <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">
                   {saveStatus === 'saving' && <RefreshCw className="h-3.5 w-3.5 animate-spin text-blue-500" />}
                   {saveStatus === 'saved' && <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />}
@@ -714,19 +745,26 @@ function App() {
           </div>
         ) : (
           <div className="h-[calc(100vh-88px)]">
-            <div className="h-full min-h-[500px]">
-              <OrgChart 
-                key={data.name}
-                initialNodes={data.nodes} 
-                initialEdges={data.edges}
-                initialViewState={data.viewState}
-                onDataChange={handleDataChange}
-                isRecruiterMode={isRecruiterMode}
-                availablePlans={availablePlans}
-                onImportSettings={handleImportSettings}
-                forceFitView={forceFitView}
+            {currentView === 'chart' ? (
+              <div className="h-full min-h-[500px]">
+                <OrgChart 
+                  key={data.name}
+                  initialNodes={data.nodes} 
+                  initialEdges={data.edges}
+                  initialViewState={data.viewState}
+                  onDataChange={handleDataChange}
+                  isRecruiterMode={isRecruiterMode}
+                  availablePlans={availablePlans}
+                  onImportSettings={handleImportSettings}
+                  forceFitView={forceFitView}
+                />
+              </div>
+            ) : (
+              <SalaryBandPlanner 
+                jobFamilies={data.jobFamilies || []}
+                onDataChange={(jobFamilies) => handleDataChange({ jobFamilies })}
               />
-            </div>
+            )}
 
             <StatsModal 
               isOpen={isStatsModalOpen}

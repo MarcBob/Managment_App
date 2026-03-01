@@ -12,6 +12,8 @@
 
 ## UI Structure
 - Consolidated header: All main controls (Plan switcher, Title, Recruiter Mode, Stats) are in the single top header to maximize vertical space for the org chart.
+- **Salary Band Planning:** Integrated a new screen to model job families, career levels, and salary bands. Supports branching paths (Management vs IC) and auto-calculation of midpoints based on configurable spreads.
+
 ---
 ## Tools
 - React Flow for graph visualization.

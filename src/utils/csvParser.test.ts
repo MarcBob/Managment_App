@@ -169,11 +169,8 @@ New,Person,CEO,,new@test.com,,FILLED`;
     const newCsv = `First Name,Last Name,Job Title,Team,Work Email,Supervisor name,Status
 CEO,Boss,CEO,,ceo@test.com,,FILLED`;
 
-    const { nodes, edges } = updatePlanWithCsv(nestedNodes, nestedEdges, newCsv);
+    const { edges } = updatePlanWithCsv(nestedNodes, nestedEdges, newCsv);
 
-    const emptyEm = nodes.find(n => n.id === 'empty-em')!;
-    const emptyEng = nodes.find(n => n.id === 'empty-eng')!;
-    
     // empty-eng should STILL be under empty-em
     const engEdge = edges.find(e => e.target === 'empty-eng');
     expect(engEdge?.source).toBe('empty-em');

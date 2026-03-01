@@ -9,9 +9,14 @@ Build a web application to plan and visualize an engineering organization. The a
 - [x] Phase 3: Interactivity & Planning Features
 - [x] Phase 4: Refinement & Export
 - [x] Phase 5: Persistence & Multi-Plan Management
-    - [x] Multiple plan storage on backend.
-    - [x] Editable plan title in UI (Google Docs style).
-    - [x] Plan switcher/manager UI.
+- [x] Phase 6: Salary Band Planning
+    - [x] Data model for Job Families and Salary Bands.
+    - [x] CRUD for Job Families.
+    - [x] Career path branching (Management vs IC).
+    - [x] Sub-band calculation logic (Learning, Fulfilling, Mastering, Exceeding).
+    - [x] Auto-calculation of midpoints for progression.
+    - [x] Visualization of salary bands.
+    - [x] Bidirectional sync with Leading Node (Anchor) support.
 
 ## Tech Stack
 - **Frontend:** React (TypeScript)
