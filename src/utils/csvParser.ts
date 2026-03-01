@@ -12,6 +12,8 @@ export interface OrgNodeData {
   exitDate?: string;
   probationEndDate?: string;
   salaryBandId?: string;
+  payRate?: string;
+  compensationDate?: string;
 }
 
 export interface OrgNode {
@@ -102,6 +104,8 @@ export const parseOrgCsv = (csvString: string) => {
         startDate: normalizeDate(row['Hire Date'] || row['Start Date'] || ''),
         exitDate: normalizeDate(row['Contract Termination Date'] || row['Exit Date'] || ''),
         probationEndDate: normalizeDate(row['Probation Period Ends'] || ''),
+        payRate: row['Pay rate'] || '',
+        compensationDate: normalizeDate(row['Compensation: Date'] || ''),
       },
       position: { x: 0, y: 0 },
     });
@@ -155,6 +159,8 @@ export const exportToCsv = (nodes: OrgNode[], edges: OrgEdge[]) => {
       'Start Date': node.data.startDate || '',
       'Exit Date': node.data.exitDate || '',
       'Probation Period Ends': node.data.probationEndDate || '',
+      'Pay rate': node.data.payRate || '',
+      'Compensation: Date': node.data.compensationDate || '',
     };
   });
 
@@ -187,6 +193,8 @@ export const exportRecruiterViewToCsv = (nodes: OrgNode[], edges: OrgEdge[]) => 
       'Start Date': node.data.startDate || '',
       'Exit Date': node.data.exitDate || '',
       'Probation Period Ends': node.data.probationEndDate || '',
+      'Pay rate': node.data.payRate || '',
+      'Compensation: Date': node.data.compensationDate || '',
     };
   });
 

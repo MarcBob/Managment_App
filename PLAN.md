@@ -17,6 +17,7 @@ Build a web application to plan and visualize an engineering organization. The a
     - [x] Auto-calculation of midpoints for progression.
     - [x] Visualization of salary bands.
     - [x] Bidirectional sync with Leading Node (Anchor) support.
+    - [x] Extract and visualize compensation data (Pay Rate, Compensation Date, Salary Sub-band) from imported CSVs.
 
 ## Tech Stack
 - **Frontend:** React (TypeScript)

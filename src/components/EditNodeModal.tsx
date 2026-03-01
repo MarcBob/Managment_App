@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X, Trash2, AlertCircle, MessageSquare, ChevronDown, Users } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { type JobFamily } from '../utils/salaryBands';
+import { type JobFamily, calculateSubBands } from '../utils/salaryBands';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -465,13 +465,33 @@ export const EditNodeModal = ({
                 {formData.salaryBandId && (() => {
                   const band = jobFamilies.flatMap(f => f.salaryBands).find(b => b.id === formData.salaryBandId);
                   if (!band) return null;
+                  
+                  let currentSubBandName = '';
+                  if (formData.payRate) {
+                    const pay = parseFloat(formData.payRate.replace(/[^\d.-]/g, ''));
+                    if (!isNaN(pay)) {
+                      const subBands = calculateSubBands(band.midpoint, band.spread);
+                      const matchingSubBand = subBands.find(sb => pay >= sb.start && pay <= sb.end);
+                      if (matchingSubBand) currentSubBandName = matchingSubBand.name;
+                      else if (pay < subBands[0].start) currentSubBandName = 'Below Band';
+                      else if (pay > subBands[subBands.length - 1].end) currentSubBandName = 'Above Band';
+                    }
+                  }
+
                   return (
                     <div className="pt-1 flex flex-col gap-2">
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] font-bold text-slate-500">Range (100% Midpoint)</span>
-                        <span className="text-[11px] font-black text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">
-                          ${Math.round(band.midpoint).toLocaleString()}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          {currentSubBandName && (
+                            <span className={cn("text-[11px] font-bold px-2 py-0.5 rounded-full", currentSubBandName.includes('Band') ? "text-amber-700 bg-amber-100" : "text-emerald-700 bg-emerald-100")}>
+                              {currentSubBandName}
+                            </span>
+                          )}
+                          <span className="text-[11px] font-black text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">
+                            ${Math.round(band.midpoint).toLocaleString()}
+                          </span>
+                        </div>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] font-bold text-slate-500 italic">Expected Spread: ±{Math.round(band.spread * 200)}%</span>
@@ -562,6 +582,28 @@ export const EditNodeModal = ({
                 value={formData.probationEndDate || ''}
                 onChange={(e) => setFormData({ ...formData, probationEndDate: e.target.value })}
               />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Compensation Date</label>
+                <input
+                  type="date"
+                  className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  value={formData.compensationDate || ''}
+                  onChange={(e) => setFormData({ ...formData, compensationDate: e.target.value })}
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Pay Rate</label>
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  value={formData.payRate || ''}
+                  onChange={(e) => setFormData({ ...formData, payRate: e.target.value })}
+                  placeholder="e.g. 150000"
+                />
+              </div>
             </div>
 
             <div className="pt-4 flex flex-col gap-3">
