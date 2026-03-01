@@ -489,14 +489,14 @@ export const EditNodeModal = ({
                             </span>
                           )}
                           <span className="text-[11px] font-black text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full">
-                            ${Math.round(band.midpoint).toLocaleString()}
+                            €{Math.round(band.midpoint).toLocaleString()}
                           </span>
                         </div>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] font-bold text-slate-500 italic">Expected Spread: ±{Math.round(band.spread * 200)}%</span>
                         <span className="text-[10px] font-medium text-slate-400">
-                          ${Math.round(band.midpoint * (1 - 2 * band.spread)).toLocaleString()} - ${Math.round(band.midpoint * (1 + 2 * band.spread)).toLocaleString()}
+                          €{Math.round(band.midpoint * (1 - 2 * band.spread)).toLocaleString()} - €{Math.round(band.midpoint * (1 + 2 * band.spread)).toLocaleString()}
                         </span>
                       </div>
                     </div>

@@ -40,15 +40,14 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily }) =
           {[0, 0.25, 0.5, 0.75, 1].map(pct => {
             const val = minSalary + totalRange * pct;
             return (
-              <div 
-                key={pct} 
-                className="absolute top-0 flex flex-col items-center -translate-x-1/2"
-                style={{ left: `${pct * 100}%` }}
-              >
-                <div className="h-2 w-px bg-slate-300" />
-                <span className="text-[10px] font-bold text-slate-400 mt-1">${Math.round(val).toLocaleString()}</span>
-              </div>
-            );
+                              <div 
+                                key={pct} 
+                                className="absolute top-0 flex flex-col items-center -translate-x-1/2"
+                                style={{ left: `${pct * 100}%` }}
+                              >
+                                <div className="h-2 w-px bg-slate-300" />
+                                <span className="text-[10px] font-bold text-slate-400 mt-1">€{Math.round(val).toLocaleString()}</span>
+                              </div>            );
           })}
         </div>
 
@@ -77,16 +76,15 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily }) =
                   style={{ width: '25%' }}
                 >
                   {/* Tooltip */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/sub:block z-50 pointer-events-none animate-in fade-in zoom-in-95 duration-200">
-                    <div className="bg-slate-800 text-white text-[10px] py-1.5 px-2.5 rounded shadow-xl whitespace-nowrap flex flex-col items-center">
-                      <span className="font-black text-[9px] text-slate-400 uppercase tracking-widest mb-0.5">{band.name} • {sub.name}</span>
-                      <span className="font-bold font-mono">
-                        ${Math.round(sub.start).toLocaleString()} - ${Math.round(sub.end).toLocaleString()}
-                      </span>
-                    </div>
-                    <div className="w-2 h-2 bg-slate-800 rotate-45 absolute left-1/2 -translate-x-1/2 -bottom-1" />
-                  </div>
-                </div>
+                                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/sub:block z-50 pointer-events-none animate-in fade-in zoom-in-95 duration-200">
+                                        <div className="bg-slate-800 text-white text-[10px] py-1.5 px-2.5 rounded shadow-xl whitespace-nowrap flex flex-col items-center">
+                                          <span className="font-black text-[9px] text-slate-400 uppercase tracking-widest mb-0.5">{band.name} • {sub.name}</span>
+                                          <span className="font-bold font-mono">
+                                            €{Math.round(sub.start).toLocaleString()} - €{Math.round(sub.end).toLocaleString()}
+                                          </span>
+                                        </div>
+                                        <div className="w-2 h-2 bg-slate-800 rotate-45 absolute left-1/2 -translate-x-1/2 -bottom-1" />
+                                      </div>                </div>
               ))}
             </div>
           </div>
@@ -185,14 +183,13 @@ const BandCard: React.FC<BandCardProps> = ({
 
       <div className="p-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Midpoint (100%)</label>
-            <div className="flex items-center gap-2">
-              <span className="text-slate-400 font-medium">$</span>
-              <input 
-                type="number"
-                value={Math.round(band.midpoint) || ''}
-                disabled={band.isAutoCalculated}
+                      <div>
+                        <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Midpoint (100%)</label>
+                        <div className="flex items-center gap-2">
+                          <span className="text-slate-400 font-medium">€</span>
+                          <input 
+                            type="number"
+                            value={Math.round(band.midpoint) || ''}                disabled={band.isAutoCalculated}
                 onChange={(e) => onUpdateBand(band.id, { midpoint: parseFloat(e.target.value) || 0 })}
                 className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-800 font-semibold focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none disabled:opacity-50"
               />
@@ -267,14 +264,13 @@ const BandCard: React.FC<BandCardProps> = ({
           </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="flex justify-between items-end mb-1">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Salary Sub-Bands</span>
-            <span className="text-xs font-bold text-slate-700">
-              ${Math.round(subBands[0].start).toLocaleString()} - ${Math.round(subBands[3].end).toLocaleString()}
-            </span>
-          </div>
-          <div className="h-16 w-full flex rounded-xl overflow-hidden border border-slate-200 shadow-inner bg-slate-100">
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-end mb-1">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Salary Sub-Bands</span>
+                      <span className="text-xs font-bold text-slate-700">
+                        €{Math.round(subBands[0].start).toLocaleString()} - €{Math.round(subBands[3].end).toLocaleString()}
+                      </span>
+                    </div>          <div className="h-16 w-full flex rounded-xl overflow-hidden border border-slate-200 shadow-inner bg-slate-100">
             {subBands.map((sub, idx) => (
               <div 
                 key={sub.name}
@@ -286,17 +282,16 @@ const BandCard: React.FC<BandCardProps> = ({
                 }`}
                 style={{ width: '25%' }}
               >
-                <span className="text-[10px] font-black uppercase text-blue-900/40 tracking-widest mb-1">{sub.name}</span>
-                <div className="flex flex-col items-center leading-tight">
-                  <span className="text-[10px] font-bold text-blue-900">
-                    ${Math.round(sub.start).toLocaleString()}
-                  </span>
-                  <div className="w-4 h-px bg-blue-900/20 my-0.5" />
-                  <span className="text-[10px] font-bold text-blue-900">
-                    ${Math.round(sub.end).toLocaleString()}
-                  </span>
-                </div>
-              </div>
+                                  <span className="text-[10px] font-black uppercase text-blue-900/40 tracking-widest mb-1">{sub.name}</span>
+                                  <div className="flex flex-col items-center leading-tight">
+                                    <span className="text-[10px] font-bold text-blue-900">
+                                      €{Math.round(sub.start).toLocaleString()}
+                                    </span>
+                                    <div className="w-4 h-px bg-blue-900/20 my-0.5" />
+                                    <span className="text-[10px] font-bold text-blue-900">
+                                      €{Math.round(sub.end).toLocaleString()}
+                                    </span>
+                                  </div>              </div>
             ))}
           </div>
         </div>
