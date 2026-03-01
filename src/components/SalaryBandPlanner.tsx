@@ -60,12 +60,38 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily, sho
       const pay = parseFloat(p.data.payRate!.replace(/[^\d.-]/g, ''));
       if (isNaN(pay)) return false;
       
-      // Handle edge cases for first and last sub-band bounds
-      if (subBandIndex === 0 && pay < subBand.start) return false; // Below band
-      if (subBandIndex === 3 && pay > subBand.end) return false; // Above band
-      
-      // Standard inclusion
+      // Standard inclusion within sub-band bounds
+      // We don't include out-of-band people in the first/last sub-bands anymore
       return pay >= subBand.start && pay <= subBand.end;
+    }).length;
+  };
+
+  const getOutOfBandCounts = (bandId: string, type: 'below' | 'above') => {
+    if (!showDistribution) return 0;
+
+    const band = bandData.find(b => b.id === bandId);
+    if (!band) return 0;
+    
+    // Find people with this specific band ID OR matching job title
+    const peopleInBand = allNodes.filter(n => {
+      if (!n.data.payRate) return false;
+      if (n.data.salaryBandId === bandId) return true;
+      if (!n.data.salaryBandId && n.data.jobTitle && band.jobTitles?.includes(n.data.jobTitle)) return true;
+      return false;
+    });
+
+    if (peopleInBand.length === 0) return 0;
+
+    const minBandSalary = band.subBands[0].start;
+    const maxBandSalary = band.subBands[3].end;
+    
+    return peopleInBand.filter(p => {
+      const pay = parseFloat(p.data.payRate!.replace(/[^\d.-]/g, ''));
+      if (isNaN(pay)) return false;
+      
+      if (type === 'below') return pay < minBandSalary;
+      if (type === 'above') return pay > maxBandSalary;
+      return false;
     }).length;
   };
 
@@ -89,11 +115,28 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily, sho
         </div>
 
         {/* Level Bars */}
-        {sortedBands.map((band) => (
+        {sortedBands.map((band) => {
+          const countBelow = getOutOfBandCounts(band.id, 'below');
+          const countAbove = getOutOfBandCounts(band.id, 'above');
+          
+          return (
           <div key={band.id} className="relative h-8 group">
             <div className="absolute left-0 -translate-x-full pr-4 w-32 text-right truncate text-[10px] font-bold text-slate-500 uppercase tracking-tight leading-8">
               {band.name}
             </div>
+            
+            {showDistribution && countBelow > 0 && (
+              <div 
+                className="absolute h-full flex items-center pr-2 text-[10px] font-bold text-amber-600 drop-shadow-sm z-10"
+                style={{ right: `${100 - getPos(band.subBands[0].start)}%` }}
+                title={`${countBelow} person(s) paid below band`}
+              >
+                <div className="flex items-center justify-center bg-amber-100 w-5 h-5 rounded-full ring-2 ring-white">
+                  {countBelow}
+                </div>
+              </div>
+            )}
+
             <div 
               className="absolute h-full rounded-md border border-white/40 shadow-sm flex"
               style={{ 
@@ -130,8 +173,20 @@ const JobFamilyOverview: React.FC<JobFamilyOverviewProps> = ({ activeFamily, sho
                                       </div>                </div>
               ))}
             </div>
+
+            {showDistribution && countAbove > 0 && (
+              <div 
+                className="absolute h-full flex items-center pl-2 text-[10px] font-bold text-emerald-600 drop-shadow-sm z-10"
+                style={{ left: `${getPos(band.subBands[3].end)}%` }}
+                title={`${countAbove} person(s) paid above band`}
+              >
+                <div className="flex items-center justify-center bg-emerald-100 w-5 h-5 rounded-full ring-2 ring-white">
+                  {countAbove}
+                </div>
+              </div>
+            )}
           </div>
-        ))}
+        )})}
       </div>
     </div>
   );
